@@ -1,0 +1,35 @@
+{
+  "name": "MatrixFilterConstructor",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "postinstall": "metro-with-symlinks && npm run restore",
+    "build": "fable-splitter -c splitter.config.js --define RELEASE",
+    "watch": "fable-splitter -c splitter.config.js -w --define DEBUG",
+    "run:android": "cd android && ./gradlew clean && cd .. && react-native run-android",
+    "reset:packager": "watchman watch-del-all && node_modules/react-native/scripts/packager.sh --reset-cache",
+    "start:packager": "react-native start",
+    "restore": "cd src && dotnet restore",
+    "start": "rm -rf out && cd src && dotnet fable npm-run watch",
+    "paket:add": "mono .paket/paket.exe add",
+    "paket:remove": "mono .paket/paket.exe remove",
+    "paket:update": "mono .paket/paket.exe update"
+  },
+  "dependencies": {
+    "buffer": "^5.1.0",
+    "core-js": "^2.5.7",
+    "fast-memoize": "^2.5.1",
+    "react": "^16.4.1",
+    "react-native": "^0.56.0",
+    "react-native-color-matrix-image-filters": "file:../",
+    "react-native-portal": "^1.3.0",
+    "react-native-segmented-control-tab": "^3.2.2",
+    "remotedev": "^0.2.7"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-react-native": "^5",
+    "fable-splitter": "^0.1.21",
+    "metro-with-symlinks": "^1.1.1"
+  }
+}
