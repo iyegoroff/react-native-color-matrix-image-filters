@@ -299,6 +299,9 @@ module Props =
     type Direction =
         | Horizontal | Vertical
 
+    type [<StringEnum; RequireQualifiedAccess>] ResizeMethod =
+        | Auto | Resize | Scale
+
     type IImageSource =
         interface end
 
@@ -1020,27 +1023,31 @@ module Props =
         | Opacity of float
         interface IImageStyle
 
-    type IImagePropertiesIOS =
-        interface end
-
     type IImageProperties =
-        inherit IImagePropertiesIOS
+        interface end
 
     type ImagePropertiesIOS =
         | AccessibilityLabel of string
         | Accessible of bool
         | CapInsets of Insets
         | DefaultSource of IImageSource
-        | OnError of (obj -> unit)
-        | OnProgress of (unit -> unit)
-        interface IImagePropertiesIOS
+        | OnPartialLoad of (unit -> unit)
+        | OnProgress of (ImageProgressChangeEvent -> unit)
+        interface IImageProperties
+
+    type ImagePropertiesAndroid =
+        | ResizeMethod of ResizeMethod
+        | FadeDuration of float
+        interface IImageProperties
 
     type ImageProperties =
         | BlurRadius of float
+        | LoadingIndicatorSource of IImageSource
         | OnLayout of (LayoutChangeEvent -> unit)
         | OnLoad of (unit -> unit)
         | OnLoadEnd of (unit -> unit)
         | OnLoadStart of (unit -> unit)
+        | OnError of (ImageErrorEvent -> unit)
         | ResizeMode of ResizeMode
         | Source of IImageSource
         | Style of IStyle list

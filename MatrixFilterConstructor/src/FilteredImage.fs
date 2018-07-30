@@ -19,12 +19,18 @@ module FilteredImage =
 
   type Id = int
 
+  type Loading =
+    | InProgress
+    | Failed
+    | Done
+
   type Model = 
     { Image: Image.Model
       FilterControls: (Id * CombinedFilterControl.Model * FilterControl.Model) list
       ImageSelectModalIsVisible: bool
       FilterSelectModalIsVisible: bool
       SelectedResizeMode: ResizeMode
+      LoadingStatus: Loading
       NextId: Id }
 
   type Message =
@@ -36,6 +42,9 @@ module FilteredImage =
     | FilterMessage of Id * FilterControl.Message
     | ResizeModeChanged of int
     | CopyCode
+    | ImageLoadingStarted
+    | ImageLoadingSucceed
+    | ImageLoadingFailed
 
 
   let private resizeModes =
@@ -53,6 +62,7 @@ module FilteredImage =
       ImageSelectModalIsVisible = false 
       FilterSelectModalIsVisible = false
       SelectedResizeMode = ResizeMode.Contain
+      LoadingStatus = Done
       NextId = 0 }
 
   let selectImage model image =
@@ -121,8 +131,16 @@ module FilteredImage =
 
       Alert.alert ("Message", "JS code copied to clipboard", [])
       model, []
-      
 
+    | ImageLoadingStarted ->
+      { model with LoadingStatus = InProgress }, []
+
+    | ImageLoadingSucceed ->
+      { model with LoadingStatus = Done }, []
+
+    | ImageLoadingFailed ->
+      { model with LoadingStatus = Failed }, []
+      
 
   let private containerStyle =
     ViewProperties.Style
@@ -148,9 +166,15 @@ module FilteredImage =
     ViewProperties.Style
       [ Position Position.Absolute
         Width (pct 100.) 
-        Height (dip Constants.imageHeight)
-        FlexStyle.Left (dip 5.)
-        FlexStyle.Top (dip 5.) ]
+        Height (pct 100.)
+        JustifyContent JustifyContent.Center 
+        AlignItems ItemAlignment.Center ]
+    
+  let private combinedMatrix model =
+    model.FilterControls
+    |> List.map (fun (_, control, model) -> CombinedFilterControl.matrix control model)
+    |> List.toArray
+    |> RNF.concatColorMatrices
 
   let private controls model dispatch =
     model.FilterControls
@@ -161,18 +185,15 @@ module FilteredImage =
            [ R.Props.FragmentProp.Key (string id) ]
            [ CombinedFilterControl.view tag filter (fun msg -> dispatch (id, msg)) ])
     |> R.fragment []
-  
-  let private combinedMatrix model =
-    model.FilterControls
-    |> List.map (fun (_, control, model) -> CombinedFilterControl.matrix control model)
-    |> List.toArray
-    |> RNF.concatColorMatrices
 
-  let private filteredImage model =
+  let private filteredImage model dispatch =
     RNF.ColorMatrix
       [ RNF.Props.ColorMatrixProps.Matrix (combinedMatrix model) ]
       [ RN.image
           [ imageStyle
+            OnLoadStart (fun _ -> dispatch ImageLoadingStarted)
+            OnLoad (fun _ -> dispatch ImageLoadingSucceed)
+            OnError (fun _ -> dispatch ImageLoadingFailed)
             ResizeMode model.SelectedResizeMode
             Source (Image.source model.Image) ] ]
       
@@ -195,15 +216,17 @@ module FilteredImage =
             ActivityIndicator.Size Size.Large ]
           [ RN.button
               [ ButtonProperties.Title "Add filter"
-                ButtonProperties.OnPress (fun () -> dispatch SelectFilter) ]
+                ButtonProperties.OnPress (fun _ -> dispatch SelectFilter) ]
               []
             Spacer.view 5.
             (controls model (FilterMessage >> dispatch))
             RN.view
               []
-              [ RN.activityIndicator
-                  [ spinnerStyle ]
-                (filteredImage model) ]
+              [ (match model.LoadingStatus with
+                 | InProgress -> RN.activityIndicator [ spinnerStyle ]
+                 | Done -> R.fragment [] []
+                 | Failed -> RN.view [ spinnerStyle ] [ RN.text [] "🚫" ])
+                (filteredImage model dispatch) ]
             RNS.segmentedControlTab
               [ RNS.Props.Values resizeControlValues
                 RNS.Props.OnTabPress (ResizeModeChanged >> dispatch)
@@ -212,14 +235,14 @@ module FilteredImage =
               [ controlsStyle ]
               [ RN.button
                   [ ButtonProperties.Title "Copy code"
-                    ButtonProperties.OnPress (fun () -> dispatch CopyCode) ]
+                    ButtonProperties.OnPress (fun _ -> dispatch CopyCode) ]
                   [] 
                 RN.button
                   [ ButtonProperties.Title "Change image"
-                    ButtonProperties.OnPress (fun () -> dispatch SelectImage) ]
+                    ButtonProperties.OnPress (fun _ -> dispatch SelectImage) ]
                   [] 
                 RN.button
                   [ ButtonProperties.Title "Delete"
                     ButtonProperties.Color "red"
-                    ButtonProperties.OnPress (fun () -> dispatch Delete) ]
+                    ButtonProperties.OnPress (fun _ -> dispatch Delete) ]
                   [] ] ] ]
