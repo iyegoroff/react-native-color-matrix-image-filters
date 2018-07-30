@@ -18,6 +18,8 @@
     <Compile Include="FilterSelectModal.fs" />
     <Compile Include="ImageSelectModal.fs" />
     <Compile Include="Styles.fs" />
+    <Compile Include="JSTemplate.fs" />
+    <Compile Include="JSGenerator.fs" />
     <Compile Include="FilteredImage.fs" />
     <Compile Include="Main.fs" />
     <Compile Include="App.fs" />

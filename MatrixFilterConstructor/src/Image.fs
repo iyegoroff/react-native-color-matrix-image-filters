@@ -1,4 +1,4 @@
-namespace FilterConstructor
+namespace MatrixFilterConstructor
 
 open Fable.Helpers.ReactNative
 open Fable.Helpers.ReactNative.Props

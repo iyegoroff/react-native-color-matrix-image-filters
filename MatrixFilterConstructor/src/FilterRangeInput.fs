@@ -1,4 +1,4 @@
-namespace FilterConstructor
+namespace MatrixFilterConstructor
 
 open Elmish
 open Fable.Helpers.ReactNative

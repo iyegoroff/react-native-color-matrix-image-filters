@@ -1,4 +1,4 @@
-namespace FilterConstructor
+namespace MatrixFilterConstructor
 
 module Utils =
 

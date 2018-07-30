@@ -1,10 +1,7 @@
-namespace FilterConstructor
+namespace MatrixFilterConstructor
 
-open Fable.Helpers.ReactNative
 open Fable.Import
 open Fable.Helpers
-open System
-open Fable.Import.ReactNativeColorMatrixImageFilters.Props
 
 module R = Fable.Helpers.React
 module RN = Fable.Helpers.ReactNative

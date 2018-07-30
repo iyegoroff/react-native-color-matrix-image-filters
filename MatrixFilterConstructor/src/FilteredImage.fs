@@ -1,5 +1,4 @@
-
-namespace FilterConstructor
+namespace MatrixFilterConstructor
 
 open Elmish
 open Fable.Helpers.ReactNative
@@ -113,7 +112,13 @@ module FilteredImage =
       { model with SelectedResizeMode = resizeModes.[index] }, []
 
     | CopyCode ->
-      Globals.Clipboard.setString "test"
+      model.FilterControls
+      |> List.map
+           (fun (_, filter, value) ->
+             (filter, (match value with | Some v -> Some v.Value | _ -> None)))
+      |> JSGenerator.run
+      |> Globals.Clipboard.setString
+
       Alert.alert ("Message", "JS code copied to clipboard", [])
       model, []
       
