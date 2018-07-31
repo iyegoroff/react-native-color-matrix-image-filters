@@ -24,6 +24,7 @@
     "react-native-color-matrix-image-filters": "file:../",
     "react-native-portal": "^1.3.0",
     "react-native-segmented-control-tab": "^3.2.2",
+    "react-native-slider": "^0.11.0",
     "remotedev": "^0.2.7"
   },
   "devDependencies": {

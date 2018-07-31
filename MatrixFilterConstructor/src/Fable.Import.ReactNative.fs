@@ -1510,35 +1510,6 @@ module ReactNative =
         abstract clearInteractionHandle: handle: Handle -> unit
         abstract setDeadline: deadline: float -> unit
 
-    and ScrollViewStyle =
-        inherit FlexStyle
-        inherit TransformsStyle
-        abstract backfaceVisibility: (* TODO StringEnum visible | hidden *) string option with get, set
-        abstract backgroundColor: string option with get, set
-        abstract borderColor: string option with get, set
-        abstract borderTopColor: string option with get, set
-        abstract borderRightColor: string option with get, set
-        abstract borderBottomColor: string option with get, set
-        abstract borderLeftColor: string option with get, set
-        abstract borderRadius: float option with get, set
-        abstract borderTopLeftRadius: float option with get, set
-        abstract borderTopRightRadius: float option with get, set
-        abstract borderBottomLeftRadius: float option with get, set
-        abstract borderBottomRightRadius: float option with get, set
-        abstract borderStyle: (* TODO StringEnum solid | dotted | dashed *) string option with get, set
-        abstract borderWidth: float option with get, set
-        abstract borderTopWidth: float option with get, set
-        abstract borderRightWidth: float option with get, set
-        abstract borderBottomWidth: float option with get, set
-        abstract borderLeftWidth: float option with get, set
-        abstract opacity: float option with get, set
-        abstract overflow: (* TODO StringEnum visible | hidden *) string option with get, set
-        abstract shadowColor: string option with get, set
-        abstract shadowOffset: obj option with get, set
-        abstract shadowOpacity: float option with get, set
-        abstract shadowRadius: float option with get, set
-        abstract elevation: float option with get, set
-
     and ScrollViewPropertiesIOS =
         abstract alwaysBounceHorizontal: bool option with get, set
         abstract alwaysBounceVertical: bool option with get, set
@@ -1588,7 +1559,7 @@ module ReactNative =
         abstract removeClippedSubviews: bool option with get, set
         abstract showsHorizontalScrollIndicator: bool option with get, set
         abstract showsVerticalScrollIndicator: bool option with get, set
-        abstract style: ScrollViewStyle option with get, set
+        abstract style: ViewStyle option with get, set
         abstract refreshControl: React.ReactElement option with get, set
         abstract ref: Ref<obj> option with get, set
 

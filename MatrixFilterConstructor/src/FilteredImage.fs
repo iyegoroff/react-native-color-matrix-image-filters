@@ -213,7 +213,7 @@ module FilteredImage =
               (FilterSelectModalMessage >> dispatch) ]
         RN.view
           [ containerStyle
-            ActivityIndicator.Size Size.Large ]
+            ActivityIndicator.Size IndicatorSize.Large ]
           [ RN.button
               [ ButtonProperties.Title "Add filter"
                 ButtonProperties.OnPress (fun _ -> dispatch SelectFilter) ]

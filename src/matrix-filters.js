@@ -188,9 +188,9 @@ export default {
     const n = 0.5 * (1 - v);
 
     return [
-      v, 0, 0, 0, n,
-      0, v, 0, 0, n,
-      0, 0, v, 0, n,
+      v, 0, 0, 0, (isIos ? 1 : 255) * n,
+      0, v, 0, 0, (isIos ? 1 : 255) * n,
+      0, 0, v, 0, (isIos ? 1 : 255) * n,
       0, 0, 0, 1, 0
     ];
   },
