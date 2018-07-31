@@ -1,6 +1,7 @@
 namespace MatrixFilterConstructor
 
 open Elmish
+open Elmish.React
 open Fable.Helpers.ReactNative
 open Fable.Helpers.ReactNative.Props
 open Fable.Import
@@ -11,6 +12,10 @@ module RS = Fable.Import.ReactNativeSlider
 
 
 module FilterRangeInput =
+
+  type private Size =
+    { width: float 
+      height: float }
 
   type Model =
     { Value: float
@@ -46,18 +51,14 @@ module FilterRangeInput =
 
   let private thumbStyle =
     RS.Props.ThumbStyle
-      []
-      // [ ShadowColor "black"
-      //   Margin (dip 5.)
-      //   Padding (dip 5.)
-      //   ShadowRadius 1.
-      //   ShadowOpacity 1.
-      //   ShadowOffset
-      //     { width = 0.
-      //       height = 0. }
-      //   BackgroundColor "white"
-      //   Elevation 2. ]
-    
+      [ ShadowColor "black"
+        ShadowRadius 1.
+        ShadowOpacity 1.
+        ShadowOffset
+          { width = 0.
+            height = 0. }
+        BackgroundColor "white"
+        Elevation 2. ]
 
   let view (model: Model) (dispatch: Dispatch<Message>) =
     RN.view
@@ -75,7 +76,7 @@ module FilterRangeInput =
                   RS.Props.MaximumValue model.Max
                   RS.Props.MinimumValue model.Min
                   RS.Props.MinimumTrackTintColor "#007aff"
-                  RS.Props.OnValueChange (ValueChanged >> dispatch) ]) ])
+                  RS.Props.OnValueChange (ValueChanged >> dispatch) ]) ]) 
         RN.view
           [ rangeLegendStyle ]
           [ RN.text [] (sprintf "%.2f" model.Min)

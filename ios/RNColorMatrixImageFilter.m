@@ -82,6 +82,7 @@ static CIContext* context;
                        context:(void *)context {
   if ([keyPath isEqualToString:@"image"]) {
     _inputImage = [_target.image copy];
+    NSLog(@"filter: %@", _inputImage);
     [self renderFilteredImage];
   }
 }
@@ -110,7 +111,8 @@ static CIContext* context;
 - (void)renderFilteredImage
 {
   if (_target) {
-    UIImage *image = [self filteredImage:_inputImage filter:_filter resizeMode:_target.resizeMode];
+    UIImage *image = [self filteredImage:_inputImage resizeMode:_target.resizeMode];
+
     [_target removeObserver:self forKeyPath:@"image"];
     [_target setImage:image];
     [_target addObserver:self
@@ -121,25 +123,28 @@ static CIContext* context;
 }
 
 - (UIImage *)filteredImage:(UIImage *)image
-                    filter:(CIFilter *)filter
                 resizeMode:(RCTResizeMode)resizeMode
 {
-  CIImage *tmp = [[CIImage alloc] initWithImage:image];
-  [filter setValue:tmp forKey:@"inputImage"];
+  if (image != nil) {
+    CIImage *tmp = [[CIImage alloc] initWithImage:image];
+    [_filter setValue:tmp forKey:@"inputImage"];
+    
+    CGRect outputRect = tmp.extent;
+    
+    CGImageRef cgim = [context createCGImage:_filter.outputImage fromRect:outputRect];
+    
+    UIImage *filteredImage = [RNColorMatrixImageFilter resizeImageIfNeeded:[UIImage imageWithCGImage:cgim]
+                                                                   srcSize:outputRect.size
+                                                                  destSize:image.size
+                                                                     scale:image.scale
+                                                                resizeMode:resizeMode];
+    
+    CGImageRelease(cgim);
+    
+    return filteredImage;
+  }
   
-  CGRect outputRect = tmp.extent;
-  
-  CGImageRef cgim = [context createCGImage:filter.outputImage fromRect:outputRect];
-  
-  UIImage *filteredImage = [RNColorMatrixImageFilter resizeImageIfNeeded:[UIImage imageWithCGImage:cgim]
-                                                      srcSize:outputRect.size
-                                                     destSize:image.size
-                                                        scale:image.scale
-                                                   resizeMode:resizeMode];
-  
-  CGImageRelease(cgim);
-  
-  return filteredImage;
+  return nil;
 }
 
 + (CIContext *)createContextWithOptions:(nullable NSDictionary<NSString *, id> *)options

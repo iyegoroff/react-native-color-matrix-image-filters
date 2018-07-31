@@ -193,7 +193,7 @@ module FilteredImage =
           [ imageStyle
             OnLoadStart (fun _ -> dispatch ImageLoadingStarted)
             OnLoad (fun _ -> dispatch ImageLoadingSucceed)
-            OnError (fun _ -> dispatch ImageLoadingFailed)
+            (unbox<IImageProperties> (OnError (fun _ -> dispatch ImageLoadingFailed)))
             ResizeMode model.SelectedResizeMode
             Source (Image.source model.Image) ] ]
       
@@ -213,7 +213,7 @@ module FilteredImage =
               (FilterSelectModalMessage >> dispatch) ]
         RN.view
           [ containerStyle
-            ActivityIndicator.Size IndicatorSize.Large ]
+            ActivityIndicator.Size Size.Large ]
           [ RN.button
               [ ButtonProperties.Title "Add filter"
                 ButtonProperties.OnPress (fun _ -> dispatch SelectFilter) ]
@@ -227,10 +227,19 @@ module FilteredImage =
                  | Done -> R.fragment [] []
                  | Failed -> RN.view [ spinnerStyle ] [ RN.text [] "🚫" ])
                 (filteredImage model dispatch) ]
-            RNS.segmentedControlTab
-              [ RNS.Props.Values resizeControlValues
-                RNS.Props.OnTabPress (ResizeModeChanged >> dispatch)
-                RNS.Props.SelectedIndex (resizeControlIndex model) ]
+            (Platform.select
+              [ Platform.Android
+                  (RNS.segmentedControlTab
+                    [ RNS.Props.Values resizeControlValues
+                      RNS.Props.OnTabPress (ResizeModeChanged >> dispatch)
+                      RNS.Props.SelectedIndex (resizeControlIndex model) ])
+                Platform.Ios
+                  (RN.segmentedControlIOS
+                     [ Values resizeControlValues
+                       SegmentedControlIOSProperties.OnChange
+                         (fun event ->
+                            dispatch (ResizeModeChanged event.nativeEvent.selectedSegmentIndex))
+                       SelectedIndex (resizeControlIndex model) ] )])
             RN.view
               [ controlsStyle ]
               [ RN.button

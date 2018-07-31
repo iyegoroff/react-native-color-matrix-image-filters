@@ -6,6 +6,7 @@
     <Compile Include="Fable.Import.ReactNative.fs" />
     <Compile Include="Fable.Helpers.ReactNative.fs" />
     <Compile Include="Fable.Import.ReactNativeColorMatrixImageFilters.fs" />
+    <Compile Include="Fable.Import.ReactNativeslider.fs" />
     <Compile Include="Constants.fs" />
     <Compile Include="Utils.fs" />
     <Compile Include="Image.fs" />

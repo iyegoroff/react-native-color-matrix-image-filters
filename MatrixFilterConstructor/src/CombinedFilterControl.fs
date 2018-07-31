@@ -51,7 +51,7 @@ module CombinedFilterControl =
     | Nightvision -> None
     | Warm -> None
     | Cool -> None
-    | Brightness -> Some (FilterRangeInput.init -10. 10.)
+    | Brightness -> Some (FilterRangeInput.init -100. 100.)
     | Exposure -> Some (FilterRangeInput.init -10. 10.)
     | Contrast -> Some (FilterRangeInput.init -10. 10.)
     | Temperature -> Some (FilterRangeInput.init -10. 10.)
