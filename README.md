@@ -1,5 +1,11 @@
 
 # react-native-color-matrix-image-filters
+[![npm version](https://badge.fury.io/js/react-native-color-matrix-image-filters.svg?t=1495378566925)](https://badge.fury.io/js/react-native-color-matrix-image-filters)
+[![Dependency Status](https://david-dm.org/iyegoroff/react-native-color-matrix-image-filters.svg?t=1495378566925)](https://david-dm.org/iyegoroff/react-native-color-matrix-image-filters)
+[![typings included](https://img.shields.io/badge/typings-included-brightgreen.svg?t=1495378566925)](src/index.d.ts)
+[![npm](https://img.shields.io/npm/l/express.svg?t=1495378566925)](https://www.npmjs.com/package/react-native-color-matrix-image-filters)
+
+Various color matrix based image filters for iOS & Android.
 
 ## Getting started
 
@@ -11,43 +17,120 @@
 
 ### Manual installation
 
+[link](manual_installation.md)
 
-#### iOS
+## Status
 
-1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
-2. Go to `node_modules` ➜ `react-native-color-matrix-image-filters` and add `RNColorMatrixImageFilters.xcodeproj`
-3. In XCode, in the project navigator, select your project. Add `libRNColorMatrixImageFilters.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
-4. Run your project (`Cmd+R`)<
+- iOS & Android - filter components work as stackable wrappers for standard `Image` component.
+- React-Native:
+  - with rn >= 0.56.0 use latest version
 
-#### Android
+## Example
 
-1. Open up `android/app/src/main/java/[...]/MainActivity.java`
-  - Add `import com.reactlibrary.RNColorMatrixImageFiltersPackage;` to the imports at the top of the file
-  - Add `new RNColorMatrixImageFiltersPackage()` to the list returned by the `getPackages()` method
-2. Append the following lines to `android/settings.gradle`:
-  	```
-  	include ':react-native-color-matrix-image-filters'
-  	project(':react-native-color-matrix-image-filters').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-color-matrix-image-filters/android')
-  	```
-3. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
-  	```
-      compile project(':react-native-color-matrix-image-filters')
-  	```
+```javascript
+import { Image } from 'react-native';
+import {
+  Grayscale,
+  Sepia,
+  Tint,
+  ColorMatrix,
+  concatColorMatrices,
+  invert,
+  contrast,
+  saturate
+} from 'react-native-color-matrix-image-filters';
 
-#### Windows
-[Read it! :D](https://github.com/ReactWindows/react-native)
+const GrayscaledImage = (imageProps) => (
+  <Grayscale>
+    <Image {...imageProps} />
+  </Grayscale>
+);
 
-1. In Visual Studio add the `RNColorMatrixImageFilters.sln` in `node_modules/react-native-color-matrix-image-filters/windows/RNColorMatrixImageFilters.sln` folder to their solution, reference from their app.
-2. Open up your `MainPage.cs` app
-  - Add `using Color.Matrix.Image.Filters.RNColorMatrixImageFilters;` to the usings at the top of the file
-  - Add `new RNColorMatrixImageFiltersPackage()` to the `List<IReactPackage>` returned by the `Packages` method
+const CombinedFiltersImage = (imageProps) => (
+  <Tint value={1.25}>
+    <Sepia>
+      <Image {...imageProps} />
+    </Sepia>
+  </Tint>
+);
 
+const ColorMatrixImage = (imageProps) => (
+  <ColorMatrix
+    matrix={concatColorMatrices([saturate(), contrast(5.16), invert(-0.94)])}
+  >
+    <Image {...imageProps} />
+  </ColorMatrix>
+);
+```
+
+Original                                       |  Grayscaled
+:---------------------------------------------:|:---------------------------------------------:
+<img src="img/parrot.png" align="left" height="200">  |  <img src="img/gray.png" align="right" height="200">
+
+CombinedFilters                                |  ColorMatrix
+:---------------------------------------------:|:---------------------------------------------:
+<img src="img/combined.png" align="left" height="200">  |  <img src="img/color-matrix.png" align="right" height="200">
 
 ## Usage
-```javascript
-import RNColorMatrixImageFilters from 'react-native-color-matrix-image-filters';
 
-// TODO: What to do with the module?
-RNColorMatrixImageFilters;
-```
+All filters support `View` [props](https://facebook.github.io/react-native/docs/view#props).
+Also some filters have optional `value` prop which takes a `number`. `ColorMatrix` filter
+has `matrix` prop which takes a `Matrix` type - an array of 20 numbers. Additionally library exports
+functions like `grayscale`, `tint` etc. - these functions return values of `Matrix` type and their
+results can be combined with `concatColorMatrices` function. If you need to combine several filters,
+consider using `ColorMatrix` with `concatColorMatrices` - generally it is more performant than
+corresponding stack of filter components.
+
+## Reference
+
+### Supported filters
+
+- ColorMatrix: [component]()
+- Normal: [component](), [function]()
+- Saturate: [component](), [function]()
+- HueRotate: [component](), [function]()
+- LuminanceToAlpha: [component](), [function]()
+- Invert: [component](), [function]()
+- Grayscale: [component](), [function]()
+- Sepia: [component](), [function]()
+- Nightvision: [component](), [function]()
+- Warm: [component](), [function]()
+- Cool: [component](), [function]()
+- Brightness: [component](), [function]()
+- Exposure: [component](), [function]()
+- Contrast: [component](), [function]()
+- Temperature: [component](), [function]()
+- Tint: [component](), [function]()
+- Threshold: [component](), [function]()
+- Protanomaly: [component](), [function]()
+- Deuteranomaly: [component](), [function]()
+- Tritanomaly: [component](), [function]()
+- Protanopia: [component](), [function]()
+- Deuteranopia: [component](), [function]()
+- Tritanopia: [component](), [function]()
+- Achromatopsia: [component](), [function]()
+- Achromatomaly: [component](), [function]()
+
+### Functions
+
+- `concatColorMatrices(matrices: Matrix[]): Matrix`
+
+### Matrix type
+
+- A 4x5 matrix for color transformations represented by [array]() -
+  consult [Android docs](https://developer.android.com/reference/android/graphics/ColorMatrix)
+	for more specific info about it's format
+
+## Playground
+
+You may check [MatrixFilterConstructor](MatrixFilterConstructor/README.md) example app to play with
+filters.
+
+## Credits
+
+- parrot [image](https://commons.wikimedia.org/wiki/File:Ara_macao_-flying_away-8a.jpg) by
+  [Robert01](https://de.wikipedia.org/wiki/Benutzer:Robert01)
+- all color filters are taken from [color-matrix](https://github.com/skratchdot/color-matrix)
+  project by @skratchdot
+- `concatColorMatrices` function is based on Android SDK [sources](https://github.com/AndroidSDKSources/android-sdk-sources-for-api-level-27/blob/048d6cef38d11a9937bccc8cec517c1b149904c5/android/graphics/ColorMatrix.java#L181-L205)
   

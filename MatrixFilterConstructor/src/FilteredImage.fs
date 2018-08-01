@@ -243,7 +243,7 @@ module FilteredImage =
             RN.view
               [ controlsStyle ]
               [ RN.button
-                  [ ButtonProperties.Title "Copy code"
+                  [ ButtonProperties.Title "Copy JS"
                     ButtonProperties.OnPress (fun _ -> dispatch CopyCode) ]
                   [] 
                 RN.button

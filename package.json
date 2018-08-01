@@ -1,9 +1,9 @@
 {
-  "description": "Matrix color filters for React Native Image component",
+  "description": "Color matrix filters for React Native Image component",
   "keywords": [
     "react-native",
-    "color-filter",
-    "image"
+    "color-matrix",
+    "image-filter"
   ],
   "license": "MIT",
   "main": "src/index.js",

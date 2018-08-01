@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform } from 'react-native';
 
-// taken from here: https://github.com/skratchdot/color-matrix/blob/master/lib/filters.js
+// filters taken from here: https://github.com/skratchdot/color-matrix/blob/master/lib/filters.js
 
 const isIos = Platform.OS === 'ios';
 
@@ -122,7 +122,7 @@ const staticFilters = {
 export default {
   normal: () => staticFilters.normal,
 
-  saturate: (v = 0) => [
+  saturate: (v = 1) => [
     0.213 + 0.787 * v, 0.715 - 0.715 * v, 0.072 - 0.072 * v, 0, 0,
     0.213 - 0.213 * v, 0.715 + 0.285 * v, 0.072 - 0.072 * v, 0, 0,
     0.213 - 0.213 * v, 0.715 - 0.715 * v, 0.072 + 0.928 * v, 0, 0,
@@ -173,7 +173,7 @@ export default {
     ];
   },
 
-  exposure: (v) => {
+  exposure: (v = 1) => {
     const n = Math.max(v, 0);
 
     return [

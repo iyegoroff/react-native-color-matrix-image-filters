@@ -1,5 +1,7 @@
 import filters from './matrix-filters';
 
+// based on android sdk sources: https://goo.gl/MMDopQ
+
 export const concatTwoColorMatrices = (matB, matA) => {
   const a = [...matA];
   const b = [...matB];

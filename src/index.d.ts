@@ -21,14 +21,14 @@ export class Normal extends React.Component<NormalProps> { }
 
 
 export interface SaturateProps extends FilterProps {
-  readonly value: number;
+  readonly value?: number;
 }
 
 export class Saturate extends React.Component<SaturateProps> { }
 
 
 export interface HueRotateProps extends FilterProps {
-  readonly value: number;
+  readonly value?: number;
 }
 
 export class HueRotate extends React.Component<HueRotateProps> { }
@@ -70,42 +70,42 @@ export class Cool extends React.Component<CoolProps> { }
 
 
 export interface BrightnessProps extends FilterProps {
-  readonly value: number;
+  readonly value?: number;
 }
 
 export class Brightness extends React.Component<BrightnessProps> { }
 
 
 export interface ExposureProps extends FilterProps {
-  readonly value: number;
+  readonly value?: number;
 }
 
 export class Exposure extends React.Component<ExposureProps> { }
 
 
 export interface ContrastProps extends FilterProps {
-  readonly value: number;
+  readonly value?: number;
 }
 
 export class Contrast extends React.Component<ContrastProps> { }
 
 
 export interface TemperatureProps extends FilterProps {
-  readonly value: number;
+  readonly value?: number;
 }
 
 export class Temperature extends React.Component<TemperatureProps> { }
 
 
 export interface TintProps extends FilterProps {
-  readonly value: number;
+  readonly value?: number;
 }
 
 export class Tint extends React.Component<TintProps> { }
 
 
 export interface ThresholdProps extends FilterProps {
-  readonly value: number;
+  readonly value?: number;
 }
 
 export class Threshold extends React.Component<ThresholdProps> { }
@@ -154,8 +154,8 @@ export class Achromatomaly extends React.Component<AchromatomalyProps> { }
 export function concatColorMatrices(matrices: Matrix[]): Matrix;
 
 export function normal(): Matrix;
-export function saturate(v: number): Matrix;
-export function hueRotate(v: number): Matrix;
+export function saturate(value?: number): Matrix;
+export function hueRotate(value?: number): Matrix;
 export function luminanceToAlpha(): Matrix;
 export function invert(): Matrix;
 export function grayscale(): Matrix;
@@ -163,12 +163,12 @@ export function sepia(): Matrix;
 export function nightvision(): Matrix;
 export function warm(): Matrix;
 export function cool(): Matrix;
-export function brightness(v: number): Matrix;
-export function exposure(v: number): Matrix;
-export function contrast(v: number): Matrix;
-export function temperature(v: number): Matrix;
-export function tint(v: number): Matrix;
-export function threshold(v: number): Matrix;
+export function brightness(value?: number): Matrix;
+export function exposure(value?: number): Matrix;
+export function contrast(value?: number): Matrix;
+export function temperature(value?: number): Matrix;
+export function tint(value?: number): Matrix;
+export function threshold(value?: number): Matrix;
 export function protanomaly(): Matrix;
 export function deuteranomaly(): Matrix;
 export function tritanomaly(): Matrix;
