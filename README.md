@@ -56,7 +56,7 @@ const CombinedFiltersImage = (imageProps) => (
 
 const ColorMatrixImage = (imageProps) => (
   <ColorMatrix
-    matrix={concatColorMatrices([saturate(), contrast(5.16), invert(-0.94)])}
+    matrix={concatColorMatrices([saturate(-0.9), contrast(5.2), invert()])}
   >
     <Image {...imageProps} />
   </ColorMatrix>
