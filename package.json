@@ -23,15 +23,5 @@
     "react": "*",
     "react-native": "*",
     "fbjs": "*"
-  },
-  "files": [
-    "android",
-    "img",
-    "ios",
-    "MatrixFilterConstructor",
-    "MatrixFilterConstructor/out",
-    "src",
-    "LICENSE",
-    "manual_installation.md"
-  ]
+  }
 }
