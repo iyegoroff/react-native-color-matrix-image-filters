@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "private": true,
   "scripts": {
-    "postinstall": "metro-with-symlinks && npm run restore",
+    "postinstall": "metro-with-symlinks",
     "build": "fable-splitter -c splitter.config.js --define RELEASE",
     "watch": "fable-splitter -c splitter.config.js -w --define DEBUG",
     "run:android": "cd android && ./gradlew clean && cd .. && react-native run-android",
