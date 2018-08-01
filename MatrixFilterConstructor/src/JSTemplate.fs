@@ -22,7 +22,7 @@ export const FilteredImage = (props) => {
 
   return (
     <ColorMatrix matrix={matrix}>
-      <Image {..imageProps} />
+      <Image {...imageProps} />
     </ColorMatrix>
   );
 };
