@@ -13,10 +13,6 @@ module RS = Fable.Import.ReactNativeSlider
 
 module FilterRangeInput =
 
-  type private Size =
-    { width: float 
-      height: float }
-
   type Model =
     { Value: float
       Min: float

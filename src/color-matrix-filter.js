@@ -2,12 +2,14 @@ import React from 'react';
 import invariant from 'fbjs/lib/invariant';
 import { NativeFilter } from './native-filter';
 import filters from './matrix-filters';
-import { concatTwoColorMatrices } from './concat-color-matrices';
+import { concatTwoColorMatrices, concatColorMatrices } from './concat-color-matrices';
 
 const ColorMatrixFilter = ({ matrix, parentMatrix, children, ...restProps }) => {
-  invariant(matrix.length === 20, `Color matrix should have 20 elements.`);
+  const mat = Array.isArray(matrix[0]) ? concatColorMatrices(matrix) : matrix;
+  
+  invariant(mat.length === 20, `Color matrix should have 20 elements.`);
 
-  const concatedMatrix = parentMatrix ? concatTwoColorMatrices(matrix, parentMatrix) : matrix;
+  const concatedMatrix = parentMatrix ? concatTwoColorMatrices(mat, parentMatrix) : mat;
   const child = React.Children.only(children);
 
   return child && child.type && child.type.isColorMatrixFilter

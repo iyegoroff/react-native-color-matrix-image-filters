@@ -3,6 +3,9 @@ import filters from './matrix-filters';
 // based on android sdk sources: https://goo.gl/MMDopQ
 
 export const concatTwoColorMatrices = (matB, matA) => {
+  invariant(matB.length === 20, `Color matrix matB should have 20 elements.`);
+  invariant(matA.length === 20, `Color matrix matA should have 20 elements.`);
+  
   const a = [...matA];
   const b = [...matB];
   const tmp = Array(20);

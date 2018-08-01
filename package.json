@@ -1,5 +1,5 @@
 {
-  "description": "Color matrix filters for React Native Image component",
+  "description": "Various color matrix based image filters for iOS & Android",
   "keywords": [
     "react-native",
     "color-matrix",
@@ -23,5 +23,15 @@
     "react": "*",
     "react-native": "*",
     "fbjs": "*"
-  }
+  },
+  "files": [
+    "android",
+    "img",
+    "ios",
+    "MatrixFilterConstructor",
+    "MatrixFilterConstructor/out",
+    "src",
+    "LICENSE",
+    "manual_installation.md"
+  ]
 }

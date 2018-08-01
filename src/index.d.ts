@@ -9,7 +9,7 @@ export type Matrix = [
 interface FilterProps extends ReactNative.ViewProps { }
 
 export interface ColorMatrixProps extends FilterProps {
-  readonly matrix: Readonly<Matrix>;
+  readonly matrix: Readonly<Matrix> | ReadonlyArray<Readonly<Matrix>>;
 }
 
 export class ColorMatrix extends React.Component<ColorMatrixProps> { }

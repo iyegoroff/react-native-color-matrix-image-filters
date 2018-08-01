@@ -73,7 +73,7 @@ CombinedFilters                                |  ColorMatrix
 
 ## Usage
 
-All filters support `View` [props](https://facebook.github.io/react-native/docs/view#props).
+Each filter support all of `View` [props](https://facebook.github.io/react-native/docs/view#props).
 Also some filters have optional `value` prop which takes a `number`. `ColorMatrix` filter
 has `matrix` prop which takes a `Matrix` type - an array of 20 numbers. Additionally library exports
 functions like `grayscale`, `tint` etc. - these functions return values of `Matrix` type and their
@@ -85,35 +85,38 @@ corresponding stack of filter components.
 
 ### Supported filters
 
-- ColorMatrix: [component]()
-- Normal: [component](), [function]()
-- Saturate: [component](), [function]()
-- HueRotate: [component](), [function]()
-- LuminanceToAlpha: [component](), [function]()
-- Invert: [component](), [function]()
-- Grayscale: [component](), [function]()
-- Sepia: [component](), [function]()
-- Nightvision: [component](), [function]()
-- Warm: [component](), [function]()
-- Cool: [component](), [function]()
-- Brightness: [component](), [function]()
-- Exposure: [component](), [function]()
-- Contrast: [component](), [function]()
-- Temperature: [component](), [function]()
-- Tint: [component](), [function]()
-- Threshold: [component](), [function]()
-- Protanomaly: [component](), [function]()
-- Deuteranomaly: [component](), [function]()
-- Tritanomaly: [component](), [function]()
-- Protanopia: [component](), [function]()
-- Deuteranopia: [component](), [function]()
-- Tritanopia: [component](), [function]()
-- Achromatopsia: [component](), [function]()
-- Achromatomaly: [component](), [function]()
+| Component         | Additional prop   | function          |
+| ----------------- | ----------------- | ----------------- |
+| ColorMatrix       | matrix: Matrix    | -
+| Normal            | -                 | normal(): Matrix
+| Saturate          | value: number = 1 | saturate(value: number = 1): Matrix
+| HueRotate         | value: number = 0 | hueRotate(value: number = 0): Matrix
+| LuminanceToAlpha  | -                 | luminanceToAlpha(): Matrix
+| Invert            | -                 | invert(): Matrix
+| Grayscale         | -                 | grayscale(): Matrix
+| Sepia             | -                 | sepia(): Matrix
+| Nightvision       | -                 | nightvision(): Matrix
+| Warm              | -                 | warm(): Matrix
+| Cool              | -                 | cool(): Matrix
+| Brightness        | value: number = 0 | brightness(value: number = 0): Matrix
+| Exposure          | value: number = 1 | exposure(value: number = 1): Matrix
+| Contrast          | value: number = 1 | contrast(value: number = 1): Matrix
+| Temperature       | value: number = 1 | temperature(value: number = 1): Matrix
+| Tint              | value: number = 0 | tint(value: number = 0): Matrix
+| Threshold         | value: number = 0 | threshold(value: number = 0): Matrix
+| Protanomaly       | -                 | protanomaly(): Matrix
+| Deuteranomaly     | -                 | deuteranomaly(): Matrix
+| Tritanomaly       | -                 | tritanomaly(): Matrix
+| Protanopia        | -                 | protanopia(): Matrix
+| Deuteranopia      | -                 | deuteranopia(): Matrix
+| Tritanopia        | -                 | tritanopia(): Matrix
+| Achromatopsia     | -                 | achromatopsia(): Matrix
+| Achromatomaly     | -                 | achromatomaly(): Matrix
+
 
 ### Functions
 
-- `concatColorMatrices(matrices: Matrix[]): Matrix`
+- concatColorMatrices(matrices: Matrix[]): Matrix
 
 ### Matrix type
 
@@ -121,10 +124,11 @@ corresponding stack of filter components.
   consult [Android docs](https://developer.android.com/reference/android/graphics/ColorMatrix)
 	for more specific info about it's format
 
-## Playground
+## Misc
 
-You may check [MatrixFilterConstructor](MatrixFilterConstructor/README.md) example app to play with
-filters.
+- You may check [MatrixFilterConstructor](MatrixFilterConstructor/) example app to play with filters
+- This library were tested only with standard `Image` component, but in theory it should work with
+  any image which native part is based on `RCTImageView` on iOS or `ImageView` on Android
 
 ## Credits
 
@@ -132,5 +136,5 @@ filters.
   [Robert01](https://de.wikipedia.org/wiki/Benutzer:Robert01)
 - all color filters are taken from [color-matrix](https://github.com/skratchdot/color-matrix)
   project by @skratchdot
-- `concatColorMatrices` function is based on Android SDK [sources](https://github.com/AndroidSDKSources/android-sdk-sources-for-api-level-27/blob/048d6cef38d11a9937bccc8cec517c1b149904c5/android/graphics/ColorMatrix.java#L181-L205)
+- `concatColorMatrices` function is based on Android SDK [sources](https://goo.gl/MMDopQ)
   

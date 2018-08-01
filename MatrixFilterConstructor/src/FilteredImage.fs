@@ -193,7 +193,7 @@ module FilteredImage =
           [ imageStyle
             OnLoadStart (fun _ -> dispatch ImageLoadingStarted)
             OnLoad (fun _ -> dispatch ImageLoadingSucceed)
-            (unbox<IImageProperties> (OnError (fun _ -> dispatch ImageLoadingFailed)))
+            OnError (fun _ -> dispatch ImageLoadingFailed)
             ResizeMode model.SelectedResizeMode
             Source (Image.source model.Image) ] ]
       

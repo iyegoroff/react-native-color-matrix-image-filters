@@ -28,7 +28,6 @@ module Main =
     | ChangeAllImages
     | FilteredImageMessage of Id * FilteredImage.Message
     | ImageSelectModalMessage of ImageSelectModal.Message
-    | ContainerScrolled
 
 
   let init () = 
@@ -75,9 +74,6 @@ module Main =
                      FilteredImages = filteredImages }, []
       | Hide ->
         { model with DefaultImageSelectModalIsVisible = false }, []
-
-    | ContainerScrolled ->
-      model, []
 
 
   let private separatorStyle =
@@ -133,6 +129,4 @@ module Main =
             RenderItem (fun item -> lazyView renderFilteredImage item.item)
             ItemSeparatorComponent separator
             ListHeaderComponent listControls
-            OnMomentumScrollEnd (fun _ -> dispatch ContainerScrolled)
-            OnScrollEndDrag (fun _ -> dispatch ContainerScrolled)
             KeyExtractor (fun (id, _) _ -> string id) ] ]
