@@ -127,7 +127,7 @@ corresponding stack of filter components.
 ## Misc
 
 - You may check [MatrixFilterConstructor](MatrixFilterConstructor/) example app to play with filters
-- This library were tested only with standard `Image` component, but in theory it should work with
+- This library was tested only with standard `Image` component, but in theory it should work with
   any image which native part is based on `RCTImageView` on iOS or `ImageView` on Android
 
 ## Credits
