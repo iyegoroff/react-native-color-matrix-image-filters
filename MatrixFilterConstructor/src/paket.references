@@ -6,6 +6,5 @@ Fable.React
 Fable.Import.ReactNativePortal
 Fable.Import.ReactNativeSlider
 Fable.Import.ReactNativeSegmentedControlTab
-Fable.Import.ReactNativeColorMatrixImageFilters
 Fable.Import.FastMemoize
 dotnet-fable
