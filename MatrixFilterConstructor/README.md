@@ -4,3 +4,5 @@ $ cd node_modules/react-native-color-matrix-image-filters/MatrixFilterConstructo
 $ npm i
 $ react-native run-android
 ```
+
+<img src="../img/demo.gif" height="600">
