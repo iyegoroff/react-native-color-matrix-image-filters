@@ -82,7 +82,6 @@ static CIContext* context;
                        context:(void *)context {
   if ([keyPath isEqualToString:@"image"]) {
     _inputImage = [_target.image copy];
-    NSLog(@"filter: %@", _inputImage);
     [self renderFilteredImage];
   }
 }

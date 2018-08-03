@@ -1,5 +1,7 @@
 namespace MatrixFilterConstructor
 
+open Fable.Import.ReactNative
+
 module Utils =
 
   let rec moveDownAt index list =
@@ -10,3 +12,9 @@ module Utils =
     | _, [] -> list
 
   let moveUpAt index list = moveDownAt (index - 1) list
+
+  let configureNextLayoutAnimation () =
+    Globals.LayoutAnimation.configureNext
+      (unbox<Constants.LayoutAnimationPresets> Globals.LayoutAnimation.Presets).spring
+      id
+      ignore

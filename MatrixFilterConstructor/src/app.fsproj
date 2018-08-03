@@ -6,8 +6,8 @@
     <Compile Include="../../fable-typed/src/Fable.Import.ReactNativeColorMatrixImageFilters.fs" />
     <Compile Include="Constants.fs" />
     <Compile Include="Utils.fs" />
-    <Compile Include="Image.fs" />
     <Compile Include="Spacer.fs" />
+    <Compile Include="Image.fs" />
     <Compile Include="FilterRangeInput.fs" />
     <Compile Include="FilterControl.fs" />
     <Compile Include="CombinedFilterControl.fs" />

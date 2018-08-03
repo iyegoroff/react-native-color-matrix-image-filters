@@ -67,10 +67,7 @@ module CombinedFilterControl =
     | Achromatomaly -> None
 
   let matrix control (model: FilterControl.Model) =
-    let value =
-      match model with
-      | Some input -> input.Value
-      | _ -> 0.
+    let value = model |> Option.fold (fun _ input -> input.Value) 0.
     
     match control with
     | Normal -> RNF.normal ()

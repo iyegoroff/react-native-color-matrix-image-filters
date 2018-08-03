@@ -3,6 +3,10 @@ namespace MatrixFilterConstructor
 open Elmish
 open Fable.Helpers.ReactNative.Props
 open Fable.Helpers.ReactNative
+open Fable.Import.ReactNative
+open Fable.Core
+open Fable.Import
+
 module RN = Fable.Helpers.ReactNative
 
 
@@ -32,23 +36,30 @@ module SelectModal =
     | Select.Message.ItemSelected item ->
       match item with
       | Item x ->
-        dispatch (SelectMessage (Select.Message.ItemSelected x))
         dispatch Hide
+        (fun () ->
+           JS.setTimeout (fun () -> dispatch (SelectMessage (Select.Message.ItemSelected x))) 0
+           |> ignore
+           |> U2.Case1)
+        |> Globals.InteractionManager.runAfterInteractions
+        |> ignore
       | Close -> dispatch Hide
     
   let view items selected itemKey equals isVisible (dispatch: Dispatch<Message<'a>>) =
     let items = Array.map Item items
       
     RN.modal
-      [ Visible isVisible
+      [ AnimationType
+          (Platform.select
+             [ Platform.Ios AnimationType.Slide
+               Platform.Android AnimationType.Fade ])
+        ModalProperties.Visible isVisible
         OnRequestClose (fun () -> dispatch Hide) ]
       [ Select.view
           (Platform.select
              [ Platform.Android items
                Platform.Ios (Array.append items [| Close |]) ])
-          (match selected with
-           | Some x -> Some (Item x)
-           | None -> None)
+          (Option.map Item selected)
           (itemKeyWithClose itemKey)
           (equalsWithClose equals)
           (dispatchWithClose dispatch) ]

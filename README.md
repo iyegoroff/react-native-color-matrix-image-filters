@@ -75,7 +75,7 @@ CombinedFilters                                |  ColorMatrix
 
 Each filter support all of `View` [props](https://facebook.github.io/react-native/docs/view#props).
 Also some filters have optional `value` prop which takes a `number`. `ColorMatrix` filter
-has `matrix` prop which takes a `Matrix` type - an array of 20 numbers. Additionally library exports
+has `matrix` prop which takes a `Matrix` - an array of 20 numbers. Additionally library exports
 functions like `grayscale`, `tint` etc. - these functions return values of `Matrix` type and their
 results can be combined with `concatColorMatrices` function. If you need to combine several filters,
 consider using `ColorMatrix` with `concatColorMatrices` - generally it is more performant than
