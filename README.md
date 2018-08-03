@@ -21,7 +21,8 @@ Various color matrix based image filters for iOS & Android.
 
 ## Status
 
-- iOS & Android - filter components work as stackable wrappers for standard `Image` component.
+- iOS & Android - filter components work as stackable wrappers for standard `Image` and
+  `ImageBackground` components.
 - React-Native:
   - with rn >= 0.56.0 use latest version
 

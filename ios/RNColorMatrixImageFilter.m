@@ -56,14 +56,18 @@ static CIContext* context;
 
 - (void)linkTarget
 {
-  for (UIView *child in self.subviews) {
-    if ([child isKindOfClass:[RCTImageView class]] && !_target) {
+  UIView* parent = self;
+  
+  while (!_target && parent.subviews.count > 0) {
+    UIView* child = parent.subviews[0];
+    if ([child isKindOfClass:[RCTImageView class]]) {
       _target = (RCTImageView *)child;
       [child addObserver:self
               forKeyPath:@"image"
                  options:NSKeyValueObservingOptionNew
                  context:NULL];
-      break;
+    } else {
+      parent = child;
     }
   }
 }
