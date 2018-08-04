@@ -7,18 +7,16 @@ export const concatTwoColorMatrices = (matB, matA) => {
   invariant(matB.length === 20, `Color matrix matB should have 20 elements.`);
   invariant(matA.length === 20, `Color matrix matA should have 20 elements.`);
 
-  const a = [...matA];
-  const b = [...matB];
   const tmp = Array(20);
 
   let index = 0;
   for (let j = 0; j < 20; j += 5) {
     for (let i = 0; i < 4; i++) {
-      tmp[index++] = a[j + 0] * b[i + 0] + a[j + 1] * b[i + 5] +
-        a[j + 2] * b[i + 10] + a[j + 3] * b[i + 15];
+      tmp[index++] = matA[j + 0] * matB[i + 0] + matA[j + 1] * matB[i + 5] +
+        matA[j + 2] * matB[i + 10] + matA[j + 3] * matB[i + 15];
     }
-    tmp[index++] = a[j + 0] * b[4] + a[j + 1] * b[9] +
-      a[j + 2] * b[14] + a[j + 3] * b[19] + a[j + 4];
+    tmp[index++] = matA[j + 0] * matB[4] + matA[j + 1] * matB[9] +
+      matA[j + 2] * matB[14] + matA[j + 3] * matB[19] + matA[j + 4];
   }
 
   return tmp;
