@@ -1,0 +1,1 @@
+[release notes](https://github.com/iyegoroff/react-native-color-matrix-image-filters/releases)
