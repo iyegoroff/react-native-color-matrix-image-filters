@@ -73,6 +73,36 @@ module Props =
     | Style of IStyle list
     | Value of float
 
+  type TechnicolorProps =
+    | Style of IStyle list
+
+  type PolaroidProps =
+    | Style of IStyle list
+
+  type ToBGRProps =
+    | Style of IStyle list
+
+  type KodachromeProps =
+    | Style of IStyle list
+
+  type BrowniProps =
+    | Style of IStyle list
+
+  type VintageProps =
+    | Style of IStyle list
+
+  type NightProps =
+    | Style of IStyle list
+    | Value of float
+
+  type PredatorProps =
+    | Style of IStyle list
+    | Value of float
+
+  type LsdProps =
+    | Style of IStyle list
+
+
   type ProtanomalyProps =
     | Style of IStyle list
 
@@ -101,11 +131,11 @@ module Props =
 open Props
 open Fable.Core
 
-let concatColorMatrices (matrices: Matrix array): Matrix =
+let concatColorMatrices (_matrices: Matrix array): Matrix =
   importMember "react-native-color-matrix-image-filters"
 let normal (): Matrix = importMember "react-native-color-matrix-image-filters"
-let saturate (v: float): Matrix = importMember "react-native-color-matrix-image-filters"
-let hueRotate (v: float): Matrix = importMember "react-native-color-matrix-image-filters"
+let saturate (_v: float): Matrix = importMember "react-native-color-matrix-image-filters"
+let hueRotate (_v: float): Matrix = importMember "react-native-color-matrix-image-filters"
 let luminanceToAlpha (): Matrix = importMember "react-native-color-matrix-image-filters"
 let invert (): Matrix = importMember "react-native-color-matrix-image-filters"
 let grayscale (): Matrix = importMember "react-native-color-matrix-image-filters"
@@ -113,12 +143,21 @@ let sepia (): Matrix = importMember "react-native-color-matrix-image-filters"
 let nightvision (): Matrix = importMember "react-native-color-matrix-image-filters"
 let warm (): Matrix = importMember "react-native-color-matrix-image-filters"
 let cool (): Matrix = importMember "react-native-color-matrix-image-filters"
-let brightness (v: float): Matrix = importMember "react-native-color-matrix-image-filters"
-let exposure (v: float): Matrix = importMember "react-native-color-matrix-image-filters"
-let contrast (v: float): Matrix = importMember "react-native-color-matrix-image-filters"
-let temperature (v: float): Matrix = importMember "react-native-color-matrix-image-filters"
-let tint (v: float): Matrix = importMember "react-native-color-matrix-image-filters"
-let threshold (v: float): Matrix = importMember "react-native-color-matrix-image-filters"
+let brightness (_v: float): Matrix = importMember "react-native-color-matrix-image-filters"
+let exposure (_v: float): Matrix = importMember "react-native-color-matrix-image-filters"
+let contrast (_v: float): Matrix = importMember "react-native-color-matrix-image-filters"
+let temperature (_v: float): Matrix = importMember "react-native-color-matrix-image-filters"
+let tint (_v: float): Matrix = importMember "react-native-color-matrix-image-filters"
+let threshold (_v: float): Matrix = importMember "react-native-color-matrix-image-filters"
+let technicolor (): Matrix = importMember "react-native-color-matrix-image-filters"
+let polaroid (): Matrix = importMember "react-native-color-matrix-image-filters"
+let toBGR (): Matrix = importMember "react-native-color-matrix-image-filters"
+let kodachrome (): Matrix = importMember "react-native-color-matrix-image-filters"
+let browni (): Matrix = importMember "react-native-color-matrix-image-filters"
+let vintage (): Matrix = importMember "react-native-color-matrix-image-filters"
+let night (_v: float): Matrix = importMember "react-native-color-matrix-image-filters"
+let predator (_v: float): Matrix = importMember "react-native-color-matrix-image-filters"
+let lsd (): Matrix = importMember "react-native-color-matrix-image-filters"
 let protanomaly (): Matrix = importMember "react-native-color-matrix-image-filters"
 let deuteranomaly (): Matrix = importMember "react-native-color-matrix-image-filters"
 let tritanomaly (): Matrix = importMember "react-native-color-matrix-image-filters"
@@ -180,6 +219,33 @@ let inline Tint (props: TintProps list) (children: React.ReactElement list): Rea
 
 let inline Threshold (props: ThresholdProps list) (children: React.ReactElement list): React.ReactElement =
   ofImport "Threshold" "react-native-color-matrix-image-filters" (propsToObj props) children
+
+let inline Technicolor (props: TechnicolorProps list) (children: React.ReactElement list): React.ReactElement =
+  ofImport "Technicolor" "react-native-color-matrix-image-filters" (propsToObj props) children
+
+let inline Polaroid (props: PolaroidProps list) (children: React.ReactElement list): React.ReactElement =
+  ofImport "Polaroid" "react-native-color-matrix-image-filters" (propsToObj props) children
+
+let inline ToBGR (props: ToBGRProps list) (children: React.ReactElement list): React.ReactElement =
+  ofImport "ToBGR" "react-native-color-matrix-image-filters" (propsToObj props) children
+
+let inline Kodachrome (props: KodachromeProps list) (children: React.ReactElement list): React.ReactElement =
+  ofImport "Kodachrome" "react-native-color-matrix-image-filters" (propsToObj props) children
+
+let inline Browni (props: BrowniProps list) (children: React.ReactElement list): React.ReactElement =
+  ofImport "Browni" "react-native-color-matrix-image-filters" (propsToObj props) children
+
+let inline Vintage (props: VintageProps list) (children: React.ReactElement list): React.ReactElement =
+  ofImport "Vintage" "react-native-color-matrix-image-filters" (propsToObj props) children
+
+let inline Night (props: NightProps list) (children: React.ReactElement list): React.ReactElement =
+  ofImport "Night" "react-native-color-matrix-image-filters" (propsToObj props) children
+
+let inline Predator (props: PredatorProps list) (children: React.ReactElement list): React.ReactElement =
+  ofImport "Predator" "react-native-color-matrix-image-filters" (propsToObj props) children
+
+let inline Lsd (props: LsdProps list) (children: React.ReactElement list): React.ReactElement =
+  ofImport "Lsd" "react-native-color-matrix-image-filters" (propsToObj props) children
 
 let inline Protanomaly (props: ProtanomalyProps list) (children: React.ReactElement list): React.ReactElement =
   ofImport "Protanomaly" "react-native-color-matrix-image-filters" (propsToObj props) children

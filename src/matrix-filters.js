@@ -3,7 +3,8 @@ import { Platform } from 'react-native';
 
 // filters taken from here: https://github.com/skratchdot/color-matrix/blob/master/lib/filters.js
 
-const isIos = Platform.OS === 'ios';
+const bias = Platform.OS === 'ios' ? 1 : 255;
+const biasRev = Platform.OS === 'ios' ? 255 : 1;
 
 const staticFilters = {
   normal: [
@@ -21,9 +22,9 @@ const staticFilters = {
   ],
 
   invert: [
-    -1, 0, 0, 0, isIos ? 1 : 255,
-    0, -1, 0, 0, isIos ? 1 : 255,
-    0, 0, -1, 0, isIos ? 1 : 255,
+    -1, 0, 0, 0, bias,
+    0, -1, 0, 0, bias,
+    0, 0, -1, 0, bias,
     0, 0, 0, 1, 0
   ],
 
@@ -59,6 +60,55 @@ const staticFilters = {
     0.99, 0, 0, 0, 0,
     0, 0.93, 0, 0, 0,
     0, 0, 1.08, 0, 0,
+    0, 0, 0, 1, 0
+  ],
+
+  technicolor: [
+    1.9125277891456083, -0.8545344976951645, -0.09155508482755585, 0, 11.793603434377337 / biasRev,
+    -0.3087833385928097, 1.7658908555458428, -0.10601743074722245, 0, -70.35205161461398 / biasRev,
+    -0.231103377548616, -0.7501899197440212, 1.847597816108189, 0, 30.950940869491138 / biasRev,
+    0, 0, 0, 1, 0
+  ],
+
+  polaroid: [
+    1.438, -0.062, -0.062, 0, 0,
+    -0.122, 1.378, -0.122, 0, 0,
+    -0.016, -0.016, 1.483, 0, 0,
+    0, 0, 0, 1, 0
+  ],
+
+  toBGR: [
+    0, 0, 1, 0, 0,
+    0, 1, 0, 0, 0,
+    1, 0, 0, 0, 0,
+    0, 0, 0, 1, 0
+  ],
+
+  kodachrome: [
+    1.1285582396593525, -0.3967382283601348, -0.03992559172921793, 0, 63.72958762196502 / biasRev,
+    -0.16404339962244616, 1.0835251566291304, -0.05498805115633132, 0, 24.732407896706203 / biasRev,
+    -0.16786010706155763, -0.5603416277695248, 1.6014850761964943, 0, 35.62982807460946 / biasRev,
+    0, 0, 0, 1, 0
+  ],
+
+  browni: [
+    0.5997023498159715, 0.34553243048391263, -0.2708298674538042, 0, 47.43192855600873 / biasRev,
+    -0.037703249837783157, 0.8609577587992641, 0.15059552388459913, 0, -36.96841498319127 / biasRev,
+    0.24113635128153335, -0.07441037908422492, 0.44972182064877153, 0, -7.562075277591283 / biasRev,
+    0, 0, 0, 1, 0
+  ],
+
+  vintage: [
+    0.6279345635605994, 0.3202183420819367, -0.03965408211312453, 0, 9.651285835294123 / biasRev,
+    0.02578397704808868, 0.6441188644374771, 0.03259127616149294, 0, 7.462829176470591 / biasRev,
+    0.0466055556782719, -0.0851232987247891, 0.5241648018700465, 0, 5.159190588235296 / biasRev,
+    0, 0, 0, 1, 0
+  ],
+
+  lsd: [
+    2, -0.4, 0.5, 0, 0,
+    -0.5, 2, -0.4, 0, 0,
+    -0.4, -0.5, 3, 0, 0,
     0, 0, 0, 1, 0
   ],
 
@@ -130,15 +180,17 @@ export default {
   ],
 
   hueRotate: (v = 0) => {
-    const a00 = (0.213) + (Math.cos(v) * 0.787) - (Math.sin(v) * 0.213);
-    const a01 = (0.715) - (Math.cos(v) * 0.715) - (Math.sin(v) * 0.715);
-    const a02 = (0.072) - (Math.cos(v) * 0.072) + (Math.sin(v) * 0.928);
-    const a10 = (0.213) - (Math.cos(v) * 0.213) + (Math.sin(v) * 0.143);
-    const a11 = (0.715) + (Math.cos(v) * 0.285) + (Math.sin(v) * 0.140);
-    const a12 = (0.072) - (Math.cos(v) * 0.072) - (Math.sin(v) * 0.283);
-    const a20 = (0.213) - (Math.cos(v) * 0.213) - (Math.sin(v) * 0.787);
-    const a21 = (0.715) - (Math.cos(v) * 0.715) + (Math.sin(v) * 0.715);
-    const a22 = (0.072) + (Math.cos(v) * 0.928) + (Math.sin(v) * 0.072);
+    const cos = Math.cos(v);
+    const sin = Math.sin(v);
+    const a00 = (0.213) + (cos * 0.787) - (sin * 0.213);
+    const a01 = (0.715) - (cos * 0.715) - (sin * 0.715);
+    const a02 = (0.072) - (cos * 0.072) + (sin * 0.928);
+    const a10 = (0.213) - (cos * 0.213) + (sin * 0.143);
+    const a11 = (0.715) + (cos * 0.285) + (sin * 0.140);
+    const a12 = (0.072) - (cos * 0.072) - (sin * 0.283);
+    const a20 = (0.213) - (cos * 0.213) - (sin * 0.787);
+    const a21 = (0.715) - (cos * 0.715) + (sin * 0.715);
+    const a22 = (0.072) + (cos * 0.928) + (sin * 0.072);
 
     return [
       a00, a01, a02, 0, 0,
@@ -163,7 +215,7 @@ export default {
   cool: () => staticFilters.cool,
 
   brightness: (v = 0) => {
-    const n = (isIos ? 1 : 255) * (v / 100);
+    const n = bias * (v / 100);
 
     return [
       1, 0, 0, 0, n,
@@ -188,9 +240,9 @@ export default {
     const n = 0.5 * (1 - v);
 
     return [
-      v, 0, 0, 0, (isIos ? 1 : 255) * n,
-      0, v, 0, 0, (isIos ? 1 : 255) * n,
-      0, 0, v, 0, (isIos ? 1 : 255) * n,
+      v, 0, 0, 0, bias * n,
+      0, v, 0, 0, bias * n,
+      0, 0, v, 0, bias * n,
       0, 0, 0, 1, 0
     ];
   },
@@ -218,12 +270,56 @@ export default {
     const b = b_lum * 256;
 
     return [
-      r, g, b, 0, -(isIos ? 1 : 255) * v,
-      r, g, b, 0, -(isIos ? 1 : 255) * v,
-      r, g, b, 0, -(isIos ? 1 : 255) * v,
+      r, g, b, 0, -bias * v,
+      r, g, b, 0, -bias * v,
+      r, g, b, 0, -bias * v,
       0, 0, 0, 1, 0
     ];
   },
+
+  technicolor: () => staticFilters.technicolor,
+
+  polaroid: () => staticFilters.polaroid,
+
+  toBGR: () => staticFilters.toBGR,
+
+  kodachrome: () => staticFilters.kodachrome,
+
+  browni: () => staticFilters.browni,
+
+  vintage: () => staticFilters.vintage,
+
+  night: (v = 0.1) => [
+    v * (-2.0), -v, 0, 0, 0,
+    -v, 0, v, 0, 0,
+    0, v, v * 2.0, 0, 0,
+    0, 0, 0, 1, 0
+  ],
+
+  predator: (v = 1) => [
+    // row 1
+    11.224130630493164 * v,
+    -4.794486999511719 * v,
+    -2.8746118545532227 * v,
+    0 * v,
+    0.40342438220977783 * v / biasRev,
+    // row 2
+    -3.6330697536468506 * v,
+    9.193157196044922 * v,
+    -2.951810836791992 * v,
+    0 * v,
+    -1.316135048866272 * v / biasRev,
+    // row 3
+    -3.2184197902679443 * v,
+    -4.2375030517578125 * v,
+    7.476448059082031 * v,
+    0 * v,
+    0.8044459223747253 * v / biasRev,
+    // row 4
+    0, 0, 0, 1, 0
+  ],
+
+  lsd: () => staticFilters.lsd,
 
   protanomaly: () => staticFilters.protanomaly,
 

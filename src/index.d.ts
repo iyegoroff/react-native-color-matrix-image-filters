@@ -8,147 +8,48 @@ export type Matrix = [
 
 interface FilterProps extends ReactNative.ViewProps { }
 
+export interface ValueFilterProps extends FilterProps {
+  readonly value?: number;
+}
+
 export interface ColorMatrixProps extends FilterProps {
   readonly matrix: Readonly<Matrix> | ReadonlyArray<Readonly<Matrix>>;
 }
 
 export class ColorMatrix extends React.Component<ColorMatrixProps> { }
-
-
-export interface NormalProps extends FilterProps { }
-
-export class Normal extends React.Component<NormalProps> { }
-
-
-export interface SaturateProps extends FilterProps {
-  readonly value?: number;
-}
-
-export class Saturate extends React.Component<SaturateProps> { }
-
-
-export interface HueRotateProps extends FilterProps {
-  readonly value?: number;
-}
-
-export class HueRotate extends React.Component<HueRotateProps> { }
-
-
-export interface LuminanceToAlphaProps extends FilterProps { }
-
-export class LuminanceToAlpha extends React.Component<LuminanceToAlphaProps> { }
-
-
-export interface InvertProps extends FilterProps { }
-
-export class Invert extends React.Component<InvertProps> { }
-
-
-export interface GrayscaleProps extends FilterProps { }
-
-export class Grayscale extends React.Component<GrayscaleProps> { }
-
-
-export interface SepiaProps extends FilterProps { }
-
-export class Sepia extends React.Component<SepiaProps> { }
-
-
-export interface NightvisionProps extends FilterProps { }
-
-export class Nightvision extends React.Component<NightvisionProps> { }
-
-
-export interface WarmProps extends FilterProps { }
-
-export class Warm extends React.Component<WarmProps> { }
-
-
-export interface CoolProps extends FilterProps { }
-
-export class Cool extends React.Component<CoolProps> { }
-
-
-export interface BrightnessProps extends FilterProps {
-  readonly value?: number;
-}
-
-export class Brightness extends React.Component<BrightnessProps> { }
-
-
-export interface ExposureProps extends FilterProps {
-  readonly value?: number;
-}
-
-export class Exposure extends React.Component<ExposureProps> { }
-
-
-export interface ContrastProps extends FilterProps {
-  readonly value?: number;
-}
-
-export class Contrast extends React.Component<ContrastProps> { }
-
-
-export interface TemperatureProps extends FilterProps {
-  readonly value?: number;
-}
-
-export class Temperature extends React.Component<TemperatureProps> { }
-
-
-export interface TintProps extends FilterProps {
-  readonly value?: number;
-}
-
-export class Tint extends React.Component<TintProps> { }
-
-
-export interface ThresholdProps extends FilterProps {
-  readonly value?: number;
-}
-
-export class Threshold extends React.Component<ThresholdProps> { }
-
-
-export interface ProtanomalyProps extends FilterProps { }
-
-export class Protanomaly extends React.Component<ProtanomalyProps> { }
-
-
-export interface DeuteranomalyProps extends FilterProps { }
-
-export class Deuteranomaly extends React.Component<DeuteranomalyProps> { }
-
-
-export interface TritanomalyProps extends FilterProps { }
-
-export class Tritanomaly extends React.Component<TritanomalyProps> { }
-
-
-export interface ProtanopiaProps extends FilterProps { }
-
-export class Protanopia extends React.Component<ProtanopiaProps> { }
-
-
-export interface DeuteranopiaProps extends FilterProps { }
-
-export class Deuteranopia extends React.Component<DeuteranopiaProps> { }
-
-
-export interface TritanopiaProps extends FilterProps { }
-
-export class Tritanopia extends React.Component<TritanopiaProps> { }
-
-
-export interface AchromatopsiaProps extends FilterProps { }
-
-export class Achromatopsia extends React.Component<AchromatopsiaProps> { }
-
-
-export interface AchromatomalyProps extends FilterProps { }
-
-export class Achromatomaly extends React.Component<AchromatomalyProps> { }
+export class Normal extends React.Component<FilterProps> { }
+export class Saturate extends React.Component<ValueFilterProps> { }
+export class HueRotate extends React.Component<ValueFilterProps> { }
+export class LuminanceToAlpha extends React.Component<FilterProps> { }
+export class Invert extends React.Component<FilterProps> { }
+export class Grayscale extends React.Component<FilterProps> { }
+export class Sepia extends React.Component<FilterProps> { }
+export class Nightvision extends React.Component<FilterProps> { }
+export class Warm extends React.Component<FilterProps> { }
+export class Cool extends React.Component<FilterProps> { }
+export class Brightness extends React.Component<ValueFilterProps> { }
+export class Exposure extends React.Component<ValueFilterProps> { }
+export class Contrast extends React.Component<ValueFilterProps> { }
+export class Temperature extends React.Component<ValueFilterProps> { }
+export class Tint extends React.Component<ValueFilterProps> { }
+export class Threshold extends React.Component<ValueFilterProps> { }
+export class Technicolor extends React.Component<FilterProps> { }
+export class Polaroid extends React.Component<FilterProps> { }
+export class ToBGR extends React.Component<FilterProps> { }
+export class Kodachrome extends React.Component<FilterProps> { }
+export class Browni extends React.Component<FilterProps> { }
+export class Vintage extends React.Component<FilterProps> { }
+export class Night extends React.Component<ValueFilterProps> { }
+export class Predator extends React.Component<ValueFilterProps> { }
+export class Lsd extends React.Component<FilterProps> { }
+export class Protanomaly extends React.Component<FilterProps> { }
+export class Deuteranomaly extends React.Component<FilterProps> { }
+export class Tritanomaly extends React.Component<FilterProps> { }
+export class Protanopia extends React.Component<FilterProps> { }
+export class Deuteranopia extends React.Component<FilterProps> { }
+export class Tritanopia extends React.Component<FilterProps> { }
+export class Achromatopsia extends React.Component<FilterProps> { }
+export class Achromatomaly extends React.Component<FilterProps> { }
 
 
 export function concatColorMatrices(matrices: Matrix[]): Matrix;
@@ -169,6 +70,15 @@ export function contrast(value?: number): Matrix;
 export function temperature(value?: number): Matrix;
 export function tint(value?: number): Matrix;
 export function threshold(value?: number): Matrix;
+export function technicolor(): Matrix;
+export function polaroid(): Matrix;
+export function toBGR(): Matrix;
+export function kodachrome(): Matrix;
+export function browni(): Matrix;
+export function vintage(): Matrix;
+export function night(value?: number): Matrix;
+export function predator(value?: number): Matrix;
+export function lsd(): Matrix;
 export function protanomaly(): Matrix;
 export function deuteranomaly(): Matrix;
 export function tritanomaly(): Matrix;

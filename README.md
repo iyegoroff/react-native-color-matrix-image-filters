@@ -86,33 +86,42 @@ corresponding stack of filter components.
 
 ### Supported filters
 
-| Component         | Additional prop   | function          |
-| ----------------- | ----------------- | ----------------- |
-| ColorMatrix       | matrix: Matrix    | -
-| Normal            | -                 | normal(): Matrix
-| Saturate          | value: number = 1 | saturate(value: number = 1): Matrix
-| HueRotate         | value: number = 0 | hueRotate(value: number = 0): Matrix
-| LuminanceToAlpha  | -                 | luminanceToAlpha(): Matrix
-| Invert            | -                 | invert(): Matrix
-| Grayscale         | -                 | grayscale(): Matrix
-| Sepia             | -                 | sepia(): Matrix
-| Nightvision       | -                 | nightvision(): Matrix
-| Warm              | -                 | warm(): Matrix
-| Cool              | -                 | cool(): Matrix
-| Brightness        | value: number = 0 | brightness(value: number = 0): Matrix
-| Exposure          | value: number = 1 | exposure(value: number = 1): Matrix
-| Contrast          | value: number = 1 | contrast(value: number = 1): Matrix
-| Temperature       | value: number = 1 | temperature(value: number = 1): Matrix
-| Tint              | value: number = 0 | tint(value: number = 0): Matrix
-| Threshold         | value: number = 0 | threshold(value: number = 0): Matrix
-| Protanomaly       | -                 | protanomaly(): Matrix
-| Deuteranomaly     | -                 | deuteranomaly(): Matrix
-| Tritanomaly       | -                 | tritanomaly(): Matrix
-| Protanopia        | -                 | protanopia(): Matrix
-| Deuteranopia      | -                 | deuteranopia(): Matrix
-| Tritanopia        | -                 | tritanopia(): Matrix
-| Achromatopsia     | -                 | achromatopsia(): Matrix
-| Achromatomaly     | -                 | achromatomaly(): Matrix
+| Component         | Additional prop     | function          |
+| ----------------- | ------------------- | ----------------- |
+| ColorMatrix       | matrix: Matrix      | -
+| Normal            | -                   | normal(): Matrix
+| Saturate          | value: number = 1   | saturate(value: number = 1): Matrix
+| HueRotate         | value: number = 0   | hueRotate(value: number = 0): Matrix
+| LuminanceToAlpha  | -                   | luminanceToAlpha(): Matrix
+| Invert            | -                   | invert(): Matrix
+| Grayscale         | -                   | grayscale(): Matrix
+| Sepia             | -                   | sepia(): Matrix
+| Nightvision       | -                   | nightvision(): Matrix
+| Warm              | -                   | warm(): Matrix
+| Cool              | -                   | cool(): Matrix
+| Brightness        | value: number = 0   | brightness(value: number = 0): Matrix
+| Exposure          | value: number = 1   | exposure(value: number = 1): Matrix
+| Contrast          | value: number = 1   | contrast(value: number = 1): Matrix
+| Temperature       | value: number = 1   | temperature(value: number = 1): Matrix
+| Tint              | value: number = 0   | tint(value: number = 0): Matrix
+| Threshold         | value: number = 0   | threshold(value: number = 0): Matrix
+| Technicolor       | -                   | technicolor(): Matrix
+| Polaroid          | -                   | polaroid(): Matrix
+| ToBGR             | -                   | toBGR(): Matrix
+| Kodachrome        | -                   | kodachrome(): Matrix
+| Browni            | -                   | browni(): Matrix
+| Vintage           | -                   | vintage(): Matrix
+| Night             | value: number = 0.1 | night(value: number = 0.1): Matrix
+| Predator          | value: number = 1   | predator(value: number = 1): Matrix
+| Lsd               | -                   | lsd(): Matrix
+| Protanomaly       | -                   | protanomaly(): Matrix
+| Deuteranomaly     | -                   | deuteranomaly(): Matrix
+| Tritanomaly       | -                   | tritanomaly(): Matrix
+| Protanopia        | -                   | protanopia(): Matrix
+| Deuteranopia      | -                   | deuteranopia(): Matrix
+| Tritanopia        | -                   | tritanopia(): Matrix
+| Achromatopsia     | -                   | achromatopsia(): Matrix
+| Achromatomaly     | -                   | achromatomaly(): Matrix
 
 
 ### Functions
@@ -136,6 +145,5 @@ corresponding stack of filter components.
 - parrot [image](https://commons.wikimedia.org/wiki/File:Ara_macao_-flying_away-8a.jpg) by
   [Robert01](https://de.wikipedia.org/wiki/Benutzer:Robert01)
 - all color filters are taken from [color-matrix](https://github.com/skratchdot/color-matrix)
-  project by @skratchdot
+  project by @skratchdot and Pixi.js [sources](https://goo.gl/1GLTCU)
 - `concatColorMatrices` function is based on Android SDK [sources](https://goo.gl/MMDopQ)
-  

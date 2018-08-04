@@ -26,6 +26,15 @@ module CombinedFilterControl =
     | Temperature
     | Tint
     | Threshold
+    | Technicolor
+    | Polaroid
+    | ToBGR
+    | Kodachrome
+    | Browni
+    | Vintage
+    | Night
+    | Predator
+    | Lsd
     | Protanomaly
     | Deuteranomaly
     | Tritanomaly
@@ -57,6 +66,15 @@ module CombinedFilterControl =
     | Temperature -> Some (FilterRangeInput.init -10. 10.)
     | Tint -> Some (FilterRangeInput.init -10. 10.)
     | Threshold -> Some (FilterRangeInput.init -100. 100.)
+    | Technicolor -> None
+    | Polaroid -> None
+    | ToBGR -> None
+    | Kodachrome -> None
+    | Browni -> None
+    | Vintage -> None
+    | Night -> Some (FilterRangeInput.init -10. 10.)
+    | Predator -> Some (FilterRangeInput.init -10. 10.)
+    | Lsd -> None
     | Protanomaly -> None
     | Deuteranomaly -> None
     | Tritanomaly -> None
@@ -86,6 +104,15 @@ module CombinedFilterControl =
     | Temperature -> RNF.temperature value
     | Tint -> RNF.tint value
     | Threshold -> RNF.threshold value
+    | Technicolor -> RNF.technicolor ()
+    | Polaroid -> RNF.polaroid ()
+    | ToBGR -> RNF.toBGR ()
+    | Kodachrome -> RNF.kodachrome ()
+    | Browni -> RNF.browni ()
+    | Vintage -> RNF.vintage ()
+    | Night -> RNF.night value
+    | Predator -> RNF.predator value
+    | Lsd -> RNF.lsd ()
     | Protanomaly -> RNF.protanomaly ()
     | Deuteranomaly -> RNF.deuteranomaly ()
     | Tritanomaly -> RNF.tritanomaly ()
@@ -113,6 +140,15 @@ module CombinedFilterControl =
     | Temperature -> FilterControl.view (name Temperature)
     | Tint -> FilterControl.view (name Tint)
     | Threshold -> FilterControl.view (name Threshold)
+    | Technicolor -> FilterControl.view (name Technicolor)
+    | Polaroid -> FilterControl.view (name Polaroid)
+    | ToBGR -> FilterControl.view (name ToBGR)
+    | Kodachrome -> FilterControl.view (name Kodachrome)
+    | Browni -> FilterControl.view (name Browni)
+    | Vintage -> FilterControl.view (name Vintage)
+    | Night -> FilterControl.view (name Night)
+    | Predator -> FilterControl.view (name Predator)
+    | Lsd -> FilterControl.view (name Lsd)
     | Protanomaly -> FilterControl.view (name Protanomaly)
     | Deuteranomaly -> FilterControl.view (name Deuteranomaly)
     | Tritanomaly -> FilterControl.view (name Tritanomaly)
@@ -139,6 +175,15 @@ module CombinedFilterControl =
        Temperature
        Tint
        Threshold
+       Technicolor
+       Polaroid
+       ToBGR
+       Kodachrome
+       Browni
+       Vintage
+       Night
+       Predator
+       Lsd
        Protanomaly
        Deuteranomaly
        Tritanomaly
