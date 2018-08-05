@@ -25,6 +25,7 @@ module Filter =
     | MoveUp
     | MoveDown
     | Delete
+    | Tick
 
   let init inputs : Model =
     List.map
@@ -44,6 +45,16 @@ module Filter =
     | MoveUp
     | MoveDown
     | Delete -> model, []
+
+    | Tick ->
+      model,
+      model
+      |> List.map
+           (fun (input, _) ->
+              Cmd.map
+                (fun sub -> FilterInputMessage (input, sub))
+                (Cmd.ofMsg (CombinedFilterInput.Animated AnimatedFilterRangeInput.Tick)))
+      |> Cmd.batch
 
   let private controlsContainer =
     ViewProperties.Style

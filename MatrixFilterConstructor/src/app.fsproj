@@ -10,6 +10,7 @@
     <Compile Include="Image.fs" />
     <Compile Include="FilterInputs/FilterRangeInput.fs" />
     <Compile Include="FilterInputs/FilterColorInput.fs" />
+    <Compile Include="FilterInputs/AnimatedFilterRangeInput.fs" />
     <Compile Include="FilterInputs/CombinedFilterInput.fs" />
     <Compile Include="Filters/Filter.fs" />
     <Compile Include="Filters/CombinedFilter.fs" />

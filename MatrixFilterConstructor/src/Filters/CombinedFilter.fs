@@ -48,6 +48,16 @@ module CombinedFilter =
     | Tritanopia
     | Achromatopsia
     | Achromatomaly
+    | AnimatedSaturate
+    | AnimatedHueRotate
+    | AnimatedBrightness
+    | AnimatedExposure
+    | AnimatedContrast
+    | AnimatedTemperature
+    | AnimatedTint
+    | AnimatedThreshold
+    | AnimatedNight
+    | AnimatedPredator
 
 
   let name =
@@ -56,97 +66,54 @@ module CombinedFilter =
   let init model : Filter.Model =
     match model with
     | Normal -> Filter.init []
-
-    | Saturate ->
-      Filter.init
-        [ Filter.Value, CFI.initRange -10. 10. ]
-
-    | HueRotate ->
-      Filter.init
-        [ Filter.Value, CFI.initRange -10. 10. ]
-
+    | Saturate -> Filter.init [ Filter.Value, CFI.initRange -10. 10. 1. ]
+    | HueRotate -> Filter.init [ Filter.Value, CFI.initRange -10. 10. 0. ]
     | LuminanceToAlpha -> Filter.init []
-
     | Invert -> Filter.init []
-
     | Grayscale -> Filter.init []
-
     | Sepia -> Filter.init []
-
     | Nightvision -> Filter.init []
-
     | Warm -> Filter.init []
-
     | Cool -> Filter.init []
-
-    | Brightness ->
-      Filter.init
-        [ Filter.Value, CFI.initRange -100. 100. ]
-
-    | Exposure ->
-      Filter.init
-        [ Filter.Value, CFI.initRange -10. 10. ]
-
-    | Contrast ->
-      Filter.init
-        [ Filter.Value, CFI.initRange -10. 10. ]
-
-    | Temperature ->
-      Filter.init
-        [ Filter.Value, CFI.initRange -10. 10. ]
-
-    | Tint ->
-      Filter.init
-        [ Filter.Value, CFI.initRange -10. 10. ]
-
-    | Threshold ->
-      Filter.init
-        [ Filter.Value, CFI.initRange -100. 100. ]
-
+    | Brightness -> Filter.init [ Filter.Value, CFI.initRange -100. 100. 0. ]
+    | Exposure -> Filter.init [ Filter.Value, CFI.initRange -10. 10. 1. ]
+    | Contrast -> Filter.init [ Filter.Value, CFI.initRange -10. 10. 1. ]
+    | Temperature -> Filter.init [ Filter.Value, CFI.initRange -10. 10. 1. ]
+    | Tint -> Filter.init [ Filter.Value, CFI.initRange -10. 10. 0. ]
+    | Threshold -> Filter.init [ Filter.Value, CFI.initRange -100. 100. 0. ]
     | Technicolor -> Filter.init []
-
     | Polaroid -> Filter.init []
-
     | ToBGR -> Filter.init []
-
     | Kodachrome -> Filter.init []
-
     | Browni -> Filter.init []
-
     | Vintage -> Filter.init []
-
-    | Night ->
-      Filter.init
-        [ Filter.Value, CFI.initRange -10. 10. ]
-
-    | Predator ->
-      Filter.init
-        [ Filter.Value, CFI.initRange -10. 10. ]
-
+    | Night -> Filter.init [ Filter.Value, CFI.initRange -10. 10. 0.1 ]
+    | Predator -> Filter.init [ Filter.Value, CFI.initRange -10. 10. 1. ]
     | Lsd -> Filter.init []
-
     | ColorTone ->
       Filter.init
-        [ Filter.Desaturation, CFI.initRange -10. 10.
-          Filter.Toned, CFI.initRange -10. 10.
-          Filter.LightColor, CFI.initColor
-          Filter.DarkColor, CFI.initColor ]
-
+        [ Filter.Desaturation, CFI.initRange -10. 10. 0.2
+          Filter.Toned, CFI.initRange -10. 10. 1.5
+          Filter.LightColor, CFI.initColor "#ffe580"
+          Filter.DarkColor, CFI.initColor "#338000" ]
     | Protanomaly -> Filter.init []
-
     | Deuteranomaly -> Filter.init []
-
     | Tritanomaly -> Filter.init []
-
     | Protanopia -> Filter.init []
-
     | Deuteranopia -> Filter.init []
-
     | Tritanopia -> Filter.init []
-
     | Achromatopsia -> Filter.init []
-
     | Achromatomaly -> Filter.init []
+    | AnimatedSaturate -> Filter.init [ Filter.Value, CFI.initAnimated -10. 10. 1. ]
+    | AnimatedHueRotate -> Filter.init [ Filter.Value, CFI.initAnimated -10. 10. 0. ]
+    | AnimatedBrightness -> Filter.init [ Filter.Value, CFI.initAnimated -100. 100. 0. ]
+    | AnimatedExposure -> Filter.init [ Filter.Value, CFI.initAnimated -10. 10. 1. ]
+    | AnimatedContrast -> Filter.init [ Filter.Value, CFI.initAnimated -10. 10. 1. ]
+    | AnimatedTemperature -> Filter.init [ Filter.Value, CFI.initAnimated -10. 10. 1. ]
+    | AnimatedTint -> Filter.init [ Filter.Value, CFI.initAnimated -10. 10. 0. ]
+    | AnimatedThreshold -> Filter.init [ Filter.Value, CFI.initAnimated -100. 100. 0. ]
+    | AnimatedNight -> Filter.init [ Filter.Value, CFI.initAnimated -10. 10. 0.1 ]
+    | AnimatedPredator -> Filter.init [ Filter.Value, CFI.initAnimated -10. 10. 1. ]
 
 
   let matrix control (model: Filter.Model) =
@@ -190,6 +157,16 @@ module CombinedFilter =
     | Tritanopia, _ -> RNF.tritanopia ()
     | Achromatopsia, _ -> RNF.achromatopsia ()
     | Achromatomaly, _ -> RNF.achromatomaly ()
+    | AnimatedSaturate, [ Filter.Value, CFI.Animated input] -> RNF.saturate input.Value
+    | AnimatedHueRotate, [ Filter.Value, CFI.Animated input] -> RNF.hueRotate input.Value
+    | AnimatedBrightness, [ Filter.Value, CFI.Animated input] -> RNF.brightness input.Value
+    | AnimatedExposure, [ Filter.Value, CFI.Animated input] -> RNF.exposure input.Value
+    | AnimatedContrast, [ Filter.Value, CFI.Animated input] -> RNF.contrast input.Value
+    | AnimatedTemperature, [ Filter.Value, CFI.Animated input] -> RNF.temperature input.Value
+    | AnimatedTint, [ Filter.Value, CFI.Animated input] -> RNF.tint input.Value
+    | AnimatedThreshold, [ Filter.Value, CFI.Animated input] -> RNF.threshold input.Value
+    | AnimatedNight, [ Filter.Value, CFI.Animated input] -> RNF.night input.Value
+    | AnimatedPredator, [ Filter.Value, CFI.Animated input] -> RNF.predator input.Value
     | _ -> RNF.normal ()
 
 
@@ -229,6 +206,16 @@ module CombinedFilter =
     | Tritanopia -> Filter.controls (name Tritanopia)
     | Achromatopsia -> Filter.controls (name Achromatopsia)
     | Achromatomaly -> Filter.controls (name Achromatomaly)
+    | AnimatedSaturate -> Filter.controls (name AnimatedSaturate)
+    | AnimatedHueRotate -> Filter.controls (name AnimatedHueRotate)
+    | AnimatedBrightness -> Filter.controls (name AnimatedBrightness)
+    | AnimatedExposure -> Filter.controls (name AnimatedExposure)
+    | AnimatedContrast -> Filter.controls (name AnimatedContrast)
+    | AnimatedTemperature -> Filter.controls (name AnimatedTemperature)
+    | AnimatedTint -> Filter.controls (name AnimatedTint)
+    | AnimatedThreshold -> Filter.controls (name AnimatedThreshold)
+    | AnimatedNight -> Filter.controls (name AnimatedNight)
+    | AnimatedPredator -> Filter.controls (name AnimatedPredator)
 
     
   let availableFilters: Model array =
@@ -266,3 +253,16 @@ module CombinedFilter =
        Tritanopia
        Achromatopsia
        Achromatomaly |]
+
+  let availableAnimatedFilters: Model array =
+    [| AnimatedSaturate
+       AnimatedHueRotate
+       AnimatedBrightness
+       AnimatedExposure
+       AnimatedContrast
+       AnimatedTemperature
+       AnimatedTint
+       AnimatedThreshold
+       AnimatedNight
+       AnimatedPredator |]
+       

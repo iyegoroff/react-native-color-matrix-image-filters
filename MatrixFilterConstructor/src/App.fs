@@ -7,7 +7,8 @@ open Elmish.HMR
 
 module App =
 
-  Program.mkProgram Main.init Main.update Main.view
+  Program.mkProgram Main.init Main.update Main.pureView
+  |> Program.withSubscription Main.subscribe
   |> Program.withHMR
   |> Program.withReactNative "MatrixFilterConstructor"
   |> Program.run

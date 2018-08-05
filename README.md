@@ -86,7 +86,7 @@ corresponding stack of filter components.
 
 ### Supported filters
 
-| Component         | Additional prop     | function          |
+| Component         | Additional props    | function          |
 | ----------------- | ------------------- | ----------------- |
 | ColorMatrix       | matrix: Matrix      | -
 | Normal            | -                   | normal(): Matrix
@@ -114,6 +114,7 @@ corresponding stack of filter components.
 | Night             | value: number = 0.1 | night(value: number = 0.1): Matrix
 | Predator          | value: number = 1   | predator(value: number = 1): Matrix
 | Lsd               | -                   | lsd(): Matrix
+| ColorTone         | desaturation: number = 0.2, toned: number = 0.15, lightColor: string = "#FFE580", darkColor: string = "#338000" | colorTone(desaturation: number = 0.2, toned: number = 0.15, lightColor: string = "#FFE580", darkColor: string = "#338000"): Matrix
 | Protanomaly       | -                   | protanomaly(): Matrix
 | Deuteranomaly     | -                   | deuteranomaly(): Matrix
 | Tritanomaly       | -                   | tritanomaly(): Matrix

@@ -22,10 +22,10 @@ module FilterRangeInput =
   type Message =
     | ValueChanged of float
 
-  let init name min max : Model =
+  let init name min max initial : Model =
     { Min = min
       Max = max
-      Value = 0.
+      Value = initial
       Name = name }
 
   let update (message: Message) (model: Model) =
@@ -59,22 +59,27 @@ module FilterRangeInput =
         Elevation 2. ]
 
   let view (model: Model) (dispatch: Dispatch<Message>) =
+    let slider =
+      (fun () ->
+         (Platform.select
+            [ Platform.Android
+                (RN.slider
+                  [ MaximumValue model.Max
+                    MinimumValue model.Min
+                    SliderProperties.Value model.Value
+                    SliderProperties.OnValueChange (ValueChanged >> dispatch) ])
+              Platform.Ios
+                (RS.slider
+                  [ thumbStyle
+                    RS.Props.MaximumValue model.Max
+                    RS.Props.MinimumValue model.Min
+                    RS.Props.Value model.Value
+                    RS.Props.MinimumTrackTintColor "#007aff"
+                    RS.Props.OnValueChange (ValueChanged >> dispatch) ]) ]))
     RN.view
       [ containerStyle ]
       [ RN.text [] (sprintf "%s %.2f" model.Name model.Value)
-        (Platform.select
-          [ Platform.Android
-              (RN.slider
-                [ MaximumValue model.Max
-                  MinimumValue model.Min
-                  SliderProperties.OnValueChange (ValueChanged >> dispatch) ])
-            Platform.Ios
-              (RS.slider
-                [ thumbStyle
-                  RS.Props.MaximumValue model.Max
-                  RS.Props.MinimumValue model.Min
-                  RS.Props.MinimumTrackTintColor "#007aff"
-                  RS.Props.OnValueChange (ValueChanged >> dispatch) ]) ]) 
+        lazyView slider ()      
         RN.view
           [ rangeLegendStyle ]
           [ RN.text [] (sprintf "%.2f" model.Min)

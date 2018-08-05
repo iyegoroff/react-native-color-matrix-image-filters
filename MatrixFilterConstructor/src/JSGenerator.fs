@@ -29,7 +29,13 @@ module JSGenerator =
     |> Array.mapi (fun i v -> if i = 0 then Char.ToLower v else v)
     |> String.Concat
 
-  let run (selectedFilters: (CombinedFilter.Model * float option) list): string =
+  let private inputValue (filter: CombinedFilterInput.Model) =
+    match filter with
+    | CombinedFilterInput.Range value -> (sprintf "%.2f" value.Value)
+    | CombinedFilterInput.Animated value -> (sprintf "%.2f" value.Value)
+    | CombinedFilterInput.Color value -> (sprintf "'%s'" value.Value)
+
+  let run (selectedFilters: (CombinedFilter.Model * Filter.Model) list): string =
     let selectedFilters =
       selectedFilters
       |> List.mapFold
@@ -39,7 +45,7 @@ module JSGenerator =
               (name, value, id), Map.add name id map)
            Map.empty
       |> fst
-      |> List.map (fun (name, value, id) -> (name, value, if id = 1 then "" else (string id)))
+      |> List.map (fun (name, values, id) -> (name, values, if id = 1 then "" else (string id)))
 
     let rec generate =
       function
@@ -57,19 +63,27 @@ module JSGenerator =
 
       | Props padding ->
         selectedFilters
-        |> List.filter (fun (_, value, _) -> value.IsSome)
-        |> List.map (fun (name, value, id) ->
-             (sprintf "%s%s: %sValue%s = %f," name id name id (defaultArg value 0.)))
+        |> List.filter (fun (_, values, _) -> values.Length > 0)
+        |> List.collect (fun (name, values, id) -> List.map (fun value -> name, value, id) values)
+        |> List.map
+             (fun (name, (inputName, input), id) ->
+               match inputName with
+               | Filter.Value -> sprintf "%s%s: %sValue%s = %s," name id name id (inputValue input)
+               | _ -> sprintf "%s%A%s = %s," name inputName id (inputValue input))
         |> String.concat (sprintf "\n%s" padding)
         |> sprintf "%s%s" padding
 
       | Matrices padding ->
         selectedFilters
         |> List.map
-             (fun (name, value, id) ->
-                match value with
-                | Some _ -> (sprintf "%s(%sValue%s)" name name id)
-                | None -> (sprintf "%s()" name))
+             (fun (name, values, id) ->
+                if values.Length > 0 then
+                  values
+                  |> List.map (fun (inputName, _) -> sprintf "%s%A%s" name inputName id)
+                  |> (fun valueNames -> String.Join (", ", valueNames))
+                  |> sprintf "%s(%s)" name
+                else
+                  sprintf "%s()" name)
         |> String.concat (sprintf ",\n%s" padding)
         |> sprintf "%s%s" padding
 

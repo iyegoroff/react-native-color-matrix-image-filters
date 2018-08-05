@@ -1,10 +1,12 @@
 namespace MatrixFilterConstructor
 
 open Elmish
+open System
 open Elmish.React
 open Fable.Helpers.ReactNative
 open Fable.Helpers.ReactNative.Props
 open Fable.Import
+open Fable.PowerPack
 
 module RN = Fable.Helpers.ReactNative
 module R = Fable.Helpers.React
@@ -19,6 +21,7 @@ module Main =
     { FilteredImages: (Id * FilteredImage.Model) array
       DefaultImageSelectModalIsVisible: bool
       DefaultImage: Image.Model
+      AnimationNoticeWasShown: bool
       NextId: Id }
 
   type Message =
@@ -26,12 +29,15 @@ module Main =
     | SelectDefaultImage
     | ImageSelectModalMessage of ImageSelectModal.Message
     | FilteredImageMessage of Id * FilteredImage.Message
+    | ContainerScrolled
+    | Tick
 
   let init () = 
     // Utils.enableExperimentalLayoutAnimationOnAndroid ()
     { FilteredImages = [||]
       DefaultImageSelectModalIsVisible = false
       DefaultImage = Image.defaultImage
+      AnimationNoticeWasShown = false
       NextId = 0 },
     Cmd.none
 
@@ -70,6 +76,20 @@ module Main =
       | None -> model, []
       | Some (_, image) ->
         match msg with
+        | FilteredImage.SelectAnimatedFilter when (not model.AnimationNoticeWasShown) ->
+          { model with AnimationNoticeWasShown = true },
+          Cmd.ofPromise
+            (fun () -> Promise.create (fun resolve reject ->
+              Alert.alert
+                ("Notice",
+                 String.Concat
+                   [ "Animated filters here are implemented with 'requestAnimationFrame', so it "
+                     "may lead to slow performance and increased energy consumption on some "
+                     "devices." ],
+                 [ "OK", resolve ])))
+            ()
+            (fun _ -> FilteredImageMessage (id, msg))
+            (fun _ -> FilteredImageMessage (id, msg))
         | FilteredImage.Delete ->
           Utils.configureNextLayoutAnimation ()
           { model with FilteredImages = Array.filter
@@ -82,6 +102,36 @@ module Main =
                                           model.FilteredImages },
           Cmd.map (fun sub -> FilteredImageMessage (id, sub)) cmd
 
+    | ContainerScrolled ->
+      model.FilteredImages
+      |> Array.toList
+      |> List.collect (fun (_, image) -> image.Filters)
+      |> List.collect (fun (_, _, filter) -> filter)
+      |> List.iter
+           (function
+            | (_, CombinedFilterInput.Model.Color
+                    { FilterColorInput.Model.ColorWheelRef = Some wheel }) -> wheel.measureOffset ()
+            | _ -> ())
+      model, []
+
+    | Tick ->
+      model,
+      model.FilteredImages
+      |> Array.map
+           (fun (id, _) ->
+              Cmd.map (fun sub -> FilteredImageMessage (id, sub)) (Cmd.ofMsg FilteredImage.Tick))
+      |> Cmd.batch
+
+  
+  let subscribe (_model: Model) =
+    let sub dispatch = 
+      let rec animate (_dt: float) =
+        Browser.window.requestAnimationFrame animate |> ignore
+        dispatch Tick
+
+      animate 0.
+    Cmd.ofSub sub
+      
   let private separatorStyle =
     ViewProperties.Style
       [ Height (dip 1.5) ]
@@ -127,7 +177,8 @@ module Main =
           model.DefaultImage
           model.DefaultImageSelectModalIsVisible
           (ImageSelectModalMessage >> dispatch)
-        RNP.exitPortal Constants.filterPortal []
+        RNP.exitPortal Constants.commonFilterPortal []
+        RNP.exitPortal Constants.animatedFilterPortal []
         RNP.exitPortal Constants.imagePortal []
         RN.flatList model.FilteredImages
           [ listContentStyle
@@ -135,4 +186,9 @@ module Main =
             RenderItem (fun item -> lazyView renderFilteredImage item.item)
             ItemSeparatorComponent separator
             ListHeaderComponent listControls
+            OnMomentumScrollEnd (fun _ -> dispatch ContainerScrolled)
+            OnScrollEndDrag (fun _ -> dispatch ContainerScrolled)
             KeyExtractor (fun (id, _) _ -> string id) ] ]
+
+  let pureView =
+    lazyView2 view

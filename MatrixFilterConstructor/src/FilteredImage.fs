@@ -28,7 +28,8 @@ module FilteredImage =
     { Image: Image.Model
       Filters: (Id * CombinedFilter.Model * Filter.Model) list
       ImageSelectModalIsVisible: bool
-      FilterSelectModalIsVisible: bool
+      CommonFilterSelectModalIsVisible: bool
+      AnimatedFilterSelectModalIsVisible: bool
       SelectedResizeMode: ResizeMode
       LoadingStatus: Loading
       NextId: Id }
@@ -38,7 +39,8 @@ module FilteredImage =
     | SelectImage
     | SetImage of Image.Model
     | ImageSelectModalMessage of ImageSelectModal.Message
-    | SelectFilter
+    | SelectCommonFilter
+    | SelectAnimatedFilter
     | FilterSelectModalMessage of FilterSelectModal.Message
     | FilterMessage of Id * Filter.Message
     | ResizeModeChanged of int
@@ -46,6 +48,7 @@ module FilteredImage =
     | ImageLoadingStarted
     | ImageLoadingSucceed
     | ImageLoadingFailed
+    | Tick
 
 
   let private resizeModes =
@@ -61,7 +64,8 @@ module FilteredImage =
     { Image = image
       Filters = []
       ImageSelectModalIsVisible = false 
-      FilterSelectModalIsVisible = false
+      CommonFilterSelectModalIsVisible = false
+      AnimatedFilterSelectModalIsVisible = false
       SelectedResizeMode = ResizeMode.Contain
       LoadingStatus = Done
       NextId = 0 }
@@ -92,18 +96,21 @@ module FilteredImage =
       | ImageSelectModal.Hide ->
         { model with ImageSelectModalIsVisible = false }, []
 
-    | SelectFilter ->
-      { model with FilterSelectModalIsVisible = true }, []
+    | SelectCommonFilter ->
+      { model with CommonFilterSelectModalIsVisible = true }, []
+
+    | SelectAnimatedFilter ->
+      { model with AnimatedFilterSelectModalIsVisible = true }, []
 
     | FilterSelectModalMessage msg ->
       match msg with
       | SelectMessage (ItemSelected filter) -> 
         Utils.configureNextLayoutAnimation ()
-        { model with Filters = 
-                       model.Filters @ [model.NextId, filter, CombinedFilter.init filter]
+        { model with Filters = model.Filters @ [model.NextId, filter, CombinedFilter.init filter]
                      NextId = model.NextId + 1 }, []
       | Hide ->
-        { model with FilterSelectModalIsVisible = false }, []
+        { model with CommonFilterSelectModalIsVisible = false
+                     AnimatedFilterSelectModalIsVisible = false }, []
 
     | FilterMessage (id, msg) ->
       match List.tryFind (fun (i, _, _) -> i = id) model.Filters with
@@ -132,10 +139,10 @@ module FilteredImage =
       { model with SelectedResizeMode = resizeModes.[index] }, []
 
     | CopyCode ->
-      // model.FilterControls
-      // |> List.map (fun (_, filter, value) -> (filter, value |> Option.map (fun v -> v.Value)))
-      // |> JSGenerator.run
-      // |> Globals.Clipboard.setString
+      model.Filters
+      |> List.map (fun (_, filter, value) -> (filter, value))
+      |> JSGenerator.run
+      |> Globals.Clipboard.setString
 
       Alert.alert ("Info", "JS code copied to clipboard", [])
       model, []
@@ -148,6 +155,13 @@ module FilteredImage =
 
     | ImageLoadingFailed ->
       { model with LoadingStatus = Failed }, []
+
+    | Tick ->
+      model,
+      model.Filters
+      |> List.map
+           (fun (id, _, _) -> Cmd.map (fun sub -> FilterMessage (id, sub)) (Cmd.ofMsg Filter.Tick))
+      |> Cmd.batch
       
 
   let private containerStyle =
@@ -198,16 +212,26 @@ module FilteredImage =
               model.ImageSelectModalIsVisible
               (ImageSelectModalMessage >> dispatch) ]
         RNP.enterPortal
-          Constants.filterPortal
-          [ FilterSelectModal.view
-              model.FilterSelectModalIsVisible
+          Constants.commonFilterPortal
+          [ FilterSelectModal.common
+              model.CommonFilterSelectModalIsVisible
+              (FilterSelectModalMessage >> dispatch) ]
+        RNP.enterPortal
+          Constants.animatedFilterPortal
+          [ FilterSelectModal.animated
+              model.AnimatedFilterSelectModalIsVisible
               (FilterSelectModalMessage >> dispatch) ]
         RN.view
           [ containerStyle
             ActivityIndicator.Size Size.Large ]
           [ RN.button
               [ ButtonProperties.Title "Add filter"
-                ButtonProperties.OnPress (fun _ -> dispatch SelectFilter) ]
+                ButtonProperties.OnPress (fun _ -> dispatch SelectCommonFilter) ]
+              []
+            Spacer.view
+            RN.button
+              [ ButtonProperties.Title "Add animated filter"
+                ButtonProperties.OnPress (fun _ -> dispatch SelectAnimatedFilter) ]
               []
             Spacer.view
             RN.view
