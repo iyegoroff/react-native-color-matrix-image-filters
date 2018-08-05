@@ -8,7 +8,7 @@
     <PackageIconUrl></PackageIconUrl>
     <PackageTags>fsharp;fable;react-native;color-matrix;image-filters</PackageTags>
     <Authors>iyegoroff</Authors>
-    <Version>0.0.3</Version>
+    <Version>0.0.4</Version>
     <TargetFramework>netstandard1.6</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
