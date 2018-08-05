@@ -25,11 +25,11 @@ module JSGenerator =
       Line input
 
   let private importName filter =
-    (CombinedFilterControl.name filter).ToCharArray ()
+    (CombinedFilter.name filter).ToCharArray ()
     |> Array.mapi (fun i v -> if i = 0 then Char.ToLower v else v)
     |> String.Concat
 
-  let run (selectedFilters: (CombinedFilterControl.Model * float option) list): string =
+  let run (selectedFilters: (CombinedFilter.Model * float option) list): string =
     let selectedFilters =
       selectedFilters
       |> List.mapFold

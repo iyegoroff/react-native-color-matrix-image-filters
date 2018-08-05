@@ -115,7 +115,7 @@ module Main =
               ButtonProperties.Color "green"
               ButtonProperties.OnPress (fun () -> dispatch SelectDefaultImage) ]
             []
-          Spacer.view 5.
+          Spacer.view
           RN.button
             [ ButtonProperties.Title "Add filtered image"
               ButtonProperties.Color "green"

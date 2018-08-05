@@ -1,7 +1,6 @@
 namespace MatrixFilterConstructor
 
 open Elmish
-
 open Fable.Helpers.ReactNative
 open Fable.Helpers.ReactNative.Props
 open Fable.Helpers.ReactNativeImagePicker

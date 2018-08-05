@@ -16,6 +16,14 @@ export interface ColorMatrixProps extends FilterProps {
   readonly matrix: Readonly<Matrix> | ReadonlyArray<Readonly<Matrix>>;
 }
 
+export interface ColorToneProps extends FilterProps {
+  readonly desaturation?: number;
+  readonly toned?: number;
+  readonly lightColor?: string;
+  readonly darkColor?: string;
+}
+
+
 export class ColorMatrix extends React.Component<ColorMatrixProps> { }
 export class Normal extends React.Component<FilterProps> { }
 export class Saturate extends React.Component<ValueFilterProps> { }
@@ -79,6 +87,12 @@ export function vintage(): Matrix;
 export function night(value?: number): Matrix;
 export function predator(value?: number): Matrix;
 export function lsd(): Matrix;
+export function colorTone(
+  desaturation?: number,
+  toned?: number,
+  lightColor?: string,
+  darkColor?: string
+): Matrix;
 export function protanomaly(): Matrix;
 export function deuteranomaly(): Matrix;
 export function tritanomaly(): Matrix;

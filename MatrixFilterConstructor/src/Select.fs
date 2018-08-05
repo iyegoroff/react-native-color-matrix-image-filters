@@ -14,7 +14,6 @@ module Select =
   type Message<'a> =
     | ItemSelected of 'a
 
-
   let private itemStyle =
     ViewProperties.Style
       [ Padding (dip 15.) ]

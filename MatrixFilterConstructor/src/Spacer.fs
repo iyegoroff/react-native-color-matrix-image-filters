@@ -11,5 +11,5 @@ module Spacer =
   let private containerStyle =
     FastMemoize.memoize (fun height -> ViewProperties.Style [ Height (dip height) ])      
 
-  let view height =
-    RN.view [ containerStyle height ] []
+  let view  =
+    RN.view [ containerStyle 5. ] []

@@ -29,19 +29,32 @@ ColorMatrixFilter.displayName = 'ColorMatrix';
 
 const filterName = ([first, ...rest]) => first.toUpperCase() + rest.join('');
 
-const createColorMatrixImageFilter = (filter) => ({ value, children, ...restProps }) => (
+const createColorMatrixImageFilter = (filter) => ({ value, ...restProps }) => (
   <ColorMatrixFilter
     matrix={filter(value)}
     {...restProps}
-  >
-    {children}
-  </ColorMatrixFilter>
+  />
+);
+
+const createColorToneImageFilter = (filter) => ({
+    desaturation,
+    toned,
+    lightColor,
+    darkColor,
+    ...restProps
+}) => (
+  <ColorMatrixFilter
+    matrix={filter(desaturation, toned, lightColor, darkColor)}
+    {...restProps}
+  />
 );
 
 export default Object.keys(filters).reduce(
   (acc, name) => {
     const key = filterName(name);
-    acc[key] = createColorMatrixImageFilter(filters[name]);
+    acc[key] = key === 'ColorTone'
+      ? createColorToneImageFilter(filters[name])
+      : createColorMatrixImageFilter(filters[name]);
     acc[key].displayName = key;
     acc[key].isColorMatrixFilter = true;
     return acc;

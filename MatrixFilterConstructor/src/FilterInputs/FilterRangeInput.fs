@@ -16,15 +16,17 @@ module FilterRangeInput =
   type Model =
     { Value: float
       Min: float
-      Max: float }
+      Max: float
+      Name: string }
 
   type Message =
     | ValueChanged of float
 
-  let init min max : Model =
+  let init name min max : Model =
     { Min = min
       Max = max
-      Value = 0. }
+      Value = 0.
+      Name = name }
 
   let update (message: Message) (model: Model) =
     match message with
@@ -59,7 +61,7 @@ module FilterRangeInput =
   let view (model: Model) (dispatch: Dispatch<Message>) =
     RN.view
       [ containerStyle ]
-      [ RN.text [] (sprintf "Value %.2f" model.Value)
+      [ RN.text [] (sprintf "%s %.2f" model.Name model.Value)
         (Platform.select
           [ Platform.Android
               (RN.slider

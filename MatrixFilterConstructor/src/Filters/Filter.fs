@@ -6,26 +6,39 @@ open Fable.Helpers.ReactNative.Props
 
 module R = Fable.Helpers.React
 module RN = Fable.Helpers.ReactNative
+module RNF = Fable.Import.ReactNativeColorMatrixImageFilters
 
 
-module FilterControl =
+module Filter =
 
-  type Model = FilterRangeInput.Model option
+  type Input =
+    | Value
+    | Desaturation
+    | Toned
+    | LightColor
+    | DarkColor
+
+  type Model = (Input * CombinedFilterInput.Model) list
 
   type Message =
-    | FilterInputMessage of FilterRangeInput.Message
+    | FilterInputMessage of Input * CombinedFilterInput.Message
     | MoveUp
     | MoveDown
     | Delete
 
+  let init inputs : Model =
+    List.map
+      (fun (input, toModel) -> input, toModel (sprintf "%A" input))
+      inputs
 
   let update (message: Message) (model: Model) : Model * Sub<Message> list =
     match message with
-    | FilterInputMessage msg ->
-      match model with
-      | Some input ->
-        let input', cmd = FilterRangeInput.update msg input
-        Some input', Cmd.map FilterInputMessage cmd
+    | FilterInputMessage (input, msg) ->
+      match List.tryFind (fun (id, _) -> input = id) model with
+      | Some (_, inputModel) ->
+        let inputModel', cmd = CombinedFilterInput.update msg inputModel
+        List.map (fun (id, m) -> id, if input = id then inputModel' else m) model,
+        Cmd.map (fun sub -> FilterInputMessage (input, sub)) cmd
       | None -> model, []
 
     | MoveUp
@@ -49,16 +62,23 @@ module FilterControl =
       [ FlexDirection FlexDirection.Row
         JustifyContent JustifyContent.SpaceBetween ]
 
-  let view name (model: Model) (dispatch: Dispatch<Message>) =
-    let slider =
-      match model with
-      | Some input -> FilterRangeInput.view input (FilterInputMessage >> dispatch)
-      | _ -> R.fragment [] []
+  let view filterComponent mapInput (model: Model) content =
+    filterComponent
+      (model |> List.map mapInput |> List.choose id)
+      [ content ]
+
+  let controls name (model: Model) (dispatch: Dispatch<Message>) =
+    let dispatch' = FilterInputMessage >> dispatch
+    let sliders = 
+      List.map
+        (fun (input, inputModel) ->
+           CombinedFilterInput.view inputModel (fun msg -> dispatch' (input, msg)))
+        model
         
     RN.view
       [ controlsContainer ]
       [ RN.text [ titleStyle ] name
-        slider
+        R.fragment [] sliders
         RN.view
           [ controlButtonsStyle ]
           [ RN.button

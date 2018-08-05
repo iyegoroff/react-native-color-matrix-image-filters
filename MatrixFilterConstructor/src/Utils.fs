@@ -14,7 +14,4 @@ module Utils =
   let moveUpAt index list = moveDownAt (index - 1) list
 
   let configureNextLayoutAnimation () =
-    Globals.LayoutAnimation.configureNext
-      (unbox<Constants.LayoutAnimationPresets> Globals.LayoutAnimation.Presets).spring
-      id
-      ignore
+    Globals.LayoutAnimation.spring id

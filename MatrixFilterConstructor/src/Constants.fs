@@ -6,8 +6,3 @@ module Constants =
   let imageHeight = (Globals.Dimensions.get "screen").height * 0.5
   let filterPortal = "filterPortal"
   let imagePortal = "imagePortal"
-
-  type LayoutAnimationPresets =
-    { easeInEaseOut: LayoutAnimationConfig
-      linear: LayoutAnimationConfig
-      spring: LayoutAnimationConfig }

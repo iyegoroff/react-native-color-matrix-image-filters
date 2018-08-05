@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, processColor } from 'react-native';
 
 // filters taken from here: https://github.com/skratchdot/color-matrix/blob/master/lib/filters.js
 
@@ -320,6 +320,28 @@ export default {
   ],
 
   lsd: () => staticFilters.lsd,
+
+  colorTone: (desaturation, toned, lightColor, darkColor) => {
+    desaturation = desaturation === undefined ? 0.2 : desaturation;
+    toned = toned === undefined ? 0.15 : toned;
+    lightColor = lightColor === undefined ? 0xFFE580 : processColor(lightColor);
+    darkColor = darkColor === undefined ? 0x338000 : processColor(darkColor);
+
+    const lR = ((lightColor >> 16) & 0xFF) / 255;
+    const lG = ((lightColor >> 8) & 0xFF) / 255;
+    const lB = (lightColor & 0xFF) / 255;
+
+    const dR = ((darkColor >> 16) & 0xFF) / 255;
+    const dG = ((darkColor >> 8) & 0xFF) / 255;
+    const dB = (darkColor & 0xFF) / 255;
+
+    return [
+      0.3, 0.59, 0.11, 0, 0,
+      lR, lG, lB, desaturation, 0,
+      dR, dG, dB, toned, 0,
+      lR - dR, lG - dG, lB - dB, 0, 0,
+    ];
+  },
 
   protanomaly: () => staticFilters.protanomaly,
 

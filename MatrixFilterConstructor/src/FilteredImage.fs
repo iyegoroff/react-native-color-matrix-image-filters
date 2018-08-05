@@ -26,7 +26,7 @@ module FilteredImage =
 
   type Model = 
     { Image: Image.Model
-      FilterControls: (Id * CombinedFilterControl.Model * FilterControl.Model) list
+      Filters: (Id * CombinedFilter.Model * Filter.Model) list
       ImageSelectModalIsVisible: bool
       FilterSelectModalIsVisible: bool
       SelectedResizeMode: ResizeMode
@@ -40,7 +40,7 @@ module FilteredImage =
     | ImageSelectModalMessage of ImageSelectModal.Message
     | SelectFilter
     | FilterSelectModalMessage of FilterSelectModal.Message
-    | FilterMessage of Id * FilterControl.Message
+    | FilterMessage of Id * Filter.Message
     | ResizeModeChanged of int
     | CopyCode
     | ImageLoadingStarted
@@ -59,7 +59,7 @@ module FilteredImage =
 
   let init image =
     { Image = image
-      FilterControls = []
+      Filters = []
       ImageSelectModalIsVisible = false 
       FilterSelectModalIsVisible = false
       SelectedResizeMode = ResizeMode.Contain
@@ -99,43 +99,43 @@ module FilteredImage =
       match msg with
       | SelectMessage (ItemSelected filter) -> 
         Utils.configureNextLayoutAnimation ()
-        { model with FilterControls = 
-                       model.FilterControls @ [model.NextId, filter, CombinedFilterControl.init filter]
+        { model with Filters = 
+                       model.Filters @ [model.NextId, filter, CombinedFilter.init filter]
                      NextId = model.NextId + 1 }, []
       | Hide ->
         { model with FilterSelectModalIsVisible = false }, []
 
     | FilterMessage (id, msg) ->
-      match List.tryFind (fun (i, _, _) -> i = id) model.FilterControls with
+      match List.tryFind (fun (i, _, _) -> i = id) model.Filters with
       | None -> model, []
       | Some (_, _, filter) ->
-        let filter', cmd = FilterControl.update msg filter
+        let filter', cmd = Filter.update msg filter
         let filters =
-          List.map (fun (i, t, f) -> i, t, if i = id then filter' else f) model.FilterControls
+          List.map (fun (i, t, f) -> i, t, if i = id then filter' else f) model.Filters
         let filters' =
           match msg with
-          | FilterControl.Message.Delete ->
+          | Filter.Delete ->
             Utils.configureNextLayoutAnimation ()
             List.filter (fun (i, _, _) -> i <> id) filters
-          | FilterControl.Message.MoveDown ->
+          | Filter.MoveDown ->
             Utils.configureNextLayoutAnimation ()
             Utils.moveUpAt (List.findIndex (fun (i, _, _) -> i = id) filters) filters
-          | FilterControl.Message.MoveUp ->
+          | Filter.MoveUp ->
             Utils.configureNextLayoutAnimation ()
             Utils.moveDownAt (List.findIndex (fun (i, _, _) -> i = id) filters) filters
           | _ -> filters
 
-        { model with FilterControls = filters' },
+        { model with Filters = filters' },
         Cmd.map (fun sub -> FilterMessage (id, sub)) cmd
 
     | ResizeModeChanged index ->
       { model with SelectedResizeMode = resizeModes.[index] }, []
 
     | CopyCode ->
-      model.FilterControls
-      |> List.map (fun (_, filter, value) -> (filter, value |> Option.map (fun v -> v.Value)))
-      |> JSGenerator.run
-      |> Globals.Clipboard.setString
+      // model.FilterControls
+      // |> List.map (fun (_, filter, value) -> (filter, value |> Option.map (fun v -> v.Value)))
+      // |> JSGenerator.run
+      // |> Globals.Clipboard.setString
 
       Alert.alert ("Info", "JS code copied to clipboard", [])
       model, []
@@ -177,10 +177,14 @@ module FilteredImage =
         Height (pct 100.)
         JustifyContent JustifyContent.Center 
         AlignItems ItemAlignment.Center ]
+
+  let private filterContainerStyle =
+    ViewProperties.Style
+      [ FlexDirection FlexDirection.ColumnReverse ]
     
   let private combinedMatrix model =
-    model.FilterControls
-    |> List.map (fun (_, control, model) -> CombinedFilterControl.matrix control model)
+    model.Filters
+    |> List.map (fun (_, control, model) -> CombinedFilter.matrix control model)
     |> List.toArray
     |> RNF.concatColorMatrices
       
@@ -205,18 +209,18 @@ module FilteredImage =
               [ ButtonProperties.Title "Add filter"
                 ButtonProperties.OnPress (fun _ -> dispatch SelectFilter) ]
               []
-            Spacer.view 5.
-            model.FilterControls
-            |> List.rev
-            |> List.map
-               (fun (id, tag, filter) ->
-                 R.fragment
-                   [ R.Props.FragmentProp.Key (string id) ]
-                   [ CombinedFilterControl.view
-                       tag
-                       filter
-                       (fun msg -> dispatch (FilterMessage (id, msg))) ])
-            |> R.fragment []
+            Spacer.view
+            RN.view
+              [ filterContainerStyle ]
+              (List.map
+                 (fun (id, tag, filter) ->
+                    R.fragment
+                      [ R.Props.FragmentProp.Key (string id) ]
+                      [ CombinedFilter.controls
+                          tag
+                          filter
+                          (fun msg -> dispatch (FilterMessage (id, msg))) ])
+                 model.Filters)
             RN.view
               []
               [ (match model.LoadingStatus with

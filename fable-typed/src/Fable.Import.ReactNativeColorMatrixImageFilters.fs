@@ -102,6 +102,12 @@ module Props =
   type LsdProps =
     | Style of IStyle list
 
+  type ColorToneProps =
+    | Desaturation of float
+    | Toned of float
+    | LightColor of string
+    | DarkColor of string
+    | Style of IStyle list
 
   type ProtanomalyProps =
     | Style of IStyle list
@@ -158,6 +164,8 @@ let vintage (): Matrix = importMember "react-native-color-matrix-image-filters"
 let night (_v: float): Matrix = importMember "react-native-color-matrix-image-filters"
 let predator (_v: float): Matrix = importMember "react-native-color-matrix-image-filters"
 let lsd (): Matrix = importMember "react-native-color-matrix-image-filters"
+let colorTone (_desaturation: float) (_toned: float) (_lightColor: string) (_darkColor: string): Matrix =
+  importMember "react-native-color-matrix-image-filters"
 let protanomaly (): Matrix = importMember "react-native-color-matrix-image-filters"
 let deuteranomaly (): Matrix = importMember "react-native-color-matrix-image-filters"
 let tritanomaly (): Matrix = importMember "react-native-color-matrix-image-filters"
@@ -246,6 +254,9 @@ let inline Predator (props: PredatorProps list) (children: React.ReactElement li
 
 let inline Lsd (props: LsdProps list) (children: React.ReactElement list): React.ReactElement =
   ofImport "Lsd" "react-native-color-matrix-image-filters" (propsToObj props) children
+
+let inline ColorTone (props: ColorToneProps list) (children: React.ReactElement list): React.ReactElement =
+  ofImport "ColorTone" "react-native-color-matrix-image-filters" (propsToObj props) children
 
 let inline Protanomaly (props: ProtanomalyProps list) (children: React.ReactElement list): React.ReactElement =
   ofImport "Protanomaly" "react-native-color-matrix-image-filters" (propsToObj props) children
