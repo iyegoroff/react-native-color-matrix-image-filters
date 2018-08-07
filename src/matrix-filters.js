@@ -1,4 +1,3 @@
-import React from 'react';
 import { Platform, processColor } from 'react-native';
 
 // filters taken from here: https://github.com/skratchdot/color-matrix/blob/master/lib/filters.js
@@ -196,7 +195,7 @@ export default {
       a00, a01, a02, 0, 0,
       a10, a11, a12, 0, 0,
       a20, a21, a22, 0, 0,
-      0, 0, 0, 1, 0,
+      0, 0, 0, 1, 0
     ];
   },
 
@@ -262,12 +261,12 @@ export default {
   ],
 
   threshold: (v = 0) => {
-    const r_lum = 0.3086;
-    const g_lum = 0.6094;
-    const b_lum = 0.0820;
-    const r = r_lum * 256;
-    const g = g_lum * 256;
-    const b = b_lum * 256;
+    const rLum = 0.3086;
+    const gLum = 0.6094;
+    const bLum = 0.0820;
+    const r = rLum * 256;
+    const g = gLum * 256;
+    const b = bLum * 256;
 
     return [
       r, g, b, 0, -bias * v,
@@ -339,7 +338,7 @@ export default {
       0.3, 0.59, 0.11, 0, 0,
       lR, lG, lB, desaturation, 0,
       dR, dG, dB, toned, 0,
-      lR - dR, lG - dG, lB - dB, 0, 0,
+      lR - dR, lG - dG, lB - dB, 0, 0
     ];
   },
 

@@ -58,6 +58,31 @@ module FilterRangeInput =
         BackgroundColor "white"
         Elevation 2. ]
 
+  let disabledView (model: Model) =
+    RN.view
+      [ containerStyle ]
+      [ RN.text [] (sprintf "%s %.2f" model.Name model.Value)
+        (Platform.select
+            [ Platform.Android
+                (RN.slider
+                  [ MaximumValue model.Max
+                    MinimumValue model.Min
+                    SliderProperties.Disabled true
+                    SliderProperties.Value model.Value ])
+              Platform.Ios
+                (RS.slider
+                  [ thumbStyle
+                    RS.Props.MaximumValue model.Max
+                    RS.Props.MinimumValue model.Min
+                    RS.Props.Value model.Value
+                    RS.Props.Disabled true
+                    RS.Props.MinimumTrackTintColor "gray" ]) ])
+        RN.view
+          [ rangeLegendStyle ]
+          [ RN.text [] (sprintf "%.2f" model.Min)
+            RN.text [] (sprintf "%.2f" model.Max) ] ]
+
+
   let view (model: Model) (dispatch: Dispatch<Message>) =
     let slider =
       (fun () ->

@@ -6,7 +6,7 @@ import { concatTwoColorMatrices, concatColorMatrices } from './concat-color-matr
 
 const ColorMatrixFilter = ({ matrix, parentMatrix, children, ...restProps }) => {
   const mat = Array.isArray(matrix[0]) ? concatColorMatrices(matrix) : matrix;
-  
+
   invariant(mat.length === 20, `Color matrix should have 20 elements.`);
 
   const concatedMatrix = parentMatrix ? concatTwoColorMatrices(mat, parentMatrix) : mat;
@@ -37,11 +37,11 @@ const createColorMatrixImageFilter = (filter) => ({ value, ...restProps }) => (
 );
 
 const createColorToneImageFilter = (filter) => ({
-    desaturation,
-    toned,
-    lightColor,
-    darkColor,
-    ...restProps
+  desaturation,
+  toned,
+  lightColor,
+  darkColor,
+  ...restProps
 }) => (
   <ColorMatrixFilter
     matrix={filter(desaturation, toned, lightColor, darkColor)}

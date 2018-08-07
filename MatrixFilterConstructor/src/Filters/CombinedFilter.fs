@@ -1,10 +1,7 @@
 namespace MatrixFilterConstructor
 
-open Fable.Helpers.ReactNative
 open Fable.Import
 open Fable.Helpers
-open System
-open Fable.Import.ReactNativeColorMatrixImageFilters.Props
 
 module R = Fable.Helpers.React
 module RN = Fable.Helpers.ReactNative
@@ -157,16 +154,16 @@ module CombinedFilter =
     | Tritanopia, _ -> RNF.tritanopia ()
     | Achromatopsia, _ -> RNF.achromatopsia ()
     | Achromatomaly, _ -> RNF.achromatomaly ()
-    | AnimatedSaturate, [ Filter.Value, CFI.Animated input] -> RNF.saturate input.Value
-    | AnimatedHueRotate, [ Filter.Value, CFI.Animated input] -> RNF.hueRotate input.Value
-    | AnimatedBrightness, [ Filter.Value, CFI.Animated input] -> RNF.brightness input.Value
-    | AnimatedExposure, [ Filter.Value, CFI.Animated input] -> RNF.exposure input.Value
-    | AnimatedContrast, [ Filter.Value, CFI.Animated input] -> RNF.contrast input.Value
-    | AnimatedTemperature, [ Filter.Value, CFI.Animated input] -> RNF.temperature input.Value
-    | AnimatedTint, [ Filter.Value, CFI.Animated input] -> RNF.tint input.Value
-    | AnimatedThreshold, [ Filter.Value, CFI.Animated input] -> RNF.threshold input.Value
-    | AnimatedNight, [ Filter.Value, CFI.Animated input] -> RNF.night input.Value
-    | AnimatedPredator, [ Filter.Value, CFI.Animated input] -> RNF.predator input.Value
+    | AnimatedSaturate, [ Filter.Value, CFI.Animated input] -> RNF.saturate input.Animated.Value
+    | AnimatedHueRotate, [ Filter.Value, CFI.Animated input] -> RNF.hueRotate input.Animated.Value
+    | AnimatedBrightness, [ Filter.Value, CFI.Animated input] -> RNF.brightness input.Animated.Value
+    | AnimatedExposure, [ Filter.Value, CFI.Animated input] -> RNF.exposure input.Animated.Value
+    | AnimatedContrast, [ Filter.Value, CFI.Animated input] -> RNF.contrast input.Animated.Value
+    | AnimatedTemperature, [ Filter.Value, CFI.Animated input] -> RNF.temperature input.Animated.Value
+    | AnimatedTint, [ Filter.Value, CFI.Animated input] -> RNF.tint input.Animated.Value
+    | AnimatedThreshold, [ Filter.Value, CFI.Animated input] -> RNF.threshold input.Animated.Value
+    | AnimatedNight, [ Filter.Value, CFI.Animated input] -> RNF.night input.Animated.Value
+    | AnimatedPredator, [ Filter.Value, CFI.Animated input] -> RNF.predator input.Animated.Value
     | _ -> RNF.normal ()
 
 

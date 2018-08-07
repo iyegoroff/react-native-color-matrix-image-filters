@@ -15,12 +15,9 @@ module RS = Fable.Import.ReactNativeSlider
 module AnimatedFilterRangeInput =
 
   type Model =
-    { Value: float
-      Min: float
-      Max: float
-      Name: string
-      Direction: float
-      Step: FilterRangeInput.Model } 
+    { Animated: FilterRangeInput.Model
+      Step: FilterRangeInput.Model
+      Direction: float } 
 
   type Message =
     | StepMessage of FilterRangeInput.Message
@@ -29,12 +26,9 @@ module AnimatedFilterRangeInput =
   let init name min max initial : Model =
     let minStep = ((Math.abs max) / 1000.)
     let maxStep = ((Math.abs max) / 10.)
-    { Min = min
-      Max = max
-      Value = initial
-      Name = name
-      Direction = 1.
-      Step = FilterRangeInput.init (sprintf "%s.Step" name) minStep maxStep minStep }
+    { Animated = FilterRangeInput.init name min max initial
+      Step = FilterRangeInput.init (sprintf "Step.%s" name) minStep maxStep minStep
+      Direction = 1. }
 
   let update (message: Message) (model: Model) =
     match message with
@@ -43,16 +37,20 @@ module AnimatedFilterRangeInput =
       { model with Step = step }, Cmd.map StepMessage stepCmd
 
     | Tick ->
+      let animated = model.Animated
       let nextValue =
         Math.max
-          [| model.Min
-             Math.min [| model.Max; model.Value + (model.Direction * model.Step.Value)|] |]
+          [| animated.Min
+             Math.min [| animated.Max; animated.Value + (model.Direction * model.Step.Value)|] |]
       let nextDirection =
-        if nextValue = model.Min then 1. elif nextValue = model.Max then -1. else model.Direction
+        if nextValue = animated.Min then 1. elif nextValue = animated.Max then -1. else model.Direction
 
-      { model with Value = nextValue
-                   Direction = nextDirection }, []
+      { model with Direction = nextDirection
+                   Animated = { animated with Value = nextValue } }, []
 
 
   let view (model: Model) (dispatch: Dispatch<Message>) =
-    FilterRangeInput.view model.Step (StepMessage >> dispatch)
+    R.fragment
+      []
+      [ FilterRangeInput.disabledView model.Animated
+        FilterRangeInput.view model.Step (StepMessage >> dispatch) ]

@@ -10,7 +10,7 @@ import {
   __IMPORTS__
 } from 'react-native-color-matrix-image-filters';
 
-export const FilteredImage = (props) => {
+export default const FilteredImage = (props) => {
   const {
     __PROPS__
     ...imageProps

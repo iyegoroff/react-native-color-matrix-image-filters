@@ -19,4 +19,4 @@ export const checkStyle = (style) => {
       ` consider using '#fff0' instead.`
     );
   }
-}
+};
