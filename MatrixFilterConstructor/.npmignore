@@ -60,5 +60,9 @@ rn-cli.config.js
 src/bin/
 src/obj/
 
+infer-out/
+xcodebuild.log
+compile_commands.json
+
 android/build/
 android/app/build/
