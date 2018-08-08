@@ -60,9 +60,13 @@ rn-cli.config.js
 src/bin/
 src/obj/
 
+ios/infer-out/
+android/infer-out/
 infer-out/
+
 xcodebuild.log
 compile_commands.json
 
+ios/build/
 android/build/
 android/app/build/
