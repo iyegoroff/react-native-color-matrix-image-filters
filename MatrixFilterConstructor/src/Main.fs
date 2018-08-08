@@ -80,13 +80,14 @@ module Main =
           { model with AnimationNoticeWasShown = true },
           Cmd.ofPromise
             (fun () -> Promise.create (fun resolve reject ->
-              Alert.alert
+              Alert.alertWithOptions
                 ("Notice",
                  String.Concat
                    [ "Animated filters here are implemented with 'requestAnimationFrame', so it "
                      "may lead to slow performance and increased energy consumption on some "
                      "devices." ],
-                 [ "OK", resolve ])))
+                 [ "OK", resolve ],
+                 [ Alert.OnDismiss resolve])))
             ()
             (fun _ -> FilteredImageMessage (id, msg))
             (fun _ -> FilteredImageMessage (id, msg))

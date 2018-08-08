@@ -2,8 +2,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>Fable bindings for react-native-color-matrix-image-filters</Description>
-    <PackageProjectUrl>https://github.com/iyegoroff/react-native-color-matrix-image-filters/fable-typed</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/iyegoroff/react-native-color-matrix-image-filters/fable-typed</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/iyegoroff/react-native-color-matrix-image-filters/tree/master/fable-typed</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/iyegoroff/react-native-color-matrix-image-filters/tree/master/fable-typed</RepositoryUrl>
     <PackageLicenseUrl>https://github.com/iyegoroff/react-native-color-matrix-image-filters/blob/master/LICENSE</PackageLicenseUrl>
     <PackageIconUrl></PackageIconUrl>
     <PackageTags>fsharp;fable;react-native;color-matrix;image-filters</PackageTags>

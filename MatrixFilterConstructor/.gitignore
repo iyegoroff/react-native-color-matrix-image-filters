@@ -60,3 +60,6 @@ rn-cli.config.js
 src/bin/
 src/obj/
 out/
+infer-out/
+xcodebuild.log
+compile_commands.json
