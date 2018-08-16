@@ -62,6 +62,8 @@ static CIContext* context;
     UIView* child = parent.subviews[0];
     if ([child isKindOfClass:[RCTImageView class]]) {
       _target = (RCTImageView *)child;
+      _inputImage = [_target.image copy];
+
       [child addObserver:self
               forKeyPath:@"image"
                  options:NSKeyValueObservingOptionNew
