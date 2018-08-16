@@ -63,11 +63,13 @@ static CIContext* context;
     if ([child isKindOfClass:[RCTImageView class]]) {
       _target = (RCTImageView *)child;
       _inputImage = [_target.image copy];
-
+      
       [child addObserver:self
               forKeyPath:@"image"
                  options:NSKeyValueObservingOptionNew
                  context:NULL];
+      
+      [self renderFilteredImage];
     } else {
       parent = child;
     }
