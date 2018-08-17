@@ -91,7 +91,7 @@ corresponding stack of filter components.
 
 | Component         | Additional props    | function          |
 | ----------------- | ------------------- | ----------------- |
-| ColorMatrix       | matrix: Matrix      | -
+| ColorMatrix       | matrix: Matrix \| Array\<Matrix>      | -
 | Normal            | -                   | normal(): Matrix
 | Saturate          | value: number = 1   | saturate(value: number = 1): Matrix
 | HueRotate         | value: number = 0   | hueRotate(value: number = 0): Matrix
