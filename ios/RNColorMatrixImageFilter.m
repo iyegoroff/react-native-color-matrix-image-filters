@@ -117,28 +117,40 @@ static CIContext* context;
 
 - (void)renderFilteredImage
 {
-  if (_target) {
-    UIImage *image = [self filteredImage:_inputImage resizeMode:_target.resizeMode];
-
-    [_target removeObserver:self forKeyPath:@"image"];
-    [_target setImage:image];
-    [_target addObserver:self
-              forKeyPath:@"image"
-                 options:NSKeyValueObservingOptionNew
-                 context:NULL];
-  }
+  CIFilter *filter = [_filter copy];
+  __weak RNColorMatrixImageFilter *weakSelf = self;
+  
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    RNColorMatrixImageFilter *innerSelf = weakSelf;
+    
+    if (innerSelf && innerSelf.target && innerSelf.inputImage) {
+      UIImage *image = [RNColorMatrixImageFilter filteredImage:innerSelf.inputImage
+                                                        filter:filter
+                                                    resizeMode:innerSelf.target.resizeMode];
+      
+      dispatch_async(dispatch_get_main_queue(), ^{
+        [innerSelf.target removeObserver:innerSelf forKeyPath:@"image"];
+        [innerSelf.target setImage:image];
+        [innerSelf.target addObserver:innerSelf
+                           forKeyPath:@"image"
+                              options:NSKeyValueObservingOptionNew
+                              context:NULL];
+      });
+    }
+  });
 }
 
-- (UIImage *)filteredImage:(UIImage *)image
++ (UIImage *)filteredImage:(UIImage *)image
+                    filter:(CIFilter *)filter
                 resizeMode:(RCTResizeMode)resizeMode
 {
   if (image != nil) {
     CIImage *tmp = [[CIImage alloc] initWithImage:image];
-    [_filter setValue:tmp forKey:@"inputImage"];
+    [filter setValue:tmp forKey:@"inputImage"];
     
     CGRect outputRect = tmp.extent;
     
-    CGImageRef cgim = [context createCGImage:_filter.outputImage fromRect:outputRect];
+    CGImageRef cgim = [context createCGImage:filter.outputImage fromRect:outputRect];
     
     UIImage *filteredImage = [RNColorMatrixImageFilter resizeImageIfNeeded:[UIImage imageWithCGImage:cgim]
                                                                    srcSize:outputRect.size
