@@ -17,6 +17,16 @@ Various color matrix based image filters for iOS & Android.
 
 `$ react-native link react-native-color-matrix-image-filters`
 
+#### Cocoapods
+
+add the following line to your Podfile:
+
+```sh
+pod 'React', :path => '../node_modules/react-native'
+pod 'RNColorMatrixImageFilters', :path => '../node_modules/react-native-color-matrix-image-filters'
+```
+
+
 ### Manual installation
 
 [link](manual_installation.md)
