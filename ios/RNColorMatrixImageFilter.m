@@ -1,5 +1,5 @@
-#import <React/RCTImageView.h>
-#import <React/RCTImageUtils.h>
+#import "RCTImageView.h"
+#import "RCTImageUtils.h"
 #import "RNColorMatrixImageFilter.h"
 
 
