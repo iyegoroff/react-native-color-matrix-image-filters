@@ -144,7 +144,7 @@ corresponding stack of filter components.
 
 ### Matrix type
 
-- A 4x5 matrix for color transformations represented by [array]() -
+- A 4x5 matrix for color transformations represented by array -
   consult [Android docs](https://developer.android.com/reference/android/graphics/ColorMatrix)
 	for more specific info about it's format
 
