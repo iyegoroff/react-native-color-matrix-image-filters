@@ -119,7 +119,9 @@ static CIContext* context;
 {
   CIFilter *filter = [_filter copy];
   __weak RNColorMatrixImageFilter *weakSelf = self;
-  
+
+  [self updateTargetImage: nil];
+
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     RNColorMatrixImageFilter *innerSelf = weakSelf;
     
@@ -129,15 +131,19 @@ static CIContext* context;
                                                     resizeMode:innerSelf.target.resizeMode];
       
       dispatch_async(dispatch_get_main_queue(), ^{
-        [innerSelf.target removeObserver:innerSelf forKeyPath:@"image"];
-        [innerSelf.target setImage:image];
-        [innerSelf.target addObserver:innerSelf
-                           forKeyPath:@"image"
-                              options:NSKeyValueObservingOptionNew
-                              context:NULL];
+        [innerSelf updateTargetImage:image];
       });
     }
   });
+}
+
+- (void)updateTargetImage:(UIImage *)image {
+    [self.target removeObserver:self forKeyPath:@"image"];
+    [self.target setImage:image];
+    [self.target addObserver:self
+                  forKeyPath:@"image"
+                     options:NSKeyValueObservingOptionNew
+                     context:NULL];
 }
 
 + (UIImage *)filteredImage:(UIImage *)image
