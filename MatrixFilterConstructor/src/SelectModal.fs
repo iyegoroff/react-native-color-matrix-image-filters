@@ -38,7 +38,7 @@ module SelectModal =
       | Item x ->
         dispatch Hide
         (fun () ->
-           JS.setTimeout (fun () -> dispatch (SelectMessage (Select.Message.ItemSelected x))) 0
+           JS.setTimeout (fun () -> dispatch (SelectMessage (Select.Message.ItemSelected x))) 50
            |> ignore
            |> U2.Case1)
         |> Globals.InteractionManager.runAfterInteractions

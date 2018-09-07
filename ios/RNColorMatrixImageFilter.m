@@ -69,7 +69,7 @@ static CIContext* context;
                  options:NSKeyValueObservingOptionNew
                  context:NULL];
       
-      [self renderFilteredImage];
+      [self renderFilteredImage:YES];
     } else {
       parent = child;
     }
@@ -90,7 +90,7 @@ static CIContext* context;
                        context:(void *)context {
   if ([keyPath isEqualToString:@"image"]) {
     _inputImage = [_target.image copy];
-    [self renderFilteredImage];
+    [self renderFilteredImage:YES];
   }
 }
 
@@ -111,17 +111,19 @@ static CIContext* context;
     [_filter setValue:[CIVector vectorWithValues:&m[12] count:4] forKey:@"inputAVector"];
     [_filter setValue:[CIVector vectorWithValues:&m[16] count:4] forKey:@"inputBiasVector"];
     
-    [self renderFilteredImage];
+    [self renderFilteredImage:NO];
   }
 }
 
-- (void)renderFilteredImage
+- (void)renderFilteredImage:(BOOL)shouldInvalidate
 {
   CIFilter *filter = [_filter copy];
   __weak RNColorMatrixImageFilter *weakSelf = self;
 
-  [self updateTargetImage: nil];
-
+  if (shouldInvalidate) {
+    [self updateTargetImage: nil];
+  }
+  
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     RNColorMatrixImageFilter *innerSelf = weakSelf;
     
