@@ -24,8 +24,8 @@
     "buffer": "^5.1.0",
     "core-js": "^2.5.7",
     "fast-memoize": "^2.5.1",
-    "react": "^16.4.1",
-    "react-native": "^0.56.0",
+    "react": "^16.5.1",
+    "react-native": "^0.57.0",
     "react-native-color-matrix-image-filters": "file:../",
     "react-native-color-wheel": "^0.1.5",
     "react-native-image-picker": "^0.26.10",
@@ -36,8 +36,8 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
-    "babel-preset-react-native": "^5",
+    "metro-react-native-babel-preset": "^0.45.2",
     "fable-splitter": "^0.1.21",
-    "metro-with-symlinks": "^1.1.1"
+    "metro-with-symlinks": "github:treyp/metro-with-symlinks#rn-47"
   }
 }
