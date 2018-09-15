@@ -45,4 +45,5 @@ buck-out/
 *.keystore
 
 android/build/
-      
+
+*.tgz
