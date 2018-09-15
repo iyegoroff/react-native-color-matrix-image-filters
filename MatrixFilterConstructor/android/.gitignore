@@ -1,0 +1,7 @@
+**/build/
+**/infer-out/
+.idea
+.gradle
+local.properties
+*.iml
+.DS_Store

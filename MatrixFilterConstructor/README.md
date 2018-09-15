@@ -5,4 +5,4 @@ $ npm i
 $ react-native run-android
 ```
 
-<img src="../img/demo.gif" height="600">
+<img src="https://github.com/iyegoroff/react-native-color-matrix-image-filters/raw/master/img/demo.gif" height="600">
