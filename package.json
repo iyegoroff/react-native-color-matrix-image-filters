@@ -57,6 +57,7 @@
     "MatrixFilterConstructor"
   ],
   "dependencies": {
-    "concat-color-matrices": "0.0.1"
+    "concat-color-matrices": "^1.0.0",
+    "rn-color-matrices": "^1.0.0"
   }
 }

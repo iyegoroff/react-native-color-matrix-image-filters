@@ -1,6 +1,6 @@
 import React from 'react';
 import { NativeFilter } from './native-filter';
-import filters from './matrix-filters';
+import filters from 'rn-color-matrices';
 import { concatTwoColorMatrices, concatColorMatrices } from 'concat-color-matrices';
 
 const ColorMatrixFilter = ({ matrix, parentMatrix, children, ...restProps }) => {
