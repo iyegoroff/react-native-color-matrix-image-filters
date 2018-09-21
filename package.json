@@ -55,5 +55,8 @@
     "*.md",
     "*.podspec",
     "MatrixFilterConstructor"
-  ]
+  ],
+  "dependencies": {
+    "concat-color-matrices": "0.0.1"
+  }
 }

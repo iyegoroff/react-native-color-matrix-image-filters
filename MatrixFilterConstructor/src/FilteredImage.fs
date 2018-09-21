@@ -200,7 +200,9 @@ module FilteredImage =
     model.Filters
     |> List.map (fun (_, control, model) -> CombinedFilter.matrix control model)
     |> List.toArray
-    |> RNF.concatColorMatrices
+    |> function
+       | [||] -> RNF.normal ()
+       | x -> RNF.concatColorMatrices x
       
   let view model (dispatch: Dispatch<Message>) =
     R.fragment
