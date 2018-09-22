@@ -10,16 +10,18 @@
     "run:android": "npm run clean:android && react-native run-android",
     "clean:android": "cd android && ./gradlew clean",
     "infer:android": "cd android && infer run -- ./gradlew build",
-    "clean:ios": "cd ios && xcodebuild -target MatrixFilterConstructor -configuration Debug -sdk iphonesimulator clean",
-    "infer:ios": "cd ios && infer run -- xcodebuild -project MatrixFilterConstructor.xcodeproj -configuration Debug -scheme MatrixFilterConstructor -sdk iphonesimulator COMPILER_INDEX_STORE_ENABLE=NO",
-    "infer:alt-ios": "cd ios && xcodebuild -target MatrixFilterConstructor -configuration Debug -sdk iphonesimulator COMPILER_INDEX_STORE_ENABLE=NO | tee xcodebuild.log && xcpretty -r json-compilation-database -o compile_commands.json < xcodebuild.log > /dev/null && infer run --compilation-database-escaped compile_commands.json",
+    "clean:ios": "cd ios && xcodebuild -target MatrixFilterConstructor -configuration Debug -sdk iphonesimulator clean && rm -rf build",
+    "_infer:ios": "cd ios && LD=/usr/bin/true infer run --keep-going --no-xcpretty -- xcodebuild -project MatrixFilterConstructor.xcodeproj -configuration Debug -scheme MatrixFilterConstructor -derivedDataPath build",
+    "infer:ios": "cd ios && xcodebuild -project MatrixFilterConstructor.xcodeproj -configuration Debug -scheme MatrixFilterConstructor -derivedDataPath build | tee xcodebuild.log && xcpretty -r json-compilation-database -o compile_commands.json < xcodebuild.log > /dev/null && infer run --keep-going --compilation-database-escaped compile_commands.json",
     "reset:packager": "watchman watch-del-all && node_modules/react-native/scripts/packager.sh --reset-cache",
     "start:packager": "react-native start",
     "restore": "cd src && dotnet restore",
     "start": "rm -rf out && cd src && dotnet fable npm-run watch",
     "paket:add": "mono .paket/paket.exe add",
     "paket:remove": "mono .paket/paket.exe remove",
-    "paket:update": "mono .paket/paket.exe update"
+    "paket:update": "mono .paket/paket.exe update",
+    "generate:android:apk": "npm run generate:android:bundle && cd android && ./gradlew assembleRelease",
+    "generate:android:bundle": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle"
   },
   "dependencies": {
     "buffer": "^5.1.0",
