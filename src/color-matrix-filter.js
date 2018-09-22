@@ -46,12 +46,21 @@ const createColorToneImageFilter = (filter) => ({
   />
 );
 
+const createRGBAImageFilter = (filter) => ({ red, green, blue, alpha, ...restProps }) => (
+  <ColorMatrixFilter
+    matrix={filter(red, green, blue, alpha)}
+    {...restProps}
+  />
+);
+
 export default Object.keys(filters).reduce(
   (acc, name) => {
     const key = filterName(name);
-    acc[key] = key === 'ColorTone'
-      ? createColorToneImageFilter(filters[name])
-      : createColorMatrixImageFilter(filters[name]);
+    const create = key === 'ColorTone'
+      ? createColorToneImageFilter
+      : key === 'RGBA' ? createRGBAImageFilter : createColorMatrixImageFilter;
+
+    acc[key] = create(filters[name]);
     acc[key].displayName = key;
     acc[key].isColorMatrixFilter = true;
     return acc;

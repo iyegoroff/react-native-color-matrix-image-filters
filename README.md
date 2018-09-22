@@ -102,6 +102,7 @@ corresponding stack of filter components.
 | ----------------- | ------------------- | ----------------- |
 | ColorMatrix       | matrix: Matrix \| Array\<Matrix>      | -
 | Normal            | -                   | normal(): Matrix
+| RGBA              | red: number = 1, green: number = 1, blue: number = 1, alhpa: number = 1 | rgba(red: number = 1, green: number = 1, blue: number = 1, alhpa: number = 1): Matrix
 | Saturate          | value: number = 1   | saturate(value: number = 1): Matrix
 | HueRotate         | value: number = 0   | hueRotate(value: number = 0): Matrix
 | LuminanceToAlpha  | -                   | luminanceToAlpha(): Matrix

@@ -23,9 +23,17 @@ export interface ColorToneProps extends FilterProps {
   readonly darkColor?: string;
 }
 
+export interface RGBAProps extends FilterProps {
+  readonly red?: number;
+  readonly green?: number;
+  readonly blue?: number;
+  readonly alpha?: number;
+}
+
 
 export class ColorMatrix extends React.Component<ColorMatrixProps> { }
 export class Normal extends React.Component<FilterProps> { }
+export class RGBA extends React.Component<RGBAProps> {}
 export class Saturate extends React.Component<ValueFilterProps> { }
 export class HueRotate extends React.Component<ValueFilterProps> { }
 export class LuminanceToAlpha extends React.Component<FilterProps> { }
@@ -63,6 +71,7 @@ export class Achromatomaly extends React.Component<FilterProps> { }
 export function concatColorMatrices(matrices: Matrix[]): Matrix;
 
 export function normal(): Matrix;
+export function rgba(red?: number, green?: number, blue?: number, alpha?: number): Matrix;
 export function saturate(value?: number): Matrix;
 export function hueRotate(value?: number): Matrix;
 export function luminanceToAlpha(): Matrix;

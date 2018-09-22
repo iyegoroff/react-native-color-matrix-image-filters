@@ -58,6 +58,6 @@
   ],
   "dependencies": {
     "concat-color-matrices": "^1.0.0",
-    "rn-color-matrices": "^1.0.0"
+    "rn-color-matrices": "^1.0.1"
   }
 }

@@ -34,7 +34,7 @@ module JSGenerator =
       Line input
 
   let private importName filter =
-    (CombinedFilter.name filter).Replace("Animated", "").ToCharArray ()
+    (CombinedFilter.name filter).Replace("Animated", "").Replace("RGBA", "rgba").ToCharArray ()
     |> Array.mapi (fun i v -> if i = 0 then Char.ToLower v else v)
     |> String.Concat
 

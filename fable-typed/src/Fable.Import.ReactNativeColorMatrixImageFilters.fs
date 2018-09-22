@@ -20,6 +20,13 @@ module Props =
   type NormalProps =
     | Style of IStyle list
 
+  type RGBAProps =
+    | Style of IStyle list
+    | Red of float
+    | Green of float
+    | Blue of float
+    | Alpha of float
+
   type SaturateProps =
     | Style of IStyle list
     | Value of float
@@ -140,6 +147,8 @@ open Fable.Core
 let concatColorMatrices (_matrices: Matrix array): Matrix =
   importMember "react-native-color-matrix-image-filters"
 let normal (): Matrix = importMember "react-native-color-matrix-image-filters"
+let rgba (_red: float) (_green: float) (_blue: float) (_alpha: float): Matrix =
+  importMember "react-native-color-matrix-image-filters"
 let saturate (_v: float): Matrix = importMember "react-native-color-matrix-image-filters"
 let hueRotate (_v: float): Matrix = importMember "react-native-color-matrix-image-filters"
 let luminanceToAlpha (): Matrix = importMember "react-native-color-matrix-image-filters"
@@ -182,6 +191,9 @@ let inline ColorMatrix (props: ColorMatrixProps list) (children: React.ReactElem
 
 let inline Normal (props: NormalProps list) (children: React.ReactElement list): React.ReactElement =
   ofImport "Normal" "react-native-color-matrix-image-filters" (propsToObj props) children
+
+let inline RGBA (props: RGBAProps list) (children: React.ReactElement list): React.ReactElement =
+  ofImport "RGBA" "react-native-color-matrix-image-filters" (propsToObj props) children
 
 let inline Saturate (props: SaturateProps list) (children: React.ReactElement list): React.ReactElement =
   ofImport "Saturate" "react-native-color-matrix-image-filters" (propsToObj props) children

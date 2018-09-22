@@ -17,6 +17,10 @@ module Filter =
     | Toned
     | LightColor
     | DarkColor
+    | Red
+    | Green
+    | Blue
+    | Alpha
 
   type Model = (Input * CombinedFilterInput.Model) list
 

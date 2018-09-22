@@ -12,6 +12,7 @@ module CombinedFilter =
 
   type Model =
     | Normal
+    | RGBA
     | Saturate
     | HueRotate
     | LuminanceToAlpha
@@ -63,6 +64,12 @@ module CombinedFilter =
   let init model : Filter.Model =
     match model with
     | Normal -> Filter.init []
+    | RGBA ->
+      Filter.init
+        [ Filter.Red, CFI.initRange 0. 5. 1.
+          Filter.Green, CFI.initRange 0. 5. 1.
+          Filter.Blue, CFI.initRange 0. 5. 1.
+          Filter.Alpha, CFI.initRange 0. 5. 1. ]
     | Saturate -> Filter.init [ Filter.Value, CFI.initRange -10. 10. 1. ]
     | HueRotate -> Filter.init [ Filter.Value, CFI.initRange -10. 10. 0. ]
     | LuminanceToAlpha -> Filter.init []
@@ -116,6 +123,12 @@ module CombinedFilter =
   let matrix control (model: Filter.Model) =
     match control, model with
     | Normal, _ -> RNF.normal ()
+    | RGBA,
+      [ Filter.Red, CFI.Range red
+        Filter.Green, CFI.Range green
+        Filter.Blue, CFI.Range blue
+        Filter.Alpha, CFI.Range alpha ] ->
+        RNF.rgba red.Value green.Value blue.Value alpha.Value
     | Saturate, [ Filter.Value, CFI.Range input ] -> RNF.saturate input.Value
     | HueRotate, [ Filter.Value, CFI.Range input ] -> RNF.hueRotate input.Value
     | LuminanceToAlpha, _ -> RNF.luminanceToAlpha ()
@@ -170,6 +183,7 @@ module CombinedFilter =
   let controls =
     function
     | Normal -> Filter.controls (name Normal)
+    | RGBA -> Filter.controls (name RGBA)
     | Saturate -> Filter.controls (name Saturate)
     | HueRotate -> Filter.controls (name HueRotate)
     | LuminanceToAlpha -> Filter.controls (name LuminanceToAlpha)
@@ -217,6 +231,7 @@ module CombinedFilter =
     
   let availableFilters: Model array =
     [| Normal
+       RGBA
        Saturate
        HueRotate
        LuminanceToAlpha
