@@ -5,3 +5,6 @@
 local.properties
 *.iml
 .DS_Store
+app/*.keystore
+app/src/main/assets/
+app/src/main/res/drawable-*

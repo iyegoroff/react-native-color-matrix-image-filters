@@ -8,6 +8,7 @@
     "build": "fable-splitter -c splitter.config.js --define RELEASE",
     "watch": "fable-splitter -c splitter.config.js -w --define DEBUG",
     "run:android": "npm run clean:android && react-native run-android",
+    "run:android:release": "npm run clean:android && npm run generate:android:bundle && react-native run-android --variant=release",
     "clean:android": "cd android && ./gradlew clean",
     "infer:android": "cd android && infer run -- ./gradlew build",
     "clean:ios": "cd ios && xcodebuild -target MatrixFilterConstructor -configuration Debug -sdk iphonesimulator clean && rm -rf build",
@@ -20,8 +21,9 @@
     "paket:add": "mono .paket/paket.exe add",
     "paket:remove": "mono .paket/paket.exe remove",
     "paket:update": "mono .paket/paket.exe update",
+    "generate:android:signing-key": "keytool -genkey -v -keystore mfc.keystore -alias mfc -keyalg RSA -keysize 2048 -validity 10000 && mv mfc.keystore android/app",
     "generate:android:apk": "npm run generate:android:bundle && cd android && ./gradlew assembleRelease",
-    "generate:android:bundle": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle"
+    "generate:android:bundle": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/"
   },
   "dependencies": {
     "buffer": "^5.1.0",
