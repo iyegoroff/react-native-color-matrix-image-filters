@@ -24,7 +24,10 @@ const ColorMatrixFilter = ({ matrix, parentMatrix, children, ...restProps }) => 
 ColorMatrixFilter.isColorMatrixFilter = true;
 ColorMatrixFilter.displayName = 'ColorMatrix';
 
-const filterName = ([first, ...rest]) => first.toUpperCase() + rest.join('');
+const filterName = (name) => {
+  const [first, ...rest] = name;
+  return name === 'rgba' ? 'RGBA' : first.toUpperCase() + rest.join('');
+};
 
 const createColorMatrixImageFilter = (filter) => ({ value, ...restProps }) => (
   <ColorMatrixFilter
