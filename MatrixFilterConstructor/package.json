@@ -21,6 +21,7 @@
     "paket:add": "mono .paket/paket.exe add",
     "paket:remove": "mono .paket/paket.exe remove",
     "paket:update": "mono .paket/paket.exe update",
+    "paket:install": "mono .paket/paket.exe install",
     "generate:android:signing-key": "keytool -genkey -v -keystore mfc.keystore -alias mfc -keyalg RSA -keysize 2048 -validity 10000 && mv mfc.keystore android/app",
     "generate:android:apk": "npm run generate:android:bundle && cd android && ./gradlew assembleRelease",
     "generate:android:bundle": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/"
