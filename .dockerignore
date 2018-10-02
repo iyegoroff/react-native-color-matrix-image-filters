@@ -19,6 +19,7 @@ LICENSE
 **/.gradle
 **/.idea
 **/*.iml
+**/*.apk
 
 **/ios/build
 **/ios/infer-out

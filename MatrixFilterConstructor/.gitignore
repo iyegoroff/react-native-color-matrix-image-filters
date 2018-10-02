@@ -7,3 +7,4 @@ src/bin/
 .gradle/
 compile_commands.json
 rn-cli.config.js
+*.apk
