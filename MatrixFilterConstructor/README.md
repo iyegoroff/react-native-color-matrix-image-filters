@@ -1,8 +1,17 @@
+### Running debug version
 ```bash
 $ npm i react-native-color-matrix-image-filters
 $ cd node_modules/react-native-color-matrix-image-filters/MatrixFilterConstructor
 $ npm i
 $ npm run run:android
 ```
+
+
+### Building signed release apk with Docker
+- Clone the repo or get it from npm
+- Go to `MatrixFilterConstructor` folder
+- Generate keystore: `npm run generate:android:signing-key`
+- Open `MatrixFilterConstructor/android/gradle.properties` file and replace `qwerty`s with your passwords
+- Run `npm run build:release:docker` - when finished apk will be copied to `MatrixFilterConstructor/docker.apk` file
 
 <img src="https://github.com/iyegoroff/react-native-color-matrix-image-filters/raw/master/img/demo.gif" height="600">
