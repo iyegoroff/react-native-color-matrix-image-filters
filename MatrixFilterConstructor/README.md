@@ -12,6 +12,6 @@ $ npm run run:android
 - Go to `MatrixFilterConstructor` folder
 - Generate keystore: `npm run generate:android:signing-key`
 - Open `MatrixFilterConstructor/android/gradle.properties` file and replace `qwerty`s with your passwords
-- Run `npm run build:release:docker` - when finished apk will be copied to `MatrixFilterConstructor/docker.apk` file
+- Run `npm run build:release:docker` - when finished apk will be copied to `MatrixFilterConstructor/mfc.apk` file
 
 <img src="https://github.com/iyegoroff/react-native-color-matrix-image-filters/raw/master/img/demo.gif" height="600">

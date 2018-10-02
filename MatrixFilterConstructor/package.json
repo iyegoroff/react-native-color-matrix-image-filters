@@ -27,27 +27,27 @@
     "generate:android:apk": "npm run generate:android:bundle && cd android && ./gradlew assembleRelease",
     "generate:android:bundle": "npm run build:release && react-native bundle --platform android --dev false --entry-file index.js --bundle-output ./android/app/src/main/assets/index.android.bundle --assets-dest ./android/app/src/main/res/",
     "build:docker:image": "docker build -t mfc-android.image -f ./Dockerfile ../",
-    "extract:docker:apk": "docker create -ti --name mfc-android-container mfc-android.image /bin/bash && docker cp mfc-android-container:/package/MatrixFilterConstructor/android/app/build/outputs/apk/app-release.apk docker.apk && docker rm -fv mfc-android-container",
+    "extract:docker:apk": "docker create -ti --name mfc-android-container mfc-android.image /bin/bash && docker cp mfc-android-container:/package/MatrixFilterConstructor/android/app/build/outputs/apk/app-release.apk mfc.apk && docker rm -fv mfc-android-container",
     "build:release:docker": "npm run build:docker:image && npm run extract:docker:apk"
   },
   "dependencies": {
-    "buffer": "^5.1.0",
-    "core-js": "^2.5.7",
-    "fast-memoize": "^2.5.1",
-    "react": "^16.5.1",
-    "react-native": "^0.57.0",
+    "buffer": "5.1.0",
+    "core-js": "2.5.7",
+    "fast-memoize": "2.5.1",
+    "react": "16.5.1",
+    "react-native": "0.57.1",
     "react-native-color-matrix-image-filters": "file:../",
-    "react-native-color-wheel": "^0.1.5",
-    "react-native-image-picker": "^0.26.10",
-    "react-native-portal": "^1.3.0",
-    "react-native-segmented-control-tab": "^3.2.2",
-    "react-native-slider": "^0.11.0",
-    "remotedev": "^0.2.7"
+    "react-native-color-wheel": "0.1.5",
+    "react-native-image-picker": "0.26.10",
+    "react-native-portal": "1.3.0",
+    "react-native-segmented-control-tab": "3.2.2",
+    "react-native-slider": "0.11.0",
+    "remotedev": "0.2.7"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "metro-react-native-babel-preset": "^0.45.2",
-    "fable-splitter": "^0.1.21",
-    "metro-with-symlinks": "^1.3.0"
+    "babel-core": "6.26.3",
+    "metro-react-native-babel-preset": "0.45.2",
+    "fable-splitter": "0.1.21",
+    "metro-with-symlinks": "1.3.0"
   }
 }
