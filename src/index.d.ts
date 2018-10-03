@@ -30,6 +30,10 @@ export interface RGBAProps extends FilterProps {
   readonly alpha?: number;
 }
 
+export interface DuoToneProps extends FilterProps {
+  readonly firstColor?: string;
+  readonly secondColor?: string;
+}
 
 export class ColorMatrix extends React.Component<ColorMatrixProps> { }
 export class Normal extends React.Component<FilterProps> { }
@@ -38,7 +42,8 @@ export class Saturate extends React.Component<ValueFilterProps> { }
 export class HueRotate extends React.Component<ValueFilterProps> { }
 export class LuminanceToAlpha extends React.Component<FilterProps> { }
 export class Invert extends React.Component<FilterProps> { }
-export class Grayscale extends React.Component<FilterProps> { }
+export class BlackAndWhite extends React.Component<FilterProps> { }
+export class Grayscale extends React.Component<ValueFilterProps> { }
 export class Sepia extends React.Component<FilterProps> { }
 export class Nightvision extends React.Component<FilterProps> { }
 export class Warm extends React.Component<FilterProps> { }
@@ -58,6 +63,8 @@ export class Vintage extends React.Component<FilterProps> { }
 export class Night extends React.Component<ValueFilterProps> { }
 export class Predator extends React.Component<ValueFilterProps> { }
 export class Lsd extends React.Component<FilterProps> { }
+export class ColorTone extends React.Component<ColorToneProps> { }
+export class DuoTone extends React.Component<DuoToneProps> { }
 export class Protanomaly extends React.Component<FilterProps> { }
 export class Deuteranomaly extends React.Component<FilterProps> { }
 export class Tritanomaly extends React.Component<FilterProps> { }
@@ -76,7 +83,8 @@ export function saturate(value?: number): Matrix;
 export function hueRotate(value?: number): Matrix;
 export function luminanceToAlpha(): Matrix;
 export function invert(): Matrix;
-export function grayscale(): Matrix;
+export function blackAndWhite(): Matrix;
+export function grayscale(value?: number): Matrix;
 export function sepia(): Matrix;
 export function nightvision(): Matrix;
 export function warm(): Matrix;
@@ -102,6 +110,7 @@ export function colorTone(
   lightColor?: string,
   darkColor?: string
 ): Matrix;
+export function duoTone(firstColor?: string, secondColor?: string): Matrix;
 export function protanomaly(): Matrix;
 export function deuteranomaly(): Matrix;
 export function tritanomaly(): Matrix;

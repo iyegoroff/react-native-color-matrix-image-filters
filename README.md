@@ -42,7 +42,7 @@ pod 'RNColorMatrixImageFilters', :path => '../node_modules/react-native-color-ma
 ```javascript
 import { Image } from 'react-native';
 import {
-  Grayscale,
+  BlackAndWhite,
   Sepia,
   Tint,
   ColorMatrix,
@@ -52,10 +52,10 @@ import {
   saturate
 } from 'react-native-color-matrix-image-filters';
 
-const GrayscaledImage = (imageProps) => (
-  <Grayscale>
+const BlackAndWhiteImage = (imageProps) => (
+  <BlackAndWhite>
     <Image {...imageProps} />
-  </Grayscale>
+  </BlackAndWhite>
 );
 
 const CombinedFiltersImage = (imageProps) => (
@@ -76,7 +76,7 @@ const ColorMatrixImage = (imageProps) => (
 );
 ```
 
-Original                                       |  Grayscaled
+Original                                       |  BlackAndWhite
 :---------------------------------------------:|:---------------------------------------------:
 <img src="img/parrot.png" align="left" height="200">  |  <img src="img/gray.png" align="right" height="200">
 
@@ -107,7 +107,8 @@ corresponding stack of filter components.
 | HueRotate         | value: number = 0   | hueRotate(value: number = 0): Matrix
 | LuminanceToAlpha  | -                   | luminanceToAlpha(): Matrix
 | Invert            | -                   | invert(): Matrix
-| Grayscale         | -                   | grayscale(): Matrix
+| BlackAndWhite     | -                   | blackAndWhite(): Matrix
+| Grayscale         | value: number = 1   | grayscale(value: number = 1): Matrix
 | Sepia             | -                   | sepia(): Matrix
 | Nightvision       | -                   | nightvision(): Matrix
 | Warm              | -                   | warm(): Matrix
@@ -128,6 +129,7 @@ corresponding stack of filter components.
 | Predator          | value: number = 1   | predator(value: number = 1): Matrix
 | Lsd               | -                   | lsd(): Matrix
 | ColorTone         | desaturation: number = 0.2, toned: number = 0.15, lightColor: string = "#FFE580", darkColor: string = "#338000" | colorTone(desaturation: number = 0.2, toned: number = 0.15, lightColor: string = "#FFE580", darkColor: string = "#338000"): Matrix
+| DuoTone           | firstColor: string = "#FFE580", secondColor: string = "#338000" | duoTone(firstColor: string = "#FFE580", secondColor: string = "#338000"): Matrix
 | Protanomaly       | -                   | protanomaly(): Matrix
 | Deuteranomaly     | -                   | deuteranomaly(): Matrix
 | Tritanomaly       | -                   | tritanomaly(): Matrix
@@ -161,3 +163,4 @@ corresponding stack of filter components.
 - all color filters are taken from [color-matrix](https://github.com/skratchdot/color-matrix)
   project by @skratchdot and Pixi.js [sources](https://goo.gl/1GLTCU)
 - `concatColorMatrices` function is based on Android SDK [sources](https://goo.gl/MMDopQ)
+- `DuoTone` filter based on [example](https://codepen.io/jmperez/pen/LGqaxQ) by José Manuel Pérez

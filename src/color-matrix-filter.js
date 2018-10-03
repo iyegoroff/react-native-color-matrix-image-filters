@@ -29,41 +29,41 @@ const filterName = (name) => {
   return name === 'rgba' ? 'RGBA' : first.toUpperCase() + rest.join('');
 };
 
-const createColorMatrixImageFilter = (filter) => ({ value, ...restProps }) => (
+const filterMap = {
+  ColorTone: (filter) => ({ desaturation, toned, lightColor, darkColor, ...restProps }) => (
+    <ColorMatrixFilter
+      matrix={filter(desaturation, toned, lightColor, darkColor)}
+      {...restProps}
+    />
+  ),
+
+  RGBA: (filter) => ({ red, green, blue, alpha, ...restProps }) => (
+    <ColorMatrixFilter
+      matrix={filter(red, green, blue, alpha)}
+      {...restProps}
+    />
+  ),
+
+  DuoTone: (filter) => ({ firstColor, secondColor, ...restProps }) => (
+    <ColorMatrixFilter
+      matrix={filter(firstColor, secondColor)}
+      {...restProps}
+    />
+  )
+};
+
+const createFilter = (key) => filterMap[key] || ((filter) => ({ value, ...restProps }) => (
   <ColorMatrixFilter
     matrix={filter(value)}
     {...restProps}
   />
-);
-
-const createColorToneImageFilter = (filter) => ({
-  desaturation,
-  toned,
-  lightColor,
-  darkColor,
-  ...restProps
-}) => (
-  <ColorMatrixFilter
-    matrix={filter(desaturation, toned, lightColor, darkColor)}
-    {...restProps}
-  />
-);
-
-const createRGBAImageFilter = (filter) => ({ red, green, blue, alpha, ...restProps }) => (
-  <ColorMatrixFilter
-    matrix={filter(red, green, blue, alpha)}
-    {...restProps}
-  />
-);
+));
 
 export default Object.keys(filters).reduce(
   (acc, name) => {
     const key = filterName(name);
-    const create = key === 'ColorTone'
-      ? createColorToneImageFilter
-      : key === 'RGBA' ? createRGBAImageFilter : createColorMatrixImageFilter;
 
-    acc[key] = create(filters[name]);
+    acc[key] = createFilter(key)(filters[name]);
     acc[key].displayName = key;
     acc[key].isColorMatrixFilter = true;
     return acc;

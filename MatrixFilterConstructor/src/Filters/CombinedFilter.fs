@@ -17,6 +17,7 @@ module CombinedFilter =
     | HueRotate
     | LuminanceToAlpha
     | Invert
+    | BlackAndWhite
     | Grayscale
     | Sepia
     | Nightvision
@@ -38,6 +39,7 @@ module CombinedFilter =
     | Predator
     | Lsd
     | ColorTone
+    | DuoTone
     | Protanomaly
     | Deuteranomaly
     | Tritanomaly
@@ -74,7 +76,8 @@ module CombinedFilter =
     | HueRotate -> Filter.init [ Filter.Value, CFI.initRange -10. 10. 0. ]
     | LuminanceToAlpha -> Filter.init []
     | Invert -> Filter.init []
-    | Grayscale -> Filter.init []
+    | BlackAndWhite -> Filter.init []
+    | Grayscale -> Filter.init [ Filter.Value, CFI.initRange 0. 1. 1. ]
     | Sepia -> Filter.init []
     | Nightvision -> Filter.init []
     | Warm -> Filter.init []
@@ -100,6 +103,10 @@ module CombinedFilter =
           Filter.Toned, CFI.initRange -10. 10. 1.5
           Filter.LightColor, CFI.initColor "#ffe580"
           Filter.DarkColor, CFI.initColor "#338000" ]
+    | DuoTone ->
+      Filter.init
+        [ Filter.FirstColor, CFI.initColor "#ffe580" 
+          Filter.SecondColor, CFI.initColor "#338000" ]
     | Protanomaly -> Filter.init []
     | Deuteranomaly -> Filter.init []
     | Tritanomaly -> Filter.init []
@@ -133,7 +140,8 @@ module CombinedFilter =
     | HueRotate, [ Filter.Value, CFI.Range input ] -> RNF.hueRotate input.Value
     | LuminanceToAlpha, _ -> RNF.luminanceToAlpha ()
     | Invert, _ -> RNF.invert ()
-    | Grayscale, _ -> RNF.grayscale ()
+    | BlackAndWhite, _ -> RNF.blackAndWhite ()
+    | Grayscale, [ Filter.Value, CFI.Range input ] -> RNF.grayscale input.Value
     | Sepia, _ -> RNF.sepia ()
     | Nightvision, _ -> RNF.nightvision ()
     | Warm, _ -> RNF.warm ()
@@ -159,6 +167,10 @@ module CombinedFilter =
         Filter.LightColor, CFI.Color lightColor
         Filter.DarkColor, CFI.Color darkColor ] ->
         RNF.colorTone desaturation.Value toned.Value lightColor.Value darkColor.Value
+    | DuoTone,
+      [ Filter.FirstColor, CFI.Color firstColor
+        Filter.SecondColor, CFI.Color secondColor ] ->
+        RNF.duoTone firstColor.Value secondColor.Value
     | Protanomaly, _ -> RNF.protanomaly ()
     | Deuteranomaly, _ -> RNF.deuteranomaly ()
     | Tritanomaly, _ -> RNF.tritanomaly ()
@@ -188,6 +200,7 @@ module CombinedFilter =
     | HueRotate -> Filter.controls (name HueRotate)
     | LuminanceToAlpha -> Filter.controls (name LuminanceToAlpha)
     | Invert -> Filter.controls (name Invert)
+    | BlackAndWhite -> Filter.controls (name BlackAndWhite)
     | Grayscale -> Filter.controls (name Grayscale)
     | Sepia -> Filter.controls (name Sepia)
     | Nightvision -> Filter.controls (name Nightvision)
@@ -209,6 +222,7 @@ module CombinedFilter =
     | Predator -> Filter.controls (name Predator)
     | Lsd -> Filter.controls (name Lsd)
     | ColorTone -> Filter.controls (name ColorTone)
+    | DuoTone -> Filter.controls (name DuoTone)
     | Protanomaly -> Filter.controls (name Protanomaly)
     | Deuteranomaly -> Filter.controls (name Deuteranomaly)
     | Tritanomaly -> Filter.controls (name Tritanomaly)
@@ -236,6 +250,7 @@ module CombinedFilter =
        HueRotate
        LuminanceToAlpha
        Invert
+       BlackAndWhite
        Grayscale
        Sepia
        Nightvision
@@ -257,6 +272,7 @@ module CombinedFilter =
        Predator
        Lsd
        ColorTone
+       DuoTone
        Protanomaly
        Deuteranomaly
        Tritanomaly

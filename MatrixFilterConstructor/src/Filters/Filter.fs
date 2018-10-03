@@ -21,6 +21,8 @@ module Filter =
     | Green
     | Blue
     | Alpha
+    | FirstColor
+    | SecondColor
 
   type Model = (Input * CombinedFilterInput.Model) list
 

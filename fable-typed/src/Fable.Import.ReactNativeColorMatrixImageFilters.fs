@@ -41,8 +41,12 @@ module Props =
   type InvertProps =
     | Style of IStyle list
 
+  type BlackAndWhiteProps =
+    | Style of IStyle list
+
   type GrayscaleProps =
     | Style of IStyle list
+    | Value of float
 
   type SepiaProps =
     | Style of IStyle list
@@ -116,6 +120,11 @@ module Props =
     | DarkColor of string
     | Style of IStyle list
 
+  type DuoToneProps =
+    | Style of IStyle list
+    | FirstColor of string
+    | SecondColor of string
+
   type ProtanomalyProps =
     | Style of IStyle list
 
@@ -153,7 +162,8 @@ let saturate (_v: float): Matrix = importMember "react-native-color-matrix-image
 let hueRotate (_v: float): Matrix = importMember "react-native-color-matrix-image-filters"
 let luminanceToAlpha (): Matrix = importMember "react-native-color-matrix-image-filters"
 let invert (): Matrix = importMember "react-native-color-matrix-image-filters"
-let grayscale (): Matrix = importMember "react-native-color-matrix-image-filters"
+let blackAndWhite (): Matrix = importMember "react-native-color-matrix-image-filters"
+let grayscale (_v: float): Matrix = importMember "react-native-color-matrix-image-filters"
 let sepia (): Matrix = importMember "react-native-color-matrix-image-filters"
 let nightvision (): Matrix = importMember "react-native-color-matrix-image-filters"
 let warm (): Matrix = importMember "react-native-color-matrix-image-filters"
@@ -174,6 +184,8 @@ let night (_v: float): Matrix = importMember "react-native-color-matrix-image-fi
 let predator (_v: float): Matrix = importMember "react-native-color-matrix-image-filters"
 let lsd (): Matrix = importMember "react-native-color-matrix-image-filters"
 let colorTone (_desaturation: float) (_toned: float) (_lightColor: string) (_darkColor: string): Matrix =
+  importMember "react-native-color-matrix-image-filters"
+let duoTone (_firstColor: string) (_secondColor: string): Matrix =
   importMember "react-native-color-matrix-image-filters"
 let protanomaly (): Matrix = importMember "react-native-color-matrix-image-filters"
 let deuteranomaly (): Matrix = importMember "react-native-color-matrix-image-filters"
@@ -206,6 +218,9 @@ let inline LuminanceToAlpha (props: LuminanceToAlphaProps list) (children: React
 
 let inline Invert (props: InvertProps list) (children: React.ReactElement list): React.ReactElement =
   ofImport "Invert" "react-native-color-matrix-image-filters" (propsToObj props) children
+
+let inline BlackAndWhite (props: BlackAndWhiteProps list) (children: React.ReactElement list): React.ReactElement =
+  ofImport "BlackAndWhite" "react-native-color-matrix-image-filters" (propsToObj props) children
 
 let inline Grayscale (props: GrayscaleProps list) (children: React.ReactElement list): React.ReactElement =
   ofImport "Grayscale" "react-native-color-matrix-image-filters" (propsToObj props) children
@@ -269,6 +284,8 @@ let inline Lsd (props: LsdProps list) (children: React.ReactElement list): React
 
 let inline ColorTone (props: ColorToneProps list) (children: React.ReactElement list): React.ReactElement =
   ofImport "ColorTone" "react-native-color-matrix-image-filters" (propsToObj props) children
+let inline DuoTone (props: DuoToneProps list) (children: React.ReactElement list): React.ReactElement =
+  ofImport "DuoTone" "react-native-color-matrix-image-filters" (propsToObj props) children
 
 let inline Protanomaly (props: ProtanomalyProps list) (children: React.ReactElement list): React.ReactElement =
   ofImport "Protanomaly" "react-native-color-matrix-image-filters" (propsToObj props) children
