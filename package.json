@@ -59,6 +59,7 @@
     "src",
     "*.md",
     "*.podspec",
-    "MatrixFilterConstructor"
+    "MatrixFilterConstructor",
+    "fable-typed/src"
   ]
 }
