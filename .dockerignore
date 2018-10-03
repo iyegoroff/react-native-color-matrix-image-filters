@@ -11,6 +11,10 @@ LICENSE
 **/obj
 **/packages
 **/paket-files
+fable-typed/paket.*
+fable-typed/*.fsproj
+fable-typed/publish.js
+fable-typed/.paket
 
 **/android/build
 **/android/app/build
