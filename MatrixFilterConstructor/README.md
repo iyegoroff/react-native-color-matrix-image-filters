@@ -8,7 +8,7 @@ $ npm run run:android
 
 
 ### Building signed release apk with Docker
-- Clone the repo: `git clone it@github.com:iyegoroff/react-native-color-matrix-image-filters.git`
+- Clone the repo: `git clone it@github.com:iyegoroff/react-native-color-matrix-image-filters.git` or get it from npm
 - Go to example folder: `cd react-native-color-matrix-image-filters/MatrixFilterConstructor`
 - Generate keystore: `npm run generate:android:signing-key`
 - Open `MatrixFilterConstructor/android/gradle.properties` file and replace `qwerty`s with your passwords
