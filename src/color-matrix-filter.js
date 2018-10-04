@@ -25,7 +25,7 @@ ColorMatrixFilter.isColorMatrixFilter = true;
 ColorMatrixFilter.displayName = 'ColorMatrix';
 
 const filterName = (name) => {
-  const [first, ...rest] = name;
+  const [first, ...rest] = name.split('');
   return name === 'rgba' ? 'RGBA' : first.toUpperCase() + rest.join('');
 };
 
