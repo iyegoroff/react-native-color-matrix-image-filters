@@ -14,6 +14,6 @@ $ npm run run:android
 - Run `npm run build:release:docker` - upon script completion apk will be copied to `MatrixFilterConstructor/mfc.apk` file
 
 ### Download
-Android version can be downloaded from [Yandex.Store](https://store.yandex.com/) - [yastore:// link](https://clck.ru/EVdTV)
+Open [Yandex.Store](https://store.yandex.com/) Android app and search for `MatrixFilterConstructor`
 
 <img src="https://github.com/iyegoroff/react-native-color-matrix-image-filters/raw/master/img/demo.gif" height="600">
