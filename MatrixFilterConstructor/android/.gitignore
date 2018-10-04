@@ -8,3 +8,4 @@ local.properties
 app/*.keystore
 app/src/main/assets/*.bundle
 app/src/main/res/drawable-*
+gradle-yandex.properties
