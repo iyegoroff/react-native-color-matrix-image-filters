@@ -18,7 +18,7 @@
     "type": "git",
     "url": "git+https://github.com/iyegoroff/react-native-color-matrix-image-filters.git"
   },
-  "version": "2.0.0",
+  "version": "2.0.1",
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
