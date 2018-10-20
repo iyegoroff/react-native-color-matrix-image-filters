@@ -37,9 +37,7 @@ const publish = async (bumpStrategy) => {
      dotnet nuget push --source nuget.org -k \${NUGET_KEY} bin/Release/${packageName}.${nextVersion}.nupkg &&
      git add -u &&
      git commit -am 'version ${nextVersion}' &&
-     git push &&
-     git tag 'v${nextVersion}' &&
-     git push origin --tags
+     git push
     `
   );
 
