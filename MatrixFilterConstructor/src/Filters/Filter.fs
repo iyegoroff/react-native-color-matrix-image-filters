@@ -12,7 +12,7 @@ module RNF = Fable.Import.ReactNativeColorMatrixImageFilters
 module Filter =
 
   type Input =
-    | Value
+    | Amount
     | Desaturation
     | Toned
     | LightColor

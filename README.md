@@ -42,7 +42,7 @@ pod 'RNColorMatrixImageFilters', :path => '../node_modules/react-native-color-ma
 ```javascript
 import { Image } from 'react-native';
 import {
-  BlackAndWhite,
+  Grayscale,
   Sepia,
   Tint,
   ColorMatrix,
@@ -52,14 +52,14 @@ import {
   saturate
 } from 'react-native-color-matrix-image-filters';
 
-const BlackAndWhiteImage = (imageProps) => (
-  <BlackAndWhite>
+const GrayscaledImage = (imageProps) => (
+  <Grayscale>
     <Image {...imageProps} />
-  </BlackAndWhite>
+  </Grayscale>
 );
 
 const CombinedFiltersImage = (imageProps) => (
-  <Tint value={1.25}>
+  <Tint amount={1.25}>
     <Sepia>
       <Image {...imageProps} />
     </Sepia>
@@ -76,7 +76,7 @@ const ColorMatrixImage = (imageProps) => (
 );
 ```
 
-Original                                       |  BlackAndWhite
+Original                                       |  Grayscaled
 :---------------------------------------------:|:---------------------------------------------:
 <img src="img/parrot.png" align="left" height="200">  |  <img src="img/gray.png" align="right" height="200">
 
@@ -87,7 +87,7 @@ CombinedFilters                                |  ColorMatrix
 ## Usage
 
 Each filter support all of `View` [props](https://facebook.github.io/react-native/docs/view#props).
-Also some filters have optional `value` prop which takes a `number`. `ColorMatrix` filter
+Also some filters have optional `amount` prop which takes a `number`. `ColorMatrix` filter
 has `matrix` prop which takes a `Matrix` - an array of 20 numbers. Additionally library exports
 functions like `grayscale`, `tint` etc. - these functions return values of `Matrix` type and their
 results can be combined with `concatColorMatrices` function. If you need to combine several filters,
@@ -98,46 +98,45 @@ corresponding stack of filter components.
 
 ### Supported filters
 
-| Component         | Additional props    | function          |
-| ----------------- | ------------------- | ----------------- |
+| Component         | Additional props     | function          |
+| ----------------- | -------------------- | ----------------- |
 | ColorMatrix       | matrix: Matrix \| Array\<Matrix>      | -
-| Normal            | -                   | normal(): Matrix
+| Normal            | -                    | normal(): Matrix
 | RGBA              | red: number = 1, green: number = 1, blue: number = 1, alpha: number = 1 | rgba(red: number = 1, green: number = 1, blue: number = 1, alpha: number = 1): Matrix
-| Saturate          | value: number = 1   | saturate(value: number = 1): Matrix
-| HueRotate         | value: number = 0   | hueRotate(value: number = 0): Matrix
-| LuminanceToAlpha  | -                   | luminanceToAlpha(): Matrix
-| Invert            | -                   | invert(): Matrix
-| BlackAndWhite     | -                   | blackAndWhite(): Matrix
-| Grayscale         | value: number = 1   | grayscale(value: number = 1): Matrix
-| Sepia             | -                   | sepia(): Matrix
-| Nightvision       | -                   | nightvision(): Matrix
-| Warm              | -                   | warm(): Matrix
-| Cool              | -                   | cool(): Matrix
-| Brightness        | value: number = 0   | brightness(value: number = 0): Matrix
-| Exposure          | value: number = 1   | exposure(value: number = 1): Matrix
-| Contrast          | value: number = 1   | contrast(value: number = 1): Matrix
-| Temperature       | value: number = 1   | temperature(value: number = 1): Matrix
-| Tint              | value: number = 0   | tint(value: number = 0): Matrix
-| Threshold         | value: number = 0   | threshold(value: number = 0): Matrix
-| Technicolor       | -                   | technicolor(): Matrix
-| Polaroid          | -                   | polaroid(): Matrix
-| ToBGR             | -                   | toBGR(): Matrix
-| Kodachrome        | -                   | kodachrome(): Matrix
-| Browni            | -                   | browni(): Matrix
-| Vintage           | -                   | vintage(): Matrix
-| Night             | value: number = 0.1 | night(value: number = 0.1): Matrix
-| Predator          | value: number = 1   | predator(value: number = 1): Matrix
-| Lsd               | -                   | lsd(): Matrix
+| Saturate          | amount: number = 1   | saturate(amount: number = 1): Matrix
+| HueRotate         | amount: number = 0   | hueRotate(amount: number = 0): Matrix
+| LuminanceToAlpha  | -                    | luminanceToAlpha(): Matrix
+| Invert            | -                    | invert(): Matrix
+| Grayscale         | amount: number = 1   | grayscale(amount: number = 1): Matrix
+| Sepia             | amount: number = 1   | sepia(amount: number = 1): Matrix
+| Nightvision       | -                    | nightvision(): Matrix
+| Warm              | -                    | warm(): Matrix
+| Cool              | -                    | cool(): Matrix
+| Brightness        | amount: number = 0   | brightness(amount: number = 0): Matrix
+| Exposure          | amount: number = 1   | exposure(amount: number = 1): Matrix
+| Contrast          | amount: number = 1   | contrast(amount: number = 1): Matrix
+| Temperature       | amount: number = 1   | temperature(amount: number = 1): Matrix
+| Tint              | amount: number = 0   | tint(amount: number = 0): Matrix
+| Threshold         | amount: number = 0   | threshold(amount: number = 0): Matrix
+| Technicolor       | -                    | technicolor(): Matrix
+| Polaroid          | -                    | polaroid(): Matrix
+| ToBGR             | -                    | toBGR(): Matrix
+| Kodachrome        | -                    | kodachrome(): Matrix
+| Browni            | -                    | browni(): Matrix
+| Vintage           | -                    | vintage(): Matrix
+| Night             | amount: number = 0.1 | night(amount: number = 0.1): Matrix
+| Predator          | amount: number = 1   | predator(amount: number = 1): Matrix
+| Lsd               | -                    | lsd(): Matrix
 | ColorTone         | desaturation: number = 0.2, toned: number = 0.15, lightColor: string = "#FFE580", darkColor: string = "#338000" | colorTone(desaturation: number = 0.2, toned: number = 0.15, lightColor: string = "#FFE580", darkColor: string = "#338000"): Matrix
 | DuoTone           | firstColor: string = "#FFE580", secondColor: string = "#338000" | duoTone(firstColor: string = "#FFE580", secondColor: string = "#338000"): Matrix
-| Protanomaly       | -                   | protanomaly(): Matrix
-| Deuteranomaly     | -                   | deuteranomaly(): Matrix
-| Tritanomaly       | -                   | tritanomaly(): Matrix
-| Protanopia        | -                   | protanopia(): Matrix
-| Deuteranopia      | -                   | deuteranopia(): Matrix
-| Tritanopia        | -                   | tritanopia(): Matrix
-| Achromatopsia     | -                   | achromatopsia(): Matrix
-| Achromatomaly     | -                   | achromatomaly(): Matrix
+| Protanomaly       | -                    | protanomaly(): Matrix
+| Deuteranomaly     | -                    | deuteranomaly(): Matrix
+| Tritanomaly       | -                    | tritanomaly(): Matrix
+| Protanopia        | -                    | protanopia(): Matrix
+| Deuteranopia      | -                    | deuteranopia(): Matrix
+| Tritanopia        | -                    | tritanopia(): Matrix
+| Achromatopsia     | -                    | achromatopsia(): Matrix
+| Achromatomaly     | -                    | achromatomaly(): Matrix
 
 
 ### Functions
@@ -160,7 +159,8 @@ corresponding stack of filter components.
 
 - parrot [image](https://commons.wikimedia.org/wiki/File:Ara_macao_-flying_away-8a.jpg) by
   [Robert01](https://de.wikipedia.org/wiki/Benutzer:Robert01)
-- all color filters are taken from [color-matrix](https://github.com/skratchdot/color-matrix)
-  project by @skratchdot and Pixi.js [sources](https://goo.gl/1GLTCU)
-- `concatColorMatrices` function is based on Android SDK [sources](https://goo.gl/MMDopQ)
+- most of color filters are taken from [color-matrix](https://github.com/skratchdot/color-matrix)
+  project by @skratchdot, Pixi.js [sources](https://github.com/pixijs/pixi.js/blob/dev/src/filters/colormatrix/ColorMatrixFilter.js)
+  and Webkit [sources](https://github.com/WebKit/webkit/blob/fd2225c344d4ea5ebcf1bdf437df251d95f8035c/Source/WebCore/platform/graphics/ColorUtilities.cpp)
+- `concatColorMatrices` function is based on Android SDK [sources](https://github.com/AndroidSDKSources/android-sdk-sources-for-api-level-27/blob/048d6cef38d11a9937bccc8cec517c1b149904c5/android/graphics/ColorMatrix.java#L181-L205)
 - `DuoTone` filter based on [example](https://codepen.io/jmperez/pen/LGqaxQ) by José Manuel Pérez

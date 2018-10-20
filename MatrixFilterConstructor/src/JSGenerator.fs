@@ -100,7 +100,7 @@ module JSGenerator =
           id
           (fun (name, (inputName, _), id) ->
              match inputName with
-             | Filter.Value ->
+             | Filter.Amount ->
                sprintf "%s%s: props.%s%s || 0,\n%s%sDirection%s: 1," name id name id padding name id
              | _ -> "")
           padding
@@ -111,7 +111,7 @@ module JSGenerator =
             id
             (fun (name, (inputName, input), id) ->
                match inputName with
-               | Filter.Value ->
+               | Filter.Amount ->
                  let nameId = sprintf "%s%s" name id
                  let min = sprintf "(props.%sMin%s || %s)" name id (inputMin input)
                  let max = sprintf "(props.%sMax%s || %s)" name id (inputMax input)
@@ -137,7 +137,7 @@ module JSGenerator =
             id
             (fun (name, (inputName, _), id) ->
                match inputName with
-               | Filter.Value -> sprintf "%s%s,\n%s  %sDirection%s," name id padding name id
+               | Filter.Amount -> sprintf "%s%s,\n%s  %sDirection%s," name id padding name id
                | _ -> "")
             (sprintf "  %s" padding)
         
@@ -148,7 +148,7 @@ module JSGenerator =
           id
           (fun (name, (inputName, _), id) ->
              match inputName with
-             | Filter.Value -> sprintf "%s%s: %sValue%s," name id name id
+             | Filter.Amount -> sprintf "%s%s: %sValue%s," name id name id
              | _ -> "")
           padding
 
@@ -157,7 +157,7 @@ module JSGenerator =
           not
           (fun (name, (inputName, input), id) ->
              match inputName with
-             | Filter.Value -> sprintf "%s%s: %sValue%s = %s," name id name id (inputValue input)
+             | Filter.Amount -> sprintf "%s%s: %sValue%s = %s," name id name id (inputValue input)
              | _ -> sprintf "%s%A%s = %s" name inputName id (inputValue input))
           padding
 

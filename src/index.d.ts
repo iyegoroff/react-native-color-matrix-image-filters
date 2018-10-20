@@ -9,7 +9,7 @@ export type Matrix = [
 interface FilterProps extends ReactNative.ViewProps { }
 
 export interface ValueFilterProps extends FilterProps {
-  readonly value?: number;
+  readonly amount?: number;
 }
 
 export interface ColorMatrixProps extends FilterProps {
@@ -42,9 +42,8 @@ export class Saturate extends React.Component<ValueFilterProps> { }
 export class HueRotate extends React.Component<ValueFilterProps> { }
 export class LuminanceToAlpha extends React.Component<FilterProps> { }
 export class Invert extends React.Component<FilterProps> { }
-export class BlackAndWhite extends React.Component<FilterProps> { }
 export class Grayscale extends React.Component<ValueFilterProps> { }
-export class Sepia extends React.Component<FilterProps> { }
+export class Sepia extends React.Component<ValueFilterProps> { }
 export class Nightvision extends React.Component<FilterProps> { }
 export class Warm extends React.Component<FilterProps> { }
 export class Cool extends React.Component<FilterProps> { }
@@ -79,30 +78,29 @@ export function concatColorMatrices(matrices: Matrix[]): Matrix;
 
 export function normal(): Matrix;
 export function rgba(red?: number, green?: number, blue?: number, alpha?: number): Matrix;
-export function saturate(value?: number): Matrix;
-export function hueRotate(value?: number): Matrix;
+export function saturate(amount?: number): Matrix;
+export function hueRotate(amount?: number): Matrix;
 export function luminanceToAlpha(): Matrix;
 export function invert(): Matrix;
-export function blackAndWhite(): Matrix;
-export function grayscale(value?: number): Matrix;
-export function sepia(): Matrix;
+export function grayscale(amount?: number): Matrix;
+export function sepia(amount?: number): Matrix;
 export function nightvision(): Matrix;
 export function warm(): Matrix;
 export function cool(): Matrix;
-export function brightness(value?: number): Matrix;
-export function exposure(value?: number): Matrix;
-export function contrast(value?: number): Matrix;
-export function temperature(value?: number): Matrix;
-export function tint(value?: number): Matrix;
-export function threshold(value?: number): Matrix;
+export function brightness(amount?: number): Matrix;
+export function exposure(amount?: number): Matrix;
+export function contrast(amount?: number): Matrix;
+export function temperature(amount?: number): Matrix;
+export function tint(amount?: number): Matrix;
+export function threshold(amount?: number): Matrix;
 export function technicolor(): Matrix;
 export function polaroid(): Matrix;
 export function toBGR(): Matrix;
 export function kodachrome(): Matrix;
 export function browni(): Matrix;
 export function vintage(): Matrix;
-export function night(value?: number): Matrix;
-export function predator(value?: number): Matrix;
+export function night(amount?: number): Matrix;
+export function predator(amount?: number): Matrix;
 export function lsd(): Matrix;
 export function colorTone(
   desaturation?: number,

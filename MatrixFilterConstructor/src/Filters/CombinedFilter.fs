@@ -17,7 +17,6 @@ module CombinedFilter =
     | HueRotate
     | LuminanceToAlpha
     | Invert
-    | BlackAndWhite
     | Grayscale
     | Sepia
     | Nightvision
@@ -72,30 +71,29 @@ module CombinedFilter =
           Filter.Green, CFI.initRange 0. 5. 1.
           Filter.Blue, CFI.initRange 0. 5. 1.
           Filter.Alpha, CFI.initRange 0. 5. 1. ]
-    | Saturate -> Filter.init [ Filter.Value, CFI.initRange -10. 10. 1. ]
-    | HueRotate -> Filter.init [ Filter.Value, CFI.initRange -10. 10. 0. ]
+    | Saturate -> Filter.init [ Filter.Amount, CFI.initRange -10. 10. 1. ]
+    | HueRotate -> Filter.init [ Filter.Amount, CFI.initRange -10. 10. 0. ]
     | LuminanceToAlpha -> Filter.init []
     | Invert -> Filter.init []
-    | BlackAndWhite -> Filter.init []
-    | Grayscale -> Filter.init [ Filter.Value, CFI.initRange 0. 1. 1. ]
-    | Sepia -> Filter.init []
+    | Grayscale -> Filter.init [ Filter.Amount, CFI.initRange 0. 1. 1. ]
+    | Sepia -> Filter.init [ Filter.Amount, CFI.initRange 0. 1. 1. ]
     | Nightvision -> Filter.init []
     | Warm -> Filter.init []
     | Cool -> Filter.init []
-    | Brightness -> Filter.init [ Filter.Value, CFI.initRange -100. 100. 0. ]
-    | Exposure -> Filter.init [ Filter.Value, CFI.initRange -10. 10. 1. ]
-    | Contrast -> Filter.init [ Filter.Value, CFI.initRange -10. 10. 1. ]
-    | Temperature -> Filter.init [ Filter.Value, CFI.initRange -10. 10. 1. ]
-    | Tint -> Filter.init [ Filter.Value, CFI.initRange -10. 10. 0. ]
-    | Threshold -> Filter.init [ Filter.Value, CFI.initRange -100. 100. 0. ]
+    | Brightness -> Filter.init [ Filter.Amount, CFI.initRange -100. 100. 0. ]
+    | Exposure -> Filter.init [ Filter.Amount, CFI.initRange -10. 10. 1. ]
+    | Contrast -> Filter.init [ Filter.Amount, CFI.initRange -10. 10. 1. ]
+    | Temperature -> Filter.init [ Filter.Amount, CFI.initRange -10. 10. 1. ]
+    | Tint -> Filter.init [ Filter.Amount, CFI.initRange -10. 10. 0. ]
+    | Threshold -> Filter.init [ Filter.Amount, CFI.initRange -100. 100. 0. ]
     | Technicolor -> Filter.init []
     | Polaroid -> Filter.init []
     | ToBGR -> Filter.init []
     | Kodachrome -> Filter.init []
     | Browni -> Filter.init []
     | Vintage -> Filter.init []
-    | Night -> Filter.init [ Filter.Value, CFI.initRange -10. 10. 0.1 ]
-    | Predator -> Filter.init [ Filter.Value, CFI.initRange -10. 10. 1. ]
+    | Night -> Filter.init [ Filter.Amount, CFI.initRange -10. 10. 0.1 ]
+    | Predator -> Filter.init [ Filter.Amount, CFI.initRange -10. 10. 1. ]
     | Lsd -> Filter.init []
     | ColorTone ->
       Filter.init
@@ -115,16 +113,16 @@ module CombinedFilter =
     | Tritanopia -> Filter.init []
     | Achromatopsia -> Filter.init []
     | Achromatomaly -> Filter.init []
-    | AnimatedSaturate -> Filter.init [ Filter.Value, CFI.initAnimated -10. 10. 1. ]
-    | AnimatedHueRotate -> Filter.init [ Filter.Value, CFI.initAnimated -10. 10. 0. ]
-    | AnimatedBrightness -> Filter.init [ Filter.Value, CFI.initAnimated -100. 100. 0. ]
-    | AnimatedExposure -> Filter.init [ Filter.Value, CFI.initAnimated -10. 10. 1. ]
-    | AnimatedContrast -> Filter.init [ Filter.Value, CFI.initAnimated -10. 10. 1. ]
-    | AnimatedTemperature -> Filter.init [ Filter.Value, CFI.initAnimated -10. 10. 1. ]
-    | AnimatedTint -> Filter.init [ Filter.Value, CFI.initAnimated -10. 10. 0. ]
-    | AnimatedThreshold -> Filter.init [ Filter.Value, CFI.initAnimated -100. 100. 0. ]
-    | AnimatedNight -> Filter.init [ Filter.Value, CFI.initAnimated -10. 10. 0.1 ]
-    | AnimatedPredator -> Filter.init [ Filter.Value, CFI.initAnimated -10. 10. 1. ]
+    | AnimatedSaturate -> Filter.init [ Filter.Amount, CFI.initAnimated -10. 10. 1. ]
+    | AnimatedHueRotate -> Filter.init [ Filter.Amount, CFI.initAnimated -10. 10. 0. ]
+    | AnimatedBrightness -> Filter.init [ Filter.Amount, CFI.initAnimated -100. 100. 0. ]
+    | AnimatedExposure -> Filter.init [ Filter.Amount, CFI.initAnimated -10. 10. 1. ]
+    | AnimatedContrast -> Filter.init [ Filter.Amount, CFI.initAnimated -10. 10. 1. ]
+    | AnimatedTemperature -> Filter.init [ Filter.Amount, CFI.initAnimated -10. 10. 1. ]
+    | AnimatedTint -> Filter.init [ Filter.Amount, CFI.initAnimated -10. 10. 0. ]
+    | AnimatedThreshold -> Filter.init [ Filter.Amount, CFI.initAnimated -100. 100. 0. ]
+    | AnimatedNight -> Filter.init [ Filter.Amount, CFI.initAnimated -10. 10. 0.1 ]
+    | AnimatedPredator -> Filter.init [ Filter.Amount, CFI.initAnimated -10. 10. 1. ]
 
 
   let matrix control (model: Filter.Model) =
@@ -136,30 +134,29 @@ module CombinedFilter =
         Filter.Blue, CFI.Range blue
         Filter.Alpha, CFI.Range alpha ] ->
         RNF.rgba red.Value green.Value blue.Value alpha.Value
-    | Saturate, [ Filter.Value, CFI.Range input ] -> RNF.saturate input.Value
-    | HueRotate, [ Filter.Value, CFI.Range input ] -> RNF.hueRotate input.Value
+    | Saturate, [ Filter.Amount, CFI.Range input ] -> RNF.saturate input.Value
+    | HueRotate, [ Filter.Amount, CFI.Range input ] -> RNF.hueRotate input.Value
     | LuminanceToAlpha, _ -> RNF.luminanceToAlpha ()
     | Invert, _ -> RNF.invert ()
-    | BlackAndWhite, _ -> RNF.blackAndWhite ()
-    | Grayscale, [ Filter.Value, CFI.Range input ] -> RNF.grayscale input.Value
-    | Sepia, _ -> RNF.sepia ()
+    | Grayscale, [ Filter.Amount, CFI.Range input ] -> RNF.grayscale input.Value
+    | Sepia, [ Filter.Amount, CFI.Range input ] -> RNF.sepia input.Value
     | Nightvision, _ -> RNF.nightvision ()
     | Warm, _ -> RNF.warm ()
     | Cool, _ -> RNF.cool ()
-    | Brightness, [ Filter.Value, CFI.Range input ] -> RNF.brightness input.Value
-    | Exposure, [ Filter.Value, CFI.Range input ] -> RNF.exposure input.Value
-    | Contrast, [ Filter.Value, CFI.Range input ] -> RNF.contrast input.Value
-    | Temperature, [ Filter.Value, CFI.Range input ] -> RNF.temperature input.Value
-    | Tint, [ Filter.Value, CFI.Range input ] -> RNF.tint input.Value
-    | Threshold, [ Filter.Value, CFI.Range input ] -> RNF.threshold input.Value
+    | Brightness, [ Filter.Amount, CFI.Range input ] -> RNF.brightness input.Value
+    | Exposure, [ Filter.Amount, CFI.Range input ] -> RNF.exposure input.Value
+    | Contrast, [ Filter.Amount, CFI.Range input ] -> RNF.contrast input.Value
+    | Temperature, [ Filter.Amount, CFI.Range input ] -> RNF.temperature input.Value
+    | Tint, [ Filter.Amount, CFI.Range input ] -> RNF.tint input.Value
+    | Threshold, [ Filter.Amount, CFI.Range input ] -> RNF.threshold input.Value
     | Technicolor, _ -> RNF.technicolor ()
     | Polaroid, _ -> RNF.polaroid ()
     | ToBGR, _ -> RNF.toBGR ()
     | Kodachrome, _ -> RNF.kodachrome ()
     | Browni, _ -> RNF.browni ()
     | Vintage, _ -> RNF.vintage ()
-    | Night, [ Filter.Value, CFI.Range input ] -> RNF.night input.Value
-    | Predator, [ Filter.Value, CFI.Range input ] -> RNF.predator input.Value
+    | Night, [ Filter.Amount, CFI.Range input ] -> RNF.night input.Value
+    | Predator, [ Filter.Amount, CFI.Range input ] -> RNF.predator input.Value
     | Lsd, _ -> RNF.lsd ()
     | ColorTone, 
       [ Filter.Desaturation, CFI.Range desaturation
@@ -179,16 +176,16 @@ module CombinedFilter =
     | Tritanopia, _ -> RNF.tritanopia ()
     | Achromatopsia, _ -> RNF.achromatopsia ()
     | Achromatomaly, _ -> RNF.achromatomaly ()
-    | AnimatedSaturate, [ Filter.Value, CFI.Animated input] -> RNF.saturate input.Animated.Value
-    | AnimatedHueRotate, [ Filter.Value, CFI.Animated input] -> RNF.hueRotate input.Animated.Value
-    | AnimatedBrightness, [ Filter.Value, CFI.Animated input] -> RNF.brightness input.Animated.Value
-    | AnimatedExposure, [ Filter.Value, CFI.Animated input] -> RNF.exposure input.Animated.Value
-    | AnimatedContrast, [ Filter.Value, CFI.Animated input] -> RNF.contrast input.Animated.Value
-    | AnimatedTemperature, [ Filter.Value, CFI.Animated input] -> RNF.temperature input.Animated.Value
-    | AnimatedTint, [ Filter.Value, CFI.Animated input] -> RNF.tint input.Animated.Value
-    | AnimatedThreshold, [ Filter.Value, CFI.Animated input] -> RNF.threshold input.Animated.Value
-    | AnimatedNight, [ Filter.Value, CFI.Animated input] -> RNF.night input.Animated.Value
-    | AnimatedPredator, [ Filter.Value, CFI.Animated input] -> RNF.predator input.Animated.Value
+    | AnimatedSaturate, [ Filter.Amount, CFI.Animated input] -> RNF.saturate input.Animated.Value
+    | AnimatedHueRotate, [ Filter.Amount, CFI.Animated input] -> RNF.hueRotate input.Animated.Value
+    | AnimatedBrightness, [ Filter.Amount, CFI.Animated input] -> RNF.brightness input.Animated.Value
+    | AnimatedExposure, [ Filter.Amount, CFI.Animated input] -> RNF.exposure input.Animated.Value
+    | AnimatedContrast, [ Filter.Amount, CFI.Animated input] -> RNF.contrast input.Animated.Value
+    | AnimatedTemperature, [ Filter.Amount, CFI.Animated input] -> RNF.temperature input.Animated.Value
+    | AnimatedTint, [ Filter.Amount, CFI.Animated input] -> RNF.tint input.Animated.Value
+    | AnimatedThreshold, [ Filter.Amount, CFI.Animated input] -> RNF.threshold input.Animated.Value
+    | AnimatedNight, [ Filter.Amount, CFI.Animated input] -> RNF.night input.Animated.Value
+    | AnimatedPredator, [ Filter.Amount, CFI.Animated input] -> RNF.predator input.Animated.Value
     | _ -> RNF.normal ()
 
 
@@ -200,7 +197,6 @@ module CombinedFilter =
     | HueRotate -> Filter.controls (name HueRotate)
     | LuminanceToAlpha -> Filter.controls (name LuminanceToAlpha)
     | Invert -> Filter.controls (name Invert)
-    | BlackAndWhite -> Filter.controls (name BlackAndWhite)
     | Grayscale -> Filter.controls (name Grayscale)
     | Sepia -> Filter.controls (name Sepia)
     | Nightvision -> Filter.controls (name Nightvision)
@@ -250,7 +246,6 @@ module CombinedFilter =
        HueRotate
        LuminanceToAlpha
        Invert
-       BlackAndWhite
        Grayscale
        Sepia
        Nightvision

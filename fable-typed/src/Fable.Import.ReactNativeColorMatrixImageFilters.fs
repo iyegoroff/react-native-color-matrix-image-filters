@@ -29,11 +29,11 @@ module Props =
 
   type SaturateProps =
     | Style of IStyle list
-    | Value of float
+    | Amount of float
 
   type HueRotateProps =
     | Style of IStyle list
-    | Value of float
+    | Amount of float
 
   type LuminanceToAlphaProps =
     | Style of IStyle list
@@ -41,15 +41,13 @@ module Props =
   type InvertProps =
     | Style of IStyle list
 
-  type BlackAndWhiteProps =
-    | Style of IStyle list
-
   type GrayscaleProps =
     | Style of IStyle list
-    | Value of float
+    | Amount of float
 
   type SepiaProps =
     | Style of IStyle list
+    | Amount of float
 
   type NightvisionProps =
     | Style of IStyle list
@@ -62,27 +60,27 @@ module Props =
 
   type BrightnessProps =
     | Style of IStyle list
-    | Value of float
+    | Amount of float
 
   type ExposureProps =
     | Style of IStyle list
-    | Value of float
+    | Amount of float
 
   type ContrastProps =
     | Style of IStyle list
-    | Value of float
+    | Amount of float
 
   type TemperatureProps =
     | Style of IStyle list
-    | Value of float
+    | Amount of float
 
   type TintProps =
     | Style of IStyle list
-    | Value of float
+    | Amount of float
 
   type ThresholdProps =
     | Style of IStyle list
-    | Value of float
+    | Amount of float
 
   type TechnicolorProps =
     | Style of IStyle list
@@ -104,11 +102,11 @@ module Props =
 
   type NightProps =
     | Style of IStyle list
-    | Value of float
+    | Amount of float
 
   type PredatorProps =
     | Style of IStyle list
-    | Value of float
+    | Amount of float
 
   type LsdProps =
     | Style of IStyle list
@@ -162,9 +160,8 @@ let saturate (_v: float): Matrix = importMember "react-native-color-matrix-image
 let hueRotate (_v: float): Matrix = importMember "react-native-color-matrix-image-filters"
 let luminanceToAlpha (): Matrix = importMember "react-native-color-matrix-image-filters"
 let invert (): Matrix = importMember "react-native-color-matrix-image-filters"
-let blackAndWhite (): Matrix = importMember "react-native-color-matrix-image-filters"
 let grayscale (_v: float): Matrix = importMember "react-native-color-matrix-image-filters"
-let sepia (): Matrix = importMember "react-native-color-matrix-image-filters"
+let sepia (_v: float): Matrix = importMember "react-native-color-matrix-image-filters"
 let nightvision (): Matrix = importMember "react-native-color-matrix-image-filters"
 let warm (): Matrix = importMember "react-native-color-matrix-image-filters"
 let cool (): Matrix = importMember "react-native-color-matrix-image-filters"
@@ -218,9 +215,6 @@ let inline LuminanceToAlpha (props: LuminanceToAlphaProps list) (children: React
 
 let inline Invert (props: InvertProps list) (children: React.ReactElement list): React.ReactElement =
   ofImport "Invert" "react-native-color-matrix-image-filters" (propsToObj props) children
-
-let inline BlackAndWhite (props: BlackAndWhiteProps list) (children: React.ReactElement list): React.ReactElement =
-  ofImport "BlackAndWhite" "react-native-color-matrix-image-filters" (propsToObj props) children
 
 let inline Grayscale (props: GrayscaleProps list) (children: React.ReactElement list): React.ReactElement =
   ofImport "Grayscale" "react-native-color-matrix-image-filters" (propsToObj props) children

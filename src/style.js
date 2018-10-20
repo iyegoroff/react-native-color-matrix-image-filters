@@ -10,7 +10,7 @@ export const defaultStyle = StyleSheet.create({
 });
 
 export const checkStyle = (style) => {
-  if (__DEV__ && style) {
+  if (style) {
     const { backgroundColor } = StyleSheet.flatten(style);
 
     invariant(

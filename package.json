@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "concat-color-matrices": "^1.0.0",
-    "rn-color-matrices": "^2.0.0"
+    "rn-color-matrices": "^3.0.0"
   },
   "semistandard": {
     "globals": [
