@@ -112,8 +112,7 @@ corresponding stack of filter components.
 | Nightvision       | -                    | nightvision(): Matrix
 | Warm              | -                    | warm(): Matrix
 | Cool              | -                    | cool(): Matrix
-| Brightness        | amount: number = 0   | brightness(amount: number = 0): Matrix
-| Exposure          | amount: number = 1   | exposure(amount: number = 1): Matrix
+| Brightness        | amount: number = 1   | brightness(amount: number = 1): Matrix
 | Contrast          | amount: number = 1   | contrast(amount: number = 1): Matrix
 | Temperature       | amount: number = 1   | temperature(amount: number = 1): Matrix
 | Tint              | amount: number = 0   | tint(amount: number = 0): Matrix

@@ -23,7 +23,6 @@ module CombinedFilter =
     | Warm
     | Cool
     | Brightness
-    | Exposure
     | Contrast
     | Temperature
     | Tint
@@ -50,7 +49,6 @@ module CombinedFilter =
     | AnimatedSaturate
     | AnimatedHueRotate
     | AnimatedBrightness
-    | AnimatedExposure
     | AnimatedContrast
     | AnimatedTemperature
     | AnimatedTint
@@ -80,12 +78,11 @@ module CombinedFilter =
     | Nightvision -> Filter.init []
     | Warm -> Filter.init []
     | Cool -> Filter.init []
-    | Brightness -> Filter.init [ Filter.Amount, CFI.initRange -100. 100. 0. ]
-    | Exposure -> Filter.init [ Filter.Amount, CFI.initRange -10. 10. 1. ]
+    | Brightness -> Filter.init [ Filter.Amount, CFI.initRange -10. 10. 1. ]
     | Contrast -> Filter.init [ Filter.Amount, CFI.initRange -10. 10. 1. ]
     | Temperature -> Filter.init [ Filter.Amount, CFI.initRange -10. 10. 1. ]
     | Tint -> Filter.init [ Filter.Amount, CFI.initRange -10. 10. 0. ]
-    | Threshold -> Filter.init [ Filter.Amount, CFI.initRange -100. 100. 0. ]
+    | Threshold -> Filter.init [ Filter.Amount, CFI.initRange -10. 10. 1. ]
     | Technicolor -> Filter.init []
     | Polaroid -> Filter.init []
     | ToBGR -> Filter.init []
@@ -116,7 +113,6 @@ module CombinedFilter =
     | AnimatedSaturate -> Filter.init [ Filter.Amount, CFI.initAnimated -10. 10. 1. ]
     | AnimatedHueRotate -> Filter.init [ Filter.Amount, CFI.initAnimated -10. 10. 0. ]
     | AnimatedBrightness -> Filter.init [ Filter.Amount, CFI.initAnimated -100. 100. 0. ]
-    | AnimatedExposure -> Filter.init [ Filter.Amount, CFI.initAnimated -10. 10. 1. ]
     | AnimatedContrast -> Filter.init [ Filter.Amount, CFI.initAnimated -10. 10. 1. ]
     | AnimatedTemperature -> Filter.init [ Filter.Amount, CFI.initAnimated -10. 10. 1. ]
     | AnimatedTint -> Filter.init [ Filter.Amount, CFI.initAnimated -10. 10. 0. ]
@@ -144,7 +140,6 @@ module CombinedFilter =
     | Warm, _ -> RNF.warm ()
     | Cool, _ -> RNF.cool ()
     | Brightness, [ Filter.Amount, CFI.Range input ] -> RNF.brightness input.Value
-    | Exposure, [ Filter.Amount, CFI.Range input ] -> RNF.exposure input.Value
     | Contrast, [ Filter.Amount, CFI.Range input ] -> RNF.contrast input.Value
     | Temperature, [ Filter.Amount, CFI.Range input ] -> RNF.temperature input.Value
     | Tint, [ Filter.Amount, CFI.Range input ] -> RNF.tint input.Value
@@ -179,7 +174,6 @@ module CombinedFilter =
     | AnimatedSaturate, [ Filter.Amount, CFI.Animated input] -> RNF.saturate input.Animated.Value
     | AnimatedHueRotate, [ Filter.Amount, CFI.Animated input] -> RNF.hueRotate input.Animated.Value
     | AnimatedBrightness, [ Filter.Amount, CFI.Animated input] -> RNF.brightness input.Animated.Value
-    | AnimatedExposure, [ Filter.Amount, CFI.Animated input] -> RNF.exposure input.Animated.Value
     | AnimatedContrast, [ Filter.Amount, CFI.Animated input] -> RNF.contrast input.Animated.Value
     | AnimatedTemperature, [ Filter.Amount, CFI.Animated input] -> RNF.temperature input.Animated.Value
     | AnimatedTint, [ Filter.Amount, CFI.Animated input] -> RNF.tint input.Animated.Value
@@ -203,7 +197,6 @@ module CombinedFilter =
     | Warm -> Filter.controls (name Warm)
     | Cool -> Filter.controls (name Cool)
     | Brightness -> Filter.controls (name Brightness)
-    | Exposure -> Filter.controls (name Exposure)
     | Contrast -> Filter.controls (name Contrast)
     | Temperature -> Filter.controls (name Temperature)
     | Tint -> Filter.controls (name Tint)
@@ -230,7 +223,6 @@ module CombinedFilter =
     | AnimatedSaturate -> Filter.controls (name AnimatedSaturate)
     | AnimatedHueRotate -> Filter.controls (name AnimatedHueRotate)
     | AnimatedBrightness -> Filter.controls (name AnimatedBrightness)
-    | AnimatedExposure -> Filter.controls (name AnimatedExposure)
     | AnimatedContrast -> Filter.controls (name AnimatedContrast)
     | AnimatedTemperature -> Filter.controls (name AnimatedTemperature)
     | AnimatedTint -> Filter.controls (name AnimatedTint)
@@ -252,7 +244,6 @@ module CombinedFilter =
        Warm
        Cool
        Brightness
-       Exposure
        Contrast
        Temperature
        Tint
@@ -281,7 +272,6 @@ module CombinedFilter =
     [| AnimatedSaturate
        AnimatedHueRotate
        AnimatedBrightness
-       AnimatedExposure
        AnimatedContrast
        AnimatedTemperature
        AnimatedTint

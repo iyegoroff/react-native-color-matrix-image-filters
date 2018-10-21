@@ -48,7 +48,6 @@ export class Nightvision extends React.Component<FilterProps> { }
 export class Warm extends React.Component<FilterProps> { }
 export class Cool extends React.Component<FilterProps> { }
 export class Brightness extends React.Component<ValueFilterProps> { }
-export class Exposure extends React.Component<ValueFilterProps> { }
 export class Contrast extends React.Component<ValueFilterProps> { }
 export class Temperature extends React.Component<ValueFilterProps> { }
 export class Tint extends React.Component<ValueFilterProps> { }
@@ -88,7 +87,6 @@ export function nightvision(): Matrix;
 export function warm(): Matrix;
 export function cool(): Matrix;
 export function brightness(amount?: number): Matrix;
-export function exposure(amount?: number): Matrix;
 export function contrast(amount?: number): Matrix;
 export function temperature(amount?: number): Matrix;
 export function tint(amount?: number): Matrix;

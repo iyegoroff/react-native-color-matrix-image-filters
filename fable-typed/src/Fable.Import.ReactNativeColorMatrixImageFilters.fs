@@ -62,10 +62,6 @@ module Props =
     | Style of IStyle list
     | Amount of float
 
-  type ExposureProps =
-    | Style of IStyle list
-    | Amount of float
-
   type ContrastProps =
     | Style of IStyle list
     | Amount of float
@@ -166,7 +162,6 @@ let nightvision (): Matrix = importMember "react-native-color-matrix-image-filte
 let warm (): Matrix = importMember "react-native-color-matrix-image-filters"
 let cool (): Matrix = importMember "react-native-color-matrix-image-filters"
 let brightness (_v: float): Matrix = importMember "react-native-color-matrix-image-filters"
-let exposure (_v: float): Matrix = importMember "react-native-color-matrix-image-filters"
 let contrast (_v: float): Matrix = importMember "react-native-color-matrix-image-filters"
 let temperature (_v: float): Matrix = importMember "react-native-color-matrix-image-filters"
 let tint (_v: float): Matrix = importMember "react-native-color-matrix-image-filters"
@@ -233,9 +228,6 @@ let inline Cool (props: CoolProps list) (children: React.ReactElement list): Rea
 
 let inline Brightness (props: BrightnessProps list) (children: React.ReactElement list): React.ReactElement =
   ofImport "Brightness" "react-native-color-matrix-image-filters" (propsToObj props) children
-
-let inline Exposure (props: ExposureProps list) (children: React.ReactElement list): React.ReactElement =
-  ofImport "Exposure" "react-native-color-matrix-image-filters" (propsToObj props) children
 
 let inline Contrast (props: ContrastProps list) (children: React.ReactElement list): React.ReactElement =
   ofImport "Contrast" "react-native-color-matrix-image-filters" (propsToObj props) children
