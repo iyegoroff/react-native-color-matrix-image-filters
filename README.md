@@ -152,7 +152,7 @@ corresponding stack of filter components.
 - You may check [MatrixFilterConstructor](MatrixFilterConstructor/) example app to play with filters
 - This library was tested only with standard `Image` component, but in theory it should work with
   any image which native part is based on `RCTImageView` on iOS or `ImageView` on Android
-- <strong>Recently released alternative filter package, which aims to provide almost all image filters available natively on iOS & Android: [react-native-image-filter-kit](https://github.com/iyegoroff/react-native-image-filter-kit)</strong>
+- <strong>Recently released alternative filter package, which aims to provide an interface to most of the image filters available natively on iOS & Android: [react-native-image-filter-kit](https://github.com/iyegoroff/react-native-image-filter-kit)</strong>
 
 ## Credits
 
