@@ -8,6 +8,13 @@
 
 Various color matrix based image filters for iOS & Android.
 
+## Status
+
+- iOS & Android - filter components work as stackable wrappers for standard `Image` and
+  `ImageBackground` components.
+- React-Native:
+  - with rn >= 0.56.0 use latest version
+
 ## Getting started
 
 `$ npm install react-native-color-matrix-image-filters --save`
@@ -25,17 +32,9 @@ pod 'React', :path => '../node_modules/react-native'
 pod 'RNColorMatrixImageFilters', :path => '../node_modules/react-native-color-matrix-image-filters'
 ```
 
-
 ### Manual installation
 
 [link](manual_installation.md)
-
-## Status
-
-- iOS & Android - filter components work as stackable wrappers for standard `Image` and
-  `ImageBackground` components.
-- React-Native:
-  - with rn >= 0.56.0 use latest version
 
 ## Example
 
@@ -153,6 +152,7 @@ corresponding stack of filter components.
 - You may check [MatrixFilterConstructor](MatrixFilterConstructor/) example app to play with filters
 - This library was tested only with standard `Image` component, but in theory it should work with
   any image which native part is based on `RCTImageView` on iOS or `ImageView` on Android
+- <strong>Recently released alternative filter package, which aims to provide almost all image filters available natively on iOS & Android: [react-native-image-filter-kit](https://github.com/iyegoroff/react-native-image-filter-kit)</strong>
 
 ## Credits
 
