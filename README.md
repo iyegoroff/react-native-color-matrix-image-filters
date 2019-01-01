@@ -10,9 +10,9 @@ Various color matrix based image filters for iOS & Android.
 
 ## Status
 
-- iOS & Android - filter components work as stackable wrappers for standard `Image` and
-  `ImageBackground` components.
-- React-Native:
+- iOS & Android:
+  - filter components work as stackable wrappers for `Image`, `ImageBackground` and [react-native-fast-image](https://github.com/DylanVann/react-native-fast-image) components
+- react-native:
   - with rn >= 0.56.0 use latest version
 
 ## Getting started
@@ -151,7 +151,8 @@ corresponding stack of filter components.
 
 - You may check [MatrixFilterConstructor](MatrixFilterConstructor/) example app to play with filters
 - This library was tested only with standard `Image` component, but in theory it should work with
-  any image which native part is based on `RCTImageView` on iOS or `ImageView` on Android
+  any image which native part is based on iOS `UIImageView` class and conforms to [CMIFResizable](https://github.com/iyegoroff/react-native-color-matrix-image-filters/blob/master/ios/CMIFResizable.h) protocol or is based on Android `ImageView` class
+- Installing `react-native-fast-image` is <strong>not required</strong> - this module doesn't depend on it
 - <strong>Recently released alternative filter package, which aims to provide an interface to most of the image filters available natively on iOS & Android: [react-native-image-filter-kit](https://github.com/iyegoroff/react-native-image-filter-kit)</strong>
 
 ## Credits

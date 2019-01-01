@@ -1,7 +1,6 @@
-#import "RCTImageView.h"
 #import "RCTImageUtils.h"
-#import "RNColorMatrixImageFilter.h"
-
+#import "CMIFColorMatrixImageFilter.h"
+#import "CMIFResizable.h"
 
 static CIContext* context;
 
@@ -12,16 +11,16 @@ static CIContext* context;
 @end
 
 
-@interface RNColorMatrixImageFilter ()
+@interface CMIFColorMatrixImageFilter ()
 
 @property (nonatomic, strong) CIFilter* filter;
 @property (nonatomic, strong) UIImage *inputImage;
-@property (nonatomic, weak) RCTImageView *target;
+@property (nonatomic, weak) UIImageView *target;
 
 @end
 
 
-@implementation RNColorMatrixImageFilter
+@implementation CMIFColorMatrixImageFilter
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -33,7 +32,7 @@ static CIContext* context;
                                 kCIImageProperties: [NSNull null],
                                 kCIContextWorkingColorSpace: [NSNull null]};
       
-      context = [RNColorMatrixImageFilter createContextWithOptions:options];
+      context = [CMIFColorMatrixImageFilter createContextWithOptions:options];
     });
     
     _filter = [CIFilter filterWithName:@"CIColorMatrix"];
@@ -60,8 +59,8 @@ static CIContext* context;
   
   while (!_target && parent.subviews.count > 0) {
     UIView* child = parent.subviews[0];
-    if ([child isKindOfClass:[RCTImageView class]]) {
-      _target = (RCTImageView *)child;
+    if ([child isKindOfClass:[UIImageView class]]) {
+      _target = (UIImageView *)child;
       _inputImage = [_target.image copy];
       
       [child addObserver:self
@@ -118,19 +117,25 @@ static CIContext* context;
 - (void)renderFilteredImage:(BOOL)shouldInvalidate
 {
   CIFilter *filter = [_filter copy];
-  __weak RNColorMatrixImageFilter *weakSelf = self;
+  __weak CMIFColorMatrixImageFilter *weakSelf = self;
 
   if (shouldInvalidate) {
     [self updateTargetImage: nil];
   }
   
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    RNColorMatrixImageFilter *innerSelf = weakSelf;
+    CMIFColorMatrixImageFilter *innerSelf = weakSelf;
     
-    if (innerSelf && innerSelf.target && innerSelf.inputImage) {
-      UIImage *image = [RNColorMatrixImageFilter filteredImage:innerSelf.inputImage
-                                                        filter:filter
-                                                    resizeMode:innerSelf.target.resizeMode];
+    if (
+      innerSelf &&
+      innerSelf.target &&
+      innerSelf.inputImage &&
+      [innerSelf.target respondsToSelector:@selector(resizeMode)]
+    ) {
+      RCTResizeMode resizeMode = ((id <CMIFResizable>)innerSelf.target).resizeMode;
+      UIImage *image = [CMIFColorMatrixImageFilter filteredImage:innerSelf.inputImage
+                                                          filter:filter
+                                                      resizeMode:resizeMode];
       
       dispatch_async(dispatch_get_main_queue(), ^{
         [innerSelf updateTargetImage:image];
@@ -160,7 +165,7 @@ static CIContext* context;
     
     CGImageRef cgim = [context createCGImage:filter.outputImage fromRect:outputRect];
     
-    UIImage *filteredImage = [RNColorMatrixImageFilter resizeImageIfNeeded:[UIImage imageWithCGImage:cgim]
+    UIImage *filteredImage = [CMIFColorMatrixImageFilter resizeImageIfNeeded:[UIImage imageWithCGImage:cgim]
                                                                    srcSize:outputRect.size
                                                                   destSize:image.size
                                                                      scale:image.scale

@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		74015D83210FA95300C1CA8B /* RNColorMatrixImageFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 74015D82210FA95300C1CA8B /* RNColorMatrixImageFilter.m */; };
-		74015D86210FA99E00C1CA8B /* RNColorMatrixImageFilterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 74015D85210FA99E00C1CA8B /* RNColorMatrixImageFilterManager.m */; };
+		74015D83210FA95300C1CA8B /* CMIFColorMatrixImageFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 74015D82210FA95300C1CA8B /* CMIFColorMatrixImageFilter.m */; };
+		74015D86210FA99E00C1CA8B /* CMIFColorMatrixImageFilterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 74015D85210FA99E00C1CA8B /* CMIFColorMatrixImageFilterManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,10 +25,11 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNColorMatrixImageFilters.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNColorMatrixImageFilters.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		74015D81210FA95300C1CA8B /* RNColorMatrixImageFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNColorMatrixImageFilter.h; sourceTree = "<group>"; };
-		74015D82210FA95300C1CA8B /* RNColorMatrixImageFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNColorMatrixImageFilter.m; sourceTree = "<group>"; };
-		74015D84210FA99E00C1CA8B /* RNColorMatrixImageFilterManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNColorMatrixImageFilterManager.h; sourceTree = "<group>"; };
-		74015D85210FA99E00C1CA8B /* RNColorMatrixImageFilterManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNColorMatrixImageFilterManager.m; sourceTree = "<group>"; };
+		74015D81210FA95300C1CA8B /* CMIFColorMatrixImageFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMIFColorMatrixImageFilter.h; sourceTree = "<group>"; };
+		74015D82210FA95300C1CA8B /* CMIFColorMatrixImageFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CMIFColorMatrixImageFilter.m; sourceTree = "<group>"; };
+		74015D84210FA99E00C1CA8B /* CMIFColorMatrixImageFilterManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMIFColorMatrixImageFilterManager.h; sourceTree = "<group>"; };
+		74015D85210FA99E00C1CA8B /* CMIFColorMatrixImageFilterManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CMIFColorMatrixImageFilterManager.m; sourceTree = "<group>"; };
+		7477DA9521DBCC9000342235 /* CMIFResizable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CMIFResizable.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,10 +54,11 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				74015D81210FA95300C1CA8B /* RNColorMatrixImageFilter.h */,
-				74015D82210FA95300C1CA8B /* RNColorMatrixImageFilter.m */,
-				74015D84210FA99E00C1CA8B /* RNColorMatrixImageFilterManager.h */,
-				74015D85210FA99E00C1CA8B /* RNColorMatrixImageFilterManager.m */,
+				7477DA9521DBCC9000342235 /* CMIFResizable.h */,
+				74015D81210FA95300C1CA8B /* CMIFColorMatrixImageFilter.h */,
+				74015D82210FA95300C1CA8B /* CMIFColorMatrixImageFilter.m */,
+				74015D84210FA99E00C1CA8B /* CMIFColorMatrixImageFilterManager.h */,
+				74015D85210FA99E00C1CA8B /* CMIFColorMatrixImageFilterManager.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -117,8 +119,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74015D86210FA99E00C1CA8B /* RNColorMatrixImageFilterManager.m in Sources */,
-				74015D83210FA95300C1CA8B /* RNColorMatrixImageFilter.m in Sources */,
+				74015D86210FA99E00C1CA8B /* CMIFColorMatrixImageFilterManager.m in Sources */,
+				74015D83210FA95300C1CA8B /* CMIFColorMatrixImageFilter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

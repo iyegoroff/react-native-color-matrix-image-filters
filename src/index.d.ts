@@ -35,42 +35,42 @@ export interface DuoToneProps extends FilterProps {
   readonly secondColor?: string;
 }
 
-export class ColorMatrix extends React.Component<ColorMatrixProps> { }
-export class Normal extends React.Component<FilterProps> { }
-export class RGBA extends React.Component<RGBAProps> {}
-export class Saturate extends React.Component<ValueFilterProps> { }
-export class HueRotate extends React.Component<ValueFilterProps> { }
-export class LuminanceToAlpha extends React.Component<FilterProps> { }
-export class Invert extends React.Component<FilterProps> { }
-export class Grayscale extends React.Component<ValueFilterProps> { }
-export class Sepia extends React.Component<ValueFilterProps> { }
-export class Nightvision extends React.Component<FilterProps> { }
-export class Warm extends React.Component<FilterProps> { }
-export class Cool extends React.Component<FilterProps> { }
-export class Brightness extends React.Component<ValueFilterProps> { }
-export class Contrast extends React.Component<ValueFilterProps> { }
-export class Temperature extends React.Component<ValueFilterProps> { }
-export class Tint extends React.Component<ValueFilterProps> { }
-export class Threshold extends React.Component<ValueFilterProps> { }
-export class Technicolor extends React.Component<FilterProps> { }
-export class Polaroid extends React.Component<FilterProps> { }
-export class ToBGR extends React.Component<FilterProps> { }
-export class Kodachrome extends React.Component<FilterProps> { }
-export class Browni extends React.Component<FilterProps> { }
-export class Vintage extends React.Component<FilterProps> { }
-export class Night extends React.Component<ValueFilterProps> { }
-export class Predator extends React.Component<ValueFilterProps> { }
-export class Lsd extends React.Component<FilterProps> { }
-export class ColorTone extends React.Component<ColorToneProps> { }
-export class DuoTone extends React.Component<DuoToneProps> { }
-export class Protanomaly extends React.Component<FilterProps> { }
-export class Deuteranomaly extends React.Component<FilterProps> { }
-export class Tritanomaly extends React.Component<FilterProps> { }
-export class Protanopia extends React.Component<FilterProps> { }
-export class Deuteranopia extends React.Component<FilterProps> { }
-export class Tritanopia extends React.Component<FilterProps> { }
-export class Achromatopsia extends React.Component<FilterProps> { }
-export class Achromatomaly extends React.Component<FilterProps> { }
+export declare class ColorMatrix extends React.Component<ColorMatrixProps> { }
+export declare class Normal extends React.Component<FilterProps> { }
+export declare class RGBA extends React.Component<RGBAProps> { }
+export declare class Saturate extends React.Component<ValueFilterProps> { }
+export declare class HueRotate extends React.Component<ValueFilterProps> { }
+export declare class LuminanceToAlpha extends React.Component<FilterProps> { }
+export declare class Invert extends React.Component<FilterProps> { }
+export declare class Grayscale extends React.Component<ValueFilterProps> { }
+export declare class Sepia extends React.Component<ValueFilterProps> { }
+export declare class Nightvision extends React.Component<FilterProps> { }
+export declare class Warm extends React.Component<FilterProps> { }
+export declare class Cool extends React.Component<FilterProps> { }
+export declare class Brightness extends React.Component<ValueFilterProps> { }
+export declare class Contrast extends React.Component<ValueFilterProps> { }
+export declare class Temperature extends React.Component<ValueFilterProps> { }
+export declare class Tint extends React.Component<ValueFilterProps> { }
+export declare class Threshold extends React.Component<ValueFilterProps> { }
+export declare class Technicolor extends React.Component<FilterProps> { }
+export declare class Polaroid extends React.Component<FilterProps> { }
+export declare class ToBGR extends React.Component<FilterProps> { }
+export declare class Kodachrome extends React.Component<FilterProps> { }
+export declare class Browni extends React.Component<FilterProps> { }
+export declare class Vintage extends React.Component<FilterProps> { }
+export declare class Night extends React.Component<ValueFilterProps> { }
+export declare class Predator extends React.Component<ValueFilterProps> { }
+export declare class Lsd extends React.Component<FilterProps> { }
+export declare class ColorTone extends React.Component<ColorToneProps> { }
+export declare class DuoTone extends React.Component<DuoToneProps> { }
+export declare class Protanomaly extends React.Component<FilterProps> { }
+export declare class Deuteranomaly extends React.Component<FilterProps> { }
+export declare class Tritanomaly extends React.Component<FilterProps> { }
+export declare class Protanopia extends React.Component<FilterProps> { }
+export declare class Deuteranopia extends React.Component<FilterProps> { }
+export declare class Tritanopia extends React.Component<FilterProps> { }
+export declare class Achromatopsia extends React.Component<FilterProps> { }
+export declare class Achromatomaly extends React.Component<FilterProps> { }
 
 
 export function concatColorMatrices(matrices: Matrix[]): Matrix;

@@ -1,8 +1,8 @@
 #import <React/RCTBridge.h>
-#import "RNColorMatrixImageFilterManager.h"
-#import "RNColorMatrixImageFilter.h"
+#import "CMIFColorMatrixImageFilterManager.h"
+#import "CMIFColorMatrixImageFilter.h"
 
-@implementation RNColorMatrixImageFilterManager
+@implementation CMIFColorMatrixImageFilterManager
 
 @synthesize bridge = _bridge;
 
@@ -15,7 +15,7 @@ RCT_EXPORT_MODULE();
 
 - (UIView *)view
 {
-  return [[RNColorMatrixImageFilter alloc] init];
+  return [[CMIFColorMatrixImageFilter alloc] init];
 }
 
 RCT_EXPORT_VIEW_PROPERTY(matrix, NSArray<NSNumber *>);

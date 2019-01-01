@@ -29,6 +29,7 @@ fable-typed/.paket
 **/ios/infer-out
 
 **/out
+Simple/*
 
 **/infer-out
 **/compile_commands.json

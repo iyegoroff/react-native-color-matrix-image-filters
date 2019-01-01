@@ -1,16 +1,16 @@
-import React from 'react';
-import { requireNativeComponent } from 'react-native';
-import { defaultStyle, checkStyle } from './style';
+import React from 'react'
+import { requireNativeComponent } from 'react-native'
+import { defaultStyle, checkStyle } from './style'
 
-const RNColorMatrixImageFilter = requireNativeComponent('RNColorMatrixImageFilter');
+const ColorMatrixImageFilter = requireNativeComponent('CMIFColorMatrixImageFilter')
 
 export const NativeFilter = ({ style, ...restProps }) => {
-  checkStyle(style);
+  checkStyle(style)
 
   return (
-    <RNColorMatrixImageFilter
+    <ColorMatrixImageFilter
       style={[defaultStyle.container, style]}
       {...restProps}
     />
-  );
-};
+  )
+}
