@@ -52,9 +52,9 @@ const filterMap = {
   )
 }
 
-const createFilter = (key) => filterMap[key] || ((filter) => ({ value, ...restProps }) => (
+const createFilter = (key) => filterMap[key] || ((filter) => ({ amount, ...restProps }) => (
   <ColorMatrixFilter
-    matrix={filter(value)}
+    matrix={filter(amount)}
     {...restProps}
   />
 ))
