@@ -27,7 +27,7 @@ jobs:
             - node_modules
             - RNCMIFTest/node_modules
             - RNCMIFTest/android/.gradle
-          key:deps-{{ checksum "package.json" }}-{{ checksum "RNCMIFTest/package.json" }}-{{ checksum "android/build.gradle" }}-{{ checksum "RNCMIFTest/android/build.gradle" }}-{{ checksum "RNCMIFTest/android/app/build.gradle" }}
+          key: deps-{{ checksum "package.json" }}-{{ checksum "RNCMIFTest/package.json" }}-{{ checksum "android/build.gradle" }}-{{ checksum "RNCMIFTest/android/build.gradle" }}-{{ checksum "RNCMIFTest/android/app/build.gradle" }}
 
       - run: cd ~/repo/RNCMIFTest
       - run: yarn build:android
