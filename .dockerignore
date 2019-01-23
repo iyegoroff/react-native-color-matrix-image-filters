@@ -30,6 +30,8 @@ fable-typed/.paket
 
 **/out
 Simple/*
+.vscode
+RNCMIFTest
 
 **/infer-out
 **/compile_commands.json

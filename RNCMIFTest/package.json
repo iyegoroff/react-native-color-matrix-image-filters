@@ -1,0 +1,61 @@
+{
+  "name": "RNCMIFTest",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "preinstall": "cd .. && yarn link && npm i --only=prod && cd RNCMIFTest && yarn link react-native-color-matrix-image-filters",
+    "postinstall": "metro-with-symlinks",
+    "reset:packager": "watchman watch-del-all && node_modules/react-native/scripts/packager.sh --reset-cache",
+    "test:ios": "xcrun instruments -w \"iPhone 7 (12.0)\" -t \"Blank\" && detox test -c ios.sim.debug",
+    "test:android": "detox test -c android.emu.debug",
+    "test": "npm run test:ios && npm run test:android",
+    "build:ios": "detox build -c ios.sim.debug",
+    "build:android": "detox build -c android.emu.debug && cd android && ./gradlew assembleAndroidTest"
+  },
+  "dependencies": {
+    "babel-polyfill": "6.26.0",
+    "react": "16.6.3",
+    "react-native": "0.57.8",
+    "react-native-fast-image": "5.1.2",
+    "react-native-color-matrix-image-filters": "file:../"
+  },
+  "devDependencies": {
+    "babel-jest": "23.6.0",
+    "detox": "10.0.2",
+    "detox-take-screenshot": "0.0.5",
+    "jest": "23.6.0",
+    "jest-screenshot": "0.2.1",
+    "metro-react-native-babel-preset": "0.51.1",
+    "metro-with-symlinks": "1.3.0"
+  },
+  "jest": {
+    "preset": "react-native",
+    "reporters": [
+      "default",
+      "jest-screenshot/reporter"
+    ]
+  },
+  "detox": {
+    "test-runner": "jest",
+    "configurations": {
+      "ios.sim.debug": {
+        "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/RNCMIFTest.app",
+        "build": "xcodebuild -project ios/RNCMIFTest.xcodeproj -scheme RNCMIFTest -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
+        "type": "ios.simulator",
+        "name": "iPhone 7"
+      },
+      "android.emu.debug": {
+        "binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk",
+        "build": "cd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && cd ..",
+        "type": "android.emulator",
+        "name": "Nexus_5X_API_28"
+      },
+      "android.emu.release": {
+        "binaryPath": "android/app/build/outputs/apk/release/app-release.apk",
+        "build": "cd android && ./gradlew assembleRelease assembleAndroidTest -DtestBuildType=release && cd ..",
+        "type": "android.emulator",
+        "name": "Nexus_5X_API_28"
+      }
+    }
+  }
+}
