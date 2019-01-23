@@ -17,8 +17,11 @@ jobs:
           - deps-android-v1-{{ checksum "package.json" }}-{{ checksum "RNCMIFTest/package.json" }}-{{ checksum "android/build.gradle" }}-{{ checksum "RNCMIFTest/android/build.gradle" }}-{{ checksum "RNCMIFTest/android/app/build.gradle" }}
           - deps-android-v1-
 
-      - run: cd RNCMIFTest && yarn
-      - run: cd RNCMIFTest/android && ./gradlew androidDependencies
+      - run:
+          cd RNCMIFTest
+          yarn
+          cd android
+          ./gradlew androidDependencies
 
       - save_cache:
           paths:
@@ -27,8 +30,10 @@ jobs:
             - RNCMIFTest/android/.gradle
           key: deps-android-v1-{{ checksum "package.json" }}-{{ checksum "RNCMIFTest/package.json" }}-{{ checksum "android/build.gradle" }}-{{ checksum "RNCMIFTest/android/build.gradle" }}-{{ checksum "RNCMIFTest/android/app/build.gradle" }}
 
-      - run: cd RNCMIFTest && yarn build:android
-      # - run: yarn reset:packager & yarn test:android
+      - run:
+          cd RNCMIFTest
+          yarn build:android
+          # yarn reset:packager & yarn test:android
 
   test-ios:
     macos:
@@ -43,7 +48,9 @@ jobs:
           - deps-ios-v1-{{ checksum "package.json" }}-{{ checksum "RNCMIFTest/package.json" }}
           - deps-ios-v1-
 
-      - run: cd RNCMIFTest && yarn
+      - run:
+          cd RNCMIFTest
+          yarn
 
       - save_cache:
           paths:
@@ -51,10 +58,11 @@ jobs:
             - RNCMIFTest/node_modules
           key: deps-ios-v1-{{ checksum "package.json" }}-{{ checksum "RNCMIFTest/package.json" }}
 
-      - run: npm i -g detox-cli@10.0.2
-      - run: cd RNCMIFTest
-      - run: yarn build:ios
-      - run: yarn reset:packager & yarn test:ios
+      - run:
+          npm i -g detox-cli@10.0.2
+          cd RNCMIFTest
+          yarn build:ios
+          yarn reset:packager & yarn test:ios
 
 workflows:
   version: 2
