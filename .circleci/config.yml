@@ -63,10 +63,12 @@ jobs:
 
       - run:
           command: |
+            brew tap wix/brew
+            brew install applesimutils
             npm i -g detox-cli@10.0.2
             cd RNCMIFTest
             yarn build:ios
-            yarn reset:packager & yarn test:ios
+            yarn start:packager & yarn test:ios
 
 workflows:
   version: 2
