@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  test-android:
     docker:
       - image: circleci/android:api-28-node
 
@@ -14,8 +14,8 @@ jobs:
 
       - restore_cache:
           keys:
-          - deps-v1-{{ checksum "package.json" }}-{{ checksum "RNCMIFTest/package.json" }}-{{ checksum "android/build.gradle" }}-{{ checksum "RNCMIFTest/android/build.gradle" }}-{{ checksum "RNCMIFTest/android/app/build.gradle" }}
-          - deps-v1-
+          - deps-android-v1-{{ checksum "package.json" }}-{{ checksum "RNCMIFTest/package.json" }}-{{ checksum "android/build.gradle" }}-{{ checksum "RNCMIFTest/android/build.gradle" }}-{{ checksum "RNCMIFTest/android/app/build.gradle" }}
+          - deps-android-v1-
 
       - run: cd RNCMIFTest && yarn
       - run: cd RNCMIFTest/android && ./gradlew androidDependencies
@@ -25,7 +25,38 @@ jobs:
             - node_modules
             - RNCMIFTest/node_modules
             - RNCMIFTest/android/.gradle
-          key: deps-v1-{{ checksum "package.json" }}-{{ checksum "RNCMIFTest/package.json" }}-{{ checksum "android/build.gradle" }}-{{ checksum "RNCMIFTest/android/build.gradle" }}-{{ checksum "RNCMIFTest/android/app/build.gradle" }}
+          key: deps-android-v1-{{ checksum "package.json" }}-{{ checksum "RNCMIFTest/package.json" }}-{{ checksum "android/build.gradle" }}-{{ checksum "RNCMIFTest/android/build.gradle" }}-{{ checksum "RNCMIFTest/android/app/build.gradle" }}
 
       - run: cd RNCMIFTest && yarn build:android
       # - run: yarn reset:packager & yarn test:android
+
+  test-ios:
+    macos:
+      xcode: "10.0"
+    working_directory: /Users/distiller/project
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - deps-ios-v1-{{ checksum "package.json" }}-{{ checksum "RNCMIFTest/package.json" }}
+          - deps-ios-v1-
+
+      - run: cd RNCMIFTest && yarn
+
+      - save_cache:
+          paths:
+            - node_modules
+            - RNCMIFTest/node_modules
+          key: deps-ios-v1-{{ checksum "package.json" }}-{{ checksum "RNCMIFTest/package.json" }}
+
+      - run: cd RNCMIFTest && yarn build:ios
+      - run: yarn reset:packager & yarn test:ios
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test-android
+      - test-ios
