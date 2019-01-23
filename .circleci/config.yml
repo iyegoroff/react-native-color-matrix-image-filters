@@ -1,0 +1,34 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/android:api-28-node
+
+    environment:
+      JVM_OPTS: -Xmx3200m
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - deps-{{ checksum "package.json" }}-{{ checksum "RNCMIFTest/package.json" }}-{{ checksum "android/build.gradle" }}-{{ checksum "RNCMIFTest/android/build.gradle" }}-{{ checksum "RNCMIFTest/android/app/build.gradle" }}
+          - deps-
+
+      - run: cd RNCMIFTest
+      - run: yarn
+      - run: cd android
+      - run: ./gradlew androidDependencies
+
+      - save_cache:
+          paths:
+            - node_modules
+            - RNCMIFTest/node_modules
+            - RNCMIFTest/android/.gradle
+          key:deps-{{ checksum "package.json" }}-{{ checksum "RNCMIFTest/package.json" }}-{{ checksum "android/build.gradle" }}-{{ checksum "RNCMIFTest/android/build.gradle" }}-{{ checksum "RNCMIFTest/android/app/build.gradle" }}
+
+      - run: cd ~/repo/RNCMIFTest
+      - run: yarn build:android
+      # - run: yarn reset:packager & yarn test:android
