@@ -39,7 +39,7 @@ jobs:
 
   test-ios:
     macos:
-      xcode: "10.0"
+      xcode: "10.1"
     working_directory: /Users/distiller/project
 
     steps:
