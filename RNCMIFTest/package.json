@@ -7,7 +7,7 @@
     "postinstall": "metro-with-symlinks",
     "reset:packager": "watchman watch-del-all && node_modules/react-native/scripts/packager.sh --reset-cache",
     "start:packager": "node node_modules/react-native/local-cli/cli.js start",
-    "test:ios": "xcrun instruments -w \"iPhone 7 (12.0)\" -t \"Blank\" && detox test -c ios.sim.debug",
+    "test:ios": "xcrun instruments -w \"iPhone 7 (12.1)\" -t \"Blank\" && detox test -c ios.sim.debug",
     "test:android": "detox test -c android.emu.debug",
     "test": "npm run test:ios && npm run test:android",
     "build:ios": "detox build -c ios.sim.debug",
