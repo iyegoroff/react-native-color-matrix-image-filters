@@ -1,4 +1,4 @@
-#import <RCTImage/RCTImageUtils.h>
+#import "RCTImageUtils.h"
 #import "CMIFColorMatrixImageFilter.h"
 #import "CMIFResizable.h"
 
