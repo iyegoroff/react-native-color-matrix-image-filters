@@ -52,7 +52,7 @@ jobs:
           key: deps-ios-v1-{{ checksum "package.json" }}-{{ checksum "RNCMIFTest/package.json" }}
 
       - run: cd RNCMIFTest && yarn build:ios
-      - run: yarn reset:packager & yarn test:ios
+      - run: cd RNCMIFTest && yarn reset:packager & yarn test:ios
 
 workflows:
   version: 2
