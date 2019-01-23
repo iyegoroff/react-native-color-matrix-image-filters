@@ -51,6 +51,7 @@ jobs:
             - RNCMIFTest/node_modules
           key: deps-ios-v1-{{ checksum "package.json" }}-{{ checksum "RNCMIFTest/package.json" }}
 
+      - run: npm i -g detox-cli@10.0.2
       - run: cd RNCMIFTest && yarn build:ios
       - run: cd RNCMIFTest && yarn reset:packager & yarn test:ios
 
