@@ -35,6 +35,9 @@ jobs:
           command: |
             cd RNCMIFTest
             yarn build:android
+            PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools;
+            sdkmanager --list
+            avdmanager list avd
             # yarn reset:packager & yarn test:android
 
   test-ios:
@@ -68,6 +71,10 @@ jobs:
             npm i -g detox-cli@10.0.2
             cd RNCMIFTest
             yarn build:ios
+
+      - run:
+          command: |
+            cd RNCMIFTest
             yarn start:packager & yarn test:ios
 
 workflows:
