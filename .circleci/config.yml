@@ -37,7 +37,7 @@ jobs:
             yarn build:android
             PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools;
             sdkmanager --list
-            avdmanager list avd
+            avdmanager list
             # yarn reset:packager & yarn test:android
 
   test-ios:
@@ -82,4 +82,4 @@ workflows:
   test:
     jobs:
       - test-android
-      - test-ios
+      # - test-ios
