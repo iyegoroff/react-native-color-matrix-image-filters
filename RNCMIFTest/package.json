@@ -11,7 +11,15 @@
     "test:android": "detox test -c android.emu.debug",
     "test": "npm run test:ios && npm run test:android",
     "build:ios": "detox build -c ios.sim.debug",
-    "build:android": "detox build -c android.emu.debug && cd android && ./gradlew assembleAndroidTest"
+    "build:android": "detox build -c android.emu.debug && cd android && ./gradlew assembleAndroidTest",
+    "create:android:avd": "create avd --force -n Nexus_5X_API_28 -k \"system-images;android-28;default;x86\" -d 9",
+    "clean:android": "cd android && ./gradlew clean",
+    "infer:android": "cd android && infer run -- ./gradlew build",
+    "clean:ios": "cd ios && xcodebuild clean -project RNCMIFTest.xcodeproj -scheme RNCMIFTest -configuration Debug -sdk iphonesimulator -derivedDataPath build -UseModernBuildSystem=NO",
+    "_infer:ios": "cd ios && LD=/usr/bin/true infer run --keep-going -- xcodebuild -project RNCMIFTest.xcodeproj -scheme RNCMIFTest -configuration Debug -sdk iphonesimulator -derivedDataPath build -UseModernBuildSystem=NO",
+    "infer:ios:buildlog": "cd ios && xcodebuild -project RNCMIFTest.xcodeproj -scheme RNCMIFTest -configuration Debug -sdk iphonesimulator -derivedDataPath build -UseModernBuildSystem=NO | tee xcodebuild.log",
+    "infer:ios:xcpretty": "cd ios && xcpretty -r json-compilation-database -o compile_commands.json < xcodebuild.log > /dev/null",
+    "infer:ios": "yarn clean:ios && yarn infer:ios:buildlog && yarn infer:ios:xcpretty && cd ios && infer run --keep-going --clang-compilation-db-files-escaped compile_commands.json"
   },
   "dependencies": {
     "babel-polyfill": "6.26.0",

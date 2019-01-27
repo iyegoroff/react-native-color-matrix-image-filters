@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  test-android:
+  build-android:
     docker:
       - image: circleci/android:api-28-node
 
@@ -35,10 +35,15 @@ jobs:
           command: |
             cd RNCMIFTest
             yarn build:android
-            PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools;
-            sdkmanager --list
-            avdmanager list
-            # yarn reset:packager & yarn test:android
+      #       PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools;
+      #       yes | sdkmanager --licenses
+      #       sdkmanager "system-images;android-25;google_apis;armeabi-v7a"
+      #       avdmanager create avd --force -n Nexus_5X_API_25 -k "system-images;android-25;google_apis;armeabi-v7a" -d 9
+
+      # - run:
+      #     command: |
+      #       cd RNCMIFTest
+      #       yarn reset:packager & yarn test:android
 
   test-ios:
     macos:
@@ -81,5 +86,5 @@ workflows:
   version: 2
   test:
     jobs:
-      - test-android
-      # - test-ios
+      - build-android
+      - test-ios

@@ -58,3 +58,4 @@ buck-out/
 jest-screenshot-report
 *.trace
 rn-cli.config.js
+infer-out/
