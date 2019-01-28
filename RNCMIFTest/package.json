@@ -16,8 +16,8 @@
     "create:android:avd": "create avd --force -n Nexus_5X_API_28 -k \"system-images;android-28;default;x86\" -d 9",
     "clean:android": "cd android && ./gradlew clean",
     "infer:android": "cd android && infer run -- ./gradlew build",
-    "clean:ios": "cd ios && xcodebuild clean -project RNCMIFTest.xcodeproj -configuration Debug -scheme RNCMIFTest -destination id=084B71A9-0631-4A5D-8A0F-D61DFBD25C34 -derivedDataPath build",
-    "infer:ios": "cd ios && infer -- xcodebuild -project RNCMIFTest.xcodeproj -configuration Debug -scheme RNCMIFTest -destination id=084B71A9-0631-4A5D-8A0F-D61DFBD25C34 -derivedDataPath build"
+    "clean:ios": "cd ios && xcodebuild clean -project RNCMIFTest.xcodeproj -configuration Debug -scheme RNCMIFTest -derivedDataPath build",
+    "infer:ios": "cd ios && infer -- xcodebuild -project RNCMIFTest.xcodeproj -configuration Debug -scheme RNCMIFTest -derivedDataPath build"
   },
   "dependencies": {
     "react": "16.6.3",
