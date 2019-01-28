@@ -40,8 +40,9 @@ jobs:
       - run:
           command: |
             cd RNCMIFTest
-            yarn build:android
             yarn infer:android
+            # yarn clean:android
+            # yarn build:android
       #       PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools;
       #       yes | sdkmanager --licenses
       #       sdkmanager "system-images;android-25;google_apis;armeabi-v7a"
