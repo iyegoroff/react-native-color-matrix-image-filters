@@ -351,6 +351,8 @@ export default class App extends Component {
       props: [],
       Target: TVTestCard
     }
+
+    StatusBar.setHidden(true);
   }
 
   render () {
@@ -361,7 +363,6 @@ export default class App extends Component {
         testID={'container'}
         style={styles.container}
       >
-        <StatusBar hidden />
         <Component {...props}>
           <Target />
         </Component>

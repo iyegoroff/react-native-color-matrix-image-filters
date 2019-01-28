@@ -1,7 +1,7 @@
 /* eslint-env detox/detox, jest, jasmine */
 
-require('babel-core/register')
-require('babel-polyfill')
+// require('babel-core/register')
+// require('babel-polyfill')
 
 const detox = require('detox')
 const config = require('../package.json').detox

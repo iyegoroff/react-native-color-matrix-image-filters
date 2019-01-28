@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build-android:
+  test-android:
     docker:
       - image: circleci/android:api-28-node
 
@@ -33,8 +33,15 @@ jobs:
 
       - run:
           command: |
+            VERSION=0.15.0; \
+            curl -sSL "https://github.com/facebook/infer/releases/download/v$VERSION/infer-linux64-v$VERSION.tar.xz" | sudo tar -C /opt -xJ && \
+            ln -s "/opt/infer-linux64-v$VERSION/bin/infer" /usr/local/bin/infer
+
+      - run:
+          command: |
             cd RNCMIFTest
             yarn build:android
+            yarn infer:android
       #       PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools;
       #       yes | sdkmanager --licenses
       #       sdkmanager "system-images;android-25;google_apis;armeabi-v7a"
@@ -73,18 +80,50 @@ jobs:
           command: |
             brew tap wix/brew
             brew install applesimutils
+            brew install infer
             npm i -g detox-cli@10.0.2
-            cd RNCMIFTest
-            yarn build:ios
 
       - run:
           command: |
             cd RNCMIFTest
+            yarn infer:ios
+
+      - run:
+          command: |
+            cd RNCMIFTest
+            yarn start:ios:simulator
+            yarn build:ios
             yarn start:packager & yarn test:ios
+
+  publish:
+    docker:
+      - image: circleci/node:10.10
+
+    steps:
+      - checkout
+      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+      - run: npm publish
 
 workflows:
   version: 2
   test:
     jobs:
-      - build-android
-      - test-ios
+      - test-android:
+          filters:
+            tags:
+              only: /.*/
+
+      - test-ios:
+          filters:
+            tags:
+              only: /.*/
+
+      - publish:
+          requires:
+            - test-android
+            - test-ios
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/

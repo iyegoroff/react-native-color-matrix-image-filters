@@ -66,9 +66,9 @@ describe('Test', () => {
   tests.forEach(test => {
     it(test, async () => {
       await element(by.id(test)).tap()
-      await delay(250)
+      await delay(500)
       await element(by.id(test)).tap()
-      await delay(250)
+      await delay(500)
 
       await jestExpect(await screenshot()).toMatchImageSnapshot({ path: path(test) })
     })
