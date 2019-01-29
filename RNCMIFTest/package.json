@@ -17,7 +17,7 @@
     "clean:android": "cd android && ./gradlew clean",
     "infer:android": "cd android && infer run -- ./gradlew build",
     "clean:ios": "cd ios && xcodebuild clean -project RNCMIFTest.xcodeproj -configuration Debug -scheme RNCMIFTest -derivedDataPath build",
-    "infer:ios": "cd ios && infer -- xcodebuild -project RNCMIFTest.xcodeproj -configuration Debug -scheme RNCMIFTest -destination 'platform=iOS Simulator,name:iPhone XS Max' -derivedDataPath build"
+    "infer:ios": "cd ios && infer -- xcodebuild -project RNCMIFTest.xcodeproj -configuration Debug -scheme RNCMIFTest -destination 'platform=iOS Simulator,name=iPhone XS Max' -derivedDataPath build"
   },
   "dependencies": {
     "react": "16.6.3",
