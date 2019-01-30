@@ -2,6 +2,7 @@
   "infer-blacklist-path-regex": [
     ".*/react-native/.*",
     ".*/react-native-fast-image/.*",
-    ".*/detox/.*"
+    ".*/detox/.*",
+    ".*/objc/src/.*"
   ]
 }

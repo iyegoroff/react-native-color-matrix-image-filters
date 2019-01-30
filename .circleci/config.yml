@@ -83,6 +83,8 @@ jobs:
             brew install applesimutils
             brew install infer
             npm i -g detox-cli@10.0.2
+            sudo pip install pbxproj
+            yarn patch:pbxproj
 
       - run:
           command: |
