@@ -23,13 +23,13 @@
   "dependencies": {
     "react": "16.6.3",
     "react-native": "0.58.2",
-    "react-native-fast-image": "5.1.2",
-    "react-native-color-matrix-image-filters": "file:../"
+    "react-native-color-matrix-image-filters": "file:../",
+    "react-native-fast-image": "5.1.2"
   },
   "devDependencies": {
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "24.0.0",
-    "detox": "10.0.5",
+    "detox": "10.0.2",
     "detox-take-screenshot": "0.0.5",
     "jest": "24.0.0",
     "jest-screenshot": "0.2.1",

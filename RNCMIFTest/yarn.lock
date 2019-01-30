@@ -1850,10 +1850,10 @@ detox-take-screenshot@0.0.5:
   resolved "https://registry.yarnpkg.com/detox-take-screenshot/-/detox-take-screenshot-0.0.5.tgz#2911392655c19a17fda331b582f39338d45aae95"
   integrity sha512-GNWSZdjWVrTo1RfCfrCFbKMbm+J7Sv6TuoslmI5ynZx+OZZdJTVDIY0LePh43B05lBoNictbMTACL218TCpaGw==
 
-detox@10.0.5:
-  version "10.0.5"
-  resolved "https://registry.yarnpkg.com/detox/-/detox-10.0.5.tgz#c7e4ab78fbffd2fcaaa29d0eb90673d4939a41f0"
-  integrity sha512-imUTxCqlPahmkDMzuqJAKuV9VJLRfPYg4KPzlB/hIAdl8IMIcKmKmWJcl9jxiMfc8GQ6oG++zvLBTM/dX04qpg==
+detox@10.0.2:
+  version "10.0.2"
+  resolved "https://registry.yarnpkg.com/detox/-/detox-10.0.2.tgz#a14f931f723a6482a04d0b7dda658cf6ecf64979"
+  integrity sha512-F3CYajiLVwxcvOhrgLUgh4ML7rS+3Je/4N2tZnpGFkMj8IyATVArUkTUEnfIXvVhJLE1LByu7XawfMxVh6MjEg==
   dependencies:
     bunyan "^1.8.12"
     bunyan-debug-stream "^1.1.0"
@@ -5246,7 +5246,7 @@ react-devtools-core@^3.4.2:
     ws "^3.3.1"
 
 "react-native-color-matrix-image-filters@file:..":
-  version "5.0.1"
+  version "5.0.7"
   dependencies:
     concat-color-matrices "^1.0.0"
     rn-color-matrices "^4.0.0"
