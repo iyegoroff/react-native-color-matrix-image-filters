@@ -1,13 +1,3 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
-    }
-}
-
 apply plugin: 'com.android.library'
 
 def _ext = rootProject.ext;
@@ -34,6 +24,9 @@ android {
 }
 
 dependencies {
-    //noinspection GradleDynamicVersion
-    compileOnly "com.facebook.react:react-native:${_reactNativeVersion}"
+    if (GradleVersion.current() >= GradleVersion.version('4.1')) {
+        compileOnly "com.facebook.react:react-native:${_reactNativeVersion}"
+    } else {
+        compile "com.facebook.react:react-native:${_reactNativeVersion}"
+    }
 }
