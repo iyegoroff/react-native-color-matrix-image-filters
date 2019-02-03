@@ -87,10 +87,10 @@ jobs:
             cd RNCMIFTest
             yarn patch:pbxproj
 
-      - run:
-          command: |
-            cd RNCMIFTest
-            yarn infer:ios
+      # - run:
+      #     command: |
+      #       cd RNCMIFTest
+      #       yarn infer:ios
 
       - run:
           command: |
