@@ -84,6 +84,7 @@ jobs:
             brew install infer
             npm i -g detox-cli@10.0.2
             sudo pip install pbxproj
+            cd RNCMIFTest
             yarn patch:pbxproj
 
       - run:
