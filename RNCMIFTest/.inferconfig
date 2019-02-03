@@ -3,6 +3,6 @@
     ".*/react-native/.*",
     ".*/react-native-fast-image/.*",
     ".*/detox/.*",
-    ".*/objc/src/.*"
+    ".*/NSMutableArray.m"
   ]
 }
