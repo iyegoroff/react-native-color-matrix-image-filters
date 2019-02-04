@@ -10,7 +10,6 @@
     "start:ios:simulator": "xcrun instruments -w \"iPhone 7 (12.1)\" -t \"Blank\"",
     "test:ios": "detox test -c ios.sim.debug",
     "test:android": "detox test -c android.emu.debug",
-    "test": "yarn start:ios:simulator && yarn test:android && yarn test:ios",
     "build:ios": "detox build -c ios.sim.debug",
     "build:android": "detox build -c android.emu.debug && cd android && ./gradlew assembleAndroidTest",
     "create:android:avd": "create avd --force -n Nexus_5X_API_28 -k \"system-images;android-28;default;x86\" -d 9",
