@@ -12,24 +12,12 @@ jobs:
     steps:
       - checkout
 
-      - restore_cache:
-          keys:
-          - deps-android-v1-{{ checksum "package.json" }}-{{ checksum "RNCMIFTest/package.json" }}-{{ checksum "android/build.gradle" }}-{{ checksum "RNCMIFTest/android/build.gradle" }}-{{ checksum "RNCMIFTest/android/app/build.gradle" }}
-          - deps-android-v1-
-
       - run:
           command: |
             cd RNCMIFTest
             yarn
             cd android
             ./gradlew androidDependencies
-
-      - save_cache:
-          paths:
-            - node_modules
-            - RNCMIFTest/node_modules
-            - RNCMIFTest/android/.gradle
-          key: deps-android-v1-{{ checksum "package.json" }}-{{ checksum "RNCMIFTest/package.json" }}-{{ checksum "android/build.gradle" }}-{{ checksum "RNCMIFTest/android/build.gradle" }}-{{ checksum "RNCMIFTest/android/app/build.gradle" }}
 
       - run:
           command: |
@@ -61,11 +49,6 @@ jobs:
     steps:
       - checkout
 
-      - restore_cache:
-          keys:
-          - deps-ios-v1-{{ checksum "package.json" }}-{{ checksum "RNCMIFTest/package.json" }}
-          - deps-ios-v1-
-
       - run:
           command: |
             npm i -g dot-json
@@ -75,12 +58,6 @@ jobs:
             yarn remove react-native-color-matrix-image-filters
             yarn add iyegoroff/react-native-color-matrix-image-filters
             yarn
-
-      - save_cache:
-          paths:
-            - node_modules
-            - RNCMIFTest/node_modules
-          key: deps-ios-v1-{{ checksum "package.json" }}-{{ checksum "RNCMIFTest/package.json" }}
 
       - run:
           command: |
@@ -102,7 +79,7 @@ jobs:
             cd RNCMIFTest
             yarn start:ios:simulator
             yarn build:ios
-            yarn yarn test:ios
+            yarn test:ios
 
   publish:
     docker:
