@@ -76,10 +76,11 @@ jobs:
 
       - run:
           command: |
+            killall node -9
             cd RNCMIFTest
             yarn start:ios:simulator
             yarn build:ios
-            yarn test:ios
+            yarn start:packager & yarn test:ios
 
   publish:
     docker:
