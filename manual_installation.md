@@ -11,8 +11,8 @@
 #### Android
 
 1. Open up `android/app/src/main/java/[...]/MainActivity.java`
-  - Add `mport iyegoroff.RNColorMatrixImageFilters.RNColorMatrixImageFiltersPackage;` to the imports at the top of the file
-  - Add `new RNColorMatrixImageFiltersPackage()` to the list returned by the `getPackages()` method
+  - Add `mport iyegoroff.RNColorMatrixImageFilters.ColorMatrixImageFiltersPackage;` to the imports at the top of the file
+  - Add `new ColorMatrixImageFiltersPackage()` to the list returned by the `getPackages()` method
 2. Append the following lines to `android/settings.gradle`:
   	```
   	include ':react-native-color-matrix-image-filters'
