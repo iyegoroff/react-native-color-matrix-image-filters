@@ -76,7 +76,7 @@ jobs:
 
       - run:
           command: |
-            killall node -9
+            killall node -9 || true
             cd RNCMIFTest
             yarn start:ios:simulator
             yarn build:ios
