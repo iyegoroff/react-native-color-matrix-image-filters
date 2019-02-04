@@ -102,7 +102,7 @@ jobs:
             cd RNCMIFTest
             yarn start:ios:simulator
             yarn build:ios
-            yarn start:packager & yarn test:ios
+            yarn yarn test:ios
 
   publish:
     docker:
