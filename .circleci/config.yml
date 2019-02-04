@@ -85,6 +85,8 @@ jobs:
             npm i -g detox-cli@10.0.2
             sudo pip install pbxproj
             cd RNCMIFTest
+            yarn remove react-native-color-matrix-image-filters
+            yarn add iyegoroff/react-native-color-matrix-image-filters
             yarn patch:pbxproj
 
       - run:

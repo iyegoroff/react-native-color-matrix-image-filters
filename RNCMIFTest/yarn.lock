@@ -5497,7 +5497,7 @@ react-devtools-core@^3.4.2:
     ws "^3.3.1"
 
 "react-native-color-matrix-image-filters@file:..":
-  version "5.0.7"
+  version "5.0.10"
   dependencies:
     concat-color-matrices "^1.0.0"
     rn-color-matrices "^4.0.0"
