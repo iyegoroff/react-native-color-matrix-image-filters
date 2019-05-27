@@ -352,7 +352,7 @@ export default class App extends Component {
       Target: TVTestCard
     }
 
-    StatusBar.setHidden(true);
+    StatusBar.setHidden(true)
   }
 
   render () {
