@@ -16,7 +16,7 @@ Various color matrix based image filters for iOS & Android.
 - react-native:
   - supported versions: "<strong>>=0.56.0</strong>"
 
-## Getting started
+## Installation
 
 <table>
 <td>
