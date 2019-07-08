@@ -19,7 +19,7 @@ Various color matrix based image filters for iOS & Android.
 ## Getting started
 
 <kbd>
-<details style="border: 1px solid; border-radius: 5px; padding: 5px; margin-bottom: 3px" open="true">
+<details style="border: 1px solid; border-radius: 5px; padding: 5px; margin-bottom: 3px">
   <summary>with react-native "<strong>>=0.60.0</strong>"</summary>
 
 ### 1. Install latest version from npm
