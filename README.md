@@ -14,13 +14,13 @@ Various color matrix based image filters for iOS & Android.
 - iOS & Android:
   - filter components work as stackable wrappers for `Image`, `ImageBackground` and [react-native-fast-image](https://github.com/DylanVann/react-native-fast-image) components
 - react-native:
-  - supported versions: ">=0.56.0"
+  - supported versions: "<strong>>=0.56.0</strong>"
 
 ## Getting started
 
 <kbd>
 <details style="border: 1px solid; border-radius: 5px; padding: 5px; margin-bottom: 3px" open="true">
-  <summary><strong>with react-native >= 0.60.0</strong></summary>
+  <summary>with react-native "<strong>>=0.60.0</strong>"</summary>
 
 ### 1. Install latest version from npm
 
@@ -35,7 +35,7 @@ Various color matrix based image filters for iOS & Android.
 <br/>
 <kbd>
 <details style="border: 1px solid; border-radius: 5px; padding: 5px">
-  <summary><strong>with react-native >= 0.56.0</strong></summary>
+  <summary>with react-native "<strong>>=0.56.0 <0.60.0</strong>"</summary>
 
 ### 1. Install latest version from npm
 
