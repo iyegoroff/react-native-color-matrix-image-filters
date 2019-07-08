@@ -32,7 +32,7 @@ Various color matrix based image filters for iOS & Android.
 
 </details>
 </kbd>
-
+<br/>
 <kbd>
 <details style="border: 1px solid; border-radius: 5px; padding: 5px">
   <summary>with react-native >= 0.56.0</summary>
