@@ -18,6 +18,7 @@ Various color matrix based image filters for iOS & Android.
 
 ## Getting started
 
+<kbd>
 <details style="border: 1px solid; border-radius: 5px; padding: 5px; margin-bottom: 3px" open="true">
   <summary>with react-native >= 0.60.0</summary>
 
@@ -30,7 +31,9 @@ Various color matrix based image filters for iOS & Android.
 `$ cd ios && pod install && cd ..`
 
 </details>
+</kbd>
 
+<kbd>
 <details style="border: 1px solid; border-radius: 5px; padding: 5px">
   <summary>with react-native >= 0.56.0</summary>
 
@@ -56,7 +59,9 @@ pod 'RNColorMatrixImageFilters', :path => '../node_modules/react-native-color-ma
 ### 2-c. Manual installation
 
 [link](manual_installation.md)
+
 </details>
+</kbd>
 
 ## Example
 
