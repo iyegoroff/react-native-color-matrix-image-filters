@@ -52,7 +52,7 @@
   },
   "scripts": {
     "precommit": "lint-staged",
-    "preversion": "cd RNCMIFTest && yarn clean:android && yarn build:android; yarn reset:packager & yarn test:android",
+    "preversion": "cd RNCMIFTest && yarn && yarn clean:android && yarn build:android; yarn reset:packager & yarn test:android",
     "postversion": "git push && git push --tags"
   },
   "lint-staged": {
