@@ -104,11 +104,11 @@ const ColorMatrixImage = (imageProps) => (
 
 Original                                       |  Grayscaled
 :---------------------------------------------:|:---------------------------------------------:
-<img src="img/parrot.png" align="left" height="200">  |  <img src="img/gray.png" align="right" height="200">
+<img src="https://github.com/iyegoroff/react-native-color-matrix-image-filters/raw/master/img/parrot.png" align="left" height="200">  |  <img src="https://github.com/iyegoroff/react-native-color-matrix-image-filters/raw/master/img/gray.png" align="right" height="200">
 
 CombinedFilters                                |  ColorMatrix
 :---------------------------------------------:|:---------------------------------------------:
-<img src="img/combined.png" align="left" height="200">  |  <img src="img/color-matrix.png" align="right" height="200">
+<img src="https://github.com/iyegoroff/react-native-color-matrix-image-filters/raw/master/img/combined.png" align="left" height="200">  |  <img src="https://github.com/iyegoroff/react-native-color-matrix-image-filters/raw/master/img/color-matrix.png" align="right" height="200">
 
 ## Usage
 
