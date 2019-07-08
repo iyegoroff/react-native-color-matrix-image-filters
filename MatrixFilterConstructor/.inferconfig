@@ -1,5 +1,0 @@
-{
-  "infer-blacklist-path-regex": [
-    ".*/react-native-image-picker/"
-  ]
-}
