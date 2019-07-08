@@ -1,0 +1,11 @@
+**/build/
+**/infer-out/
+.idea
+.gradle
+local.properties
+*.iml
+.DS_Store
+app/*.keystore
+app/src/main/assets/*.bundle
+app/src/main/res/drawable-*
+gradle-yandex.properties

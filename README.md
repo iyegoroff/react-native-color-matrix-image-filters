@@ -14,17 +14,35 @@ Various color matrix based image filters for iOS & Android.
 - iOS & Android:
   - filter components work as stackable wrappers for `Image`, `ImageBackground` and [react-native-fast-image](https://github.com/DylanVann/react-native-fast-image) components
 - react-native:
-  - with rn >= 0.56.0 use latest version
+  - supported versions: ">=0.56.0"
 
 ## Getting started
 
-`$ npm install react-native-color-matrix-image-filters --save`
+<details style="border: 1px solid; border-radius: 5px; padding: 5px; margin-bottom: 3px" open="true">
+  <summary>with react-native >= 0.60.0</summary>
 
-### Automatic installation
+### 1. Install latest version from npm
+
+`$ npm i react-native-color-matrix-image-filters -S`
+
+### 2. Install pods
+
+`$ cd ios && pod install && cd ..`
+
+</details>
+
+<details style="border: 1px solid; border-radius: 5px; padding: 5px">
+  <summary>with react-native >= 0.56.0</summary>
+
+### 1. Install latest version from npm
+
+`$ npm i react-native-color-matrix-image-filters -S`
+
+### 2-a. Link native modules
 
 `$ react-native link react-native-color-matrix-image-filters`
 
-### Installation with Cocoapods
+### 2-b. Installation with Cocoapods
 
 If you use Cocoapods add the following line to your Podfile:
 
@@ -33,9 +51,12 @@ pod 'React', :path => '../node_modules/react-native'
 pod 'RNColorMatrixImageFilters', :path => '../node_modules/react-native-color-matrix-image-filters'
 ```
 
-### Manual installation
+`$ cd ios && pod install && cd ..`
+
+### 2-c. Manual installation
 
 [link](manual_installation.md)
+</details>
 
 ## Example
 
@@ -152,7 +173,7 @@ corresponding stack of filter components.
 
 - You may check [MatrixFilterConstructor](MatrixFilterConstructor/) example app to play with filters
 - This library was tested only with standard `Image` component, but in theory it should work with
-  any image which native part is based on iOS `UIImageView` class and conforms to [CMIFResizable](https://github.com/iyegoroff/react-native-color-matrix-image-filters/blob/master/ios/CMIFResizable.h) protocol or is based on Android `ImageView` class
+  any image that conforms to [CMIFResizable](https://github.com/iyegoroff/react-native-color-matrix-image-filters/blob/master/ios/CMIFResizable.h) protocol or is based on Android `ImageView` class
 - Installing `react-native-fast-image` is <strong>not required</strong> - this module doesn't depend on it
 - <strong>Recently released alternative filter package, which aims to provide an interface to most of the image filters available natively on iOS & Android: [react-native-image-filter-kit](https://github.com/iyegoroff/react-native-image-filter-kit)</strong>
 

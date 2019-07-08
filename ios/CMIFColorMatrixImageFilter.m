@@ -1,4 +1,4 @@
-#import <RCTImageUtils.h>
+#import "RCTImageUtils.h"
 #import "CMIFColorMatrixImageFilter.h"
 #import "CMIFResizable.h"
 
@@ -15,7 +15,7 @@ static CIContext* context;
 
 @property (nonatomic, strong) CIFilter* filter;
 @property (nonatomic, strong) UIImage *inputImage;
-@property (nonatomic, weak) UIImageView *target;
+@property (nonatomic, weak) NSObject<CMIFResizable> *target;
 
 @end
 
@@ -59,8 +59,10 @@ static CIContext* context;
   
   while (!_target && parent.subviews.count > 0) {
     UIView* child = parent.subviews[0];
-    if ([child isKindOfClass:[UIImageView class]]) {
-      _target = (UIImageView *)child;
+    if ([child respondsToSelector:@selector(resizeMode)] &&
+        [child respondsToSelector:@selector(image)] &&
+        [child respondsToSelector:@selector(setImage:)]) {
+      _target = (NSObject<CMIFResizable> *)child;
       _inputImage = [_target.image copy];
       
       [child addObserver:self
@@ -126,12 +128,7 @@ static CIContext* context;
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     CMIFColorMatrixImageFilter *innerSelf = weakSelf;
     
-    if (
-      innerSelf &&
-      innerSelf.target &&
-      innerSelf.inputImage &&
-      [innerSelf.target respondsToSelector:@selector(resizeMode)]
-    ) {
+    if (innerSelf && innerSelf.target && innerSelf.inputImage) {
       RCTResizeMode resizeMode = ((id <CMIFResizable>)innerSelf.target).resizeMode;
       UIImage *image = [CMIFColorMatrixImageFilter filteredImage:innerSelf.inputImage
                                                           filter:filter

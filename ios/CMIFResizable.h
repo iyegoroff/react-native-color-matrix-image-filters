@@ -5,9 +5,10 @@
 
 @protocol CMIFResizable <NSObject>
 
+- (UIImage *)image;
+- (void)setImage:(UIImage *)image;
 - (RCTResizeMode)resizeMode;
 
 @end
-
 
 #endif /* CMIFResizable_h */

@@ -1,0 +1,30 @@
+{
+  "name": "Simple",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "preinstall": "cd .. && npm i",
+    "build": "rm -rf build && tsc -p ./src",
+    "lint": "tslint -p ./src",
+    "watch": "npm run build -- --watch",
+    "reset:packager": "watchman watch-del-all && node_modules/react-native/scripts/packager.sh --reset-cache",
+    "run:android": "react-native run-android"
+  },
+  "dependencies": {
+    "react": "16.8.6",
+    "react-native": "0.60.0",
+    "react-native-color-matrix-image-filters": "file:..",
+    "react-native-fast-image": "^7.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.0",
+    "@babel/runtime": "^7.5.1",
+    "@types/react": "^16.8.23",
+    "@types/react-native": "^0.60.0",
+    "metro-react-native-babel-preset": "^0.55.0",
+    "tslint": "^5.18.0",
+    "tslint-config-standard": "^8.0.1",
+    "tslint-react": "^4.0.0",
+    "typescript": "^3.5.2"
+  }
+}

@@ -29,7 +29,6 @@ node_modules/
 .yarn-integrity
 
 **/out/
-Simple/*
 .vscode
 *.trace
 .ionide

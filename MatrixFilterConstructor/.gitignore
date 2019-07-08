@@ -8,3 +8,4 @@ src/bin/
 compile_commands.json
 rn-cli.config.js
 *.apk
+out/*

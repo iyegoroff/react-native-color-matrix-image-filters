@@ -4,16 +4,13 @@
   "private": true,
   "scripts": {
     "preinstall": "cd .. && npm i --only=prod",
-    "postinstall": "metro-with-symlinks",
+    "postinstall": "metro-with-symlinks && npm run paket:install",
     "build": "fable-splitter -c splitter.config.js --define RELEASE",
     "watch": "fable-splitter -c splitter.config.js -w --define DEBUG",
     "run:android": "npm run clean:android && react-native run-android",
     "run:android:release": "npm run clean:android && npm run generate:android:bundle && react-native run-android --variant=release",
     "clean:android": "cd android && ./gradlew clean",
-    "infer:android": "cd android && infer run -- ./gradlew build",
     "clean:ios": "cd ios && xcodebuild -target MatrixFilterConstructor -configuration Debug -sdk iphonesimulator clean && rm -rf build",
-    "_infer:ios": "cd ios && LD=/usr/bin/true infer run --keep-going --no-xcpretty -- xcodebuild -project MatrixFilterConstructor.xcodeproj -configuration Debug -scheme MatrixFilterConstructor -derivedDataPath build",
-    "infer:ios": "cd ios && xcodebuild -project MatrixFilterConstructor.xcodeproj -configuration Debug -scheme MatrixFilterConstructor -derivedDataPath build | tee xcodebuild.log && xcpretty -r json-compilation-database -o compile_commands.json < xcodebuild.log > /dev/null && infer run --keep-going --compilation-database-escaped compile_commands.json",
     "reset:packager": "watchman watch-del-all && node_modules/react-native/scripts/packager.sh --reset-cache",
     "start:packager": "react-native start",
     "restore": "cd src && dotnet restore",
@@ -47,6 +44,7 @@
   "devDependencies": {
     "@babel/core": "7.4.5",
     "@babel/runtime": "7.4.5",
+    "babel-core": "^6.26.3",
     "fable-splitter": "0.1.21",
     "metro-react-native-babel-preset": "0.54.1",
     "metro-with-symlinks": "1.3.0"
