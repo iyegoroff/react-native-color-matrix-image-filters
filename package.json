@@ -52,8 +52,10 @@
   },
   "scripts": {
     "precommit": "lint-staged",
-    "preversion": "cd RNCMIFTest && yarn && yarn clean:android && yarn build:android; yarn reset:packager & yarn test:android",
-    "postversion": "git push && git push --tags"
+    "preversion": "npm run remove:node-modules && npm t",
+    "postversion": "git push && git push --tags",
+    "remove:node-modules": "rm -rf Simple/node_modules && rm -rf MatrixFilterConstructor/node_modules",
+    "test": "cd RNCMIFTest && yarn && yarn clean:android && yarn build:android; yarn reset:packager & yarn test:android"
   },
   "lint-staged": {
     "*.js": [
