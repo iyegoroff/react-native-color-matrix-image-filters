@@ -60,7 +60,7 @@ pod 'RNColorMatrixImageFilters', :path => '../node_modules/react-native-color-ma
 
 ### 2-c. Manual installation
 
-[link](manual_installation.md)
+Install manually if `react-native link` failed - [link](manual_installation.md)
 
 </details>
 </td>

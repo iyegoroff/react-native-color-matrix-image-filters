@@ -7,7 +7,7 @@
     "build": "rm -rf build && tsc -p ./src",
     "lint": "tslint -p ./src",
     "watch": "npm run build -- --watch",
-    "reset:packager": "watchman watch-del-all && node_modules/react-native/scripts/packager.sh --reset-cache",
+    "reset:packager": "watchman watch-del-all && react-native start --reset-cache",
     "run:android": "react-native run-android"
   },
   "dependencies": {
