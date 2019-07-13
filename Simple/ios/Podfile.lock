@@ -105,7 +105,7 @@ PODS:
   - React-RCTWebSocket (0.60.0):
     - React-Core (= 0.60.0)
     - React-fishhook (= 0.60.0)
-  - RNColorMatrixImageFilters (5.1.5):
+  - RNColorMatrixImageFilters (5.1.7):
     - React
   - RNFastImage (7.0.2):
     - React
@@ -226,7 +226,7 @@ SPEC CHECKSUMS:
   React-RCTText: 685fca2e13b024271048e7e247ef24476f28a41e
   React-RCTVibration: 4ee1cf208ab17a50fafb1c16ffe28fe594a64e4f
   React-RCTWebSocket: fca087d583724aa0e5fef7d911f0f2a28d0f2736
-  RNColorMatrixImageFilters: efa3f54c9b73bb0652314fb539b017b9a7e05d63
+  RNColorMatrixImageFilters: ab55ff9655a199a075a1a58a35a8b8260ec02d11
   RNFastImage: 9b0c22643872bb7494c8d87bbbb66cc4c0d9e7a2
   SDWebImage: 920f1a2ff1ca8296ad34f6e0510a1ef1d70ac965
   SDWebImageWebPCoder: 7568737603c50f6237850afedd7e9e28e5917e6b

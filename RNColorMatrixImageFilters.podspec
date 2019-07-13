@@ -1,5 +1,6 @@
 require 'json'
-package = JSON.parse(File.read('package.json'))
+
+package = JSON.parse(File.read(File.join(__dir__, 'package.json')))
 
 Pod::Spec.new do |s|
   s.name         = 'RNColorMatrixImageFilters'
@@ -15,4 +16,3 @@ Pod::Spec.new do |s|
 
   s.dependency 'React'
 end
-
