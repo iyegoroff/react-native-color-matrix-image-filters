@@ -68,5 +68,5 @@ export default Object.keys(filters).reduce(
     acc[key].isColorMatrixFilter = true
     return acc
   },
-  { 'ColorMatrix': ColorMatrixFilter }
+  { ColorMatrix: ColorMatrixFilter }
 )
