@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "react": "16.8.6",
-    "react-native": "0.60.0",
+    "react-native": "^0.60.4",
     "react-native-color-matrix-image-filters": "file:..",
     "react-native-fast-image": "^7.0.2"
   },
