@@ -162,11 +162,7 @@ static CIContext* context;
     
     CGImageRef cgim = [context createCGImage:filter.outputImage fromRect:outputRect];
     
-    UIImage *filteredImage = [CMIFColorMatrixImageFilter resizeImageIfNeeded:[UIImage imageWithCGImage:cgim]
-                                                                   srcSize:outputRect.size
-                                                                  destSize:image.size
-                                                                     scale:image.scale
-                                                                resizeMode:resizeMode];
+    UIImage *filteredImage = [UIImage imageWithCGImage:cgim scale:image.scale orientation:image.imageOrientation];
     
     CGImageRelease(cgim);
     
@@ -186,27 +182,6 @@ static CIContext* context;
   // NSLog(@"filter: context %f", CFAbsoluteTimeGetCurrent() - start);
   
   return context;
-}
-
-+ (UIImage *)resizeImageIfNeeded:(UIImage *)image
-                         srcSize:(CGSize)srcSize
-                        destSize:(CGSize)destSize
-                           scale:(CGFloat)scale
-                      resizeMode:(RCTResizeMode)resizeMode
-{
-  if (CGSizeEqualToSize(destSize, CGSizeZero) ||
-      CGSizeEqualToSize(srcSize, CGSizeZero) ||
-      CGSizeEqualToSize(srcSize, destSize)) {
-    return image;
-  }
-  
-  CAKeyframeAnimation *animation = image.reactKeyframeAnimation;
-  CGRect targetSize = RCTTargetRect(srcSize, destSize, scale, resizeMode);
-  CGAffineTransform transform = RCTTransformFromTargetRect(srcSize, targetSize);
-  image = RCTTransformImage(image, destSize, scale, transform);
-  image.reactKeyframeAnimation = animation;
-  
-  return image;
 }
 
 @end
