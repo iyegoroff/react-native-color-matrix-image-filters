@@ -14,7 +14,9 @@ jobs:
 
       - run:
           command: |
+            npm i -g dot-json
             cd RNCMIFTest
+            dot-json package.json devDependencies.jest-screenshot -d
             yarn
             cd android
             ./gradlew androidDependencies
@@ -61,9 +63,9 @@ jobs:
 
       - run:
           command: |
-            brew tap wix/brew
-            brew install applesimutils
-            brew install infer
+            HOMEBREW_NO_AUTO_UPDATE=1 brew tap wix/brew
+            HOMEBREW_NO_AUTO_UPDATE=1 brew install applesimutils
+            HOMEBREW_NO_AUTO_UPDATE=1 brew install infer
             npm i -g detox-cli@10.0.2
             sudo pip install pbxproj
             cd RNCMIFTest
