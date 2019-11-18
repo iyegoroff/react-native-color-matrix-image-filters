@@ -12,6 +12,7 @@ import FastImage from 'react-native-fast-image'
 export default class App extends React.Component<{}> {
 
   render() {
+
     return (
       <View style={styles.container}>
         <Text>Image</Text>

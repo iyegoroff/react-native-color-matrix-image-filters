@@ -65,6 +65,7 @@
     "*.podspec",
     "MatrixFilterConstructor",
     "Simple",
-    "fable-typed/src"
+    "fable-typed/src",
+    "LICENSE"
   ]
 }

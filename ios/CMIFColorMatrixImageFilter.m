@@ -4,13 +4,6 @@
 
 static CIContext* context;
 
-@interface UIImage (React)
-
-@property (nonatomic, copy) CAKeyframeAnimation *reactKeyframeAnimation;
-
-@end
-
-
 @interface CMIFColorMatrixImageFilter ()
 
 @property (nonatomic, strong) CIFilter* filter;
@@ -26,18 +19,18 @@ static CIContext* context;
 {
   if ((self = [super initWithFrame:frame])) {
     static dispatch_once_t onceToken;
-    
+
     dispatch_once(&onceToken, ^{
       NSDictionary *options = @{kCIImageColorSpace: [NSNull null],
                                 kCIImageProperties: [NSNull null],
                                 kCIContextWorkingColorSpace: [NSNull null]};
-      
+
       context = [CMIFColorMatrixImageFilter createContextWithOptions:options];
     });
-    
+
     _filter = [CIFilter filterWithName:@"CIColorMatrix"];
   }
-  
+
   return self;
 }
 
@@ -49,14 +42,14 @@ static CIContext* context;
 - (void)layoutSubviews
 {
   [super layoutSubviews];
-  
+
   [self linkTarget];
 }
 
 - (void)linkTarget
 {
   UIView* parent = self;
-  
+
   while (!_target && parent.subviews.count > 0) {
     UIView* child = parent.subviews[0];
     if ([child respondsToSelector:@selector(resizeMode)] &&
@@ -64,12 +57,12 @@ static CIContext* context;
         [child respondsToSelector:@selector(setImage:)]) {
       _target = (NSObject<CMIFResizable> *)child;
       _inputImage = [_target.image copy];
-      
+
       [child addObserver:self
               forKeyPath:@"image"
                  options:NSKeyValueObservingOptionNew
                  context:NULL];
-      
+
       [self renderFilteredImage:YES];
     } else {
       parent = child;
@@ -105,13 +98,13 @@ static CIContext* context;
       [_matrix[15] floatValue], [_matrix[16] floatValue], [_matrix[17] floatValue], [_matrix[18] floatValue],
       [_matrix[4] floatValue], [_matrix[9] floatValue], [_matrix[14] floatValue], [_matrix[19] floatValue]
     };
-    
+
     [_filter setValue:[CIVector vectorWithValues:&m[0] count:4] forKey:@"inputRVector"];
     [_filter setValue:[CIVector vectorWithValues:&m[4] count:4] forKey:@"inputGVector"];
     [_filter setValue:[CIVector vectorWithValues:&m[8] count:4] forKey:@"inputBVector"];
     [_filter setValue:[CIVector vectorWithValues:&m[12] count:4] forKey:@"inputAVector"];
     [_filter setValue:[CIVector vectorWithValues:&m[16] count:4] forKey:@"inputBiasVector"];
-    
+
     [self renderFilteredImage:NO];
   }
 }
@@ -124,16 +117,16 @@ static CIContext* context;
   if (shouldInvalidate) {
     [self updateTargetImage: nil];
   }
-  
+
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     CMIFColorMatrixImageFilter *innerSelf = weakSelf;
-    
+
     if (innerSelf && innerSelf.target && innerSelf.inputImage) {
       RCTResizeMode resizeMode = ((id <CMIFResizable>)innerSelf.target).resizeMode;
       UIImage *image = [CMIFColorMatrixImageFilter filteredImage:innerSelf.inputImage
                                                           filter:filter
                                                       resizeMode:resizeMode];
-      
+
       dispatch_async(dispatch_get_main_queue(), ^{
         [innerSelf updateTargetImage:image];
       });
@@ -157,18 +150,18 @@ static CIContext* context;
   if (image != nil) {
     CIImage *tmp = [[CIImage alloc] initWithImage:image];
     [filter setValue:tmp forKey:@"inputImage"];
-    
+
     CGRect outputRect = tmp.extent;
-    
+
     CGImageRef cgim = [context createCGImage:filter.outputImage fromRect:outputRect];
-    
+
     UIImage *filteredImage = [UIImage imageWithCGImage:cgim scale:image.scale orientation:image.imageOrientation];
-    
+
     CGImageRelease(cgim);
-    
+
     return filteredImage;
   }
-  
+
   return nil;
 }
 
@@ -177,10 +170,10 @@ static CIContext* context;
   // CFAbsoluteTime start = CFAbsoluteTimeGetCurrent();
   EAGLContext *eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
   eaglContext = eaglContext ?: [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-  
+
   CIContext *context = [CIContext contextWithEAGLContext:eaglContext options:options];
   // NSLog(@"filter: context %f", CFAbsoluteTimeGetCurrent() - start);
-  
+
   return context;
 }
 

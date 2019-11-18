@@ -3,6 +3,9 @@
 .git
 img
 LICENSE
+README.md
+RELEASE_NOTES.md
+*.podspec
 **/*.md
 *.tgz
 **/.gitignore
@@ -25,14 +28,20 @@ fable-typed/.paket
 **/*.iml
 **/*.apk
 
-**/ios/build
-**/ios/infer-out
+**/ios
 
 **/out
-Simple/*
-.vscode
-RNCMIFTest
 
 **/infer-out
 **/compile_commands.json
 **/xcodebuild.log
+
+.circleci
+.github
+.ionide
+.vscode
+
+blueprint-templates
+docs
+RNCMIFTest
+Simple

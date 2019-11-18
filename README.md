@@ -66,6 +66,13 @@ Install manually if `react-native link` failed - [link](manual_installation.md)
 </td>
 </table>
 
+## Scope
+
+This module is meant to be used for simple stuff, like "grayscaling inactive user avatar" etc. Check
+[react-native-image-filter-kit](https://github.com/iyegoroff/react-native-image-filter-kit) if
+you need some advanced features like image blending/composing, extracting filtering results to file system
+and ability to create custom filters.
+
 ## Example
 
 ```javascript
@@ -183,7 +190,6 @@ corresponding stack of filter components.
 - This library was tested only with standard `Image` component, but in theory it should work with
   any image that conforms to [CMIFResizable](https://github.com/iyegoroff/react-native-color-matrix-image-filters/blob/master/ios/CMIFResizable.h) protocol or is based on Android `ImageView` class
 - Installing `react-native-fast-image` is <strong>not required</strong> - this module doesn't depend on it
-- <strong>Recently released alternative filter package, which aims to provide an interface to most of the image filters available natively on iOS & Android: [react-native-image-filter-kit](https://github.com/iyegoroff/react-native-image-filter-kit)</strong>
 
 ## Credits
 
