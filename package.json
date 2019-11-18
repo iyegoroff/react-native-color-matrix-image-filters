@@ -18,7 +18,7 @@
     "type": "git",
     "url": "git+https://github.com/iyegoroff/react-native-color-matrix-image-filters.git"
   },
-  "version": "5.2.2",
+  "version": "5.2.1",
   "peerDependencies": {
     "@babel/runtime": "*",
     "fbjs": "*",
@@ -50,7 +50,7 @@
   },
   "scripts": {
     "precommit": "lint-staged",
-    "preversion": "npm run remove:node-modules && npm run lint",
+    "preversion": "npm run remove:node-modules && npm run lint && npm t",
     "postversion": "git push && git push --tags",
     "remove:node-modules": "rm -rf Simple/node_modules && rm -rf MatrixFilterConstructor/node_modules",
     "test": "cd RNCMIFTest && yarn && yarn clean:android && yarn build:android; yarn reset:packager & yarn test:android",
