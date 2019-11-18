@@ -16,7 +16,7 @@ export const checkStyle = (style) => {
     invariant(
       processColor(backgroundColor) !== 0,
       `ImageFilter: Can't use '${backgroundColor}' backgroundColor,` +
-      ` consider using '#fff0' instead.`
+      ' consider using \'#fff0\' instead.'
     )
   }
 }
