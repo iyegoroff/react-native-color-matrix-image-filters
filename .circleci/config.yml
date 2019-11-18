@@ -14,7 +14,7 @@ jobs:
 
       - run:
           command: |
-            npm i -g dot-json
+            sudo npm i -g dot-json
             cd RNCMIFTest
             dot-json package.json devDependencies.jest-screenshot -d
             yarn
