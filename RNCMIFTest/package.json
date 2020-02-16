@@ -17,7 +17,7 @@
     "infer:android": "cd android && infer --fail-on-issue -- ./gradlew build",
     "clean:ios": "cd ios && xcodebuild clean -project RNCMIFTest.xcodeproj -configuration Debug -scheme RNCMIFTest -derivedDataPath build",
     "infer:ios": "cd ios && infer --fail-on-issue -- xcodebuild -project RNCMIFTest.xcodeproj -configuration Debug -scheme RNCMIFTest -destination 'platform=iOS Simulator,name=iPhone 7,OS=12.1' -derivedDataPath build",
-    "patch:pbxproj": "python ./patch-tvos.py"
+    "patch:pbxproj": "python3 ./patch-tvos.py"
   },
   "dependencies": {
     "react": "16.6.3",

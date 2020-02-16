@@ -67,7 +67,7 @@ jobs:
             HOMEBREW_NO_AUTO_UPDATE=1 brew install applesimutils
             HOMEBREW_NO_AUTO_UPDATE=1 brew install infer
             npm i -g detox-cli@10.0.2
-            sudo pip install pbxproj
+            sudo python3 -m pip install pbxproj
             cd RNCMIFTest
             yarn patch:pbxproj
 
