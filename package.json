@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@types/react": "^16.8.23",
-    "@types/react-native": "^0.60.0",
+    "@types/react-native": "^0.61.15",
     "eslint-plugin-detox": "^1.0.0",
     "standard": "^14.3.1"
   },

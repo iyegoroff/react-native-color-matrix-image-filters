@@ -3,23 +3,26 @@ import { NativeFilter } from './native-filter'
 import filters from 'rn-color-matrices'
 import { concatTwoColorMatrices, concatColorMatrices } from 'concat-color-matrices'
 
-const ColorMatrixFilter = ({ matrix, parentMatrix, children, ...restProps }) => {
-  const mat = Array.isArray(matrix[0]) ? concatColorMatrices(matrix) : matrix
+const ColorMatrixFilter = React.forwardRef(
+  ({ matrix, parentMatrix, children, ...restProps }, ref) => {
+    const mat = Array.isArray(matrix[0]) ? concatColorMatrices(matrix) : matrix
 
-  const concatedMatrix = parentMatrix ? concatTwoColorMatrices(mat, parentMatrix) : mat
-  const child = React.Children.only(children)
+    const concatedMatrix = parentMatrix ? concatTwoColorMatrices(mat, parentMatrix) : mat
+    const child = React.Children.only(children)
 
-  return child && child.type && child.type.isColorMatrixFilter
-    ? React.cloneElement(child, { ...child.props, parentMatrix: concatedMatrix })
-    : (
-      <NativeFilter
-        matrix={concatedMatrix}
-        {...restProps}
-      >
-        {children}
-      </NativeFilter>
-    )
-}
+    return child && child.type && child.type.isColorMatrixFilter
+      ? React.cloneElement(child, { ...child.props, ref, parentMatrix: concatedMatrix })
+      : (
+        <NativeFilter
+          matrix={concatedMatrix}
+          ref={ref}
+          {...restProps}
+        >
+          {children}
+        </NativeFilter>
+      )
+  }
+)
 
 ColorMatrixFilter.isColorMatrixFilter = true
 ColorMatrixFilter.displayName = 'ColorMatrix'
@@ -30,33 +33,45 @@ const filterName = (name) => {
 }
 
 const filterMap = {
-  ColorTone: (filter) => ({ desaturation, toned, lightColor, darkColor, ...restProps }) => (
-    <ColorMatrixFilter
-      matrix={filter(desaturation, toned, lightColor, darkColor)}
-      {...restProps}
-    />
+  ColorTone: (filter) => React.forwardRef(
+    ({ desaturation, toned, lightColor, darkColor, ...restProps }, ref) => (
+      <ColorMatrixFilter
+        matrix={filter(desaturation, toned, lightColor, darkColor)}
+        ref={ref}
+        {...restProps}
+      />
+    )
   ),
 
-  RGBA: (filter) => ({ red, green, blue, alpha, ...restProps }) => (
-    <ColorMatrixFilter
-      matrix={filter(red, green, blue, alpha)}
-      {...restProps}
-    />
+  RGBA: (filter) => React.forwardRef(
+    ({ red, green, blue, alpha, ...restProps }, ref) => (
+      <ColorMatrixFilter
+        matrix={filter(red, green, blue, alpha)}
+        ref={ref}
+        {...restProps}
+      />
+    )
   ),
 
-  DuoTone: (filter) => ({ firstColor, secondColor, ...restProps }) => (
-    <ColorMatrixFilter
-      matrix={filter(firstColor, secondColor)}
-      {...restProps}
-    />
+  DuoTone: (filter) => React.forwardRef(
+    ({ firstColor, secondColor, ...restProps }, ref) => (
+      <ColorMatrixFilter
+        matrix={filter(firstColor, secondColor)}
+        ref={ref}
+        {...restProps}
+      />
+    )
   )
 }
 
-const createFilter = (key) => filterMap[key] || ((filter) => ({ amount, ...restProps }) => (
-  <ColorMatrixFilter
-    matrix={filter(amount)}
-    {...restProps}
-  />
+const createFilter = (key) => filterMap[key] || ((filter) => React.forwardRef(
+  ({ amount, ...restProps }, ref) => (
+    <ColorMatrixFilter
+      matrix={filter(amount)}
+      ref={ref}
+      {...restProps}
+    />
+  )
 ))
 
 export default Object.keys(filters).reduce(

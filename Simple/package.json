@@ -8,7 +8,7 @@
     "lint": "tslint -p ./src",
     "watch": "npm run build -- --watch",
     "reset:packager": "watchman watch-del-all && react-native start --reset-cache",
-    "run:android": "react-native run-android"
+    "run:android": "react-native run-android --no-jetifier"
   },
   "dependencies": {
     "react": "16.8.6",
