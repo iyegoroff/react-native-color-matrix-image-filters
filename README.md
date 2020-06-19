@@ -188,7 +188,7 @@ corresponding stack of filter components.
 
 - You may check [MatrixFilterConstructor](MatrixFilterConstructor/) example app to play with filters
 - This library was tested only with standard `Image` component, but in theory it should work with
-  any image that conforms to [CMIFResizable](https://github.com/iyegoroff/react-native-color-matrix-image-filters/blob/master/ios/CMIFResizable.h) protocol or is based on Android `ImageView` class
+  any image that conforms to [CMIFImageView](https://github.com/iyegoroff/react-native-color-matrix-image-filters/blob/master/ios/CMIFImageView.h) protocol or is based on Android `ImageView` class
 - Installing `react-native-fast-image` is <strong>not required</strong> - this module doesn't depend on it
 
 ## Credits

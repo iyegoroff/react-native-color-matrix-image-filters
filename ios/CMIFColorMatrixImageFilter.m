@@ -1,6 +1,5 @@
-#import "RCTImageUtils.h"
 #import "CMIFColorMatrixImageFilter.h"
-#import "CMIFResizable.h"
+#import "CMIFImageView.h"
 
 static CIContext* context;
 
@@ -8,7 +7,7 @@ static CIContext* context;
 
 @property (nonatomic, strong) CIFilter* filter;
 @property (nonatomic, strong) UIImage *inputImage;
-@property (nonatomic, weak) NSObject<CMIFResizable> *target;
+@property (nonatomic, weak) NSObject<CMIFImageView> *target;
 
 @end
 
@@ -52,10 +51,9 @@ static CIContext* context;
 
   while (!_target && parent.subviews.count > 0) {
     UIView* child = parent.subviews[0];
-    if ([child respondsToSelector:@selector(resizeMode)] &&
-        [child respondsToSelector:@selector(image)] &&
+    if ([child respondsToSelector:@selector(image)] &&
         [child respondsToSelector:@selector(setImage:)]) {
-      _target = (NSObject<CMIFResizable> *)child;
+      _target = (NSObject<CMIFImageView> *)child;
       _inputImage = [_target.image copy];
 
       [child addObserver:self
@@ -122,10 +120,8 @@ static CIContext* context;
     CMIFColorMatrixImageFilter *innerSelf = weakSelf;
 
     if (innerSelf && innerSelf.target && innerSelf.inputImage) {
-      RCTResizeMode resizeMode = ((id <CMIFResizable>)innerSelf.target).resizeMode;
       UIImage *image = [CMIFColorMatrixImageFilter filteredImage:innerSelf.inputImage
-                                                          filter:filter
-                                                      resizeMode:resizeMode];
+                                                          filter:filter];
 
       dispatch_async(dispatch_get_main_queue(), ^{
         [innerSelf updateTargetImage:image];
@@ -143,9 +139,7 @@ static CIContext* context;
                      context:NULL];
 }
 
-+ (UIImage *)filteredImage:(UIImage *)image
-                    filter:(CIFilter *)filter
-                resizeMode:(RCTResizeMode)resizeMode
++ (UIImage *)filteredImage:(UIImage *)image filter:(CIFilter *)filter
 {
   if (image != nil) {
     CIImage *tmp = [[CIImage alloc] initWithImage:image];
