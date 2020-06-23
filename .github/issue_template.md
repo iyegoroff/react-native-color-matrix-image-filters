@@ -1,5 +1,7 @@
-<!-- Please specify your mobile platform(s) and react-native & react-native-color-matrix-image-filters versions. Also check https://github.com/iyegoroff/react-native-color-matrix-image-filters#status if your rncmif version corresponds with your rn version.-->
+- Please specify your mobile platform(s) and react-native & react-native-color-matrix-image-filters versions. Also check https://github.com/iyegoroff/react-native-color-matrix-image-filters#status if your rncmif version corresponds with your rn version.
 
-<!-- Getting "No ViewManager defined for class X" error most likely means that you didn't link the module or something is wrong with your build and/or configuration. Try cleaning the project and check if your configuration matches with https://github.com/iyegoroff/react-native-color-matrix-image-filters/blob/master/manual_installation.md instruction. -->
+- Sometimes cleaning the project could resolve build issues: press `Shift + Cmd + K` in Xcode and run `cd android && ./gradlew clean` in terminal.
 
-<!-- If your app crashed due to react-native-color-matrix-image-filters, please attach a crash log. -->
+- In case you use Expo you have to switch to 'bare workflow' in order to use this module.
+
+- If your app crashed due to react-native-color-matrix-image-filters, please attach a crash log or provide a minimal repro.
