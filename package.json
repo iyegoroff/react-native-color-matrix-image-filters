@@ -50,7 +50,7 @@
   },
   "scripts": {
     "precommit": "lint-staged",
-    "preversion": "npm run remove:node-modules && npm run lint",
+    "preversion": "npm run remove:node-modules && npm run lint && git add -u && git commit -am lint || :",
     "postversion": "git push && git push --tags",
     "remove:node-modules": "rm -rf Simple/node_modules && rm -rf MatrixFilterConstructor/node_modules",
     "test": "cd RNCMIFTest && yarn && yarn clean:android && yarn build:android; yarn reset:packager & yarn test:android",
