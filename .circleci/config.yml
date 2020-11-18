@@ -5,7 +5,6 @@ jobs:
       - image: circleci/android:api-28-node
 
     environment:
-      JAVA_OPTS: -v 1.8
       JVM_OPTS: -Xmx3200m
 
     working_directory: ~/repo
@@ -32,17 +31,6 @@ jobs:
           command: |
             cd RNCMIFTest
             yarn infer:android
-            # yarn clean:android
-            # yarn build:android
-      #       PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools;
-      #       yes | sdkmanager --licenses
-      #       sdkmanager "system-images;android-25;google_apis;armeabi-v7a"
-      #       avdmanager create avd --force -n Nexus_5X_API_25 -k "system-images;android-25;google_apis;armeabi-v7a" -d 9
-
-      # - run:
-      #     command: |
-      #       cd RNCMIFTest
-      #       yarn reset:packager & yarn test:android
 
   test-ios:
     macos:
@@ -98,20 +86,20 @@ workflows:
   version: 2
   test:
     jobs:
-      - test-android:
-          filters:
-            tags:
-              only: /.*/
+      # - test-android:
+      #     filters:
+      #       tags:
+      #         only: /.*/
 
-      - test-ios:
-          filters:
-            tags:
-              only: /.*/
+      # - test-ios:
+      #     filters:
+      #       tags:
+      #         only: /.*/
 
       - publish:
-          requires:
-            - test-android
-            - test-ios
+          # requires:
+          #   - test-android
+          #   - test-ios
           filters:
             tags:
               only: /^v.*/

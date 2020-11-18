@@ -1,6 +1,9 @@
 # react-native-color-matrix-image-filters
+
 [![npm version](https://badge.fury.io/js/react-native-color-matrix-image-filters.svg?t=1495378566925)](https://badge.fury.io/js/react-native-color-matrix-image-filters)
-[![CircleCI](https://circleci.com/gh/iyegoroff/react-native-color-matrix-image-filters.svg?style=svg)](https://circleci.com/gh/iyegoroff/react-native-color-matrix-image-filters)
+
+<!-- [![CircleCI](https://circleci.com/gh/iyegoroff/react-native-color-matrix-image-filters.svg?style=svg)](https://circleci.com/gh/iyegoroff/react-native-color-matrix-image-filters) -->
+
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/standard/standard)
 [![Dependency Status](https://david-dm.org/iyegoroff/react-native-color-matrix-image-filters.svg?t=1495378566925)](https://david-dm.org/iyegoroff/react-native-color-matrix-image-filters)
 [![devDependencies Status](https://david-dm.org/iyegoroff/react-native-color-matrix-image-filters/dev-status.svg)](https://david-dm.org/iyegoroff/react-native-color-matrix-image-filters?type=dev)
@@ -76,7 +79,7 @@ and ability to create custom filters.
 ## Example
 
 ```javascript
-import { Image } from 'react-native';
+import { Image } from 'react-native'
 import {
   Grayscale,
   Sepia,
@@ -85,14 +88,14 @@ import {
   concatColorMatrices,
   invert,
   contrast,
-  saturate
-} from 'react-native-color-matrix-image-filters';
+  saturate,
+} from 'react-native-color-matrix-image-filters'
 
 const GrayscaledImage = (imageProps) => (
   <Grayscale>
     <Image {...imageProps} />
   </Grayscale>
-);
+)
 
 const CombinedFiltersImage = (imageProps) => (
   <Tint amount={1.25}>
@@ -100,7 +103,7 @@ const CombinedFiltersImage = (imageProps) => (
       <Image {...imageProps} />
     </Sepia>
   </Tint>
-);
+)
 
 const ColorMatrixImage = (imageProps) => (
   <ColorMatrix
@@ -109,16 +112,16 @@ const ColorMatrixImage = (imageProps) => (
   >
     <Image {...imageProps} />
   </ColorMatrix>
-);
+)
 ```
 
-Original                                       |  Grayscaled
-:---------------------------------------------:|:---------------------------------------------:
-<img src="https://github.com/iyegoroff/react-native-color-matrix-image-filters/raw/master/img/parrot.png" align="left" height="200">  |  <img src="https://github.com/iyegoroff/react-native-color-matrix-image-filters/raw/master/img/gray.png" align="right" height="200">
+|                                                               Original                                                               |                                                             Grayscaled                                                              |
+| :----------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------: |
+| <img src="https://github.com/iyegoroff/react-native-color-matrix-image-filters/raw/master/img/parrot.png" align="left" height="200"> | <img src="https://github.com/iyegoroff/react-native-color-matrix-image-filters/raw/master/img/gray.png" align="right" height="200"> |
 
-CombinedFilters                                |  ColorMatrix
-:---------------------------------------------:|:---------------------------------------------:
-<img src="https://github.com/iyegoroff/react-native-color-matrix-image-filters/raw/master/img/combined.png" align="left" height="200">  |  <img src="https://github.com/iyegoroff/react-native-color-matrix-image-filters/raw/master/img/color-matrix.png" align="right" height="200">
+|                                                            CombinedFilters                                                             |                                                                 ColorMatrix                                                                 |
+| :------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: |
+| <img src="https://github.com/iyegoroff/react-native-color-matrix-image-filters/raw/master/img/combined.png" align="left" height="200"> | <img src="https://github.com/iyegoroff/react-native-color-matrix-image-filters/raw/master/img/color-matrix.png" align="right" height="200"> |
 
 ## Usage
 
@@ -134,45 +137,44 @@ corresponding stack of filter components.
 
 ### Supported filters
 
-| Component         | Additional props     | function          |
-| ----------------- | -------------------- | ----------------- |
-| ColorMatrix       | matrix: Matrix \| Array\<Matrix>      | -
-| Normal            | -                    | normal(): Matrix
-| RGBA              | red: number = 1, green: number = 1, blue: number = 1, alpha: number = 1 | rgba(red: number = 1, green: number = 1, blue: number = 1, alpha: number = 1): Matrix
-| Saturate          | amount: number = 1   | saturate(amount: number = 1): Matrix
-| HueRotate         | amount: number = 0   | hueRotate(amount: number = 0): Matrix
-| LuminanceToAlpha  | -                    | luminanceToAlpha(): Matrix
-| Invert            | -                    | invert(): Matrix
-| Grayscale         | amount: number = 1   | grayscale(amount: number = 1): Matrix
-| Sepia             | amount: number = 1   | sepia(amount: number = 1): Matrix
-| Nightvision       | -                    | nightvision(): Matrix
-| Warm              | -                    | warm(): Matrix
-| Cool              | -                    | cool(): Matrix
-| Brightness        | amount: number = 1   | brightness(amount: number = 1): Matrix
-| Contrast          | amount: number = 1   | contrast(amount: number = 1): Matrix
-| Temperature       | amount: number = 1   | temperature(amount: number = 1): Matrix
-| Tint              | amount: number = 0   | tint(amount: number = 0): Matrix
-| Threshold         | amount: number = 0   | threshold(amount: number = 0): Matrix
-| Technicolor       | -                    | technicolor(): Matrix
-| Polaroid          | -                    | polaroid(): Matrix
-| ToBGR             | -                    | toBGR(): Matrix
-| Kodachrome        | -                    | kodachrome(): Matrix
-| Browni            | -                    | browni(): Matrix
-| Vintage           | -                    | vintage(): Matrix
-| Night             | amount: number = 0.1 | night(amount: number = 0.1): Matrix
-| Predator          | amount: number = 1   | predator(amount: number = 1): Matrix
-| Lsd               | -                    | lsd(): Matrix
-| ColorTone         | desaturation: number = 0.2, toned: number = 0.15, lightColor: string = "#FFE580", darkColor: string = "#338000" | colorTone(desaturation: number = 0.2, toned: number = 0.15, lightColor: string = "#FFE580", darkColor: string = "#338000"): Matrix
-| DuoTone           | firstColor: string = "#FFE580", secondColor: string = "#338000" | duoTone(firstColor: string = "#FFE580", secondColor: string = "#338000"): Matrix
-| Protanomaly       | -                    | protanomaly(): Matrix
-| Deuteranomaly     | -                    | deuteranomaly(): Matrix
-| Tritanomaly       | -                    | tritanomaly(): Matrix
-| Protanopia        | -                    | protanopia(): Matrix
-| Deuteranopia      | -                    | deuteranopia(): Matrix
-| Tritanopia        | -                    | tritanopia(): Matrix
-| Achromatopsia     | -                    | achromatopsia(): Matrix
-| Achromatomaly     | -                    | achromatomaly(): Matrix
-
+| Component        | Additional props                                                                                                | function                                                                                                                           |
+| ---------------- | --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| ColorMatrix      | matrix: Matrix \| Array\<Matrix>                                                                                | -                                                                                                                                  |
+| Normal           | -                                                                                                               | normal(): Matrix                                                                                                                   |
+| RGBA             | red: number = 1, green: number = 1, blue: number = 1, alpha: number = 1                                         | rgba(red: number = 1, green: number = 1, blue: number = 1, alpha: number = 1): Matrix                                              |
+| Saturate         | amount: number = 1                                                                                              | saturate(amount: number = 1): Matrix                                                                                               |
+| HueRotate        | amount: number = 0                                                                                              | hueRotate(amount: number = 0): Matrix                                                                                              |
+| LuminanceToAlpha | -                                                                                                               | luminanceToAlpha(): Matrix                                                                                                         |
+| Invert           | -                                                                                                               | invert(): Matrix                                                                                                                   |
+| Grayscale        | amount: number = 1                                                                                              | grayscale(amount: number = 1): Matrix                                                                                              |
+| Sepia            | amount: number = 1                                                                                              | sepia(amount: number = 1): Matrix                                                                                                  |
+| Nightvision      | -                                                                                                               | nightvision(): Matrix                                                                                                              |
+| Warm             | -                                                                                                               | warm(): Matrix                                                                                                                     |
+| Cool             | -                                                                                                               | cool(): Matrix                                                                                                                     |
+| Brightness       | amount: number = 1                                                                                              | brightness(amount: number = 1): Matrix                                                                                             |
+| Contrast         | amount: number = 1                                                                                              | contrast(amount: number = 1): Matrix                                                                                               |
+| Temperature      | amount: number = 1                                                                                              | temperature(amount: number = 1): Matrix                                                                                            |
+| Tint             | amount: number = 0                                                                                              | tint(amount: number = 0): Matrix                                                                                                   |
+| Threshold        | amount: number = 0                                                                                              | threshold(amount: number = 0): Matrix                                                                                              |
+| Technicolor      | -                                                                                                               | technicolor(): Matrix                                                                                                              |
+| Polaroid         | -                                                                                                               | polaroid(): Matrix                                                                                                                 |
+| ToBGR            | -                                                                                                               | toBGR(): Matrix                                                                                                                    |
+| Kodachrome       | -                                                                                                               | kodachrome(): Matrix                                                                                                               |
+| Browni           | -                                                                                                               | browni(): Matrix                                                                                                                   |
+| Vintage          | -                                                                                                               | vintage(): Matrix                                                                                                                  |
+| Night            | amount: number = 0.1                                                                                            | night(amount: number = 0.1): Matrix                                                                                                |
+| Predator         | amount: number = 1                                                                                              | predator(amount: number = 1): Matrix                                                                                               |
+| Lsd              | -                                                                                                               | lsd(): Matrix                                                                                                                      |
+| ColorTone        | desaturation: number = 0.2, toned: number = 0.15, lightColor: string = "#FFE580", darkColor: string = "#338000" | colorTone(desaturation: number = 0.2, toned: number = 0.15, lightColor: string = "#FFE580", darkColor: string = "#338000"): Matrix |
+| DuoTone          | firstColor: string = "#FFE580", secondColor: string = "#338000"                                                 | duoTone(firstColor: string = "#FFE580", secondColor: string = "#338000"): Matrix                                                   |
+| Protanomaly      | -                                                                                                               | protanomaly(): Matrix                                                                                                              |
+| Deuteranomaly    | -                                                                                                               | deuteranomaly(): Matrix                                                                                                            |
+| Tritanomaly      | -                                                                                                               | tritanomaly(): Matrix                                                                                                              |
+| Protanopia       | -                                                                                                               | protanopia(): Matrix                                                                                                               |
+| Deuteranopia     | -                                                                                                               | deuteranopia(): Matrix                                                                                                             |
+| Tritanopia       | -                                                                                                               | tritanopia(): Matrix                                                                                                               |
+| Achromatopsia    | -                                                                                                               | achromatopsia(): Matrix                                                                                                            |
+| Achromatomaly    | -                                                                                                               | achromatomaly(): Matrix                                                                                                            |
 
 ### Functions
 
@@ -182,7 +184,7 @@ corresponding stack of filter components.
 
 - A 4x5 matrix for color transformations represented by array -
   consult [Android docs](https://developer.android.com/reference/android/graphics/ColorMatrix)
-	for more specific info about it's format
+  for more specific info about it's format
 
 ## Misc
 
