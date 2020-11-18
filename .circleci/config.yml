@@ -2,7 +2,7 @@ version: 2
 jobs:
   test-android:
     docker:
-      - image: circleci/android:api-28-node8-alpha
+      - image: circleci/android:api-28-node
 
     environment:
       JVM_OPTS: -Xmx3200m
