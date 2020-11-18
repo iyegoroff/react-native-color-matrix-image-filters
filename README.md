@@ -1,14 +1,13 @@
 # react-native-color-matrix-image-filters
 
 [![npm version](https://badge.fury.io/js/react-native-color-matrix-image-filters.svg?t=1495378566925)](https://badge.fury.io/js/react-native-color-matrix-image-filters)
-
-<!-- [![CircleCI](https://circleci.com/gh/iyegoroff/react-native-color-matrix-image-filters.svg?style=svg)](https://circleci.com/gh/iyegoroff/react-native-color-matrix-image-filters) -->
-
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/standard/standard)
 [![Dependency Status](https://david-dm.org/iyegoroff/react-native-color-matrix-image-filters.svg?t=1495378566925)](https://david-dm.org/iyegoroff/react-native-color-matrix-image-filters)
 [![devDependencies Status](https://david-dm.org/iyegoroff/react-native-color-matrix-image-filters/dev-status.svg)](https://david-dm.org/iyegoroff/react-native-color-matrix-image-filters?type=dev)
 [![typings included](https://img.shields.io/badge/typings-included-brightgreen.svg?t=1495378566925)](src/index.d.ts)
 [![npm](https://img.shields.io/npm/l/express.svg?t=1495378566925)](https://www.npmjs.com/package/react-native-color-matrix-image-filters)
+
+<!-- [![CircleCI](https://circleci.com/gh/iyegoroff/react-native-color-matrix-image-filters.svg?style=svg)](https://circleci.com/gh/iyegoroff/react-native-color-matrix-image-filters) -->
 
 Various color matrix based image filters for iOS & Android.
 
