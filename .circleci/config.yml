@@ -5,13 +5,14 @@ jobs:
       - image: circleci/android:api-28-node
 
     environment:
-      JAVA_HOME: /usr/lib/jvm/java-8-openjdk-amd64
       JVM_OPTS: -Xmx3200m
 
     working_directory: ~/repo
 
     steps:
       - checkout
+
+      - run: echo $(JAVA_HOME)
 
       - run:
           command: |
