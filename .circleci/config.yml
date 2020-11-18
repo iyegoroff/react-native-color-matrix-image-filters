@@ -19,7 +19,7 @@ jobs:
             dot-json package.json devDependencies.jest-screenshot -d
             yarn
             cd android
-            ./gradlew androidDependencies
+            export JAVA_HOME=`/usr/libexec/java_home -v 1.8` ./gradlew androidDependencies
 
       - run:
           command: |
@@ -30,14 +30,13 @@ jobs:
       - run:
           command: |
             cd RNCMIFTest
-            yarn infer:android
+            export JAVA_HOME=`/usr/libexec/java_home -v 1.8` yarn infer:android
             # yarn clean:android
             # yarn build:android
       #       PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools;
       #       yes | sdkmanager --licenses
       #       sdkmanager "system-images;android-25;google_apis;armeabi-v7a"
       #       avdmanager create avd --force -n Nexus_5X_API_25 -k "system-images;android-25;google_apis;armeabi-v7a" -d 9
-
       # - run:
       #     command: |
       #       cd RNCMIFTest
