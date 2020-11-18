@@ -5,7 +5,8 @@ jobs:
       - image: circleci/android:api-28-node
 
     environment:
-      JVM_OPTS: -Xmx3200m -v 1.8
+      JAVA_OPTS: -v 1.8
+      JVM_OPTS: -Xmx3200m
 
     working_directory: ~/repo
 
