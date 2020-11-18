@@ -20,7 +20,7 @@ const ColorMatrixFilter = React.forwardRef(
         >
           {children}
         </NativeFilter>
-      )
+        )
   }
 )
 
