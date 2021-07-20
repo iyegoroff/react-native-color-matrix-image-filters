@@ -32,7 +32,7 @@
     "core-js": "2.5.7",
     "fast-memoize": "2.5.1",
     "react": "16.8.3",
-    "react-native": "0.59.8",
+    "react-native": "0.62.3",
     "react-native-color-matrix-image-filters": "file:../",
     "react-native-color-wheel": "0.1.5",
     "react-native-image-picker": "0.28.1",
