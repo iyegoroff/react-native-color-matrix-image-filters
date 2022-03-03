@@ -1,33 +1,34 @@
-/**
- * Metro configuration for React Native
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 const path = require('path')
+const exclusionList = require('metro-config/src/defaults/exclusionList')
+const escape = require('escape-string-regexp')
+const pak = require('../package.json')
 
-const extraNodeModules = {
-  'react': path.resolve(__dirname, 'node_modules/react'),
-  'fbjs': path.resolve(__dirname, 'node_modules/fbjs'),
-  'react-native': path.resolve(__dirname, 'node_modules/react-native'),
-  '@babel/runtime': path.resolve(__dirname, 'node_modules/@babel/runtime'),
-  'react-native-color-matrix-image-filters': path.resolve(__dirname, '../')
-}
-const watchFolders = [
-  path.resolve(__dirname, '../')
-]
+const root = path.resolve(__dirname, '..')
+
+const modules = Object.keys({
+  ...pak.peerDependencies
+})
 
 module.exports = {
+  projectRoot: __dirname,
+  watchFolders: [root],
+
   resolver: {
-    extraNodeModules
+    blockList: exclusionList(
+      modules.map((m) => new RegExp(`^${escape(path.join(root, 'node_modules', m))}\\/.*$`))
+    ),
+
+    extraNodeModules: modules.reduce((acc, name) => {
+      acc[name] = path.join(__dirname, 'node_modules', name)
+      return acc
+    }, {})
   },
-  watchFolders,
+
   transformer: {
     getTransformOptions: async () => ({
       transform: {
         experimentalImportSupport: false,
-        inlineRequires: false
+        inlineRequires: true
       }
     })
   }

@@ -33,3 +33,4 @@ node_modules/
 *.trace
 .ionide
 Simple_old
+_node_modules

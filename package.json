@@ -21,7 +21,6 @@
   "version": "5.2.10",
   "peerDependencies": {
     "@babel/runtime": "*",
-    "fbjs": "*",
     "react": "*",
     "react-native": "*"
   },
@@ -33,7 +32,8 @@
   },
   "dependencies": {
     "concat-color-matrices": "^1.0.0",
-    "rn-color-matrices": "^4.1.0"
+    "rn-color-matrices": "^4.1.0",
+    "ts-tiny-invariant": "^1.0.5"
   },
   "standard": {
     "globals": [

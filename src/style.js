@@ -1,5 +1,5 @@
 import { StyleSheet, processColor } from 'react-native'
-import invariant from 'fbjs/lib/invariant'
+import invariant from 'ts-tiny-invariant'
 
 // For some reason RNImageMatrixFilter draw method is not called when component's backgroundColor
 // is not set or transparent
@@ -16,7 +16,7 @@ export const checkStyle = (style) => {
     invariant(
       processColor(backgroundColor) !== 0,
       `ImageFilter: Can't use '${backgroundColor}' backgroundColor,` +
-      ' consider using \'#fff0\' instead.'
+        " consider using '#fff0' instead."
     )
   }
 }

@@ -27,11 +27,11 @@ Various color matrix based image filters for iOS & Android.
 
 ### 1. Install latest version from npm
 
-`$ npm i react-native-color-matrix-image-filters -S`
+`npm i react-native-color-matrix-image-filters -S`
 
 ### 2. Install pods
 
-`$ cd ios && pod install && cd ..`
+`npx pod-install`
 
 </details>
 </td>
@@ -43,11 +43,11 @@ Various color matrix based image filters for iOS & Android.
 
 ### 1. Install latest version from npm
 
-`$ npm i react-native-color-matrix-image-filters -S`
+`npm i react-native-color-matrix-image-filters -S`
 
 ### 2-a. Link native modules
 
-`$ react-native link react-native-color-matrix-image-filters`
+`react-native link react-native-color-matrix-image-filters`
 
 ### 2-b. Install pods
 
@@ -58,7 +58,7 @@ pod 'React', :path => '../node_modules/react-native'
 pod 'RNColorMatrixImageFilters', :path => '../node_modules/react-native-color-matrix-image-filters'
 ```
 
-`$ cd ios && pod install && cd ..`
+`cd ios && pod install && cd ..`
 
 ### 2-c. Manual installation
 
@@ -87,7 +87,7 @@ import {
   concatColorMatrices,
   invert,
   contrast,
-  saturate,
+  saturate
 } from 'react-native-color-matrix-image-filters'
 
 const GrayscaledImage = (imageProps) => (
