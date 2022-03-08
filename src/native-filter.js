@@ -7,8 +7,5 @@ const ColorMatrixImageFilter = requireNativeComponent('CMIFColorMatrixImageFilte
 export const NativeFilter = React.forwardRef(({ style, ...restProps }, ref) => {
   checkStyle(style)
 
-  console.warn(ColorMatrixImageFilter)
-  console.warn(requireNativeComponent)
-
   return <ColorMatrixImageFilter style={[defaultStyle.container, style]} ref={ref} {...restProps} />
 })
