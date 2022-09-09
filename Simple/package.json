@@ -11,15 +11,15 @@
     "watch": "npm run build -- --watch"
   },
   "dependencies": {
-    "react": "17.0.2",
-    "react-native": "0.68.1",
+    "react": "18.1.0",
+    "react-native": "0.70.0",
     "react-native-color-matrix-image-filters": "file:..",
-    "react-native-fast-image": "^8.5.11"
+    "react-native-fast-image": "^8.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/runtime": "^7.12.5",
-    "metro-react-native-babel-preset": "^0.67.0",
-    "typescript": "^4.6.3"
+    "metro-react-native-babel-preset": "^0.72.1",
+    "typescript": "^4.8.3"
   }
 }
