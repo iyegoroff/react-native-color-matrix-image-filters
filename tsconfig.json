@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "target": "ES2018",
+    "strict": true,
+    "jsx": "react",
+    "lib": ["es2018"],
+    "moduleResolution": "node",
+    "removeComments": true,
+    "declaration": true,
+    "noEmitOnError": true,
+    "esModuleInterop": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "allowUnreachableCode": false,
+    "noUncheckedIndexedAccess": true,
+    "noFallthroughCasesInSwitch": true,
+    "outDir": "./dist",
+    "types": [],
+  },
+  "include": ["./src"]
+}

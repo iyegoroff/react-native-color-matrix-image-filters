@@ -1,4 +1,4 @@
-import { StyleSheet, processColor } from 'react-native'
+import { StyleSheet, processColor, ViewStyle, StyleProp } from 'react-native'
 import invariant from 'ts-tiny-invariant'
 
 // For some reason RNImageMatrixFilter draw method is not called when component's backgroundColor
@@ -9,13 +9,13 @@ export const defaultStyle = StyleSheet.create({
   }
 })
 
-export const checkStyle = (style) => {
+export const checkStyle = (style: StyleProp<ViewStyle>) => {
   if (style) {
     const { backgroundColor } = StyleSheet.flatten(style)
 
     invariant(
       processColor(backgroundColor) !== 0,
-      `ImageFilter: Can't use '${backgroundColor}' backgroundColor,` +
+      `ImageFilter: Can't use '${String(backgroundColor)}' backgroundColor,` +
         " consider using '#fff0' instead."
     )
   }

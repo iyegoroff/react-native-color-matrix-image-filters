@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "private": true,
   "scripts": {
-    "preinstall": "cd .. && npm i --only=prod",
+    "preinstall": "cd ../.. && npm i --only=prod",
     "postinstall": "metro-with-symlinks && npm run paket:install",
     "build": "fable-splitter -c splitter.config.js --define RELEASE",
     "watch": "fable-splitter -c splitter.config.js -w --define DEBUG",
@@ -23,7 +23,7 @@
     "generate:android:signing-key": "keytool -genkey -v -keystore mfc.keystore -alias mfc -keyalg RSA -keysize 2048 -validity 10000 && mv mfc.keystore android/app",
     "generate:android:apk": "npm run generate:android:bundle && cd android && ./gradlew assembleRelease",
     "generate:android:bundle": "npm run build:release && react-native bundle --platform android --dev false --entry-file index.js --bundle-output ./android/app/src/main/assets/index.android.bundle --assets-dest ./android/app/src/main/res/",
-    "build:docker:image": "docker build -t mfc-android.image -f ./Dockerfile ../",
+    "build:docker:image": "docker build -t mfc-android.image -f ./Dockerfile ../..",
     "extract:docker:apk": "docker create -ti --name mfc-android-container mfc-android.image /bin/bash && docker cp mfc-android-container:/package/MatrixFilterConstructor/android/app/build/outputs/apk/app-release.apk mfc.apk && docker rm -fv mfc-android-container",
     "build:release:docker": "npm run build:docker:image && npm run extract:docker:apk"
   },
@@ -33,7 +33,7 @@
     "fast-memoize": "2.5.1",
     "react": "16.8.3",
     "react-native": "0.59.8",
-    "react-native-color-matrix-image-filters": "file:../",
+    "react-native-color-matrix-image-filters": "file:../..",
     "react-native-color-wheel": "0.1.5",
     "react-native-image-picker": "0.28.1",
     "react-native-portal": "1.3.0",

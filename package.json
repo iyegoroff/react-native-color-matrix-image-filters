@@ -6,8 +6,8 @@
     "image-filter"
   ],
   "license": "MIT",
-  "main": "src/index.js",
-  "types": "src/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "name": "react-native-color-matrix-image-filters",
   "author": "iyegoroff <iegoroff@gmail.com>",
   "bugs": {
@@ -20,51 +20,50 @@
   },
   "version": "5.2.14",
   "peerDependencies": {
-    "@babel/runtime": "*",
     "react": "*",
     "react-native": "*"
   },
   "devDependencies": {
-    "@types/react": "^16.9.56",
-    "@types/react-native": "^0.63.35",
+    "@types/react": "^18.0.19",
+    "@types/react-native": "^0.69.8",
     "eslint-plugin-detox": "^1.0.0",
-    "standard": "^16.0.3"
+    "@typescript-eslint/eslint-plugin": "^5.36.2",
+    "@typescript-eslint/parser": "^5.36.2",
+    "eslint": "^8.23.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard-with-typescript": "^22.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-no-null": "^1.0.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.0.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^2.7.1",
+    "type-coverage": "^2.22.0",
+    "typescript": "^4.8.3"
   },
   "dependencies": {
     "concat-color-matrices": "^1.0.0",
     "rn-color-matrices": "^4.1.0",
-    "ts-tiny-invariant": "^1.0.5"
-  },
-  "standard": {
-    "globals": [
-      "__DEV__"
-    ],
-    "ignore": [
-      "fable-typed",
-      "MatrixFilterConstructor",
-      "**/rn-cli.config.js"
-    ],
-    "plugins": [
-      "detox"
-    ]
+    "ts-tiny-invariant": "^2.0.4"
   },
   "scripts": {
-    "precommit": "lint-staged",
-    "preversion": "npm run remove:node-modules && npm run lint && git add -u && git commit -am lint || :",
-    "postversion": "git push && git push --tags",
-    "remove:node-modules": "rm -rf Simple/node_modules && rm -rf MatrixFilterConstructor/node_modules",
-    "test": "cd RNCMIFTest && yarn && yarn clean:android && yarn build:android; yarn reset:packager & yarn test:android",
-    "lint": "standard src/*.js --fix"
+    "preversion": "npm run remove:node-modules && npm run lint && npm run build && npm run type-coverage && git add -u && git commit -am lint || :",
+    "postversion": "git add . && git commit -am \"lint & docs [skip build]\" || : && git push && git push --tags",
+    "remove:node-modules": "rm -rf examples/Simple/node_modules && rm -rf examples/MatrixFilterConstructor/node_modules",
+    "test": "cd examples/RNCMIFTest && yarn && yarn clean:android && yarn build:android; yarn reset:packager & yarn test:android",
+    "build": "rm -rf dist && tsc -p .",
+    "lint": "eslint .",
+    "type-coverage": "type-coverage --detail --strict --ignore-files **/examples/** --ignore-files **/dist/**"
   },
   "files": [
     ".dockerignore",
     "android",
     "ios",
     "src",
+    "dist",
     "*.md",
     "*.podspec",
-    "MatrixFilterConstructor",
-    "Simple",
     "fable-typed/src",
     "LICENSE"
   ]

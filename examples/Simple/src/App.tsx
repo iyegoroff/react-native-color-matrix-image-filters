@@ -1,48 +1,27 @@
 import React from 'react'
-import {
-  View,
-  StyleSheet,
-  Image,
-  ImageBackground,
-  Text
-} from 'react-native'
+import { View, StyleSheet, Image, ImageBackground, Text, ImageRequireSource } from 'react-native'
 import { DuoTone } from 'react-native-color-matrix-image-filters'
 import FastImage from 'react-native-fast-image'
 
 export default class App extends React.Component<{}> {
+  mood: ImageRequireSource = require('../mood.png')
 
   render() {
-
     return (
       <View style={styles.container}>
         <Text>Image</Text>
         <DuoTone secondColor={'red'}>
-          <Image
-            style={styles.image}
-            source={require('../mood.png')}
-            resizeMode={'stretch'}
-          />
+          <Image style={styles.image} source={this.mood} resizeMode={'stretch'} />
         </DuoTone>
         <Text>ImageBackground</Text>
         <DuoTone secondColor={'green'}>
-          <ImageBackground
-            style={styles.image}
-            source={require('../mood.png')}
-            resizeMode={'stretch'}
-          >
-            <Image
-              style={styles.innerImage}
-              source={require('../mood.png')}
-            />
+          <ImageBackground style={styles.image} source={this.mood} resizeMode={'stretch'}>
+            <Image style={styles.innerImage} source={this.mood} />
           </ImageBackground>
         </DuoTone>
         <Text>FastImage</Text>
         <DuoTone secondColor={'blue'}>
-          <FastImage
-            style={styles.image}
-            source={require('../mood.png')}
-            resizeMode={'stretch'}
-          />
+          <FastImage style={styles.image} source={this.mood} resizeMode={'stretch'} />
         </DuoTone>
       </View>
     )

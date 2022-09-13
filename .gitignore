@@ -34,3 +34,4 @@ node_modules/
 .ionide
 Simple_old
 _node_modules
+dist

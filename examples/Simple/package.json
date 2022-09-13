@@ -6,20 +6,19 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "preinstall": "cd .. && npm i",
+    "preinstall": "cd ../.. && npm i",
     "build": "rm -rf build && tsc -p ./src",
     "watch": "npm run build -- --watch"
   },
   "dependencies": {
     "react": "18.1.0",
     "react-native": "0.70.0",
-    "react-native-color-matrix-image-filters": "file:..",
+    "react-native-color-matrix-image-filters": "file:../..",
     "react-native-fast-image": "^8.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/runtime": "^7.12.5",
-    "metro-react-native-babel-preset": "^0.72.1",
-    "typescript": "^4.8.3"
+    "metro-react-native-babel-preset": "^0.72.1"
   }
 }

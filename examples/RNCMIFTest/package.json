@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "preinstall": "cd .. && yarn link && npm i --only=prod && cd RNCMIFTest && yarn link react-native-color-matrix-image-filters",
+    "preinstall": "cd ../.. && yarn link && npm i --only=prod && cd RNCMIFTest && yarn link react-native-color-matrix-image-filters",
     "postinstall": "metro-with-symlinks",
     "reset:packager": "watchman watch-del-all && node_modules/react-native/scripts/packager.sh --reset-cache",
     "start:packager": "node node_modules/react-native/local-cli/cli.js start",
@@ -22,7 +22,7 @@
   "dependencies": {
     "react": "16.6.3",
     "react-native": "0.58.3",
-    "react-native-color-matrix-image-filters": "file:../",
+    "react-native-color-matrix-image-filters": "file:../..",
     "react-native-fast-image": "5.1.2"
   },
   "devDependencies": {
@@ -53,7 +53,7 @@
       },
       "android.emu.debug": {
         "binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk",
-        "build": "cd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && cd ..",
+        "build": "cd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && cd ../..",
         "type": "android.emulator",
         "name": "Nexus_5X_API_28"
       }
