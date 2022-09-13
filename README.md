@@ -1,19 +1,18 @@
 # react-native-color-matrix-image-filters
 
 [![npm version](https://badge.fury.io/js/react-native-color-matrix-image-filters.svg?t=1495378566925)](https://badge.fury.io/js/react-native-color-matrix-image-filters)
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/standard/standard)
+[![build](https://github.com/iyegoroff/react-native-color-matrix-image-filters/workflows/build/badge.svg)](https://github.com/iyegoroff/react-native-color-matrix-image-filters/actions/workflows/build.yml)
+[![publish](https://github.com/iyegoroff/react-native-color-matrix-image-filters/workflows/publish/badge.svg)](https://github.com/iyegoroff/react-native-color-matrix-image-filters/actions/workflows/publish.yml)
+[![Type Coverage](https://img.shields.io/badge/dynamic/json.svg?label=type-coverage&prefix=%E2%89%A5&suffix=%&query=$.typeCoverage.atLeast&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fiyegoroff%2Freact-native-color-matrix-image-filters%2Fmain%2Fpackage.json)](https://github.com/plantain-00/type-coverage)
 ![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/react-native-color-matrix-image-filters)
-[![typings included](https://img.shields.io/badge/typings-included-brightgreen.svg?t=1495378566925)](src/index.d.ts)
 [![npm](https://img.shields.io/npm/l/express.svg?t=1495378566925)](https://www.npmjs.com/package/react-native-color-matrix-image-filters)
-
-<!-- [![CircleCI](https://circleci.com/gh/iyegoroff/react-native-color-matrix-image-filters.svg?style=svg)](https://circleci.com/gh/iyegoroff/react-native-color-matrix-image-filters) -->
 
 Various color matrix based image filters for iOS & Android.
 
 ## Status
 
 - iOS & Android:
-  - filter components work as stackable wrappers for `Image`, `ImageBackground` and [react-native-fast-image](https://github.com/DylanVann/react-native-fast-image) components
+  - filter components work as wrappers for `Image`, `ImageBackground` and [react-native-fast-image](https://github.com/DylanVann/react-native-fast-image) components
 - react-native:
   - supported versions: "<strong>>=0.56.0</strong>"
 
@@ -96,18 +95,13 @@ const GrayscaledImage = (imageProps) => (
 )
 
 const CombinedFiltersImage = (imageProps) => (
-  <Tint amount={1.25}>
-    <Sepia>
-      <Image {...imageProps} />
-    </Sepia>
-  </Tint>
+  <ColorMatrix matrix={concatColorMatrices([sepia(), tint(1.25)])}>
+    <Image {...imageProps} />
+  </ColorMatrix>
 )
 
 const ColorMatrixImage = (imageProps) => (
-  <ColorMatrix
-    matrix={concatColorMatrices([saturate(-0.9), contrast(5.2), invert()])}
-    // alt: matrix={[saturate(-0.9), contrast(5.2), invert()]}
-  >
+  <ColorMatrix matrix={concatColorMatrices([saturate(-0.9), contrast(5.2), invert()])}>
     <Image {...imageProps} />
   </ColorMatrix>
 )
@@ -127,9 +121,7 @@ Each filter support all of `View` [props](https://facebook.github.io/react-nativ
 Also some filters have optional `amount` prop which takes a `number`. `ColorMatrix` filter
 has `matrix` prop which takes a `Matrix` - an array of 20 numbers. Additionally library exports
 functions like `grayscale`, `tint` etc. - these functions return values of `Matrix` type and their
-results can be combined with `concatColorMatrices` function. If you need to combine several filters,
-consider using `ColorMatrix` with `concatColorMatrices` - generally it is more performant than
-corresponding stack of filter components.
+results can be combined with `concatColorMatrices` function.
 
 ## Reference
 

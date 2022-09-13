@@ -3,7 +3,9 @@ import { View, StyleSheet, Image, ImageBackground, Text, ImageRequireSource } fr
 import { DuoTone } from 'react-native-color-matrix-image-filters'
 import FastImage from 'react-native-fast-image'
 
-export default class App extends React.Component<{}> {
+declare const require: (name: string) => number
+
+export default class App extends React.Component {
   mood: ImageRequireSource = require('../mood.png')
 
   render() {

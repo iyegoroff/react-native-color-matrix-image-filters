@@ -66,5 +66,8 @@
     "*.podspec",
     "fable-typed/src",
     "LICENSE"
-  ]
+  ],
+  "typeCoverage": {
+    "atLeast": 100
+  }
 }
