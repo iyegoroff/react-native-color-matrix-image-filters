@@ -3,7 +3,7 @@
 [![npm version](https://badge.fury.io/js/react-native-color-matrix-image-filters.svg?t=1495378566925)](https://badge.fury.io/js/react-native-color-matrix-image-filters)
 [![build](https://github.com/iyegoroff/react-native-color-matrix-image-filters/workflows/build/badge.svg)](https://github.com/iyegoroff/react-native-color-matrix-image-filters/actions/workflows/build.yml)
 [![publish](https://github.com/iyegoroff/react-native-color-matrix-image-filters/workflows/publish/badge.svg)](https://github.com/iyegoroff/react-native-color-matrix-image-filters/actions/workflows/publish.yml)
-[![Type Coverage](https://img.shields.io/badge/dynamic/json.svg?label=type-coverage&prefix=%E2%89%A5&suffix=%&query=$.typeCoverage.atLeast&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fiyegoroff%2Freact-native-color-matrix-image-filters%2Fmain%2Fpackage.json)](https://github.com/plantain-00/type-coverage)
+[![Type Coverage](https://img.shields.io/badge/dynamic/json.svg?label=type-coverage&prefix=%E2%89%A5&suffix=%&query=$.typeCoverage.atLeast&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fiyegoroff%2Freact-native-color-matrix-image-filters%2Fmaster%2Fpackage.json)](https://github.com/plantain-00/type-coverage)
 ![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/react-native-color-matrix-image-filters)
 [![npm](https://img.shields.io/npm/l/express.svg?t=1495378566925)](https://www.npmjs.com/package/react-native-color-matrix-image-filters)
 
@@ -27,12 +27,14 @@ npm i react-native-color-matrix-image-filters
 
 ### 2. Install pods
 
-if using "old" architecture: 
+if using "old" architecture:
+
 ```
 npx pod-install
 ```
 
-if using "new" architecture: 
+if using "new" architecture:
+
 ```
 RCT_NEW_ARCH_ENABLED=1 npx pod-install
 ```
