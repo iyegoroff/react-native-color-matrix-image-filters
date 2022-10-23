@@ -21,13 +21,21 @@ Various color matrix based image filters for iOS & Android.
 
 ### 1. Install latest version from npm
 
-`npm i react-native-color-matrix-image-filters`
+```
+npm i react-native-color-matrix-image-filters
+```
 
 ### 2. Install pods
 
-if using "old" architecture: &nbsp;&nbsp;&nbsp;`npx pod-install`
+if using "old" architecture: 
+```
+npx pod-install
+```
 
-if using "new" architecture: &nbsp;&nbsp;&nbsp;`RCT_NEW_ARCH_ENABLED=1 npx pod-install`
+if using "new" architecture: 
+```
+RCT_NEW_ARCH_ENABLED=1 npx pod-install
+```
 
 ###
 
