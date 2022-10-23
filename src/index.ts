@@ -1,6 +1,9 @@
 import filters from 'rn-color-matrices'
 export * from './color-matrix-filters'
-export { concatColorMatrices } from 'concat-color-matrices'
+import { concatColorMatrices as legacyConcat } from 'concat-color-matrices'
+
+export const concatColorMatrices = (...matrices: Parameters<typeof legacyConcat>[0]) =>
+  legacyConcat(matrices)
 
 export const achromatomaly = filters.achromatomaly
 export const achromatopsia = filters.achromatopsia

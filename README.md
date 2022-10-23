@@ -17,19 +17,17 @@ Various color matrix based image filters for iOS & Android.
   - supported versions: "<strong>>=0.60.0</strong>"
   - supports both "old" and "new" architecture
 
-## Installation
+## Getting started
 
 ### 1. Install latest version from npm
 
 `npm i react-native-color-matrix-image-filters`
 
-### 2-a. Install pods if using "old" architecture
+### 2. Install pods
 
-`npx pod-install`
+if using "old" architecture: &nbsp;&nbsp;&nbsp;`npx pod-install`
 
-### 2-b. Install pods if using "new" architecture
-
-`RCT_NEW_ARCH_ENABLED=1 npx pod-install`
+if using "new" architecture: &nbsp;&nbsp;&nbsp;`RCT_NEW_ARCH_ENABLED=1 npx pod-install`
 
 ###
 
@@ -62,13 +60,13 @@ const GrayscaledImage = (imageProps) => (
 )
 
 const CombinedFiltersImage = (imageProps) => (
-  <ColorMatrix matrix={concatColorMatrices([sepia(), tint(1.25)])}>
+  <ColorMatrix matrix={concatColorMatrices(sepia(), tint(1.25))}>
     <Image {...imageProps} />
   </ColorMatrix>
 )
 
 const ColorMatrixImage = (imageProps) => (
-  <ColorMatrix matrix={concatColorMatrices([saturate(-0.9), contrast(5.2), invert()])}>
+  <ColorMatrix matrix={concatColorMatrices(saturate(-0.9), contrast(5.2), invert())}>
     <Image {...imageProps} />
   </ColorMatrix>
 )
@@ -135,7 +133,7 @@ results can be combined with `concatColorMatrices` function.
 
 ### Functions
 
-- concatColorMatrices(matrices: Matrix[]): Matrix
+- concatColorMatrices(...matrices: Matrix[]): Matrix
 
 ### Matrix type
 
