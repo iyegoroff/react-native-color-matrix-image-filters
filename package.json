@@ -56,7 +56,6 @@
   "files": [
     "android",
     "ios",
-    "src",
     "dist",
     "*.md",
     "*.podspec",
