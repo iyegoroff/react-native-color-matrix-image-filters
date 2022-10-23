@@ -16,7 +16,7 @@
   "homepage": "https://github.com/iyegoroff/react-native-color-matrix-image-filters#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iyegoroff/react-native-color-matrix-image-filters.git"
+    "url": "https://github.com/iyegoroff/react-native-color-matrix-image-filters.git"
   },
   "version": "5.2.14",
   "peerDependencies": {
@@ -24,23 +24,22 @@
     "react-native": "*"
   },
   "devDependencies": {
-    "@types/react": "^18.0.19",
-    "@types/react-native": "^0.69.8",
-    "eslint-plugin-detox": "^1.0.0",
-    "@typescript-eslint/eslint-plugin": "^5.36.2",
-    "@typescript-eslint/parser": "^5.36.2",
-    "eslint": "^8.23.0",
+    "@types/react": "^18.0.21",
+    "@types/react-native": "^0.70.6",
+    "@typescript-eslint/eslint-plugin": "^5.40.1",
+    "@typescript-eslint/parser": "^5.40.1",
+    "eslint": "^8.26.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-config-standard-with-typescript": "^22.0.0",
+    "eslint-config-standard-with-typescript": "^23.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-no-null": "^1.0.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-promise": "^6.0.1",
+    "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^2.7.1",
     "type-coverage": "^2.22.0",
-    "typescript": "^4.8.3"
+    "typescript": "^4.8.4"
   },
   "dependencies": {
     "concat-color-matrices": "^1.0.0",
@@ -48,26 +47,27 @@
     "ts-tiny-invariant": "^2.0.4"
   },
   "scripts": {
-    "preversion": "npm run remove:node-modules && npm run lint && npm run build && npm run type-coverage && git add -u && git commit -am lint || :",
+    "preversion": "npm run lint -- --fix && npm run type-coverage && npm run build",
     "postversion": "git add . && git commit -am \"lint & docs [skip build]\" || : && git push && git push --tags",
-    "remove:node-modules": "rm -rf examples/Simple/node_modules && rm -rf examples/MatrixFilterConstructor/node_modules",
-    "test": "cd examples/RNCMIFTest && yarn && yarn clean:android && yarn build:android; yarn reset:packager & yarn test:android",
     "build": "rm -rf dist && tsc -p .",
     "lint": "eslint .",
     "type-coverage": "type-coverage --detail --strict --ignore-files **/examples/** --ignore-files **/dist/**"
   },
   "files": [
-    ".dockerignore",
     "android",
     "ios",
     "src",
     "dist",
     "*.md",
     "*.podspec",
-    "fable-typed/src",
     "LICENSE"
   ],
   "typeCoverage": {
     "atLeast": 100
+  },
+  "codegenConfig": {
+    "name": "CMIFColorMatrixImageFiltersSpec",
+    "type": "components",
+    "jsSrcsDir": "src"
   }
 }

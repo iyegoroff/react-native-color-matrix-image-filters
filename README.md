@@ -14,57 +14,24 @@ Various color matrix based image filters for iOS & Android.
 - iOS & Android:
   - filter components work as wrappers for `Image`, `ImageBackground` and [react-native-fast-image](https://github.com/DylanVann/react-native-fast-image) components
 - react-native:
-  - supported versions: "<strong>>=0.56.0</strong>"
+  - supported versions: "<strong>>=0.60.0</strong>"
+  - supports both "old" and "new" architecture
 
 ## Installation
 
-<table>
-<td>
-<details style="border: 1px solid; border-radius: 5px; padding: 5px; margin-bottom: 3px">
-  <summary>with react-native "<strong>>=0.60.0</strong>"</summary>
-
 ### 1. Install latest version from npm
 
-`npm i react-native-color-matrix-image-filters -S`
+`npm i react-native-color-matrix-image-filters`
 
-### 2. Install pods
+### 2-a. Install pods if using "old" architecture
 
 `npx pod-install`
 
-</details>
-</td>
-</table>
-<table>
-<td>
-<details style="border: 1px solid; border-radius: 5px; padding: 5px">
-  <summary>with react-native "<strong>>=0.56.0 <0.60.0</strong>"</summary>
+### 2-b. Install pods if using "new" architecture
 
-### 1. Install latest version from npm
+`RCT_NEW_ARCH_ENABLED=1 npx pod-install`
 
-`npm i react-native-color-matrix-image-filters -S`
-
-### 2-a. Link native modules
-
-`react-native link react-native-color-matrix-image-filters`
-
-### 2-b. Install pods
-
-If you use Cocoapods add the following line to your Podfile:
-
-```sh
-pod 'React', :path => '../node_modules/react-native'
-pod 'RNColorMatrixImageFilters', :path => '../node_modules/react-native-color-matrix-image-filters'
-```
-
-`cd ios && pod install && cd ..`
-
-### 2-c. Manual installation
-
-Install manually if `react-native link` failed - [link](manual_installation.md)
-
-</details>
-</td>
-</table>
+###
 
 ## Scope
 
@@ -178,7 +145,6 @@ results can be combined with `concatColorMatrices` function.
 
 ## Misc
 
-- You may check [MatrixFilterConstructor](MatrixFilterConstructor/) example app to play with filters
 - This library was tested only with standard `Image` component, but in theory it should work with
   any image that conforms to [CMIFImageView](https://github.com/iyegoroff/react-native-color-matrix-image-filters/blob/master/ios/CMIFImageView.h) protocol or is based on Android `ImageView` class
 - Installing `react-native-fast-image` is <strong>not required</strong> - this module doesn't depend on it

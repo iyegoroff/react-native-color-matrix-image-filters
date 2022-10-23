@@ -1,34 +1,47 @@
-import org.gradle.util.GradleVersion
+def isNewArchitectureEnabled() {
+    return project.hasProperty("newArchEnabled") && project.newArchEnabled == "true"
+}
 
 apply plugin: 'com.android.library'
 
-def _ext = rootProject.ext;
+if (isNewArchitectureEnabled()) {
+    apply plugin: 'com.facebook.react'
+}
 
-def _reactNativeVersion = _ext.has('reactNative') ? _ext.reactNative : '+';
-def _compileSdkVersion = _ext.has('compileSdkVersion') ? _ext.compileSdkVersion : 28;
-def _buildToolsVersion = _ext.has('buildToolsVersion') ? _ext.buildToolsVersion : '28.0.3';
+def _ext = rootProject.ext;
+def _compileSdkVersion = _ext.has('compileSdkVersion') ? _ext.compileSdkVersion : 31;
 def _minSdkVersion = _ext.has('minSdkVersion') ? _ext.minSdkVersion : 16;
 def _targetSdkVersion = _ext.has('targetSdkVersion') ? _ext.targetSdkVersion : 28;
 
 android {
     compileSdkVersion _compileSdkVersion
-    buildToolsVersion _buildToolsVersion
 
     defaultConfig {
         minSdkVersion _minSdkVersion
         targetSdkVersion _targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        buildConfigField("boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString())
     }
-    lintOptions {
-        abortOnError false
+
+    sourceSets {
+        main {
+            if (isNewArchitectureEnabled()) {
+                java.srcDirs += ['src/newarch']
+            } else {
+                java.srcDirs += ['src/oldarch']
+            }
+        }
     }
 }
 
-dependencies {
-    if (GradleVersion.current() >= GradleVersion.version('4.1')) {
-        compileOnly "com.facebook.react:react-native:${_reactNativeVersion}"
-    } else {
-        compile "com.facebook.react:react-native:${_reactNativeVersion}"
+repositories {
+    maven {
+        // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+        url "$projectDir/../node_modules/react-native/android"
     }
+    mavenCentral()
+    google()
+}
+
+dependencies {
+    implementation 'com.facebook.react:react-native:+'
 }

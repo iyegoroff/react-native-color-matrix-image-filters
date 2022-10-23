@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "target": "es6",
+    "strict": true,
+    "outDir": "../build",
+    "jsx": "react-native",
+    "lib": ["es2016"],
+    "declaration": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "noEmitOnError": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "removeComments": true,
+    "stripInternal": true,
+    "types": ["react-native"]
+  }
+}

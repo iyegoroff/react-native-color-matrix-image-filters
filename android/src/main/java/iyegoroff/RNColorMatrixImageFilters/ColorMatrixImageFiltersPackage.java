@@ -16,6 +16,6 @@ public class ColorMatrixImageFiltersPackage implements ReactPackage {
 
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-      return Collections.<ViewManager>singletonList(new ColorMatrixImageFilterManager());
+      return Collections.<ViewManager>singletonList(new ColorMatrixImageFilterManager(reactContext));
     }
 }
