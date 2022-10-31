@@ -57,6 +57,7 @@
     "android",
     "ios",
     "dist",
+    "src",
     "*.md",
     "*.podspec",
     "LICENSE"
