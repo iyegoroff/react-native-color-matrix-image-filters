@@ -5,7 +5,8 @@
     "project": [
       "./tsconfig.json",
       "./examples/OldTest/src/tsconfig.json",
-      "./examples/NewTest/src/tsconfig.json"
+      "./examples/NewTest/src/tsconfig.json",
+      "./examples/FilterConstructor/src/tsconfig.json"
     ]
   },
   "plugins": ["@typescript-eslint", "prettier", "no-null"],
@@ -30,6 +31,7 @@
         }
       }
     ],
+    "@typescript-eslint/array-type": ["error", { "default": "array-simple" }],
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-non-null-assertion": "error",

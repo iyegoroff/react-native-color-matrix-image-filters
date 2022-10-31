@@ -3,8 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "preinstall": "cd ../.. && npm i && npm run build",
-    "postinstall": "npm run build",
+    "preinstall": "cd ../.. && npm i",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
@@ -18,7 +17,6 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/runtime": "^7.12.5",
-    "@react-native-community/eslint-config": "^2.0.0",
     "babel-jest": "^26.6.3",
     "metro-react-native-babel-preset": "0.72.3"
   }
