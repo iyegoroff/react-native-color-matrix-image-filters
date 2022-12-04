@@ -1,16 +1,22 @@
-import { Dimensions, TextStyle, ViewStyle } from 'react-native'
+import { Platform, TextStyle, ViewStyle } from 'react-native'
 import { theme } from '../theme'
 
 const { borderRadius, primaryColor } = theme
-
-const width = Dimensions.get('screen').width - 10
 
 const container: ViewStyle = {
   borderWidth: 1,
   borderRadius,
   borderColor: primaryColor,
-  padding: 5,
-  width
+  padding: 3,
+  width: '100%',
+  justifyContent: 'center'
+}
+
+const slider: ViewStyle = {
+  height: '100%',
+  width: '100%',
+  position: 'absolute',
+  alignSelf: 'center'
 }
 
 const label: TextStyle = {
@@ -20,18 +26,21 @@ const label: TextStyle = {
 
 const name: TextStyle = {
   ...label,
-  marginBottom: -5
+  marginBottom: Platform.select({
+    ios: 30,
+    android: 10
+  })
 }
 
 const bottom: ViewStyle = {
   flexDirection: 'row',
-  justifyContent: 'space-between',
-  marginTop: -5
+  justifyContent: 'space-between'
 }
 
 export const styles = {
   container,
   label,
   bottom,
+  slider,
   name
-}
+} as const

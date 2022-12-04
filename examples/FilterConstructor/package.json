@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "postinstall": "patch-package",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
@@ -15,18 +16,33 @@
     "contrast-color": "^1.0.1",
     "fast-memoize": "^2.5.2",
     "react": "18.1.0",
-    "react-native": "0.70.3",
+    "react-native": "^0.70.4",
     "react-native-color-matrix-image-filters": "file:../..",
-    "use-backlash": "^0.0.18",
+    "react-native-image-picker": "github:iyegoroff/react-native-image-picker#rn-new-architecture",
+    "rn-color-matrices": "^4.1.0",
+    "shallowequal": "^1.1.0",
+    "ts-is-defined": "^3.0.4",
+    "ts-react-memo": "^0.0.2",
+    "ts-tiny-invariant": "^2.0.4",
+    "use-backlash": "^0.0.19",
     "use-pipe-ts": "^2.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/preset-typescript": "^7.18.6",
     "@babel/runtime": "^7.12.5",
     "@types/contrast-color": "^1.0.0",
+    "@types/jest": "^29.2.3",
+    "@types/shallowequal": "^1.1.1",
+    "@welldone-software/why-did-you-render": "^7.0.1",
     "babel-jest": "^26.6.3",
+    "install": "^0.13.0",
     "jest": "^26.6.3",
-    "metro-react-native-babel-preset": "0.72.3"
+    "metro-react-native-babel-preset": "0.72.3",
+    "npm": "^9.1.2",
+    "patch-package": "^6.5.0"
   },
   "jest": {
     "preset": "react-native"

@@ -3,14 +3,13 @@ import { contrastColor } from 'contrast-color'
 import { TextStyle, ViewStyle } from 'react-native'
 import { theme } from '../theme'
 
-const { borderRadius, primaryColor, primaryColorPressed } = theme
+const { borderRadius, primaryColor, primaryColorPressed, controlHeight } = theme
 
-const auxRadius = borderRadius - 1
+const auxRadius = borderRadius - 1.5
 
 const container: Readonly<ViewStyle> = {
   flexDirection: 'row',
-  margin: 5,
-  height: 35,
+  height: controlHeight,
   borderColor: primaryColor,
   borderWidth: 1,
   borderRadius
@@ -141,4 +140,4 @@ export const styles = {
   label,
   separator,
   colorMark
-}
+} as const

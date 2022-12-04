@@ -1,4 +1,5 @@
 import filters from 'rn-color-matrices'
+export { Matrix } from 'concat-color-matrices'
 export * from './color-matrix-filters'
 import { concatColorMatrices as legacyConcat } from 'concat-color-matrices'
 

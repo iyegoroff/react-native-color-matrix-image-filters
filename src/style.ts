@@ -10,6 +10,7 @@ export const defaultStyle = StyleSheet.create({
 })
 
 export const checkStyle = (style: StyleProp<ViewStyle>) => {
+  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
   if (style) {
     const { backgroundColor } = StyleSheet.flatten(style)
 

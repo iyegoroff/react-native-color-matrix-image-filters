@@ -1,0 +1,24 @@
+diff --git a/node_modules/react-native/React/Fabric/Mounting/ComponentViews/RCTFabricComponentsPlugins.h b/node_modules/react-native/React/Fabric/Mounting/ComponentViews/RCTFabricComponentsPlugins.h
+index a2cc0aa..0cc6b21 100644
+--- a/node_modules/react-native/React/Fabric/Mounting/ComponentViews/RCTFabricComponentsPlugins.h
++++ b/node_modules/react-native/React/Fabric/Mounting/ComponentViews/RCTFabricComponentsPlugins.h
+@@ -42,6 +42,7 @@ Class<RCTComponentViewProtocol> RCTTextInputCls(void) __attribute__((used));
+ Class<RCTComponentViewProtocol> RCTInputAccessoryCls(void) __attribute__((used));
+ Class<RCTComponentViewProtocol> RCTViewCls(void) __attribute__((used));
+ Class<RCTComponentViewProtocol> RCTImageCls(void) __attribute__((used));
++Class<RCTComponentViewProtocol> RCTModalHostViewCls(void) __attribute__((used));
+ 
+ #ifdef __cplusplus
+ }
+diff --git a/node_modules/react-native/React/Fabric/Mounting/ComponentViews/RCTFabricComponentsPlugins.mm b/node_modules/react-native/React/Fabric/Mounting/ComponentViews/RCTFabricComponentsPlugins.mm
+index 84cbe8d..6318933 100644
+--- a/node_modules/react-native/React/Fabric/Mounting/ComponentViews/RCTFabricComponentsPlugins.mm
++++ b/node_modules/react-native/React/Fabric/Mounting/ComponentViews/RCTFabricComponentsPlugins.mm
+@@ -30,6 +30,7 @@
+     {"InputAccessoryView", RCTInputAccessoryCls},
+     {"View", RCTViewCls},
+     {"Image", RCTImageCls},
++    {"ModalHostView", RCTModalHostViewCls},
+   };
+ 
+   auto p = sFabricComponentsClassMap.find(name);

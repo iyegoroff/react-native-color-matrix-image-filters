@@ -1,1 +1,0 @@
-export { SegmentedControl } from './SegmentedControl'

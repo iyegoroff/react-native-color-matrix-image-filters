@@ -1,30 +1,8 @@
 import React from 'react'
+import { Matrix } from 'concat-color-matrices'
 import { View, ViewProps } from 'react-native'
 import NativeColorMatrixImageFilter from './CMIFColorMatrixImageFilterNativeComponent'
 import { defaultStyle, checkStyle } from './style'
-
-type Matrix = readonly [
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number
-]
 
 export const ColorMatrixImageFilter = React.forwardRef(function ColorMatrixImageFilter(
   {

@@ -1,0 +1,38 @@
+{
+  "plugins": ["import"],
+  "extends": ["plugin:import/typescript"],
+  "rules": {
+    "import/no-internal-modules": ["error"],
+    "import/no-restricted-paths": [
+      "error",
+      {
+        "zones": [
+          {
+            "target": "./examples/FilterConstructor/src/utils",
+            "from": "./examples/FilterConstructor/src/services"
+          },
+          {
+            "target": "./examples/FilterConstructor/src/utils",
+            "from": "./examples/FilterConstructor/src/domain"
+          },
+          {
+            "target": "./examples/FilterConstructor/src/utils",
+            "from": "./examples/FilterConstructor/src/views"
+          },
+          {
+            "target": "./examples/FilterConstructor/src/services",
+            "from": "./examples/FilterConstructor/src/domain"
+          },
+          {
+            "target": "./examples/FilterConstructor/src/services",
+            "from": "./examples/FilterConstructor/src/views"
+          },
+          {
+            "target": "./examples/FilterConstructor/src/domain",
+            "from": "./examples/FilterConstructor/src/views"
+          }
+        ]
+      }
+    ]
+  }
+}
