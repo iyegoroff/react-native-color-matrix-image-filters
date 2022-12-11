@@ -2,21 +2,22 @@
   "plugins": ["import"],
   "extends": ["plugin:import/typescript"],
   "rules": {
+    "no-restricted-imports": ["error", "shallowequal"],
     "import/no-internal-modules": ["error"],
     "import/no-restricted-paths": [
       "error",
       {
         "zones": [
           {
-            "target": "./examples/FilterConstructor/src/utils",
+            "target": "./examples/FilterConstructor/src/util",
             "from": "./examples/FilterConstructor/src/services"
           },
           {
-            "target": "./examples/FilterConstructor/src/utils",
+            "target": "./examples/FilterConstructor/src/util",
             "from": "./examples/FilterConstructor/src/domain"
           },
           {
-            "target": "./examples/FilterConstructor/src/utils",
+            "target": "./examples/FilterConstructor/src/util",
             "from": "./examples/FilterConstructor/src/views"
           },
           {

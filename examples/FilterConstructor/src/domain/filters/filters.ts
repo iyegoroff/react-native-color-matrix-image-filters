@@ -1,44 +1,7 @@
-import matrices from 'rn-color-matrices'
+import { Services } from '../../services/types'
+import { Filter } from './types'
 
-const {
-  achromatomaly,
-  achromatopsia,
-  brightness,
-  browni,
-  colorTone,
-  contrast,
-  cool,
-  deuteranomaly,
-  deuteranopia,
-  duoTone,
-  grayscale,
-  hueRotate,
-  invert,
-  kodachrome,
-  lsd,
-  luminanceToAlpha,
-  night,
-  nightvision,
-  normal,
-  polaroid,
-  predator,
-  protanomaly,
-  protanopia,
-  rgba,
-  saturate,
-  sepia,
-  technicolor,
-  temperature,
-  threshold,
-  tint,
-  toBGR,
-  tritanomaly,
-  tritanopia,
-  vintage,
-  warm
-} = matrices
-
-const filters = [
+export const filters = [
   { tag: 'Achromatomaly' },
   { tag: 'Achromatopsia' },
   { tag: 'Brightness', amount: Number(1) },
@@ -82,18 +45,7 @@ const filters = [
   { tag: 'Warm' }
 ] as const
 
-export type Filter = typeof filters[number]
-
-export type AmountFilter = Extract<Filter, { amount: number }>
-export type ColorToneFilter = Extract<Filter, { tag: 'ColorTone' }>
-export type RGBAFilter = Extract<Filter, { tag: 'RGBA' }>
-export type DuoToneFilter = Extract<Filter, { tag: 'DuoTone' }>
-export type NoControlsFilter = Exclude<
-  Filter,
-  AmountFilter | ColorToneFilter | RGBAFilter | DuoToneFilter
->
-
-const filterControlConstraints = {
+export const filterControlConstraints = {
   Achromatomaly: {},
   Achromatopsia: {},
   Brightness: {
@@ -174,123 +126,117 @@ const filterControlConstraints = {
   Warm: {}
 } as const satisfies Record<Filter['tag'], unknown>
 
-const matrix = (filter: Filter) => {
+export const matrix = (matrices: Services['ColorMatrices']) => (filter: Filter) => {
   switch (filter.tag) {
     case 'Achromatomaly':
-      return achromatomaly()
+      return matrices.achromatomaly()
 
     case 'Achromatopsia':
-      return achromatopsia()
+      return matrices.achromatopsia()
 
     case 'Brightness':
-      return brightness(filter.amount)
+      return matrices.brightness(filter.amount)
 
     case 'Browni':
-      return browni()
+      return matrices.browni()
 
     case 'ColorTone': {
       const { darkColor, desaturation, lightColor, toned } = filter
-      return colorTone(desaturation, toned, lightColor, darkColor)
+      return matrices.colorTone(desaturation, toned, lightColor, darkColor)
     }
 
     case 'Contrast':
-      return contrast(filter.amount)
+      return matrices.contrast(filter.amount)
 
     case 'Cool':
-      return cool()
+      return matrices.cool()
 
     case 'Deuteranomaly':
-      return deuteranomaly()
+      return matrices.deuteranomaly()
 
     case 'Deuteranopia':
-      return deuteranopia()
+      return matrices.deuteranopia()
 
     case 'DuoTone': {
       const { first, second } = filter
-      return duoTone(first, second)
+      return matrices.duoTone(first, second)
     }
 
     case 'Grayscale':
-      return grayscale(filter.amount)
+      return matrices.grayscale(filter.amount)
 
     case 'HueRotate':
-      return hueRotate(filter.amount)
+      return matrices.hueRotate(filter.amount)
 
     case 'Invert':
-      return invert()
+      return matrices.invert()
 
     case 'Kodachrome':
-      return kodachrome()
+      return matrices.kodachrome()
 
     case 'Lsd':
-      return lsd()
+      return matrices.lsd()
 
     case 'LuminanceToAlpha':
-      return luminanceToAlpha()
+      return matrices.luminanceToAlpha()
 
     case 'Night':
-      return night(filter.amount)
+      return matrices.night(filter.amount)
 
     case 'Nightvision':
-      return nightvision()
+      return matrices.nightvision()
 
     case 'Normal':
-      return normal()
+      return matrices.normal()
 
     case 'Polaroid':
-      return polaroid()
+      return matrices.polaroid()
 
     case 'Predator':
-      return predator(filter.amount)
+      return matrices.predator(filter.amount)
 
     case 'Protanomaly':
-      return protanomaly()
+      return matrices.protanomaly()
 
     case 'Protanopia':
-      return protanopia()
+      return matrices.protanopia()
 
     case 'RGBA': {
       const { r, g, b, a } = filter
-      return rgba(r, g, b, a)
+      return matrices.rgba(r, g, b, a)
     }
 
     case 'Saturate':
-      return saturate(filter.amount)
+      return matrices.saturate(filter.amount)
 
     case 'Sepia':
-      return sepia(filter.amount)
+      return matrices.sepia(filter.amount)
 
     case 'Technicolor':
-      return technicolor()
+      return matrices.technicolor()
 
     case 'Temperature':
-      return temperature(filter.amount)
+      return matrices.temperature(filter.amount)
 
     case 'Threshold':
-      return threshold(filter.amount)
+      return matrices.threshold(filter.amount)
 
     case 'Tint':
-      return tint(filter.amount)
+      return matrices.tint(filter.amount)
 
     case 'ToBGR':
-      return toBGR()
+      return matrices.toBGR()
 
     case 'Tritanomaly':
-      return tritanomaly()
+      return matrices.tritanomaly()
 
     case 'Tritanopia':
-      return tritanopia()
+      return matrices.tritanopia()
 
     case 'Vintage':
-      return vintage()
+      return matrices.vintage()
 
     case 'Warm':
-      return warm()
+      return matrices.warm()
   }
 }
-
-export const Filters = {
-  filterControlConstraints,
-  filters,
-  matrix
-} as const

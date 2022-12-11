@@ -1,8 +1,10 @@
-import { Command, UpdateMap } from 'use-backlash'
-import { ResizeMode, Filter } from '../../domain/types'
-import { swap } from '../../utils'
-import shallowequal from 'shallowequal'
+import { Command, UpdateMap } from 'react-use-backlash'
+import { ResizeMode } from '../../domain/types'
+import { Util } from '../../util'
 import { Services } from '../../services/types'
+import { Filter } from '../../domain/filters/types'
+
+const { swap, shallowEqual } = Util
 
 export type Id = `${number}`
 
@@ -43,7 +45,7 @@ export const init = (staticImage: number): Command<State, Actions, Injects> => [
   }
 ]
 
-export const update: UpdateMap<State, Actions, Injects> = {
+export const updates: UpdateMap<State, Actions, Injects> = {
   selectResizeMode: (state, selectedResizeMode) =>
     selectedResizeMode === state.selectedResizeMode ? [state] : [{ ...state, selectedResizeMode }],
 
@@ -88,8 +90,9 @@ export const update: UpdateMap<State, Actions, Injects> = {
     const { filters } = state
     const index = filters.findIndex((f) => f.id === id)
     const nextFilter = { ...filter, id }
+    const prevFilter = filters[index]
 
-    if (shallowequal(filters[index], nextFilter)) {
+    if (prevFilter === undefined || shallowEqual(prevFilter, nextFilter)) {
       return [state]
     }
 

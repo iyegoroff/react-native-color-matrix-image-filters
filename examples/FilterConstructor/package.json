@@ -7,9 +7,8 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "check": "tsc -p ./src",
-    "test": "jest",
-    "lint": "eslint ."
+    "check": "tsc -p ./src/tsconfig.build.json",
+    "test": "jest"
   },
   "dependencies": {
     "@react-native-community/slider": "^4.3.2",
@@ -19,12 +18,13 @@
     "react-native": "^0.70.4",
     "react-native-color-matrix-image-filters": "file:../..",
     "react-native-image-picker": "github:iyegoroff/react-native-image-picker#rn-new-architecture",
+    "react-use-backlash": "^0.0.25",
     "rn-color-matrices": "^4.1.0",
     "shallowequal": "^1.1.0",
+    "ts-deep-readonly": "^0.0.5",
     "ts-is-defined": "^3.0.4",
     "ts-react-memo": "^0.0.2",
     "ts-tiny-invariant": "^2.0.4",
-    "use-backlash": "^0.0.19",
     "use-pipe-ts": "^2.0.2"
   },
   "devDependencies": {
@@ -33,16 +33,17 @@
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.18.6",
     "@babel/runtime": "^7.12.5",
+    "@testing-library/react": "^13.4.0",
     "@types/contrast-color": "^1.0.0",
     "@types/jest": "^29.2.3",
     "@types/shallowequal": "^1.1.1",
-    "@welldone-software/why-did-you-render": "^7.0.1",
     "babel-jest": "^26.6.3",
     "install": "^0.13.0",
     "jest": "^26.6.3",
     "metro-react-native-babel-preset": "0.72.3",
     "npm": "^9.1.2",
-    "patch-package": "^6.5.0"
+    "patch-package": "^6.5.0",
+    "react-dom": "18.1.0"
   },
   "jest": {
     "preset": "react-native"

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useBacklash } from 'use-backlash'
+import { useBacklash } from 'react-use-backlash'
 import { Domain } from '../../../domain'
 import { SegmentedColorControl } from '../../segmented-control'
 import { SliderControl } from '../../slider-control'

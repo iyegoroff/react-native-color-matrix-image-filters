@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import { Domain } from '../../domain'
-import { AmountFilter } from '../../domain/types'
+import { AmountFilter } from '../../domain/filters/types'
 import { SliderControl } from '../slider-control'
 
 type Props = AmountFilter & {

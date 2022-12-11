@@ -1,12 +1,12 @@
 import React, { StrictMode } from 'react'
 import { FlatList, Image, SafeAreaView } from 'react-native'
-import { useBacklash } from 'use-backlash'
+import { useBacklash } from 'react-use-backlash'
 import { usePipe } from 'use-pipe-ts'
 import { Button } from '../button'
 import { Gap } from '../gap'
 import { SegmentedLabelControl } from '../segmented-control'
 import { SelectModal } from '../select-modal'
-import { init, update } from './state'
+import { init, updates } from './state'
 import { styles } from './styles'
 import { renderFilterControl } from './render-filter-control'
 import { ColorMatrix, concatColorMatrices, normal } from 'react-native-color-matrix-image-filters'
@@ -40,7 +40,7 @@ const Root = () => {
       moveFilterUp,
       takePhoto
     }
-  ] = useBacklash(() => init(defaultImage), update, injects)
+  ] = useBacklash(() => init(defaultImage), updates, injects)
 
   const renderFilter = usePipe([
     renderFilterControl,

@@ -1,5 +1,7 @@
 import { ImagePicker } from './image-picker'
+import { ColorMatrices } from './color-matrices'
 
 export const Services = {
-  ImagePicker
+  ImagePicker,
+  ColorMatrices
 } as const

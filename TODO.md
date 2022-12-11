@@ -1,0 +1,6 @@
+- FilterConstructor
+  - tests with react-testing-library
+  - selectPhotoFromLibrary
+  - fix ios
+  - handle takePhoto error
+  - typecheck test

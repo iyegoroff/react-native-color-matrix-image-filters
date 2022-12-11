@@ -1,9 +1,9 @@
 import React from 'react'
 import { ListRenderItemInfo } from 'react-native'
 import { usePipe } from 'use-pipe-ts'
+import { Filter } from '../../domain/filters/types'
 import { FilterControl } from '../filter-control'
 import { Id, KeyedFilter } from './state'
-import { Filter } from '../../domain/types'
 
 type OnUpdate = (id: Id, filter: Filter) => void
 type OnListAction = (id: Id) => void
