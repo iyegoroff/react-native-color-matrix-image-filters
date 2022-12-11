@@ -1,4 +1,4 @@
-import { Services } from '../../services/types'
+import { ColorMatrices } from '../../services'
 import { Filter } from './types'
 
 export const filters = [
@@ -126,7 +126,7 @@ export const filterControlConstraints = {
   Warm: {}
 } as const satisfies Record<Filter['tag'], unknown>
 
-export const matrix = (matrices: Services['ColorMatrices']) => (filter: Filter) => {
+export const matrix = (matrices: ColorMatrices) => (filter: Filter) => {
   switch (filter.tag) {
     case 'Achromatomaly':
       return matrices.achromatomaly()

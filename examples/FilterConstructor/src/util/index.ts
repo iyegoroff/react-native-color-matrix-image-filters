@@ -1,5 +1,3 @@
-import { swap } from './swap'
-import { shallowEqual } from './shallow-equal'
-import { TestUtil } from './test-util'
-
-export const Util = { swap, TestUtil, shallowEqual }
+export * from './swap'
+export * from './shallow-equal'
+export * from './test-util'

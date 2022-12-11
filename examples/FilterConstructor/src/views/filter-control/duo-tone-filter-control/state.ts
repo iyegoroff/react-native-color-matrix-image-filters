@@ -1,5 +1,5 @@
 import { UpdateMap } from 'react-use-backlash'
-import { DuoToneFilter } from '../../../domain/filters/types'
+import { DuoToneFilter } from '../../../domain'
 
 type State = undefined
 

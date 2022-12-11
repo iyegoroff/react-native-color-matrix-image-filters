@@ -1,10 +1,8 @@
 import { Command, UpdateMap } from 'react-use-backlash'
-import { ResizeMode } from '../../domain/types'
-import { Util } from '../../util'
-import { Services } from '../../services/types'
-import { Filter } from '../../domain/filters/types'
-
-const { swap, shallowEqual } = Util
+import { ResizeMode } from '../../domain'
+import { swap, shallowEqual } from '../../util'
+import { Filter } from '../../domain'
+import { ImagePicker } from '../../services'
 
 export type Id = `${number}`
 
@@ -27,13 +25,11 @@ type Actions = {
   updateFilter: [id: Id, filter: Filter]
   moveFilterUp: [id: Id]
   moveFilterDown: [id: Id]
-  takePhoto: []
-  photoTaken: [image: { uri: string }]
+  takePhoto: [source: 'camera' | 'library']
+  updatePhoto: [image: { uri: string }]
 }
 
-type Injects = {
-  takePhoto: Services['ImagePicker']['takePhoto']
-}
+type Injects = ImagePicker
 
 export const init = (staticImage: number): Command<State, Actions, Injects> => [
   {
@@ -102,15 +98,15 @@ export const updates: UpdateMap<State, Actions, Injects> = {
     return [{ ...state, filters: nextFilters }]
   },
 
-  takePhoto: (state) => [
+  takePhoto: (state, source) => [
     state,
-    async ({ photoTaken }, { takePhoto }) => {
-      const photo = await takePhoto()
+    async ({ updatePhoto }, { pickPhotoFromLibrary, takePhotoFromCamera }) => {
+      const photo = await (source === 'camera' ? takePhotoFromCamera : pickPhotoFromLibrary)()
       if (photo !== 'canceled') {
-        photoTaken(photo)
+        updatePhoto(photo)
       }
     }
   ],
 
-  photoTaken: (state, image) => [{ ...state, image }]
+  updatePhoto: (state, image) => [{ ...state, image }]
 }

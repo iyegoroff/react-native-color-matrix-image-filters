@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react'
-import { Domain } from '../../domain'
-import { AmountFilter } from '../../domain/filters/types'
+import { Filters, AmountFilter } from '../../domain'
 import { SliderControl } from '../slider-control'
 
 type Props = AmountFilter & {
@@ -19,7 +18,7 @@ export const AmountFilterControl = React.memo(function AmountFilterControl({
     [update, tag]
   )
 
-  const { amount: minMax } = Domain.Filters.filterControlConstraints[tag]
+  const { amount: minMax } = Filters.filterControlConstraints[tag]
 
   return <SliderControl {...minMax} name={'amount'} value={amount} onChange={onChange} />
 })

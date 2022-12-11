@@ -1,5 +1,5 @@
 import { UpdateMap } from 'react-use-backlash'
-import { RGBAFilter } from '../../../domain/filters/types'
+import { RGBAFilter } from '../../../domain'
 
 type State = undefined
 

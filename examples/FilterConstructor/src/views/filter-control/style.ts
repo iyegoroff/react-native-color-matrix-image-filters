@@ -8,7 +8,8 @@ const container: ViewStyle = {
   borderWidth: 1,
   borderRadius,
   width: '100%',
-  padding: 3
+  padding: 3,
+  backgroundColor: 'aliceblue'
 }
 
 const label: TextStyle = {

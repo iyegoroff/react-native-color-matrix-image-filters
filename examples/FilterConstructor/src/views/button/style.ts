@@ -11,7 +11,7 @@ const container: ViewStyle = {
   borderWidth: 1,
   borderRadius,
   height: controlHeight,
-  minWidth: 70
+  flexGrow: 1
 }
 
 const disabledContainer: ViewStyle = {

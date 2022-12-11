@@ -12,6 +12,8 @@ const takePhoto = (launch: typeof launchCamera | typeof launchImageLibrary) => a
 }
 
 export const ImagePicker = {
-  takePhoto: takePhoto(launchCamera),
-  selectPhotoFromLibrary: takePhoto(launchImageLibrary)
+  takePhotoFromCamera: takePhoto(launchCamera),
+  pickPhotoFromLibrary: takePhoto(launchImageLibrary)
 } as const
+
+export type ImagePicker = typeof ImagePicker

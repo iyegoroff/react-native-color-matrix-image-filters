@@ -1,6 +1,6 @@
 import { swap } from './swap'
 
-describe('swap', () => {
+describe('swap items', () => {
   test('should swap items inside array', () => {
     const arr = [10, 20, 30, 40, 50]
     const exp = [10, 20, 40, 30, 50]

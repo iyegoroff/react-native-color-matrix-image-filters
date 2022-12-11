@@ -1,10 +1,10 @@
 import { cleanup, renderHook, act } from '@testing-library/react'
 import { useBacklash } from 'react-use-backlash'
-import { RGBAFilter } from '../../../domain/filters/types'
-import { Util } from '../../../util'
+import { RGBAFilter } from '../../../domain'
+import { TestUtil } from '../../../util'
 import { init, updates } from './state'
 
-const { getState, getActions } = Util.TestUtil
+const { getState, getActions } = TestUtil
 
 describe('RGBAFilterControl', () => {
   afterEach(cleanup)

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useBacklash } from 'react-use-backlash'
-import { Domain } from '../../../domain'
+import { Filters } from '../../../domain'
 import { SegmentedColorControl } from '../../segmented-control'
 import { SliderControl } from '../../slider-control'
 import { separator } from '../separator'
@@ -20,7 +20,7 @@ export const ColorToneFilterControl = React.memo(function ColorToneFilterControl
     toned: tonedMinMax,
     lightColor: { variants: lightColorVariants },
     darkColor: { variants: darkColorVariants }
-  } = Domain.Filters.filterControlConstraints[tag]
+  } = Filters.filterControlConstraints[tag]
 
   return (
     <>

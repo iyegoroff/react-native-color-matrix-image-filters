@@ -1,8 +1,11 @@
-import { Services } from '../../services'
+import { ColorMatrices } from '../../services'
 import { filterControlConstraints, filters, matrix } from './filters'
 
 export const Filters = {
-  filterControlConstraints,
   filters,
-  matrix: matrix(Services.ColorMatrices)
+  filterControlConstraints,
+  matrix: matrix(ColorMatrices)
 } as const
+
+export type Filters = typeof Filters
+export * from './types'

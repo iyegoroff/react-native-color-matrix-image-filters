@@ -1,10 +1,10 @@
 import { cleanup, renderHook, act } from '@testing-library/react'
 import { useBacklash } from 'react-use-backlash'
-import { ColorToneFilter } from '../../../domain/filters/types'
-import { Util } from '../../../util'
+import { ColorToneFilter } from '../../../domain'
+import { TestUtil } from '../../../util'
 import { init, updates } from './state'
 
-const { getActions, getState } = Util.TestUtil
+const { getActions, getState } = TestUtil
 
 describe('ColorToneControl', () => {
   afterEach(cleanup)

@@ -13,12 +13,24 @@ const image: ImageStyle = {
   width: '100%'
 }
 
+const fullscreenImage: ImageStyle = {
+  height: '100%',
+  width: '100%'
+}
+
 const filterControlList: ViewStyle = {
+  width: '100%'
+}
+
+const pickerControls: ViewStyle = {
+  flexDirection: 'row',
   width: '100%'
 }
 
 export const styles = {
   container,
   image,
-  filterControlList
+  filterControlList,
+  pickerControls,
+  fullscreenImage
 } as const

@@ -1,5 +1,5 @@
 import React, { StrictMode } from 'react'
-import { FlatList, Image, SafeAreaView } from 'react-native'
+import { FlatList, SafeAreaView, View } from 'react-native'
 import { useBacklash } from 'react-use-backlash'
 import { usePipe } from 'use-pipe-ts'
 import { Button } from '../button'
@@ -9,20 +9,18 @@ import { SelectModal } from '../select-modal'
 import { init, updates } from './state'
 import { styles } from './styles'
 import { renderFilterControl } from './render-filter-control'
-import { ColorMatrix, concatColorMatrices, normal } from 'react-native-color-matrix-image-filters'
-import { Services } from '../../services'
-import { Domain } from '../../domain'
+import { concatColorMatrices, normal } from 'react-native-color-matrix-image-filters'
+import { ImagePicker } from '../../services'
+import { Filters, resizeModes } from '../../domain'
+import { FilteredImage } from './FilteredImage'
 
 declare const require: (name: string) => number
 
-const {
-  Filters: { filters: availableFilters, matrix },
-  ResizeModes: { resizeModes }
-} = Domain
+const { filters: availableFilters, matrix } = Filters
 
-const injects = { takePhoto: Services.ImagePicker.takePhoto }
+const injects = { ...ImagePicker }
 
-const defaultImage = require('../../mini-parrot.jpg')
+const defaultImage = require('../../../mini-parrot.jpg')
 
 const Separator = () => <Gap size={5} />
 
@@ -51,19 +49,18 @@ const Root = () => {
     filters.length
   ])
 
+  const takePhotoFromCamera = usePipe([takePhoto, 'camera'])
+  const pickPhotoFromLibrary = usePipe([takePhoto, 'library'])
+  const calculatedMatrix = concatColorMatrices(normal(), ...filters.map(matrix))
+
   return (
     <SafeAreaView style={styles.container}>
-      <ColorMatrix
+      <FilteredImage
         style={styles.image}
-        matrix={concatColorMatrices(normal(), ...filters.map(matrix))}
-      >
-        <Image
-          source={'static' in image ? image.static : image}
-          style={styles.image}
-          resizeMode={selectedResizeMode}
-          key={selectedResizeMode}
-        />
-      </ColorMatrix>
+        matrix={calculatedMatrix}
+        image={image}
+        resizeMode={selectedResizeMode}
+      />
       <Gap size={5} />
       <SegmentedLabelControl
         items={resizeModes}
@@ -71,7 +68,11 @@ const Root = () => {
         onSelect={selectResizeMode}
       />
       <Gap size={5} />
-      <Button label={'take photo'} onPress={takePhoto} />
+      <View style={styles.pickerControls}>
+        <Button label={'take photo'} onPress={takePhotoFromCamera} />
+        <Gap size={5} />
+        <Button label={'pick photo'} onPress={pickPhotoFromLibrary} />
+      </View>
       <Gap size={5} />
       <FlatList
         style={styles.filterControlList}

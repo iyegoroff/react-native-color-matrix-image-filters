@@ -1,6 +1,6 @@
 import React from 'react'
 import { useBacklash } from 'react-use-backlash'
-import { Domain } from '../../../domain'
+import { Filters } from '../../../domain'
 import { SliderControl } from '../../slider-control'
 import { separator } from '../separator'
 import { init, updates, Injects as Props } from './state'
@@ -10,12 +10,7 @@ export const RGBAFilterControl = React.memo(function RGBAFilterControl(props: Pr
 
   const { tag, r, g, b, a } = props
 
-  const {
-    r: rMinMax,
-    g: gMinMax,
-    b: bMinMax,
-    a: aMinMax
-  } = Domain.Filters.filterControlConstraints[tag]
+  const { r: rMinMax, g: gMinMax, b: bMinMax, a: aMinMax } = Filters.filterControlConstraints[tag]
 
   return (
     <>

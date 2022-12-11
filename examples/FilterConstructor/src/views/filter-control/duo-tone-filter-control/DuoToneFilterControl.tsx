@@ -1,6 +1,6 @@
 import React from 'react'
 import { useBacklash } from 'react-use-backlash'
-import { Domain } from '../../../domain'
+import { Filters } from '../../../domain'
 import { SegmentedColorControl } from '../../segmented-control'
 import { separator } from '../separator'
 
@@ -14,7 +14,7 @@ export const DuoToneFilterControl = React.memo(function DuoToneFilterControl(pro
   const {
     first: { variants: firstVariants },
     second: { variants: secondVariants }
-  } = Domain.Filters.filterControlConstraints[tag]
+  } = Filters.filterControlConstraints[tag]
 
   return (
     <>

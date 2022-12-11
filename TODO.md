@@ -1,6 +1,7 @@
 - FilterConstructor
   - tests with react-testing-library
-  - selectPhotoFromLibrary
   - fix ios
   - handle takePhoto error
   - typecheck test
+  - lightbox modal
+  - split logic for image & filters

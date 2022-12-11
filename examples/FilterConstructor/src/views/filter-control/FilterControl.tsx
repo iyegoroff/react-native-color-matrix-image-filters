@@ -7,7 +7,7 @@ import { DuoToneFilterControl } from './duo-tone-filter-control'
 import { RGBAFilterControl } from './rgba-filter-control'
 import { Button } from '../button'
 import { separator } from './separator'
-import { Filter } from '../../domain/filters/types'
+import { Filter } from '../../domain'
 
 type Props = Filter & {
   update: (filter: Filter) => void

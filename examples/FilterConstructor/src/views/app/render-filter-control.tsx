@@ -1,7 +1,7 @@
 import React from 'react'
 import { ListRenderItemInfo } from 'react-native'
 import { usePipe } from 'use-pipe-ts'
-import { Filter } from '../../domain/filters/types'
+import { Filter } from '../../domain'
 import { FilterControl } from '../filter-control'
 import { Id, KeyedFilter } from './state'
 

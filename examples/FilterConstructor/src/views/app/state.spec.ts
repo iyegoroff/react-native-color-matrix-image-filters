@@ -1,11 +1,14 @@
 import { cleanup, renderHook, act } from '@testing-library/react'
 import { useBacklash } from 'react-use-backlash'
-import { Util } from '../../util'
+import { TestUtil } from '../../util'
 import { init, updates } from './state'
 
-const { getActions, getState, delay } = Util.TestUtil
+const { getActions, getState, delay } = TestUtil
 
-const noopTakePhoto = () => Promise.resolve('canceled' as const)
+const noopInjects = {
+  takePhotoFromCamera: () => Promise.resolve('canceled' as const),
+  pickPhotoFromLibrary: () => Promise.resolve('canceled' as const)
+}
 
 const initialState = {
   selectedResizeMode: 'center',
@@ -19,66 +22,56 @@ describe('App', () => {
   afterEach(cleanup)
 
   test('init', () => {
-    const hook = renderHook(() => useBacklash(() => init(0), updates, { takePhoto: noopTakePhoto }))
+    const hook = renderHook(() => useBacklash(() => init(0), updates, noopInjects))
 
     expect(getState(hook)).toEqual(initialState)
   })
 
   test('should select resize mode', async () => {
-    const hook = renderHook(() => useBacklash(() => init(0), updates, { takePhoto: noopTakePhoto }))
-
-    const { selectResizeMode } = getActions(hook)
+    const hook = renderHook(() => useBacklash(() => init(0), updates, noopInjects))
 
     await act(() => {
-      selectResizeMode('contain')
+      getActions(hook).selectResizeMode('contain')
     })
 
     expect(getState(hook).selectedResizeMode).toEqual('contain')
   })
 
   test('should keep same state when selecting same resize mode', async () => {
-    const hook = renderHook(() => useBacklash(() => init(0), updates, { takePhoto: noopTakePhoto }))
-
-    const { selectResizeMode } = getActions(hook)
+    const hook = renderHook(() => useBacklash(() => init(0), updates, noopInjects))
 
     await act(() => {
-      selectResizeMode('center')
+      getActions(hook).selectResizeMode('center')
     })
 
     expect(getState(hook)).toEqual(initialState)
   })
 
   test('should start adding filter', async () => {
-    const hook = renderHook(() => useBacklash(() => init(0), updates, { takePhoto: noopTakePhoto }))
-
-    const { startAddFilter } = getActions(hook)
+    const hook = renderHook(() => useBacklash(() => init(0), updates, noopInjects))
 
     await act(() => {
-      startAddFilter()
+      getActions(hook).startAddFilter()
     })
 
     expect(getState(hook).isAddingFilter).toEqual(true)
   })
 
   test('should cancel adding filter', async () => {
-    const hook = renderHook(() => useBacklash(() => init(0), updates, { takePhoto: noopTakePhoto }))
-
-    const { cancelAddFilter } = getActions(hook)
+    const hook = renderHook(() => useBacklash(() => init(0), updates, noopInjects))
 
     await act(() => {
-      cancelAddFilter()
+      getActions(hook).cancelAddFilter()
     })
 
     expect(getState(hook).isAddingFilter).toEqual(false)
   })
 
   test('should confirm adding filter', async () => {
-    const hook = renderHook(() => useBacklash(() => init(0), updates, { takePhoto: noopTakePhoto }))
-
-    const { confirmAddFilter } = getActions(hook)
+    const hook = renderHook(() => useBacklash(() => init(0), updates, noopInjects))
 
     await act(() => {
-      confirmAddFilter({ tag: 'Browni' })
+      getActions(hook).confirmAddFilter({ tag: 'Browni' })
     })
 
     expect(getState(hook)).toEqual({
@@ -89,12 +82,10 @@ describe('App', () => {
   })
 
   test('should confirm adding filter', async () => {
-    const hook = renderHook(() => useBacklash(() => init(0), updates, { takePhoto: noopTakePhoto }))
-
-    const { confirmAddFilter } = getActions(hook)
+    const hook = renderHook(() => useBacklash(() => init(0), updates, noopInjects))
 
     await act(() => {
-      confirmAddFilter({ tag: 'Browni' })
+      getActions(hook).confirmAddFilter({ tag: 'Browni' })
     })
 
     expect(getState(hook)).toEqual({
@@ -109,14 +100,12 @@ describe('App', () => {
       useBacklash(
         () => [{ ...initialState, nextId: 1, filters: [{ tag: 'Browni', id: '0' } as const] }],
         updates,
-        { takePhoto: noopTakePhoto }
+        noopInjects
       )
     )
 
-    const { removeFilter } = getActions(hook)
-
     await act(() => {
-      removeFilter('0')
+      getActions(hook).removeFilter('0')
     })
 
     expect(getState(hook)).toEqual({ ...initialState, nextId: 1, filters: [] })
@@ -124,12 +113,10 @@ describe('App', () => {
 
   test('should keep same state if filter not exist', async () => {
     const state = { ...initialState, nextId: 1, filters: [{ tag: 'Browni', id: '0' } as const] }
-    const hook = renderHook(() => useBacklash(() => [state], updates, { takePhoto: noopTakePhoto }))
-
-    const { removeFilter } = getActions(hook)
+    const hook = renderHook(() => useBacklash(() => [state], updates, noopInjects))
 
     await act(() => {
-      removeFilter('1')
+      getActions(hook).removeFilter('1')
     })
 
     expect(getState(hook)).toBe(state)
@@ -144,12 +131,10 @@ describe('App', () => {
       ] as const
     }
 
-    const hook = renderHook(() => useBacklash(() => [state], updates, { takePhoto: noopTakePhoto }))
-
-    const { moveFilterUp } = getActions(hook)
+    const hook = renderHook(() => useBacklash(() => [state], updates, noopInjects))
 
     await act(() => {
-      moveFilterUp('1')
+      getActions(hook).moveFilterUp('1')
     })
 
     expect(getState(hook)).toEqual({
@@ -170,12 +155,10 @@ describe('App', () => {
       ] as const
     }
 
-    const hook = renderHook(() => useBacklash(() => [state], updates, { takePhoto: noopTakePhoto }))
-
-    const { moveFilterDown } = getActions(hook)
+    const hook = renderHook(() => useBacklash(() => [state], updates, noopInjects))
 
     await act(() => {
-      moveFilterDown('0')
+      getActions(hook).moveFilterDown('0')
     })
 
     expect(getState(hook)).toEqual({
@@ -193,12 +176,10 @@ describe('App', () => {
       filters: [{ tag: 'Brightness', amount: 0.5, id: '0' }] as const
     }
 
-    const hook = renderHook(() => useBacklash(() => [state], updates, { takePhoto: noopTakePhoto }))
-
-    const { updateFilter } = getActions(hook)
+    const hook = renderHook(() => useBacklash(() => [state], updates, noopInjects))
 
     await act(() => {
-      updateFilter('0', { tag: 'Brightness', amount: 1 })
+      getActions(hook).updateFilter('0', { tag: 'Brightness', amount: 1 })
     })
 
     expect(getState(hook)).toEqual({
@@ -213,12 +194,10 @@ describe('App', () => {
       filters: [{ tag: 'Brightness', amount: 0.5, id: '0' }] as const
     }
 
-    const hook = renderHook(() => useBacklash(() => [state], updates, { takePhoto: noopTakePhoto }))
-
-    const { updateFilter } = getActions(hook)
+    const hook = renderHook(() => useBacklash(() => [state], updates, noopInjects))
 
     await act(() => {
-      updateFilter('0', { tag: 'Brightness', amount: 0.5 })
+      getActions(hook).updateFilter('0', { tag: 'Brightness', amount: 0.5 })
     })
 
     expect(getState(hook)).toBe(state)
@@ -230,25 +209,25 @@ describe('App', () => {
       filters: [{ tag: 'Brightness', amount: 0.5, id: '0' }] as const
     }
 
-    const hook = renderHook(() => useBacklash(() => [state], updates, { takePhoto: noopTakePhoto }))
-
-    const { updateFilter } = getActions(hook)
+    const hook = renderHook(() => useBacklash(() => [state], updates, noopInjects))
 
     await act(() => {
-      updateFilter('1', { tag: 'Browni' })
+      getActions(hook).updateFilter('1', { tag: 'Browni' })
     })
 
     expect(getState(hook)).toBe(state)
   })
 
   test('should take photo', async () => {
-    const fakePhoto = () => Promise.resolve({ uri: 'It is a photo!' })
-    const hook = renderHook(() => useBacklash(() => init(0), updates, { takePhoto: fakePhoto }))
+    const injects = {
+      ...noopInjects,
+      takePhotoFromCamera: () => Promise.resolve({ uri: 'It is a photo!' })
+    }
 
-    const { takePhoto } = getActions(hook)
+    const hook = renderHook(() => useBacklash(() => init(0), updates, injects))
 
     await act(() => {
-      takePhoto()
+      getActions(hook).takePhoto('camera')
 
       return delay(1)
     })
@@ -260,15 +239,15 @@ describe('App', () => {
   })
 
   test('should keep same state when takePhoto was canceled', async () => {
-    const fakePhoto = () => Promise.resolve('canceled' as const)
-    const hook = renderHook(() =>
-      useBacklash(() => [initialState], updates, { takePhoto: fakePhoto })
-    )
+    const injects = {
+      ...noopInjects,
+      takePhotoFromCamera: () => Promise.resolve('canceled' as const)
+    }
 
-    const { takePhoto } = getActions(hook)
+    const hook = renderHook(() => useBacklash(() => [initialState], updates, injects))
 
     await act(() => {
-      takePhoto()
+      getActions(hook).takePhoto('camera')
 
       return delay(1)
     })
