@@ -6,7 +6,8 @@ import { Button } from '../button'
 import { Gap } from '../gap'
 import { SegmentedLabelControl } from '../segmented-control'
 import { SelectModal } from '../select-modal'
-import { init, updates } from './state'
+import { FilterSelection } from './filter-selection'
+import { ImageSelection } from './image-selection'
 import { styles } from './styles'
 import { renderFilterControl } from './render-filter-control'
 import { concatColorMatrices, normal } from 'react-native-color-matrix-image-filters'
@@ -26,19 +27,22 @@ const Separator = () => <Gap size={5} />
 
 const Root = () => {
   const [
-    { selectedResizeMode, isAddingFilter, filters, image },
+    { isAddingFilter, filters },
     {
-      selectResizeMode,
       startAddFilter,
       cancelAddFilter,
       confirmAddFilter,
       updateFilter,
       removeFilter,
       moveFilterDown,
-      moveFilterUp,
-      takePhoto
+      moveFilterUp
     }
-  ] = useBacklash(() => init(defaultImage), updates, injects)
+  ] = useBacklash(FilterSelection.init, FilterSelection.updates)
+
+  const [
+    { selectedResizeMode, image },
+    { selectResizeMode, takePhotoFromCamera, pickPhotoFromLibrary }
+  ] = useBacklash(() => ImageSelection.init(defaultImage), ImageSelection.updates, injects)
 
   const renderFilter = usePipe([
     renderFilterControl,
@@ -49,8 +53,6 @@ const Root = () => {
     filters.length
   ])
 
-  const takePhotoFromCamera = usePipe([takePhoto, 'camera'])
-  const pickPhotoFromLibrary = usePipe([takePhoto, 'library'])
   const calculatedMatrix = concatColorMatrices(normal(), ...filters.map(matrix))
 
   return (

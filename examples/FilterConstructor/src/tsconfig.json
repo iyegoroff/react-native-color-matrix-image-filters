@@ -4,6 +4,7 @@
     "strict": true,
     "jsx": "react-native",
     "lib": ["es2016"],
+    "outDir": "build",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
@@ -14,6 +15,7 @@
     "noUnusedParameters": true,
     "allowUnreachableCode": false,
     "noUncheckedIndexedAccess": true,
-    "types": ["react-native", "jest"]
+    "isolatedModules": true,
+    "types": ["jest"]
   }
 }

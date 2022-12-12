@@ -126,7 +126,7 @@ export const filterControlConstraints = {
   Warm: {}
 } as const satisfies Record<Filter['tag'], unknown>
 
-export const matrix = (matrices: ColorMatrices) => (filter: Filter) => {
+export const matrix = (matrices: typeof ColorMatrices) => (filter: Filter) => {
   switch (filter.tag) {
     case 'Achromatomaly':
       return matrices.achromatomaly()

@@ -3,7 +3,7 @@ import { ListRenderItemInfo } from 'react-native'
 import { usePipe } from 'use-pipe-ts'
 import { Filter } from '../../domain'
 import { FilterControl } from '../filter-control'
-import { Id, KeyedFilter } from './state'
+import { Id, KeyedFilter } from './filter-selection'
 
 type OnUpdate = (id: Id, filter: Filter) => void
 type OnListAction = (id: Id) => void

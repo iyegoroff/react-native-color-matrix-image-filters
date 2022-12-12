@@ -7,5 +7,4 @@ export const Filters = {
   matrix: matrix(ColorMatrices)
 } as const
 
-export type Filters = typeof Filters
 export * from './types'

@@ -1,7 +1,5 @@
 - FilterConstructor
-  - tests with react-testing-library
+  - move color matrices to filter-selection
   - fix ios
   - handle takePhoto error
-  - typecheck test
   - lightbox modal
-  - split logic for image & filters
