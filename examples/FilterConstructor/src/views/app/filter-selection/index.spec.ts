@@ -1,4 +1,5 @@
-import { cleanup, renderHook, act } from '@testing-library/react'
+import { renderHook } from 'react-hook-testing'
+import { act } from 'react-test-renderer'
 import { useBacklash } from 'react-use-backlash'
 import { TestUtil } from '../../../util'
 import { FilterSelection } from '.'
@@ -14,16 +15,14 @@ const initialState = {
 } as const
 
 describe('FilterSelection', () => {
-  afterEach(cleanup)
-
-  test('init', () => {
-    const hook = renderHook(() => useBacklash(init, updates))
+  test('init', async () => {
+    const hook = await renderHook(() => useBacklash(init, updates))
 
     expect(getState(hook)).toEqual(initialState)
   })
 
   test('should start adding filter', async () => {
-    const hook = renderHook(() => useBacklash(init, updates))
+    const hook = await renderHook(() => useBacklash(init, updates))
 
     await act(() => {
       getActions(hook).startAddFilter()
@@ -33,7 +32,7 @@ describe('FilterSelection', () => {
   })
 
   test('should cancel adding filter', async () => {
-    const hook = renderHook(() => useBacklash(init, updates))
+    const hook = await renderHook(() => useBacklash(init, updates))
 
     await act(() => {
       getActions(hook).cancelAddFilter()
@@ -43,7 +42,7 @@ describe('FilterSelection', () => {
   })
 
   test('should confirm adding filter', async () => {
-    const hook = renderHook(() => useBacklash(init, updates))
+    const hook = await renderHook(() => useBacklash(init, updates))
 
     await act(() => {
       getActions(hook).confirmAddFilter({ tag: 'Browni' })
@@ -57,7 +56,7 @@ describe('FilterSelection', () => {
   })
 
   test('should confirm adding filter', async () => {
-    const hook = renderHook(() => useBacklash(init, updates))
+    const hook = await renderHook(() => useBacklash(init, updates))
 
     await act(() => {
       getActions(hook).confirmAddFilter({ tag: 'Browni' })
@@ -71,7 +70,7 @@ describe('FilterSelection', () => {
   })
 
   test('should remove existing filter', async () => {
-    const hook = renderHook(() =>
+    const hook = await renderHook(() =>
       useBacklash(
         () => [{ ...initialState, nextId: 1, filters: [{ tag: 'Browni', id: '0' } as const] }],
         updates
@@ -87,7 +86,7 @@ describe('FilterSelection', () => {
 
   test('should keep same state if filter not exist', async () => {
     const state = { ...initialState, nextId: 1, filters: [{ tag: 'Browni', id: '0' } as const] }
-    const hook = renderHook(() => useBacklash(() => [state], updates))
+    const hook = await renderHook(() => useBacklash(() => [state], updates))
 
     await act(() => {
       getActions(hook).removeFilter('1')
@@ -105,7 +104,7 @@ describe('FilterSelection', () => {
       ] as const
     }
 
-    const hook = renderHook(() => useBacklash(() => [state], updates))
+    const hook = await renderHook(() => useBacklash(() => [state], updates))
 
     await act(() => {
       getActions(hook).moveFilterUp('1')
@@ -129,7 +128,7 @@ describe('FilterSelection', () => {
       ] as const
     }
 
-    const hook = renderHook(() => useBacklash(() => [state], updates))
+    const hook = await renderHook(() => useBacklash(() => [state], updates))
 
     await act(() => {
       getActions(hook).moveFilterUp('2')
@@ -147,7 +146,7 @@ describe('FilterSelection', () => {
       ] as const
     }
 
-    const hook = renderHook(() => useBacklash(() => [state], updates))
+    const hook = await renderHook(() => useBacklash(() => [state], updates))
 
     await act(() => {
       getActions(hook).moveFilterDown('0')
@@ -171,7 +170,7 @@ describe('FilterSelection', () => {
       ] as const
     }
 
-    const hook = renderHook(() => useBacklash(() => [state], updates))
+    const hook = await renderHook(() => useBacklash(() => [state], updates))
 
     await act(() => {
       getActions(hook).moveFilterDown('2')
@@ -186,7 +185,7 @@ describe('FilterSelection', () => {
       filters: [{ tag: 'Brightness', amount: 0.5, id: '0' }] as const
     }
 
-    const hook = renderHook(() => useBacklash(() => [state], updates))
+    const hook = await renderHook(() => useBacklash(() => [state], updates))
 
     await act(() => {
       getActions(hook).updateFilter('0', { tag: 'Brightness', amount: 1 })
@@ -204,7 +203,7 @@ describe('FilterSelection', () => {
       filters: [{ tag: 'Brightness', amount: 0.5, id: '0' }] as const
     }
 
-    const hook = renderHook(() => useBacklash(() => [state], updates))
+    const hook = await renderHook(() => useBacklash(() => [state], updates))
 
     await act(() => {
       getActions(hook).updateFilter('0', { tag: 'Brightness', amount: 0.5 })
@@ -219,7 +218,7 @@ describe('FilterSelection', () => {
       filters: [{ tag: 'Brightness', amount: 0.5, id: '0' }] as const
     }
 
-    const hook = renderHook(() => useBacklash(() => [state], updates))
+    const hook = await renderHook(() => useBacklash(() => [state], updates))
 
     await act(() => {
       getActions(hook).updateFilter('1', { tag: 'Browni' })

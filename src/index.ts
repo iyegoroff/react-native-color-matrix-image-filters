@@ -4,7 +4,7 @@ export * from './color-matrix-filters'
 import { concatColorMatrices as legacyConcat } from 'concat-color-matrices'
 
 export const concatColorMatrices = (...matrices: Parameters<typeof legacyConcat>[0]) =>
-  legacyConcat(matrices)
+  matrices.length === 0 ? filters.normal() : legacyConcat(matrices)
 
 export const achromatomaly = filters.achromatomaly
 export const achromatopsia = filters.achromatopsia

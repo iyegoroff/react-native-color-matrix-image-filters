@@ -6,9 +6,6 @@ const getState = <State, Actions>(hook: Hook<State, Actions>) => hook.result.cur
 
 const getActions = <State, Actions>(hook: Hook<State, Actions>) => hook.result.current[1]
 
-const delay = (ms: number) =>
-  new Promise((resolve) => {
-    setTimeout(() => resolve(undefined), ms)
-  })
+const delay = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms))
 
 export const TestUtil = { getState, getActions, delay } as const

@@ -1,4 +1,5 @@
-import { cleanup, renderHook, act } from '@testing-library/react'
+import { renderHook } from 'react-hook-testing'
+import { act } from 'react-test-renderer'
 import { useBacklash } from 'react-use-backlash'
 import { TestUtil } from '../../../util'
 import { ImageSelection } from '.'
@@ -19,16 +20,14 @@ const initialState = {
 } as const
 
 describe('ImageSelection', () => {
-  afterEach(cleanup)
-
-  test('init', () => {
-    const hook = renderHook(() => useBacklash(() => init(0), updates, noopInjects))
+  test('init', async () => {
+    const hook = await renderHook(() => useBacklash(() => init(0), updates, noopInjects))
 
     expect(getState(hook)).toEqual(initialState)
   })
 
   test('should select resize mode', async () => {
-    const hook = renderHook(() => useBacklash(() => [initialState], updates, noopInjects))
+    const hook = await renderHook(() => useBacklash(() => [initialState], updates, noopInjects))
 
     await act(() => {
       getActions(hook).selectResizeMode('contain')
@@ -38,7 +37,7 @@ describe('ImageSelection', () => {
   })
 
   test('should keep same state when selecting same resize mode', async () => {
-    const hook = renderHook(() => useBacklash(() => [initialState], updates, noopInjects))
+    const hook = await renderHook(() => useBacklash(() => [initialState], updates, noopInjects))
 
     await act(() => {
       getActions(hook).selectResizeMode('center')
@@ -53,7 +52,7 @@ describe('ImageSelection', () => {
       takePhotoFromCamera: () => Promise.resolve({ uri: 'It is a photo!' })
     }
 
-    const hook = renderHook(() => useBacklash(() => [initialState], updates, injects))
+    const hook = await renderHook(() => useBacklash(() => [initialState], updates, injects))
 
     await act(() => {
       getActions(hook).takePhotoFromCamera()
@@ -73,7 +72,7 @@ describe('ImageSelection', () => {
       pickPhotoFromLibrary: () => Promise.resolve({ uri: 'It is a photo!' })
     }
 
-    const hook = renderHook(() => useBacklash(() => [initialState], updates, injects))
+    const hook = await renderHook(() => useBacklash(() => [initialState], updates, injects))
 
     await act(() => {
       getActions(hook).pickPhotoFromLibrary()
@@ -93,7 +92,7 @@ describe('ImageSelection', () => {
       takePhotoFromCamera: () => Promise.resolve('canceled' as const)
     }
 
-    const hook = renderHook(() => useBacklash(() => [initialState], updates, injects))
+    const hook = await renderHook(() => useBacklash(() => [initialState], updates, injects))
 
     await act(() => {
       getActions(hook).takePhotoFromCamera()
@@ -105,7 +104,7 @@ describe('ImageSelection', () => {
   })
 
   test('should set isFullScreen true on enterFullScreen', async () => {
-    const hook = renderHook(() => useBacklash(() => [initialState], updates, noopInjects))
+    const hook = await renderHook(() => useBacklash(() => [initialState], updates, noopInjects))
 
     await act(() => {
       getActions(hook).enterFullScreen()
@@ -119,7 +118,7 @@ describe('ImageSelection', () => {
 
   test('should keep same state on enterFullScreen if isFullScreen is true', async () => {
     const state = { ...initialState, isFullScreen: true }
-    const hook = renderHook(() => useBacklash(() => [state], updates, noopInjects))
+    const hook = await renderHook(() => useBacklash(() => [state], updates, noopInjects))
 
     await act(() => {
       getActions(hook).enterFullScreen()
@@ -130,7 +129,7 @@ describe('ImageSelection', () => {
 
   test('should set isFullScreen false on leaveFullScreen', async () => {
     const state = { ...initialState, isFullScreen: true }
-    const hook = renderHook(() => useBacklash(() => [state], updates, noopInjects))
+    const hook = await renderHook(() => useBacklash(() => [state], updates, noopInjects))
 
     await act(() => {
       getActions(hook).leaveFullScreen()
@@ -144,7 +143,7 @@ describe('ImageSelection', () => {
 
   test('should keep same state on leaveFullScreen if isFullScreen is false', async () => {
     const state = { ...initialState, isFullScreen: false }
-    const hook = renderHook(() => useBacklash(() => [state], updates, noopInjects))
+    const hook = await renderHook(() => useBacklash(() => [state], updates, noopInjects))
 
     await act(() => {
       getActions(hook).leaveFullScreen()

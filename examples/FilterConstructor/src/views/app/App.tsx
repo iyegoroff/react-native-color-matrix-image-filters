@@ -10,7 +10,7 @@ import { FilterSelection } from './filter-selection'
 import { ImageSelection } from './image-selection'
 import { styles } from './styles'
 import { renderFilterControl } from './render-filter-control'
-import { concatColorMatrices, normal } from 'react-native-color-matrix-image-filters'
+import { concatColorMatrices } from 'react-native-color-matrix-image-filters'
 import { ImagePicker } from '../../services'
 import { Filters, resizeModes } from '../../domain'
 import { FilteredImage } from './FilteredImage'
@@ -53,7 +53,7 @@ const Root = () => {
     filters.length
   ])
 
-  const calculatedMatrix = concatColorMatrices(normal(), ...filters.map(matrix))
+  const calculatedMatrix = concatColorMatrices(...filters.map(matrix))
 
   return (
     <SafeAreaView style={styles.container}>

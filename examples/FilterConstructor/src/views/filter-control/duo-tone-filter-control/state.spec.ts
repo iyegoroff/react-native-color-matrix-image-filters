@@ -1,4 +1,5 @@
-import { cleanup, renderHook, act } from '@testing-library/react'
+import { renderHook } from 'react-hook-testing'
+import { act } from 'react-test-renderer'
 import { useBacklash } from 'react-use-backlash'
 import { DuoToneFilter } from '../../../domain'
 import { TestUtil } from '../../../util'
@@ -7,8 +8,6 @@ import { init, updates } from './state'
 const { getActions, getState } = TestUtil
 
 describe('DuoToneFilterControl', () => {
-  afterEach(cleanup)
-
   test('state', async () => {
     const filter = {
       tag: 'DuoTone' as const,
@@ -21,7 +20,7 @@ describe('DuoToneFilterControl', () => {
       filter.second = second
     }
 
-    const hook = renderHook(() => useBacklash(init, updates, { ...filter, update }))
+    const hook = await renderHook(() => useBacklash(init, updates, { ...filter, update }))
 
     const actions = getActions(hook)
 

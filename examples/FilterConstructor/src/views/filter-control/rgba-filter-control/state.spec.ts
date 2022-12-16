@@ -1,4 +1,5 @@
-import { cleanup, renderHook, act } from '@testing-library/react'
+import { renderHook } from 'react-hook-testing'
+import { act } from 'react-test-renderer'
 import { useBacklash } from 'react-use-backlash'
 import { RGBAFilter } from '../../../domain'
 import { TestUtil } from '../../../util'
@@ -7,8 +8,6 @@ import { init, updates } from './state'
 const { getState, getActions } = TestUtil
 
 describe('RGBAFilterControl', () => {
-  afterEach(cleanup)
-
   test('state', async () => {
     const filter = {
       tag: 'RGBA' as const,
@@ -25,7 +24,7 @@ describe('RGBAFilterControl', () => {
       filter.b = b
     }
 
-    const hook = renderHook(() => useBacklash(init, updates, { ...filter, update }))
+    const hook = await renderHook(() => useBacklash(init, updates, { ...filter, update }))
 
     const actions = getActions(hook)
 

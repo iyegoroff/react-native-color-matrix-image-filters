@@ -1,5 +1,5 @@
 import { UpdateMap } from 'react-use-backlash'
-import { ColorToneFilter } from '../../../domain/filters/types'
+import { ColorToneFilter } from '../../../domain'
 
 type State = undefined
 

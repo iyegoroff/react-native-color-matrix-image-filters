@@ -4,7 +4,7 @@ import { filterControlConstraints, filters, matrix } from './filters'
 export const Filters = {
   filters,
   filterControlConstraints,
-  matrix: matrix(ColorMatrices)
+  matrix: matrix(ColorMatrices.matrices)
 } as const
 
 export * from './types'
