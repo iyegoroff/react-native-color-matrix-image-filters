@@ -1,7 +1,7 @@
 import { renderHook } from 'react-hook-testing'
 import { act } from 'react-test-renderer'
 import { useBacklash } from 'react-use-backlash'
-import { noop, TestUtil } from '../../../util'
+import { noop, TestUtil } from '../../../utils'
 import { ImageSelection } from '.'
 
 const { init, updates } = ImageSelection

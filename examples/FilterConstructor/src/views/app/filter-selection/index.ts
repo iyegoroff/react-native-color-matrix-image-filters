@@ -1,5 +1,5 @@
 import { Command, UpdateMap } from 'react-use-backlash'
-import { swap, shallowEqual } from '../../../util'
+import { swap, shallowEqual } from '../../../utils'
 import { Filter } from '../../../domain'
 
 export type Id = `${number}`

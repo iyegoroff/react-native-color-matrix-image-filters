@@ -2,7 +2,7 @@ import { renderHook } from 'react-hook-testing'
 import { act } from 'react-test-renderer'
 import { useBacklash } from 'react-use-backlash'
 import { RGBAFilter } from '../../../domain'
-import { TestUtil } from '../../../util'
+import { TestUtil } from '../../../utils'
 import { init, updates } from './state'
 
 const { getState, getActions } = TestUtil

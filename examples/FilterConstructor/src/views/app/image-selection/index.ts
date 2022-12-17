@@ -1,7 +1,7 @@
 import { Command, UpdateMap } from 'react-use-backlash'
 import { ResizeMode } from '../../../domain'
 import { Alert, ImagePicker } from '../../../services'
-import { errorMessage } from '../../../util'
+import { errorMessage } from '../../../utils'
 
 type State = {
   selectedResizeMode: ResizeMode

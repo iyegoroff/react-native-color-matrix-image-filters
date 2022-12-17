@@ -1,7 +1,7 @@
 import { renderHook } from 'react-hook-testing'
 import { act } from 'react-test-renderer'
 import { useBacklash } from 'react-use-backlash'
-import { TestUtil } from '../../../util'
+import { TestUtil } from '../../../utils'
 import { FilterSelection } from '.'
 
 const { init, updates } = FilterSelection

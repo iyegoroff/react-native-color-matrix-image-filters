@@ -9,15 +9,15 @@
       {
         "zones": [
           {
-            "target": "./examples/FilterConstructor/src/util",
+            "target": "./examples/FilterConstructor/src/utils",
             "from": "./examples/FilterConstructor/src/services"
           },
           {
-            "target": "./examples/FilterConstructor/src/util",
+            "target": "./examples/FilterConstructor/src/utils",
             "from": "./examples/FilterConstructor/src/domain"
           },
           {
-            "target": "./examples/FilterConstructor/src/util",
+            "target": "./examples/FilterConstructor/src/utils",
             "from": "./examples/FilterConstructor/src/views"
           },
           {
