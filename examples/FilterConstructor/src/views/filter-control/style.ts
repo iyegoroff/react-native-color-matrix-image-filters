@@ -15,7 +15,7 @@ const container: ViewStyle = {
 const label: TextStyle = {
   fontWeight: 'bold',
   color: primaryColor,
-  flex: 1
+  flex: 4
 }
 
 const header: ViewStyle = {

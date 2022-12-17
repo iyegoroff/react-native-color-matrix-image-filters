@@ -1,2 +1,3 @@
 - FilterConstructor
-  - fix ios
+  - old arch
+  - readme & startup

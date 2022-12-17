@@ -5,6 +5,7 @@
   "scripts": {
     "postinstall": "patch-package",
     "android": "react-native run-android",
+    "pods": "RCT_NEW_ARCH_ENABLED=1 npx pod-install",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "check": "tsc -p ./src/tsconfig.build.json",
@@ -25,9 +26,7 @@
     "rn-color-matrices": "^4.1.0",
     "shallowequal": "^1.1.0",
     "ts-deep-readonly": "^0.0.5",
-    "ts-is-defined": "^3.0.4",
     "ts-react-memo": "^0.0.2",
-    "ts-tiny-invariant": "^2.0.4",
     "use-pipe-ts": "^2.0.2"
   },
   "devDependencies": {
@@ -40,15 +39,10 @@
     "@types/jest": "^29.2.3",
     "@types/shallowequal": "^1.1.1",
     "babel-jest": "^26.6.3",
-    "install": "^0.13.0",
     "jest": "^26.6.3",
     "metro-react-native-babel-preset": "0.72.3",
-    "npm": "^9.1.2",
     "patch-package": "^6.5.0",
     "react-hook-testing": "^0.0.1",
     "react-test-renderer": "18.1.0"
-  },
-  "jest": {
-    "preset": "react-native"
   }
 }
