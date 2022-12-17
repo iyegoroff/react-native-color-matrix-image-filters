@@ -1,5 +1,5 @@
 import React, { StrictMode } from 'react'
-import { FlatList, SafeAreaView, View } from 'react-native'
+import { FlatList, Modal, SafeAreaView, TouchableOpacity, View } from 'react-native'
 import { useBacklash } from 'react-use-backlash'
 import { usePipe } from 'use-pipe-ts'
 import { Button } from '../button'
@@ -10,20 +10,22 @@ import { FilterSelection } from './filter-selection'
 import { ImageSelection } from './image-selection'
 import { styles } from './styles'
 import { renderFilterControl } from './render-filter-control'
-import { concatColorMatrices } from 'react-native-color-matrix-image-filters'
-import { ImagePicker } from '../../services'
+import { ImagePicker, Alert } from '../../services'
 import { Filters, resizeModes } from '../../domain'
 import { FilteredImage } from './FilteredImage'
+import memoizeOne from 'memoize-one'
 
 declare const require: (name: string) => number
 
 const { filters: availableFilters, matrix } = Filters
 
-const injects = { ...ImagePicker }
+const injects = { ...ImagePicker, ...Alert }
 
 const defaultImage = require('../../../mini-parrot.jpg')
 
 const Separator = () => <Gap size={5} />
+
+const calculateMatrix = memoizeOne(matrix)
 
 const Root = () => {
   const [
@@ -40,8 +42,14 @@ const Root = () => {
   ] = useBacklash(FilterSelection.init, FilterSelection.updates)
 
   const [
-    { selectedResizeMode, image },
-    { selectResizeMode, takePhotoFromCamera, pickPhotoFromLibrary }
+    { selectedResizeMode, image, isFullScreen },
+    {
+      selectResizeMode,
+      takePhotoFromCamera,
+      pickPhotoFromLibrary,
+      enterFullScreen,
+      leaveFullScreen
+    }
   ] = useBacklash(() => ImageSelection.init(defaultImage), ImageSelection.updates, injects)
 
   const renderFilter = usePipe([
@@ -53,16 +61,18 @@ const Root = () => {
     filters.length
   ])
 
-  const calculatedMatrix = concatColorMatrices(...filters.map(matrix))
+  const calculatedMatrix = calculateMatrix(filters)
 
   return (
     <SafeAreaView style={styles.container}>
-      <FilteredImage
-        style={styles.image}
-        matrix={calculatedMatrix}
-        image={image}
-        resizeMode={selectedResizeMode}
-      />
+      <TouchableOpacity style={{ width: '100%' }} onPress={enterFullScreen}>
+        <FilteredImage
+          style={styles.image}
+          matrix={calculatedMatrix}
+          image={image}
+          resizeMode={selectedResizeMode}
+        />
+      </TouchableOpacity>
       <Gap size={5} />
       <SegmentedLabelControl
         items={resizeModes}
@@ -94,6 +104,23 @@ const Root = () => {
         onClose={cancelAddFilter}
         onSelect={confirmAddFilter}
       />
+      <Modal
+        visible={isFullScreen}
+        transparent={true}
+        style={styles.fullscreenImage}
+        animationType={'fade'}
+      >
+        <View style={styles.modalOverlay}>
+          <TouchableOpacity style={styles.frame} onPress={leaveFullScreen}>
+            <FilteredImage
+              style={styles.fullscreenImage}
+              matrix={calculatedMatrix}
+              image={image}
+              resizeMode={selectedResizeMode}
+            />
+          </TouchableOpacity>
+        </View>
+      </Modal>
     </SafeAreaView>
   )
 }

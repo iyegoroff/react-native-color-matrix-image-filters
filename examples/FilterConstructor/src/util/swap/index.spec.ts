@@ -1,4 +1,4 @@
-import { swap } from './swap'
+import { swap } from '.'
 
 describe('swap items', () => {
   test('should swap items inside array', () => {

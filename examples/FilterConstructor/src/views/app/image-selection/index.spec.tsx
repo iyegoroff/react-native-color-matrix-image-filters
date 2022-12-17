@@ -1,7 +1,7 @@
 import { renderHook } from 'react-hook-testing'
 import { act } from 'react-test-renderer'
 import { useBacklash } from 'react-use-backlash'
-import { TestUtil } from '../../../util'
+import { noop, TestUtil } from '../../../util'
 import { ImageSelection } from '.'
 
 const { init, updates } = ImageSelection
@@ -10,7 +10,8 @@ const { getActions, getState, delay } = TestUtil
 
 const noopInjects = {
   takePhotoFromCamera: () => Promise.resolve('canceled' as const),
-  pickPhotoFromLibrary: () => Promise.resolve('canceled' as const)
+  pickPhotoFromLibrary: () => Promise.resolve('canceled' as const),
+  showAlert: noop
 }
 
 const initialState = {
@@ -100,6 +101,27 @@ describe('ImageSelection', () => {
       return delay(1)
     })
 
+    expect(getState(hook)).toBe(initialState)
+  })
+
+  test('should handle error when takePhoto fails', async () => {
+    const injects = {
+      ...noopInjects,
+      showAlert: jest.fn((_: string, message: string) => {
+        expect(message).toEqual('rejected')
+      }),
+      takePhotoFromCamera: () => Promise.reject('rejected')
+    }
+
+    const hook = await renderHook(() => useBacklash(() => [initialState], updates, injects))
+
+    await act(() => {
+      getActions(hook).takePhotoFromCamera()
+
+      return delay(1)
+    })
+
+    expect(injects.showAlert).toReturn()
     expect(getState(hook)).toBe(initialState)
   })
 

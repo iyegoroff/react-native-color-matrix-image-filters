@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ComponentProps } from 'react'
 import {
   Modal,
   FlatList,
@@ -10,6 +10,7 @@ import {
 import { memo } from 'ts-react-memo'
 import { usePipe } from 'use-pipe-ts'
 import { Gap } from '../gap'
+import { theme } from '../theme'
 import { SelectOption } from './SelectOption'
 import { styles } from './styles'
 import { OptionShape } from './types'
@@ -26,7 +27,15 @@ const renderOption = <Option extends OptionShape>(
   { item }: ListRenderItemInfo<Option>
 ) => <SelectOption<Option> onSelect={onSelect} key={item.tag} option={item} />
 
-const Separator = () => <Gap size={5} />
+const gap = 5
+
+const Separator = () => <Gap size={gap} />
+
+const getButtonLayout: ComponentProps<typeof FlatList>['getItemLayout'] = (_, index) => ({
+  length: theme.controlHeight,
+  offset: (theme.controlHeight + gap) * index,
+  index
+})
 
 export const SelectModal = memo(function SelectModal<Option extends OptionShape>({
   isVisible,
@@ -40,10 +49,13 @@ export const SelectModal = memo(function SelectModal<Option extends OptionShape>
     <Modal animationType={'slide'} onRequestClose={onClose} visible={isVisible}>
       <SafeAreaView>
         <FlatList
+          getItemLayout={getButtonLayout}
           style={styles.optionList}
           data={options}
           renderItem={renderItem}
           ItemSeparatorComponent={Separator}
+          ListFooterComponent={Separator}
+          ListHeaderComponent={Separator}
         />
         <TouchableOpacity style={styles.close} onPress={onClose}>
           <Text style={styles.closeLabel}>❎</Text>

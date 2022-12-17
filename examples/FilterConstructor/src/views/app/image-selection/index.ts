@@ -1,6 +1,7 @@
 import { Command, UpdateMap } from 'react-use-backlash'
 import { ResizeMode } from '../../../domain'
-import { ImagePicker } from '../../../services'
+import { Alert, ImagePicker } from '../../../services'
+import { errorMessage } from '../../../util'
 
 type State = {
   selectedResizeMode: ResizeMode
@@ -17,7 +18,7 @@ type Actions = {
   leaveFullScreen: []
 }
 
-type Injects = ImagePicker
+type Injects = ImagePicker & Alert
 
 const init = (staticImage: number): Command<State, Actions, Injects> => [
   {
@@ -32,10 +33,14 @@ const takePhoto =
   (state: State): Command<State, Actions, Injects> =>
     [
       state,
-      async ({ updatePhoto }, { pickPhotoFromLibrary, takePhotoFromCamera }) => {
-        const photo = await (source === 'camera' ? takePhotoFromCamera : pickPhotoFromLibrary)()
-        if (photo !== 'canceled') {
-          updatePhoto(photo)
+      async ({ updatePhoto }, { pickPhotoFromLibrary, takePhotoFromCamera, showAlert }) => {
+        try {
+          const photo = await (source === 'camera' ? takePhotoFromCamera : pickPhotoFromLibrary)()
+          if (photo !== 'canceled') {
+            updatePhoto(photo)
+          }
+        } catch (e) {
+          showAlert('Failed retrieving photo', errorMessage(e))
         }
       }
     ]

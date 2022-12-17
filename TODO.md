@@ -1,6 +1,2 @@
 - FilterConstructor
-  - move color matrices to filter-selection
   - fix ios
-  - handle takePhoto error
-  - lightbox modal
-  - select-modal portal?

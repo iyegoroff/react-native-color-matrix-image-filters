@@ -2,10 +2,14 @@ import { Dimensions, ImageStyle, ViewStyle } from 'react-native'
 
 const size = Dimensions.get('screen').width
 
+const frame: ViewStyle = {
+  margin: 5
+}
+
 const container: ViewStyle = {
   flex: 1,
   alignItems: 'center',
-  margin: 5
+  ...frame
 }
 
 const image: ImageStyle = {
@@ -13,7 +17,7 @@ const image: ImageStyle = {
   width: '100%'
 }
 
-const fullscreenImage: ImageStyle = {
+const fullscreenImage = {
   height: '100%',
   width: '100%'
 }
@@ -27,10 +31,16 @@ const pickerControls: ViewStyle = {
   width: '100%'
 }
 
+const modalOverlay: ViewStyle = {
+  backgroundColor: '#FFFFFFCC'
+}
+
 export const styles = {
   container,
   image,
   filterControlList,
   pickerControls,
-  fullscreenImage
+  fullscreenImage,
+  modalOverlay,
+  frame
 } as const
