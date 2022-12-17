@@ -8,8 +8,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: npm ci
-      - run: cd examples/FilterConstructor && npm ci --ignore-scripts
       - run: npm run build
+      - run: |
+          cd examples/FilterConstructor
+          npm ci --ignore-scripts
+          npm run check
+          npm run check-test
       - run: npm run lint
       - run: npm run type-coverage
       - name: persist to workspace
