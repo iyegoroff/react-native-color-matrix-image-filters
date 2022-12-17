@@ -17,6 +17,7 @@ const noopInjects = {
 const initialState = {
   selectedResizeMode: 'center',
   isFullScreen: false,
+  showFullScreenNotice: true,
   image: { static: 0 }
 } as const
 
@@ -125,7 +126,7 @@ describe('ImageSelection', () => {
     expect(getState(hook)).toBe(initialState)
   })
 
-  test('should set isFullScreen true on enterFullScreen', async () => {
+  test('should set `isFullScreen: true` and `showFullScreenNotice: false` on enterFullScreen', async () => {
     const hook = await renderHook(() => useBacklash(() => [initialState], updates, noopInjects))
 
     await act(() => {
@@ -134,7 +135,8 @@ describe('ImageSelection', () => {
 
     expect(getState(hook)).toEqual({
       ...initialState,
-      isFullScreen: true
+      isFullScreen: true,
+      showFullScreenNotice: false
     })
   })
 

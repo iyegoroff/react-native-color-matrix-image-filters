@@ -1,5 +1,13 @@
 import React, { StrictMode } from 'react'
-import { FlatList, Modal, SafeAreaView, StatusBar, TouchableOpacity, View } from 'react-native'
+import {
+  FlatList,
+  Modal,
+  SafeAreaView,
+  StatusBar,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native'
 import { useBacklash } from 'react-use-backlash'
 import { usePipe } from 'use-pipe-ts'
 import { Button } from '../button'
@@ -42,7 +50,7 @@ const Root = () => {
   ] = useBacklash(FilterSelection.init, FilterSelection.updates)
 
   const [
-    { selectedResizeMode, image, isFullScreen },
+    { selectedResizeMode, image, isFullScreen, showFullScreenNotice },
     {
       selectResizeMode,
       takePhotoFromCamera,
@@ -66,7 +74,8 @@ const Root = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar hidden={true} />
-      <TouchableOpacity style={{ width: '100%' }} onPress={enterFullScreen}>
+      {showFullScreenNotice && <Text style={styles.info}>Tap on image to open it in a modal</Text>}
+      <TouchableOpacity style={styles.imageContainer} onPress={enterFullScreen}>
         <FilteredImage
           style={styles.image}
           matrix={calculatedMatrix}

@@ -1,3 +1,0 @@
-- FilterConstructor
-  - old arch
-  - readme & startup

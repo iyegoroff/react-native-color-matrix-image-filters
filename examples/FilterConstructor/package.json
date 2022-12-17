@@ -13,7 +13,7 @@
     "check-test": "tsc -p ./src/tsconfig.test.json",
     "test": "jest",
     "shake": "adb shell input keyevent 82",
-    "clean": "cd android && ./gradlew clean && cd ../ios && pod deintegrate"
+    "clean": "cd ios && pod deintegrate && rm -rf build && cd ../android && ./gradlew clean"
   },
   "dependencies": {
     "@react-native-community/slider": "^4.3.2",

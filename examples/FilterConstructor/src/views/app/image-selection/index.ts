@@ -7,6 +7,7 @@ type State = {
   selectedResizeMode: ResizeMode
   image: { static: number } | { uri: string }
   isFullScreen: boolean
+  showFullScreenNotice: boolean
 }
 
 type Actions = {
@@ -24,7 +25,8 @@ const init = (staticImage: number): Command<State, Actions, Injects> => [
   {
     selectedResizeMode: 'center',
     image: { static: staticImage },
-    isFullScreen: false
+    isFullScreen: false,
+    showFullScreenNotice: true
   }
 ]
 
@@ -55,7 +57,9 @@ const updates: UpdateMap<State, Actions, Injects> = {
 
   updatePhoto: (state, image) => [{ ...state, image }],
 
-  enterFullScreen: (state) => [state.isFullScreen ? state : { ...state, isFullScreen: true }],
+  enterFullScreen: (state) => [
+    state.isFullScreen ? state : { ...state, isFullScreen: true, showFullScreenNotice: false }
+  ],
 
   leaveFullScreen: (state) => [!state.isFullScreen ? state : { ...state, isFullScreen: false }]
 }

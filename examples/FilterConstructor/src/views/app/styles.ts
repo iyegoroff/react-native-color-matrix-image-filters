@@ -1,4 +1,4 @@
-import { Dimensions, ImageStyle, ViewStyle } from 'react-native'
+import { Dimensions, ImageStyle, TextStyle, ViewStyle } from 'react-native'
 
 const size = Dimensions.get('screen').width
 
@@ -35,6 +35,14 @@ const modalOverlay: ViewStyle = {
   backgroundColor: '#FFFFFFCC'
 }
 
+const info: TextStyle = {
+  position: 'absolute'
+}
+
+const imageContainer: ViewStyle = {
+  width: '100%'
+}
+
 export const styles = {
   container,
   image,
@@ -42,5 +50,7 @@ export const styles = {
   pickerControls,
   fullscreenImage,
   modalOverlay,
-  frame
+  frame,
+  info,
+  imageContainer
 } as const
