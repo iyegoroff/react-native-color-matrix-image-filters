@@ -5,12 +5,12 @@ export const filterControlConstraints = {
   Achromatomaly: {},
   Achromatopsia: {},
   Brightness: {
-    amount: { min: 0, max: 1 }
+    amount: { min: 0, max: 3 }
   },
   Browni: {},
   ColorTone: {
-    desaturation: { min: 0, max: 1 },
-    toned: { min: 0, max: 1 },
+    desaturation: { min: -3, max: 3 },
+    toned: { min: -3, max: 3 },
     darkColor: {
       variants: ['#000000', '#FFFFFF', '#FF0000', '#00FF00', '#0000FF']
     },
@@ -19,7 +19,7 @@ export const filterControlConstraints = {
     }
   },
   Contrast: {
-    amount: { min: 0, max: 1 }
+    amount: { min: 0, max: 3 }
   },
   Cool: {},
   Deuteranomaly: {},
@@ -36,7 +36,7 @@ export const filterControlConstraints = {
     amount: { min: 0, max: 1 }
   },
   HueRotate: {
-    amount: { min: 0, max: 1 }
+    amount: { min: -3, max: 3 }
   },
   Invert: {},
   Kodachrome: {},
@@ -60,20 +60,20 @@ export const filterControlConstraints = {
     a: { min: 0, max: 1 }
   },
   Saturate: {
-    amount: { min: 0, max: 1 }
+    amount: { min: -3, max: 3 }
   },
   Sepia: {
     amount: { min: 0, max: 1 }
   },
   Technicolor: {},
   Temperature: {
-    amount: { min: 0, max: 1 }
+    amount: { min: -3, max: 3 }
   },
   Threshold: {
-    amount: { min: 0, max: 10 }
+    amount: { min: 0, max: 20 }
   },
   Tint: {
-    amount: { min: 0, max: 1 }
+    amount: { min: -1, max: 2 }
   },
   ToBGR: {},
   Tritanomaly: {},

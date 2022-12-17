@@ -1,5 +1,5 @@
 import React, { StrictMode } from 'react'
-import { FlatList, Modal, SafeAreaView, TouchableOpacity, View } from 'react-native'
+import { FlatList, Modal, SafeAreaView, StatusBar, TouchableOpacity, View } from 'react-native'
 import { useBacklash } from 'react-use-backlash'
 import { usePipe } from 'use-pipe-ts'
 import { Button } from '../button'
@@ -65,6 +65,7 @@ const Root = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar hidden={true} />
       <TouchableOpacity style={{ width: '100%' }} onPress={enterFullScreen}>
         <FilteredImage
           style={styles.image}
@@ -108,7 +109,8 @@ const Root = () => {
         visible={isFullScreen}
         transparent={true}
         style={styles.fullscreenImage}
-        animationType={'fade'}
+        animationType={'slide'}
+        statusBarTranslucent={true}
       >
         <View style={styles.modalOverlay}>
           <TouchableOpacity style={styles.frame} onPress={leaveFullScreen}>

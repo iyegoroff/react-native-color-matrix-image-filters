@@ -1,5 +1,6 @@
+import React, { useMemo, useState } from 'react'
 import Slider from '@react-native-community/slider'
-import React, { useState } from 'react'
+import { debounce } from 'debounce'
 import { Text, View } from 'react-native'
 import { styles } from './styles'
 
@@ -19,6 +20,7 @@ export const SliderControl = React.memo(function SliderControl({
   onChange
 }: Props) {
   const [initial] = useState(value)
+  const onChangeDebounced = useMemo(() => debounce(onChange, 25), [onChange])
 
   return (
     <View style={styles.container}>
@@ -29,7 +31,7 @@ export const SliderControl = React.memo(function SliderControl({
         minimumValue={min}
         maximumValue={max}
         value={initial}
-        onValueChange={onChange}
+        onValueChange={onChangeDebounced}
         style={styles.slider}
       />
       <View style={styles.bottom}>

@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "postinstall": "patch-package",
+    "preinstall": "cd ../.. && npm ci && npm run build",
+    "postinstall": "patch-package && bundle install",
     "android": "react-native run-android",
     "pods": "RCT_NEW_ARCH_ENABLED=1 npx pod-install",
     "ios": "react-native run-ios",
@@ -11,11 +12,13 @@
     "check": "tsc -p ./src/tsconfig.build.json",
     "check-test": "tsc -p ./src/tsconfig.test.json",
     "test": "jest",
-    "shake": "adb shell input keyevent 82"
+    "shake": "adb shell input keyevent 82",
+    "clean": "cd android && ./gradlew clean && cd ../ios && pod deintegrate"
   },
   "dependencies": {
     "@react-native-community/slider": "^4.3.2",
     "contrast-color": "^1.0.1",
+    "debounce": "^1.2.1",
     "fast-memoize": "^2.5.2",
     "memoize-one": "^6.0.0",
     "react": "18.1.0",
@@ -36,6 +39,7 @@
     "@babel/preset-typescript": "^7.18.6",
     "@babel/runtime": "^7.12.5",
     "@types/contrast-color": "^1.0.0",
+    "@types/debounce": "^1.2.1",
     "@types/jest": "^29.2.3",
     "@types/shallowequal": "^1.1.1",
     "babel-jest": "^26.6.3",

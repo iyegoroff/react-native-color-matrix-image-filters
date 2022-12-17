@@ -46,7 +46,12 @@ export const SelectModal = memo(function SelectModal<Option extends OptionShape>
   const renderItem = usePipe([renderOption<Option>, onSelect])
 
   return (
-    <Modal animationType={'slide'} onRequestClose={onClose} visible={isVisible}>
+    <Modal
+      animationType={'slide'}
+      onRequestClose={onClose}
+      visible={isVisible}
+      statusBarTranslucent={true}
+    >
       <SafeAreaView>
         <FlatList
           getItemLayout={getButtonLayout}
