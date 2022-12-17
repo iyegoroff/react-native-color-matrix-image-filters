@@ -14,6 +14,7 @@ jobs:
           npm ci --ignore-scripts
           npm run check
           npm run check-test
+          npm t
       - run: npm run lint
       - run: npm run type-coverage
       - name: persist to workspace
