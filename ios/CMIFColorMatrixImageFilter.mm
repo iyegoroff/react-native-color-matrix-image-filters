@@ -109,18 +109,18 @@ static CIContext* context;
 #ifdef RCT_NEW_ARCH_ENABLED
 - (void)updateProps:(Props::Shared const &)props oldProps:(Props::Shared const &)oldProps
 {
-    const auto &oldViewProps = *std::static_pointer_cast<CMIFColorMatrixImageFilterProps const>(_props);
-    const auto &newViewProps = *std::static_pointer_cast<CMIFColorMatrixImageFilterProps const>(props);
-    
-    if (oldViewProps.matrix != newViewProps.matrix) {
-        NSMutableArray* matrix = [NSMutableArray new];
-        std::for_each(newViewProps.matrix.begin(), newViewProps.matrix.end(), ^(Float num) {
-            [matrix addObject:[NSNumber numberWithFloat:num]];
-        });
-        [self updateFilter:matrix];
-    }
+  const auto &oldViewProps = *std::static_pointer_cast<CMIFColorMatrixImageFilterProps const>(_props);
+  const auto &newViewProps = *std::static_pointer_cast<CMIFColorMatrixImageFilterProps const>(props);
 
-    [super updateProps:props oldProps:oldProps];
+  if (oldViewProps.matrix != newViewProps.matrix) {
+      NSMutableArray* matrix = [NSMutableArray new];
+      std::for_each(newViewProps.matrix.begin(), newViewProps.matrix.end(), ^(Float num) {
+          [matrix addObject:[NSNumber numberWithFloat:num]];
+      });
+      [self updateFilter:matrix];
+  }
+
+  [super updateProps:props oldProps:oldProps];
 }
 #else
 - (void)didSetProps:(NSArray<NSString *> *)changedProps
@@ -133,21 +133,21 @@ static CIContext* context;
 
 - (void)updateFilter:(NSArray<NSNumber *> *)matrix
 {
-    CGFloat m[20] = {
-      [matrix[0] floatValue], [matrix[1] floatValue], [matrix[2] floatValue], [matrix[3] floatValue],
-      [matrix[5] floatValue], [matrix[6] floatValue], [matrix[7] floatValue], [matrix[8] floatValue],
-      [matrix[10] floatValue], [matrix[11] floatValue], [matrix[12] floatValue], [matrix[13] floatValue],
-      [matrix[15] floatValue], [matrix[16] floatValue], [matrix[17] floatValue], [matrix[18] floatValue],
-      [matrix[4] floatValue], [matrix[9] floatValue], [matrix[14] floatValue], [matrix[19] floatValue]
-    };
+  CGFloat m[20] = {
+    [matrix[0] floatValue], [matrix[1] floatValue], [matrix[2] floatValue], [matrix[3] floatValue],
+    [matrix[5] floatValue], [matrix[6] floatValue], [matrix[7] floatValue], [matrix[8] floatValue],
+    [matrix[10] floatValue], [matrix[11] floatValue], [matrix[12] floatValue], [matrix[13] floatValue],
+    [matrix[15] floatValue], [matrix[16] floatValue], [matrix[17] floatValue], [matrix[18] floatValue],
+    [matrix[4] floatValue], [matrix[9] floatValue], [matrix[14] floatValue], [matrix[19] floatValue]
+  };
 
-    [_filter setValue:[CIVector vectorWithValues:&m[0] count:4] forKey:@"inputRVector"];
-    [_filter setValue:[CIVector vectorWithValues:&m[4] count:4] forKey:@"inputGVector"];
-    [_filter setValue:[CIVector vectorWithValues:&m[8] count:4] forKey:@"inputBVector"];
-    [_filter setValue:[CIVector vectorWithValues:&m[12] count:4] forKey:@"inputAVector"];
-    [_filter setValue:[CIVector vectorWithValues:&m[16] count:4] forKey:@"inputBiasVector"];
+  [_filter setValue:[CIVector vectorWithValues:&m[0] count:4] forKey:@"inputRVector"];
+  [_filter setValue:[CIVector vectorWithValues:&m[4] count:4] forKey:@"inputGVector"];
+  [_filter setValue:[CIVector vectorWithValues:&m[8] count:4] forKey:@"inputBVector"];
+  [_filter setValue:[CIVector vectorWithValues:&m[12] count:4] forKey:@"inputAVector"];
+  [_filter setValue:[CIVector vectorWithValues:&m[16] count:4] forKey:@"inputBiasVector"];
 
-    [self renderFilteredImage:NO];
+  [self renderFilteredImage:NO];
 }
 
 - (void)renderFilteredImage:(BOOL)shouldInvalidate
@@ -174,12 +174,12 @@ static CIContext* context;
 }
 
 - (void)updateTargetImage:(UIImage *)image {
-    [self.target removeObserver:self forKeyPath:@"image"];
-    [self.target setImage:image];
-    [self.target addObserver:self
-                  forKeyPath:@"image"
-                     options:NSKeyValueObservingOptionNew
-                     context:NULL];
+  [self.target removeObserver:self forKeyPath:@"image"];
+  [self.target setImage:image];
+  [self.target addObserver:self
+                forKeyPath:@"image"
+                   options:NSKeyValueObservingOptionNew
+                   context:NULL];
 }
 
 + (UIImage *)filteredImage:(UIImage *)image filter:(CIFilter *)filter
@@ -196,7 +196,13 @@ static CIContext* context;
 
     CGImageRelease(cgim);
 
+#ifdef RCT_NEW_ARCH_ENABLED
+    return [NSStringFromClass([image class]) isEqual:@"_UIResizableImage"]
+      ? [filteredImage resizableImageWithCapInsets:image.capInsets resizingMode:UIImageResizingModeTile]
+      : filteredImage;
+#else
     return filteredImage;
+#endif
   }
 
   return nil;
@@ -204,14 +210,10 @@ static CIContext* context;
 
 + (CIContext *)createContextWithOptions:(nullable NSDictionary<NSString *, id> *)options
 {
-  // CFAbsoluteTime start = CFAbsoluteTimeGetCurrent();
   EAGLContext *eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
   eaglContext = eaglContext ?: [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
 
-  CIContext *context = [CIContext contextWithEAGLContext:eaglContext options:options];
-  // NSLog(@"filter: context %f", CFAbsoluteTimeGetCurrent() - start);
-
-  return context;
+  return [CIContext contextWithEAGLContext:eaglContext options:options];
 }
 
 #ifdef RCT_NEW_ARCH_ENABLED

@@ -625,7 +625,7 @@ PODS:
   - React-jsinspector (0.70.4)
   - React-logger (0.70.4):
     - glog
-  - react-native-color-matrix-image-filters (6.0.0):
+  - react-native-color-matrix-image-filters (6.0.2):
     - RCT-Folly
     - RCTRequired
     - RCTTypeSafety
@@ -935,7 +935,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 4a893fc8f683b91befcaf56c44ad8be4506b6828
   React-jsinspector: 1d5a9e84e419a57cabc23249aec3d837d1b03a80
   React-logger: f8071ad48248781d5afdb8a07f778758529d3019
-  react-native-color-matrix-image-filters: 1f6f123404781601ff8f7630275ea9707f449821
+  react-native-color-matrix-image-filters: 7d611c93b1ee8d47767c41ebb9fe2bad1da76ad2
   react-native-image-picker: a25c079128eb9bc11ef888beb2d78bfba8814cfb
   react-native-slider: 92acbaf15cb72361c64c06bfd3f8ff0ae8c38977
   React-perflogger: 5e41b01b35d97cc1b0ea177181eb33b5c77623b6
