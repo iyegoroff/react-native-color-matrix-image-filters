@@ -28,7 +28,6 @@
     "react-use-backlash": "^0.0.25",
     "rn-color-matrices": "^4.1.0",
     "shallowequal": "^1.1.0",
-    "ts-deep-readonly": "^0.0.5",
     "ts-react-memo": "^0.0.2",
     "use-pipe-ts": "^2.0.2"
   },

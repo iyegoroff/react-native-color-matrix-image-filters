@@ -1,6 +1,4 @@
-import { DeepReadonly } from 'ts-deep-readonly'
-
-type Hook<State, Actions> = DeepReadonly<{ result: { current: [State, Actions] } }>
+type Hook<State, Actions> = { readonly result: { readonly current: readonly [State, Actions] } }
 
 const getState = <State, Actions>(hook: Hook<State, Actions>) => hook.result.current[0]
 
