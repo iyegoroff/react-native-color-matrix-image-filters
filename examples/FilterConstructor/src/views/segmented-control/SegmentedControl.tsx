@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { View } from 'react-native'
 import { memo } from 'ts-react-memo'
-import { SegmentedControlItem } from './SegmentedControlItem'
+import { SegmentedControlPressable } from './SegmentedControlPressable'
 import { styles } from './styles'
 
 export type SegmentedControlProps<Item extends string> = {
@@ -26,7 +26,7 @@ export const SegmentedControl = memo(function SegmentedControl<Item extends stri
 
         return (
           <Fragment key={item}>
-            <SegmentedControlItem<Item>
+            <SegmentedControlPressable<Item>
               variant={variant}
               item={item}
               position={position}

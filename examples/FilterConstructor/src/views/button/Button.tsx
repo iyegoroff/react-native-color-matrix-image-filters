@@ -12,15 +12,15 @@ export const Button = React.memo(function Button({ label, onPress }: Props) {
 
   return disabled ? (
     <View style={styles.disabledContainer}>
-      <View style={styles.background(false)}>
+      <View style={styles.background}>
         <Text style={styles.disabledLabel}>{label}</Text>
       </View>
     </View>
   ) : (
     <Pressable style={styles.container} onPress={onPress} disabled={disabled}>
       {({ pressed }) => (
-        <View style={styles.background(pressed)}>
-          <Text style={styles.label(pressed)}>{label}</Text>
+        <View style={pressed ? styles.pressedBackground : styles.background}>
+          <Text style={pressed ? styles.pressedLabel : styles.label}>{label}</Text>
         </View>
       )}
     </Pressable>

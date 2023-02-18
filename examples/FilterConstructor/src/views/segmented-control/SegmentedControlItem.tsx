@@ -1,44 +1,42 @@
-import React from 'react'
-import { Pressable, Text, View } from 'react-native'
+import React, { useMemo } from 'react'
+import { Text, View } from 'react-native'
 import { memo } from 'ts-react-memo'
-import { usePipe } from 'use-pipe-ts'
 import { styles } from './styles'
 
-type Props<Item extends string> = {
+export type SegmentedControlItemProps<Item extends string> = {
   readonly variant: 'colors' | 'labels'
   readonly position: 'left' | 'middle' | 'right'
   readonly item: Item
-  readonly onSelect: (item: Item) => void
   readonly selected: boolean
+  readonly pressed: boolean
 }
 
 export const SegmentedControlItem = memo(function SegmentedControlItem<Item extends string>({
-  onSelect,
   item,
   selected,
   position,
-  variant
-}: Props<Item>) {
-  const select = usePipe([onSelect, item])
+  variant,
+  pressed
+}: SegmentedControlItemProps<Item>) {
+  const checkMarkStyle = useMemo(() => styles.colorMark(selected, item), [selected, item])
+
+  const colorContainerStyle = useMemo(
+    () => styles.colorContainer[position](pressed, item),
+    [position, pressed, item]
+  )
+
+  const labelContainerStyle = useMemo(
+    () => styles.labelContainer[position](pressed, selected),
+    [position, pressed, selected]
+  )
 
   return variant === 'labels' ? (
-    <Pressable style={styles.item[position]} disabled={selected} onPress={select}>
-      {({ pressed }) => (
-        <View
-          removeClippedSubviews={true}
-          style={styles.labelContainer[position](pressed, selected)}
-        >
-          <Text style={styles.label(selected || pressed)}>{item}</Text>
-        </View>
-      )}
-    </Pressable>
+    <View removeClippedSubviews={true} style={labelContainerStyle}>
+      <Text style={selected || pressed ? styles.selectedLabel : styles.label}>{item}</Text>
+    </View>
   ) : (
-    <Pressable style={styles.item[position]} disabled={selected} onPress={select}>
-      {({ pressed }) => (
-        <View style={styles.colorContainer[position](pressed, item)}>
-          <Text style={styles.colorMark(selected, item)}>●</Text>
-        </View>
-      )}
-    </Pressable>
+    <View style={colorContainerStyle}>
+      <Text style={checkMarkStyle}>●</Text>
+    </View>
   )
 })

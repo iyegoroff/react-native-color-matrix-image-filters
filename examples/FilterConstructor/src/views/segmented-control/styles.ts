@@ -1,4 +1,3 @@
-import memoize from 'fast-memoize'
 import { contrastColor } from 'contrast-color'
 import { TextStyle, ViewStyle } from 'react-native'
 import { theme } from '../theme'
@@ -34,91 +33,80 @@ const rightItem: Readonly<ViewStyle> = {
 const labelBackground = (pressed: boolean, selected: boolean) =>
   selected ? primaryColor : pressed ? primaryColorPressed : 'transparent'
 
-const leftLabelContainer = memoize(
-  (pressed: boolean, selected: boolean): Readonly<ViewStyle> => ({
-    width: '100%',
-    height: '100%',
-    backgroundColor: labelBackground(pressed, selected),
-    borderTopLeftRadius: auxRadius,
-    borderBottomLeftRadius: auxRadius,
-    justifyContent: 'center',
-    alignItems: 'center'
-  })
-)
+const leftLabelContainer = (pressed: boolean, selected: boolean): Readonly<ViewStyle> => ({
+  width: '100%',
+  height: '100%',
+  backgroundColor: labelBackground(pressed, selected),
+  borderTopLeftRadius: auxRadius,
+  borderBottomLeftRadius: auxRadius,
+  justifyContent: 'center',
+  alignItems: 'center'
+})
 
-const middleLabelContainer = memoize(
-  (pressed: boolean, selected: boolean): Readonly<ViewStyle> => ({
-    width: '100%',
-    height: '100%',
-    backgroundColor: labelBackground(pressed, selected),
-    justifyContent: 'center',
-    alignItems: 'center'
-  })
-)
+const middleLabelContainer = (pressed: boolean, selected: boolean): Readonly<ViewStyle> => ({
+  width: '100%',
+  height: '100%',
+  backgroundColor: labelBackground(pressed, selected),
+  justifyContent: 'center',
+  alignItems: 'center'
+})
 
-const rightLabelContainer = memoize(
-  (pressed: boolean, selected: boolean): Readonly<ViewStyle> => ({
-    width: '100%',
-    height: '100%',
-    backgroundColor: labelBackground(pressed, selected),
-    borderTopRightRadius: auxRadius,
-    borderBottomRightRadius: auxRadius,
-    justifyContent: 'center',
-    alignItems: 'center'
-  })
-)
+const rightLabelContainer = (pressed: boolean, selected: boolean): Readonly<ViewStyle> => ({
+  width: '100%',
+  height: '100%',
+  backgroundColor: labelBackground(pressed, selected),
+  borderTopRightRadius: auxRadius,
+  borderBottomRightRadius: auxRadius,
+  justifyContent: 'center',
+  alignItems: 'center'
+})
 
-const label = memoize(
-  (selected: boolean): Readonly<TextStyle> => ({
-    color: selected ? 'white' : primaryColor,
-    fontWeight: 'bold'
-  })
-)
+const label: Readonly<TextStyle> = {
+  color: primaryColor,
+  fontWeight: 'bold'
+}
+
+const selectedLabel: Readonly<TextStyle> = {
+  color: 'white',
+  fontWeight: 'bold'
+}
 
 const separator: Readonly<ViewStyle> = { width: 1, height: '100%', backgroundColor: primaryColor }
 
-const leftColorContainer = memoize(
-  (pressed: boolean, color: string): Readonly<ViewStyle> => ({
-    width: '100%',
-    height: '100%',
-    backgroundColor: color,
-    opacity: pressed ? 0.5 : 1,
-    borderTopLeftRadius: auxRadius,
-    borderBottomLeftRadius: auxRadius,
-    justifyContent: 'center',
-    alignItems: 'center'
-  })
-)
+const leftColorContainer = (pressed: boolean, color: string): Readonly<ViewStyle> => ({
+  width: '100%',
+  height: '100%',
+  backgroundColor: color,
+  opacity: pressed ? 0.5 : 1,
+  borderTopLeftRadius: auxRadius,
+  borderBottomLeftRadius: auxRadius,
+  justifyContent: 'center',
+  alignItems: 'center'
+})
 
-const middleColorContainer = memoize(
-  (pressed: boolean, color: string): Readonly<ViewStyle> => ({
-    width: '100%',
-    height: '100%',
-    backgroundColor: color,
-    opacity: pressed ? 0.5 : 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  })
-)
+const middleColorContainer = (pressed: boolean, color: string): Readonly<ViewStyle> => ({
+  width: '100%',
+  height: '100%',
+  backgroundColor: color,
+  opacity: pressed ? 0.5 : 1,
+  justifyContent: 'center',
+  alignItems: 'center'
+})
 
-const rightColorContainer = memoize(
-  (pressed: boolean, color: string): Readonly<ViewStyle> => ({
-    width: '100%',
-    height: '100%',
-    backgroundColor: color,
-    opacity: pressed ? 0.5 : 1,
-    borderTopRightRadius: auxRadius,
-    borderBottomRightRadius: auxRadius,
-    justifyContent: 'center',
-    alignItems: 'center'
-  })
-)
+const rightColorContainer = (pressed: boolean, color: string): Readonly<ViewStyle> => ({
+  width: '100%',
+  height: '100%',
+  backgroundColor: color,
+  opacity: pressed ? 0.5 : 1,
+  borderTopRightRadius: auxRadius,
+  borderBottomRightRadius: auxRadius,
+  justifyContent: 'center',
+  alignItems: 'center'
+})
 
-const colorMark = memoize(
-  (selected: boolean, color: string): Readonly<TextStyle> => ({
-    color: selected ? contrastColor({ bgColor: color }) : 'transparent'
-  })
-)
+const colorMark = (selected: boolean, color: string): Readonly<TextStyle> => ({
+  color: selected ? contrastColor({ bgColor: color }) : 'transparent'
+})
 
 export const styles = {
   item: {
@@ -138,6 +126,7 @@ export const styles = {
   },
   container,
   label,
+  selectedLabel,
   separator,
   colorMark
 } as const

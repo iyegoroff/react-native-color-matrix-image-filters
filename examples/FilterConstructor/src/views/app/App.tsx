@@ -1,4 +1,4 @@
-import React, { StrictMode } from 'react'
+import React, { StrictMode, useMemo } from 'react'
 import {
   FlatList,
   Modal,
@@ -21,7 +21,6 @@ import { renderFilterControl } from './render-filter-control'
 import { ImagePicker, Alert } from '../../services'
 import { Filters, resizeModes } from '../../domain'
 import { FilteredImage } from './FilteredImage'
-import memoizeOne from 'memoize-one'
 
 declare const require: (name: string) => number
 
@@ -32,8 +31,6 @@ const injects = { ...ImagePicker, ...Alert }
 const defaultImage = require('../../../mini-parrot.jpg')
 
 const Separator = () => <Gap size={5} />
-
-const calculateMatrix = memoizeOne(matrix)
 
 const Root = () => {
   const [
@@ -69,7 +66,7 @@ const Root = () => {
     filters.length
   ])
 
-  const calculatedMatrix = calculateMatrix(filters)
+  const calculatedMatrix = useMemo(() => matrix(filters), [filters])
 
   return (
     <SafeAreaView style={styles.container}>

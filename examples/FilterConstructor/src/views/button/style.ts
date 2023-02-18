@@ -1,4 +1,3 @@
-import memoize from 'fast-memoize'
 import { TextStyle, ViewStyle } from 'react-native'
 import { theme } from '../theme'
 
@@ -19,33 +18,41 @@ const disabledContainer: ViewStyle = {
   borderColor: disabledColor
 }
 
-const background = memoize(
-  (pressed: boolean): ViewStyle => ({
-    flex: 1,
-    borderRadius: borderRadius - 0.5,
-    backgroundColor: pressed ? primaryColorPressed : 'white',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 3
-  })
-)
+const background: ViewStyle = {
+  flex: 1,
+  borderRadius: borderRadius - 0.5,
+  backgroundColor: 'white',
+  justifyContent: 'center',
+  alignItems: 'center',
+  paddingHorizontal: 3
+}
+
+const pressedBackground: ViewStyle = {
+  ...background,
+  backgroundColor: primaryColorPressed
+}
+
+const label: TextStyle = {
+  fontWeight: 'bold',
+  color: primaryColor
+}
+
+const pressedLabel: TextStyle = {
+  fontWeight: 'bold',
+  color: 'white'
+}
 
 const disabledLabel: TextStyle = {
   fontWeight: 'bold',
   color: disabledColor
 }
 
-const label = memoize(
-  (pressed: boolean): TextStyle => ({
-    ...disabledLabel,
-    color: pressed ? 'white' : primaryColor
-  })
-)
-
 export const styles = {
   container,
   disabledContainer,
   background,
   label,
-  disabledLabel
+  disabledLabel,
+  pressedLabel,
+  pressedBackground
 } as const
