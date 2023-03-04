@@ -28,7 +28,7 @@ const { filters: availableFilters, matrix } = Filters
 
 const injects = { ...ImagePicker, ...Alert }
 
-const defaultImage = require('../../../mini-parrot.jpg')
+const defaultImage = { static: require('../../../mini-parrot.jpg') }
 
 const Separator = () => <Gap size={5} />
 

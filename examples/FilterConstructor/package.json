@@ -22,7 +22,7 @@
     "react": "18.1.0",
     "react-native": "^0.70.4",
     "react-native-color-matrix-image-filters": "file:../..",
-    "react-native-image-picker": "github:iyegoroff/react-native-image-picker#rn-new-architecture",
+    "react-native-image-picker": "github:iyegoroff/react-native-image-picker#prebuilt",
     "react-use-backlash": "^0.0.25",
     "rn-color-matrices": "^4.1.0",
     "shallowequal": "^1.1.0",

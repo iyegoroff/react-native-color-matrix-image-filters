@@ -21,10 +21,10 @@ type Actions = {
 
 type Injects = ImagePicker & Alert
 
-const init = (staticImage: number): Command<State, Actions, Injects> => [
+const init = (image: State['image']): Command<State, Actions, Injects> => [
   {
     selectedResizeMode: 'center',
-    image: { static: staticImage },
+    image,
     isFullScreen: false,
     showFullScreenNotice: true
   }
