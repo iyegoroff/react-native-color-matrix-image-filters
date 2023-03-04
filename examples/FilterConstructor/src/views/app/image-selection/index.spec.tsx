@@ -23,7 +23,9 @@ const initialState = {
 
 describe('ImageSelection', () => {
   test('init', async () => {
-    const hook = await renderHook(() => useBacklash(() => init(0), updates, noopInjects))
+    const hook = await renderHook(() =>
+      useBacklash(() => init({ static: 0 }), updates, noopInjects)
+    )
 
     expect(getState(hook)).toEqual(initialState)
   })
