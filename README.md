@@ -13,6 +13,7 @@ Various color matrix based image filters for iOS & Android.
 
 - iOS & Android:
   - filter components work as wrappers for `Image`, `ImageBackground` and [react-native-fast-image](https://github.com/DylanVann/react-native-fast-image) components
+  - doesn't support gif format on iOS
 - react-native:
   - supported versions: "<strong>>=0.60.0</strong>"
   - supports both "old" and "new" architecture
