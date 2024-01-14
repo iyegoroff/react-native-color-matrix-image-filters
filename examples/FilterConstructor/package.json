@@ -16,7 +16,7 @@
     "clean": "cd ios && pod deintegrate && rm -rf build && cd ../android && ./gradlew clean"
   },
   "dependencies": {
-    "@react-native-community/slider": "^4.3.2",
+    "@react-native-community/slider": "^4.5.0",
     "contrast-color": "^1.0.1",
     "debounce": "^1.2.1",
     "react": "18.1.0",

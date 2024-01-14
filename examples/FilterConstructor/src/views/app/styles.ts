@@ -20,7 +20,7 @@ const image: ImageStyle = {
 const fullscreenImage = {
   height: '100%',
   width: '100%'
-}
+} as const
 
 const filterControlList: ViewStyle = {
   width: '100%'
