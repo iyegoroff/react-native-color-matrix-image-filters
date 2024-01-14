@@ -1,4 +1,4 @@
-- Please specify your mobile platform(s) and react-native & react-native-color-matrix-image-filters versions. Also check https://github.com/iyegoroff/react-native-color-matrix-image-filters#status if your react-native-color-matrix-image-filters version corresponds with your react-native version and ensure that you followed this installation guide - https://github.com/iyegoroff/react-native-color-matrix-image-filters#installation
+- Please specify your mobile platform(s), react-native & react-native-color-matrix-image-filters versions and react-native architecture (new or old). Also check https://github.com/iyegoroff/react-native-color-matrix-image-filters#status if your react-native-color-matrix-image-filters version corresponds with your react-native version and ensure that you followed this installation guide - https://github.com/iyegoroff/react-native-color-matrix-image-filters#getting-started
 
 - Sometimes cleaning the project could resolve build issues: press `Shift + Cmd + K` in Xcode and run `cd android && ./gradlew clean` in terminal
 
