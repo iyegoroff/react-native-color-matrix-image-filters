@@ -1,6 +1,6 @@
 import { filters } from './filters'
 
-export type Filter = typeof filters[number]
+export type Filter = (typeof filters)[number]
 
 export type AmountFilter = Extract<Filter, { amount: number }>
 export type ColorToneFilter = Extract<Filter, { tag: 'ColorTone' }>
