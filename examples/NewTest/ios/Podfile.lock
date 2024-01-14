@@ -943,7 +943,7 @@ PODS:
   - React-Mapbuffer (0.73.2):
     - glog
     - React-debug
-  - react-native-color-matrix-image-filters (6.0.3):
+  - react-native-color-matrix-image-filters (6.0.5):
     - glog
     - hermes-engine
     - RCT-Folly (= 2022.05.16.00)
@@ -1416,7 +1416,7 @@ SPEC CHECKSUMS:
   React-jsitracing: 7c77101b38fcc8fa7f198de7e1d834350a85af90
   React-logger: 66b168e2b2bee57bd8ce9e69f739d805732a5570
   React-Mapbuffer: 9ee041e1d7be96da6d76a251f92e72b711c651d6
-  react-native-color-matrix-image-filters: 31225dc9362c56b3b1c283f8bc1bbcf47370e3fc
+  react-native-color-matrix-image-filters: 837af99fe27ce823d76d45894afcf2e9e731c684
   React-nativeconfig: d753fbbc8cecc8ae413d615599ac378bbf6999bb
   React-NativeModulesApple: 964f4eeab1b4325e8b6a799cf4444c3fd4eb0a9c
   React-perflogger: 29efe63b7ef5fbaaa50ef6eaa92482f98a24b97e
