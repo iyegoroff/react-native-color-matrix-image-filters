@@ -32,20 +32,19 @@ const init = (image: State['image']): Command<State, Actions, Injects> => [
 
 const takePhoto =
   (source: 'camera' | 'library') =>
-  (state: State): Command<State, Actions, Injects> =>
-    [
-      state,
-      async ({ updatePhoto }, { pickPhotoFromLibrary, takePhotoFromCamera, showAlert }) => {
-        try {
-          const photo = await (source === 'camera' ? takePhotoFromCamera : pickPhotoFromLibrary)()
-          if (photo !== 'canceled') {
-            updatePhoto(photo)
-          }
-        } catch (e) {
-          showAlert('Failed retrieving photo', errorMessage(e))
+  (state: State): Command<State, Actions, Injects> => [
+    state,
+    async ({ updatePhoto }, { pickPhotoFromLibrary, takePhotoFromCamera, showAlert }) => {
+      try {
+        const photo = await (source === 'camera' ? takePhotoFromCamera : pickPhotoFromLibrary)()
+        if (photo !== 'canceled') {
+          updatePhoto(photo)
         }
+      } catch (e) {
+        showAlert('Failed retrieving photo', errorMessage(e))
       }
-    ]
+    }
+  ]
 
 const updates: UpdateMap<State, Actions, Injects> = {
   selectResizeMode: (state, selectedResizeMode) =>
