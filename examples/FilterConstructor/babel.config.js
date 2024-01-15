@@ -5,5 +5,5 @@ module.exports = (api) =>
         targets: { node: 16 }
       }
     : {
-        presets: ['module:metro-react-native-babel-preset']
+        presets: ['module:@react-native/babel-preset']
       }
