@@ -4,7 +4,7 @@ Running on iOS
 
 ```
 npm i
-npx pod-install
+npm run pods
 npm run ios
 ```
 

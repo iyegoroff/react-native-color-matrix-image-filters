@@ -44,7 +44,7 @@ static CIContext* context;
                                 kCIImageProperties: [NSNull null],
                                 kCIContextWorkingColorSpace: [NSNull null]};
 
-      context = [CMIFColorMatrixImageFilter createContextWithOptions:options];
+      context = [CIContext contextWithOptions:options];
     });
 
     _filter = [CIFilter filterWithName:@"CIColorMatrix"];
@@ -206,11 +206,6 @@ static CIContext* context;
   }
 
   return nil;
-}
-
-+ (CIContext *)createContextWithOptions:(nullable NSDictionary<NSString *, id> *)options
-{
-  return [CIContext contextWithOptions:options];
 }
 
 #ifdef RCT_NEW_ARCH_ENABLED

@@ -6,7 +6,7 @@
     "preinstall": "cd ../.. && npm ci && npm run build",
     "postinstall": "patch-package",
     "android": "react-native run-android",
-    "pods": "RCT_NEW_ARCH_ENABLED=1 npx pod-install",
+    "pods": "NO_FLIPPER=1 npx pod-install",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "check": "tsc -p ./src/tsconfig.build.json",
