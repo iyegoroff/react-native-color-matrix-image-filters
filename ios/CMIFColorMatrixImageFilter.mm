@@ -210,10 +210,7 @@ static CIContext* context;
 
 + (CIContext *)createContextWithOptions:(nullable NSDictionary<NSString *, id> *)options
 {
-  EAGLContext *eaglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES3];
-  eaglContext = eaglContext ?: [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-
-  return [CIContext contextWithEAGLContext:eaglContext options:options];
+  return [CIContext contextWithOptions:options];
 }
 
 #ifdef RCT_NEW_ARCH_ENABLED
