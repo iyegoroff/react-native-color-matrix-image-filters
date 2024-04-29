@@ -209,9 +209,9 @@ static CIContext* context;
 }
 
 + (CIContext *)createContextWithOptions:(nullable NSDictionary<NSString *, id> *)options
-  {
-    return [CIContext contextWithOptions:options];
-  }
+{
+  return [CIContext contextWithOptions:options];
+}
 
 #ifdef RCT_NEW_ARCH_ENABLED
 + (ComponentDescriptorProvider)componentDescriptorProvider
