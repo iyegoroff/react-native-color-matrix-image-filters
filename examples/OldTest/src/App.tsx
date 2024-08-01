@@ -18,7 +18,9 @@ export default class App extends React.Component {
         <Text>ImageBackground</Text>
         <DuoTone secondColor={'green'}>
           <ImageBackground style={styles.image} source={this.mood} resizeMode={'stretch'}>
-            <Normal><Image style={styles.innerImage} source={this.mood} /></Normal>
+            <Normal>
+              <Image style={styles.innerImage} source={this.mood} />
+            </Normal>
           </ImageBackground>
         </DuoTone>
         <Text>ExpoImage</Text>
