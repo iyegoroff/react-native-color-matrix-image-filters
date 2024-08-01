@@ -14,7 +14,9 @@
   "dependencies": {
     "react": "18.2.0",
     "react-native": "0.73.2",
-    "react-native-color-matrix-image-filters": "file:../.."
+    "react-native-color-matrix-image-filters": "file:../..",
+    "expo": "^50.0.0",
+    "expo-image": "~1.10.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
