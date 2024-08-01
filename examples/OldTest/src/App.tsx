@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, StyleSheet, Image, ImageBackground, Text, ImageRequireSource } from 'react-native'
-import { DuoTone } from 'react-native-color-matrix-image-filters'
-import FastImage from 'react-native-fast-image'
+import { DuoTone, Normal } from 'react-native-color-matrix-image-filters'
+import { Image as ExpoImage } from 'expo-image'
 
 declare const require: (name: string) => number
 
@@ -18,12 +18,12 @@ export default class App extends React.Component {
         <Text>ImageBackground</Text>
         <DuoTone secondColor={'green'}>
           <ImageBackground style={styles.image} source={this.mood} resizeMode={'stretch'}>
-            <Image style={styles.innerImage} source={this.mood} />
+            <Normal><Image style={styles.innerImage} source={this.mood} /></Normal>
           </ImageBackground>
         </DuoTone>
-        <Text>FastImage</Text>
+        <Text>ExpoImage</Text>
         <DuoTone secondColor={'blue'}>
-          <FastImage style={styles.image} source={this.mood} resizeMode={'stretch'} />
+          <ExpoImage style={styles.image} source={this.mood} contentFit={'fill'} />
         </DuoTone>
       </View>
     )

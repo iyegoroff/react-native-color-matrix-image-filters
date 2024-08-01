@@ -12,9 +12,10 @@
     "pods": "NO_FLIPPER=1 npx pod-install"
   },
   "dependencies": {
+    "expo": "^50.0.0",
+    "expo-image": "~1.10.6",
     "react": "18.2.0",
     "react-native": "0.73.2",
-    "react-native-fast-image": "^8.6.3",
     "react-native-color-matrix-image-filters": "file:../.."
   },
   "devDependencies": {
