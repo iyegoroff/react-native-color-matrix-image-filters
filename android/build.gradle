@@ -15,6 +15,7 @@ def _targetSdkVersion = _ext.has('targetSdkVersion') ? _ext.targetSdkVersion : 2
 
 android {
     compileSdkVersion _compileSdkVersion
+    namespace "iyegoroff.RNColorMatrixImageFilters"
 
     defaultConfig {
         minSdkVersion _minSdkVersion
