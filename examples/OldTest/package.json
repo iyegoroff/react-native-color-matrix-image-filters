@@ -9,21 +9,24 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "build": "rm -rf build && tsc -p ./src",
-    "pods": "NO_FLIPPER=1 npx pod-install"
+    "pods": "RCT_NEW_ARCH_ENABLED=0 npx pod-install"
   },
   "dependencies": {
-    "expo": "^50.0.0",
-    "expo-image": "~1.10.6",
-    "react": "18.2.0",
-    "react-native": "0.73.2",
+    "expo": "^52.0.0",
+    "expo-image": "~2.0.3",
+    "react": "18.3.1",
+    "react-native": "0.76.5",
     "react-native-color-matrix-image-filters": "file:../.."
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0",
-    "@babel/preset-env": "^7.20.0",
-    "@babel/runtime": "^7.20.0",
-    "@react-native/babel-preset": "0.73.19",
-    "@react-native/metro-config": "0.73.3"
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.3",
+    "@babel/runtime": "^7.25.0",
+    "@react-native-community/cli": "15.0.1",
+    "@react-native-community/cli-platform-android": "15.0.1",
+    "@react-native-community/cli-platform-ios": "15.0.1",
+    "@react-native/babel-preset": "0.76.5",
+    "@react-native/metro-config": "0.76.5"
   },
   "engines": {
     "node": ">=18"
