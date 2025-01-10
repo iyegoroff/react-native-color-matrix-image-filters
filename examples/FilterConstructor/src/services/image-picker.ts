@@ -1,6 +1,6 @@
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker'
 
-const takePhoto = (launch: typeof launchCamera | typeof launchImageLibrary) => async () => {
+const takePhoto = (launch: typeof launchCamera) => async () => {
   const { assets, didCancel, errorMessage } = await launch({ mediaType: 'photo' })
   const photo = assets?.[0]?.uri
 
