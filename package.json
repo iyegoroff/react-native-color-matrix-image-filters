@@ -70,6 +70,16 @@
   "codegenConfig": {
     "name": "CMIFColorMatrixImageFiltersSpec",
     "type": "components",
-    "jsSrcsDir": "src"
+    "jsSrcsDir": "src",
+    "android": {
+      "javaPackageName": "iyegoroff.RNColorMatrixImageFilters"
+    },
+    "ios": {
+      "components": {
+        "CMIFColorMatrixImageFilter": {
+          "className": "CMIFColorMatrixImageFilter"
+        }
+      }
+    }
   }
 }
