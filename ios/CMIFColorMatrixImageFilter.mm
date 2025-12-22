@@ -271,4 +271,8 @@ Class<RCTComponentViewProtocol> CMIFColorMatrixImageFilterCls(void)
 }
 #endif
 
+- (void)setMatrix:(NSArray<NSNumber *> *)matrix {
+  [self updateFilter:matrix];
+}
+
 @end
