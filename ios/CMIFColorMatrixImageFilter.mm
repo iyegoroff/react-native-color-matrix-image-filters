@@ -24,6 +24,7 @@ static CIContext* context;
 @property (nonatomic, strong) CIFilter* filter;
 @property (nonatomic, strong) UIImage *inputImage;
 @property (nonatomic, weak) NSObject<CMIFImageView> *target;
+@property (nonatomic, assign) BOOL isUpdatingImage;
 
 @end
 
@@ -48,6 +49,7 @@ static CIContext* context;
     });
 
     _filter = [CIFilter filterWithName:@"CIColorMatrix"];
+    _isUpdatingImage = NO;
   }
 
   return self;
@@ -56,6 +58,16 @@ static CIContext* context;
 - (void)dealloc
 {
   [self unlinkTarget];
+}
+
+- (void)didMoveToWindow
+{
+  [super didMoveToWindow];
+
+  // If removed from window, unlink target to prevent stale references
+  if (!self.window) {
+    [self unlinkTarget];
+  }
 }
 
 - (void)layoutSubviews
@@ -67,6 +79,14 @@ static CIContext* context;
 
 - (void)linkTarget
 {
+  // If we already have a target and it's still in our hierarchy, keep it
+  if (_target && [(UIView*)_target isDescendantOfView:self]) {
+    return;
+  }
+
+  // Unlink any stale target
+  [self unlinkTarget];
+
   UIView* parent = self;
 
   while (!_target && parent.subviews.count > 0) {
@@ -76,10 +96,17 @@ static CIContext* context;
       _target = (NSObject<CMIFImageView> *)child;
       _inputImage = [_target.image copy];
 
-      [child addObserver:self
-              forKeyPath:@"image"
-                 options:NSKeyValueObservingOptionNew
-                 context:NULL];
+      @try {
+        [child addObserver:self
+                forKeyPath:@"image"
+                   options:NSKeyValueObservingOptionNew
+                   context:NULL];
+      } @catch (NSException *exception) {
+        // Already observing or error - skip
+        _target = nil;
+        _inputImage = nil;
+        return;
+      }
 
       [self renderFilteredImage:YES];
     } else {
@@ -91,8 +118,13 @@ static CIContext* context;
 - (void)unlinkTarget
 {
   if (_target) {
-    [_target removeObserver:self forKeyPath:@"image"];
+    @try {
+      [_target removeObserver:self forKeyPath:@"image"];
+    } @catch (NSException *exception) {
+      // Not observing - ignore
+    }
     _target = nil;
+    _inputImage = nil;
   }
 }
 
@@ -100,7 +132,8 @@ static CIContext* context;
                       ofObject:(id)object
                         change:(NSDictionary *)change
                        context:(void *)context {
-  if ([keyPath isEqualToString:@"image"]) {
+  // Only respond to our target's image changes
+  if ([keyPath isEqualToString:@"image"] && !_isUpdatingImage && object == _target) {
     _inputImage = [_target.image copy];
     [self renderFilteredImage:YES];
   }
@@ -174,12 +207,18 @@ static CIContext* context;
 }
 
 - (void)updateTargetImage:(UIImage *)image {
+  if (_isUpdatingImage || !self.target) {
+    return;
+  }
+
+  _isUpdatingImage = YES;
   [self.target removeObserver:self forKeyPath:@"image"];
   [self.target setImage:image];
   [self.target addObserver:self
                 forKeyPath:@"image"
                    options:NSKeyValueObservingOptionNew
                    context:NULL];
+  _isUpdatingImage = NO;
 }
 
 + (UIImage *)filteredImage:(UIImage *)image filter:(CIFilter *)filter
@@ -192,14 +231,26 @@ static CIContext* context;
 
     CGImageRef cgim = [context createCGImage:filter.outputImage fromRect:outputRect];
 
+    if (!cgim) {
+      return nil;
+    }
+
     UIImage *filteredImage = [UIImage imageWithCGImage:cgim scale:image.scale orientation:image.imageOrientation];
 
     CGImageRelease(cgim);
 
 #ifdef RCT_NEW_ARCH_ENABLED
-    return [NSStringFromClass([image class]) isEqual:@"_UIResizableImage"]
-      ? [filteredImage resizableImageWithCapInsets:image.capInsets resizingMode:UIImageResizingModeTile]
-      : filteredImage;
+    if ([NSStringFromClass([image class]) isEqual:@"_UIResizableImage"]) {
+      filteredImage = [filteredImage resizableImageWithCapInsets:image.capInsets resizingMode:UIImageResizingModeTile];
+    }
+
+    // Create a rasterized copy to ensure each filter instance has independent pixel data
+    UIGraphicsBeginImageContextWithOptions(filteredImage.size, NO, filteredImage.scale);
+    [filteredImage drawAtPoint:CGPointZero];
+    UIImage *rasterized = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    return rasterized ?: filteredImage;
 #else
     return filteredImage;
 #endif
