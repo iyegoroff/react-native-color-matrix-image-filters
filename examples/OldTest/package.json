@@ -12,7 +12,7 @@
     "pods": "RCT_NEW_ARCH_ENABLED=0 npx pod-install"
   },
   "dependencies": {
-    "expo": "^52.0.0",
+    "expo": "^54.0.32",
     "expo-image": "~2.0.3",
     "react": "18.3.1",
     "react-native": "0.76.5",
